@@ -1,8 +1,10 @@
 package com.hrm.application.util;
 
+import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpClientErrorException;
@@ -10,7 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Slf4j
@@ -36,7 +37,7 @@ public class WebClientUtil {
 
     // GET 請求
     public <T> T doGet(String url, Map<String, Object> headers, Map<String, Object> pathValues,
-                       Map<String, Object> queryParams,ParameterizedTypeReference<T> responseType) {
+                       Map<String, Object> queryParams, ParameterizedTypeReference<T> responseType) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
         if (pathValues != null) {
             builder.buildAndExpand(pathValues).toUri();
@@ -78,13 +79,26 @@ public class WebClientUtil {
             }).block();
         } catch (HttpClientErrorException e) {  // HTTP status code 為 4xx、5xx
             String errorMsg = "HTTP error: " + e.getStatusCode() + " - " + e.getStatusText();
+            handleHttpError(e);
             log.error(errorMsg);
             throw e;
         } catch (Exception e) {
-            String errorMsg = "error occurred: " + e.getMessage();
+            String errorMsg = "error occurred: " + "URI: " + uri + e.getMessage();
             log.error(errorMsg, e);
         }
 
         return response;
+    }
+
+    /**
+     * 處理未登入
+     */
+    private void handleHttpError(HttpClientErrorException e) {
+
+        if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+            SessionUtil.cleanSession();
+            // Redirect to login page
+            UI.getCurrent().getPage().setLocation("/login");
+        }
     }
 }

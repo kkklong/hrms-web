@@ -24,6 +24,7 @@ import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.server.VaadinRequest;
 import com.vaadin.flow.theme.lumo.Lumo;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 import org.apache.commons.lang3.StringUtils;
 import org.vaadin.stefan.fullcalendar.FullCalendar;
 
@@ -39,7 +40,7 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
     public AbstractLayout() {
         selectCurrentLocale();
 
-//        setPrimarySection(Section.DRAWER);
+        setPrimarySection(Section.DRAWER);
         addHeaderContent();
         addDrawerContent();
     }
@@ -73,7 +74,10 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
         DrawerToggle toggle = new DrawerToggle();
 //        toggle.getElement().setAttribute("aria-label", "Menu toggle");
 
-        Component title = generateTitle("Hello");
+        Component title = generateTitle("HRM System Demo");
+        title.getStyle().set("font-size", "var(--lumo-font-size-l)");
+        title.getStyle().set("font-weight", "bold");
+
         Avatar avatarBasic = new Avatar();
         TextField account = new TextField();
         account.setValue("KKK");
@@ -111,9 +115,20 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
 
         VerticalLayout footer = new VerticalLayout();
 
+        Div footerText = new Div(new Html("<span>Using the Vaadin 24.2.3" +
+                "More information can be found <a href=\"https://xxxx\" target=\"_blank\">here</a>.</span>"));
+
+        footer.addClassName("footer");
+        footer.add(themeToggle(), footerText);
+
+        SideNav nav = new SideNav();
+        createMenuEntries(nav);
+        addToDrawer(header, new Scroller(nav), footer);
+    }
+
+    protected Button themeToggle() {
         Button themeToggle = new Button("Toggle dark theme", click -> {
             ThemeList themeList = UI.getCurrent().getElement().getThemeList();
-
             if (themeList.contains(Lumo.DARK)) {
                 themeList.remove(Lumo.DARK);
             } else {
@@ -121,18 +136,7 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
             }
         });
         themeToggle.setWidthFull();
-
-        Div footerText = new Div(new Html("<span>Using the Vaadin 24.2.3" +
-                "More information can be found <a href=\"https://xxxx\" target=\"_blank\">here</a>.</span>"));
-
-        footer.addClassName("footer");
-        footer.add(themeToggle, footerText);
-
-        SideNav nav = new SideNav();
-        createMenuEntries(nav);
-
-        addToDrawer(header, new Scroller(nav), footer);
-
+        return themeToggle;
     }
 
     protected abstract void createMenuEntries(SideNav menuBuilder);

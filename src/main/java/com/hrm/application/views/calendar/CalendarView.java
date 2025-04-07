@@ -1,4 +1,4 @@
-package com.hrm.application.views;
+package com.hrm.application.views.calendar;
 
 import com.hrm.application.calendar.AbstractCalendarView;
 import com.hrm.application.entity.ShiftSchedules;
@@ -35,9 +35,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Route(value = "", layout = MainLayout.class)
+@Route(value = "calendar", layout = MainLayout.class)
 @MenuItem(label = "Calendar")
-@PageTitle("Calendar")
+@PageTitle("Calendar | HRMSystemDemo")
 public class CalendarView extends AbstractCalendarView implements AfterNavigationObserver {
 
     @Autowired
