@@ -1,4 +1,4 @@
-package com.hrm.application.services;
+package com.hrm.application.service;
 
 import com.hrm.application.config.BackendConfig;
 import com.hrm.application.entity.ApiResponse;
@@ -9,7 +9,6 @@ import com.hrm.application.util.WebClientUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;

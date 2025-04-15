@@ -1,10 +1,7 @@
-package com.hrm.application.services;
+package com.hrm.application.service;
 
 import com.hrm.application.config.BackendConfig;
 import com.hrm.application.entity.ApiResponse;
-import com.hrm.application.entity.ShiftSchedules;
-import com.hrm.application.entity.UserInfo;
-import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.WebClientUtil;
 import jakarta.annotation.Resource;
 import org.springframework.core.ParameterizedTypeReference;

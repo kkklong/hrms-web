@@ -78,13 +78,14 @@ public class WebClientUtil {
                 return resp.bodyToMono(responseType);
             }).block();
         } catch (HttpClientErrorException e) {  // HTTP status code 為 4xx、5xx
-            String errorMsg = "HTTP error: " + e.getStatusCode() + " - " + e.getStatusText();
+            log.error("ClientError: request URI: {}; HTTP error: {}; {} - status ; Header: {};", uri, e.getStatusCode(), e.getMessage(), headers);
+            NotificationUtil.error(e.getStatusCode().toString() +"-"+ e.getMessage());
             handleHttpError(e);
-            log.error(errorMsg);
+
             throw e;
         } catch (Exception e) {
-            String errorMsg = "error occurred: " + "URI: " + uri + e.getMessage();
-            log.error(errorMsg, e);
+            NotificationUtil.error(e.getMessage());
+            log.error("Error: request URI: {}; msg: {}; Header: {};", uri, e.getMessage(), headers);
         }
 
         return response;
