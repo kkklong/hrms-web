@@ -5,7 +5,6 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginI18n;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -20,10 +19,10 @@ public class LoginView extends VerticalLayout {
 
     public LoginView(AccountService service) {
         this.service = service;
-//        if (service.checkIsLogin()) {
-//            UI.getCurrent().getPage().setLocation("/");
-//            return;
-//        }
+        if (service.checkIsLogin()) {
+            UI.getCurrent().getPage().setLocation("/");
+            return;
+        }
         addClassName("login-view");
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -56,7 +55,6 @@ public class LoginView extends VerticalLayout {
         login.addLoginListener(e -> {
             boolean isAuthenticated = !(this.service.login(e.getUsername(), e.getPassword())).isBlank();
             if (isAuthenticated) {
-                Notification.show("登入成功!");
                 // 登錄成功後的頁面跳轉邏輯，導向根目錄
                 UI.getCurrent().navigate("");
             } else {

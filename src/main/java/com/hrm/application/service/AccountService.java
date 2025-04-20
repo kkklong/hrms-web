@@ -2,6 +2,9 @@ package com.hrm.application.service;
 
 import com.hrm.application.config.BackendConfig;
 import com.hrm.application.entity.ApiResponse;
+import com.hrm.application.entity.UserInfo;
+import com.hrm.application.util.NotificationUtil;
+import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.WebClientUtil;
 import jakarta.annotation.Resource;
 import org.springframework.core.ParameterizedTypeReference;
@@ -17,10 +20,13 @@ public class AccountService {
     @Resource
     BackendConfig backendConfig;
 
-
     public String login(String username, String password) {
         String url = backendConfig.getBackendDomain() + API.LOGIN.getPath();
         WebClientUtil client = new WebClientUtil(WebClient.builder().build());
+
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("Content-Type", API.LOGIN.getType());
+        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
 
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("account", username);
@@ -28,45 +34,87 @@ public class AccountService {
 
         ParameterizedTypeReference<ApiResponse<Map<String, String>>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<Map<String, String>> response = client.doPostJson(url, null, requestBody, responseType);
+        ApiResponse<Map<String, String>> response = client.doPostJson(url, headers, requestBody, responseType);
         String accessToken = "";
         if (response != null) {
-            Map<String, String> data = response.getData();
-            accessToken = data.get("accessToken");
+            if(response.getCode().equals(0)) {
+                Map<String, String> data = response.getData();
+                NotificationUtil.success(response.getMessage());
+                accessToken = data.get("accessToken");
+                SessionUtil.setToken(accessToken);
+                return accessToken;
+            }
         }
+        NotificationUtil.error(response.getMessage());
         return accessToken;
     }
 
+    public boolean logout() {
+        String url = backendConfig.getBackendDomain() + API.LOGOUT.getPath();
+        WebClientUtil client = new WebClientUtil(WebClient.builder().build());
 
-//    public boolean logout() {
-//        boolean isSuccess = apiService.logout();
-//        if (isSuccess) {
-//            //session清除目前使用者
-//            SessionUtil.cleanSession();
-//        }
-//        return isSuccess;
-//    }
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("Content-Type", API.LOGOUT.getType());
+        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
 
-//    public boolean checkIsLogin() {
-//        String token = SessionUtil.getToken();
-//        UserInfo currentEmployee = SessionUtil.getUserInfo();
-//        if (token == null) {
-//            return false;
-//        }
-//        if (currentEmployee == null) {
-//            return getCurrentUser() != null;
-//        }
-//        return true;
-//    }
+        ParameterizedTypeReference<ApiResponse<String>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<String> response = client.doPostJson(url, headers, null, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                SessionUtil.cleanSession();
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return false;
+    }
 
-//    public UserInfo getCurrentUser() {
-//        UserInfo userInfo = apiService.getCurrentUserInfo();
-//        boolean isSuccess = userInfo != null;
-//        if (isSuccess) {
-//            SessionUtil.setUserInfo(userInfo);
-//        }
-//        return userInfo;
-//    }
+    public boolean checkIsLogin() {
+        String token = SessionUtil.getToken();
+        UserInfo currentEmployee = SessionUtil.getUserInfo();
+        if (token == null) {
+            return false;
+        }
+        if (currentEmployee == null) {
+            NotificationUtil.error("用戶未登入");
+            return getCurrentUser() != null;
+        }
+        return true;
+    }
+
+    public UserInfo getCurrentUser() {
+        UserInfo userInfo = getCurrentUserInfo();
+        boolean isSuccess = userInfo != null;
+        if (isSuccess) {
+            SessionUtil.setUserInfo(userInfo);
+        }
+        return userInfo;
+    }
+
+    // 獲取當前用戶資訊
+    protected UserInfo getCurrentUserInfo() {
+        String url = backendConfig.getBackendDomain() + API.GET_CURRENT_USER.getPath();
+        WebClientUtil client = new WebClientUtil(WebClient.builder().build());
+
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("Content-Type", API.GET_CURRENT_USER.getType());
+        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+        ParameterizedTypeReference<ApiResponse<UserInfo>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<UserInfo> response = client.doGet(url, headers, null, null, responseType);
+
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                return response.getData();
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return null;
+    }
+
+
 
 //    public boolean updatePassword(UpdatePassword updatePassword) {
 //        return apiService.updatePassword(updatePassword);
@@ -79,6 +127,8 @@ public class AccountService {
     private enum API {
 
         LOGIN("/account/login", HttpMethod.POST, MediaType.APPLICATION_JSON),
+        LOGOUT("/account/logout", HttpMethod.POST, null),
+        GET_CURRENT_USER("/account/currentEmployee", HttpMethod.GET, null),
         NONE("", null, null);
 
 

@@ -7,10 +7,10 @@ import java.util.Map;
 @Component
 public class BackendConfig {
 
-    private String backendDomain;
+    public static final String backendDomain = "http://localhost:8080/";
 
     public String getBackendDomain() {
-        return "http://localhost:8080/";
+        return backendDomain;
     }
 
     public Map<String, Object> getHeaders(Object accessToken) {
