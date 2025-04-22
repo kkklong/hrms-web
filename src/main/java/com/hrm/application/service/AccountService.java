@@ -7,6 +7,7 @@ import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.WebClientUtil;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -16,6 +17,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.*;
 
 @Service
+@Slf4j
 public class AccountService {
     @Resource
     BackendConfig backendConfig;

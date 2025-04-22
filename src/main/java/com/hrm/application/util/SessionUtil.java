@@ -2,9 +2,11 @@ package com.hrm.application.util;
 
 import com.hrm.application.entity.UserInfo;
 import com.vaadin.flow.server.VaadinSession;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class SessionUtil {
 
     private static final String KEY_TOKEN = "Cookie";

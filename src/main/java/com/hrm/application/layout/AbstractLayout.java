@@ -24,9 +24,9 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
     @SuppressWarnings("unchecked")
     public AbstractLayout() {
         selectCurrentLocale();
-        setPrimarySection(Section.DRAWER);
-        addHeaderContent();
-        addDrawerContent();
+        setPrimarySection(Section.DRAWER);  // appLayout drawer跟title的primary
+//        addHeaderContent();
+//        addDrawerContent();
     }
 
 
@@ -64,7 +64,6 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
     protected void addMenu(SideNav navigation, Class<? extends Component> clazz) {
         MenuItem item = clazz.getAnnotation(MenuItem.class);
         String caption = item != null ? item.label() : String.join(" ", StringUtils.splitByCharacterTypeCamelCase(clazz.getSimpleName()));
-
         navigation.addItem(new SideNavItem(caption, clazz));
     }
 
