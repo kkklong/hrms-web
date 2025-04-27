@@ -1,34 +1,31 @@
 package com.hrm.application.service;
 
-import com.hrm.application.config.BackendConfig;
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.UserInfo;
+import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
-import com.hrm.application.util.WebClientUtil;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @Slf4j
 public class AccountService {
-    @Resource
-    BackendConfig backendConfig;
+
+    @Value("${hrm.url}")
+    private String backEndDomain;
 
     public String login(String username, String password) {
-        String url = backendConfig.getBackendDomain() + API.LOGIN.getPath();
-        WebClientUtil client = new WebClientUtil(WebClient.builder().build());
-
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", API.LOGIN.getType());
-        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+        String url = backEndDomain + API.LOGIN.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("account", username);
@@ -36,10 +33,10 @@ public class AccountService {
 
         ParameterizedTypeReference<ApiResponse<Map<String, String>>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<Map<String, String>> response = client.doPostJson(url, headers, requestBody, responseType);
+        ApiResponse<Map<String, String>> response = client.doPostJson(url, requestBody, responseType);
         String accessToken = "";
         if (response != null) {
-            if(response.getCode().equals(0)) {
+            if (response.getCode().equals(0)) {
                 Map<String, String> data = response.getData();
                 NotificationUtil.success(response.getMessage());
                 accessToken = data.get("accessToken");
@@ -52,16 +49,12 @@ public class AccountService {
     }
 
     public boolean logout() {
-        String url = backendConfig.getBackendDomain() + API.LOGOUT.getPath();
-        WebClientUtil client = new WebClientUtil(WebClient.builder().build());
-
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", API.LOGOUT.getType());
-        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+        String url = backEndDomain + API.LOGOUT.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<String>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<String> response = client.doPostJson(url, headers, null, responseType);
+        ApiResponse<String> response = client.doPostJson(url, null, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 SessionUtil.cleanSession();
@@ -97,15 +90,12 @@ public class AccountService {
 
     // 獲取當前用戶資訊
     protected UserInfo getCurrentUserInfo() {
-        String url = backendConfig.getBackendDomain() + API.GET_CURRENT_USER.getPath();
-        WebClientUtil client = new WebClientUtil(WebClient.builder().build());
+        String url = backEndDomain + API.GET_CURRENT_USER.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", API.GET_CURRENT_USER.getType());
-        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
         ParameterizedTypeReference<ApiResponse<UserInfo>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<UserInfo> response = client.doGet(url, headers, null, null, responseType);
+        ApiResponse<UserInfo> response = client.doGet(url, null, null, responseType);
 
         if (response != null) {
             if (response.getCode().equals(0)) {
@@ -115,7 +105,6 @@ public class AccountService {
         NotificationUtil.error(response.getMessage());
         return null;
     }
-
 
 
 //    public boolean updatePassword(UpdatePassword updatePassword) {

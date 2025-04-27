@@ -11,12 +11,3 @@
 /*    text-align: center;*/
 /*}*/
 
-.account-textfield {
-    font-size: var(--lumo-font-size-xl);
-}
-
-.account-textfield::part(helper-text) {
-    transform: translateY(-30%);
-    font-size: var(--lumo-font-size-xs);
-    padding-left: 5%;
-}

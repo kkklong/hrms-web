@@ -1,23 +1,23 @@
 package com.hrm.application.layout;
 
 import com.hrm.application.entity.UserInfo;
-import com.hrm.application.menu.MenuItem;
+import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
-import com.hrm.application.views.DashboardView;
+import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.CalendarView;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Html;
-import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H4;
-import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.contextmenu.SubMenu;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.menubar.MenuBar;
+import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -29,6 +29,7 @@ import com.vaadin.flow.router.RouteConfiguration;
 import com.vaadin.flow.theme.lumo.Lumo;
 import org.apache.commons.lang3.StringUtils;
 
+@CssImport("./app-layout-styles.css")
 public class MainLayout extends AbstractLayout {
 
     AccountService accountService;
@@ -44,13 +45,13 @@ public class MainLayout extends AbstractLayout {
 
     @Override
     protected void createMenuEntries(SideNav nav) {
-        addMenu(nav, DashboardView.class);
+        addMenu(nav, HomePageView.class);
         addMenu(nav, CalendarView.class);
     }
 
     @Override
     protected void addMenu(SideNav navigation, Class<? extends Component> clazz) {
-        MenuItem item = clazz.getAnnotation(MenuItem.class);
+        MenuRouter item = clazz.getAnnotation(MenuRouter.class);
 
         String caption = item != null
                 ? item.label()
@@ -58,7 +59,7 @@ public class MainLayout extends AbstractLayout {
 
         Component iconComponent = item != null
                 ? item.icon().create()
-                : null;
+                : VaadinIcon.COG_O.create();
 
         SideNavItem sideNavItem = (iconComponent != null)
                 ? new SideNavItem(caption, clazz, iconComponent)
@@ -72,9 +73,7 @@ public class MainLayout extends AbstractLayout {
         Component title = generateTitle("HRM System Demo");
         title.getStyle().set("font-size", "var(--lumo-font-size-l)");
         title.getStyle().set("font-weight", "bold");
-
-        Avatar avatarBasic = new Avatar();
-        addToNavbar(true, new DrawerToggle(), title, logoutAnchor(), createNotificationBell(), avatarBasic, accountInfo());
+        addToNavbar(true, new DrawerToggle(), title, createNotificationBell(), accountMenu(), accountInfo());
     }
 
     private void getUserInfo() {
@@ -82,24 +81,25 @@ public class MainLayout extends AbstractLayout {
         if (currentEmployee == null) {
             UI.getCurrent().getPage().setLocation("/login");
         }
-
     }
 
-    private Anchor logoutAnchor() {
-        String route = RouteConfiguration.forSessionScope().getUrl(LoginView.class);
-        Anchor logout = new Anchor(route, "Logout");
-        logout.setMinWidth("4em");
-        logout.getStyle().set("margin-right", "2px");
-        logout.getStyle().set("font-weight", "bold");
-        logout.getElement().addEventListener("click", event -> {
+    private MenuBar accountMenu () {
+        MenuBar accountMenu = new MenuBar();
+        accountMenu.setOpenOnHover(true);
+        MenuItem profileItem = accountMenu.addItem(new Avatar());
+        SubMenu accountSubMenu = profileItem.getSubMenu();
+        accountSubMenu.addItem("Change Password");
+        accountSubMenu.add(new Hr());
+        accountSubMenu.addItem("Logout", event -> {
             boolean result = this.accountService.logout();
             if (result) {
+                UI.getCurrent().navigate(LoginView.class);
                 Notification.show("登出成功!");
             } else {
                 Notification.show("登出失敗!");
             }
         });
-        return logout;
+        return accountMenu;
     }
 
     private TextField accountInfo() {
@@ -132,7 +132,7 @@ public class MainLayout extends AbstractLayout {
         bellIcon.getStyle().set("margin-right", "5px");
 
         Div wrapper = new Div(bellIcon);
-        wrapper.getStyle().set("position", "relative");
+//        wrapper.getStyle().set("position", "relative");
         wrapper.getStyle().set("display", "inline-block");
 
         return wrapper;
@@ -145,27 +145,31 @@ public class MainLayout extends AbstractLayout {
 
         VerticalLayout footer = new VerticalLayout();
 
-        Div footerText = new Div(new Html("<span>Using the Vaadin 24.2.3" +
-                ".</span>"));
+        Div footerText = new Div(new Html("<span>   &#169 Using the Vaadin 24.2.3" +
+                "</span>"));
 
         footer.addClassName("footer");
         footer.add(themeToggle(), footerText);
 
         SideNav nav = new SideNav();
         createMenuEntries(nav);
-        addToDrawer(header, new Scroller(nav), footer);
+        addToDrawer(header, new Hr(), new Scroller(nav), footer);
     }
 
     protected Button themeToggle() {
-        Button themeToggle = new Button("Toggle dark theme", click -> {
-            ThemeList themeList = UI.getCurrent().getElement().getThemeList();
-            if (themeList.contains(Lumo.DARK)) {
-                themeList.remove(Lumo.DARK);
+        Button themeToggle = new Button("Toggle light theme");
+        themeToggle.setWidthFull();
+        // 點擊後切換
+        themeToggle.addClickListener(click -> {
+            ThemeList currentThemeList = UI.getCurrent().getElement().getThemeList();
+            if (currentThemeList.contains(Lumo.DARK)) {
+                currentThemeList.remove(Lumo.DARK);
+                themeToggle.setText("Toggle dark theme");
             } else {
-                themeList.add(Lumo.DARK);
+                currentThemeList.add(Lumo.DARK);
+                themeToggle.setText("Toggle light theme");
             }
         });
-        themeToggle.setWidthFull();
         return themeToggle;
     }
 }

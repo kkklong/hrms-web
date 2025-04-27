@@ -1,6 +1,6 @@
 package com.hrm.application.layout;
 
-import com.hrm.application.menu.MenuItem;
+import com.hrm.application.menu.MenuRouter;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -62,7 +62,7 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
     protected abstract void createMenuEntries(SideNav menuBuilder);
 
     protected void addMenu(SideNav navigation, Class<? extends Component> clazz) {
-        MenuItem item = clazz.getAnnotation(MenuItem.class);
+        MenuRouter item = clazz.getAnnotation(MenuRouter.class);
         String caption = item != null ? item.label() : String.join(" ", StringUtils.splitByCharacterTypeCamelCase(clazz.getSimpleName()));
         navigation.addItem(new SideNavItem(caption, clazz));
     }

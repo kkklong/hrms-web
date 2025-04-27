@@ -4,10 +4,9 @@ import com.hrm.application.calendar.AbstractCalendarView;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.layout.MainLayout;
-import com.hrm.application.menu.MenuItem;
+import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
 import com.hrm.application.service.ShiftScheduleService;
-import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.ToolUtil;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -26,7 +25,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Route(value = "calendar", layout = MainLayout.class)
-@MenuItem(label = "Calendar", icon = VaadinIcon.CALENDAR_O)
+@MenuRouter(label = "Calendar", icon = VaadinIcon.CALENDAR_O)
 @PageTitle("Calendar | HRMSystemDemo")
 public class CalendarView extends AbstractCalendarView implements AfterNavigationObserver {
 
