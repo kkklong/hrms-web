@@ -74,7 +74,7 @@ public class AccountService {
         }
         if (currentEmployee == null) {
             NotificationUtil.error("用戶未登入");
-            return getCurrentUser() != null;
+            return false;
         }
         return true;
     }

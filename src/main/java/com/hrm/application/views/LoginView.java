@@ -19,10 +19,10 @@ public class LoginView extends VerticalLayout {
 
     public LoginView(AccountService service) {
         this.service = service;
-        if (service.checkIsLogin()) {
-            UI.getCurrent().getPage().setLocation("/");
-            return;
-        }
+//        if (service.checkIsLogin()) {
+//            UI.getCurrent().getPage().setLocation("/");
+//            return;
+//        }
         addClassName("login-view");
         setSizeFull();
         setAlignItems(Alignment.CENTER);

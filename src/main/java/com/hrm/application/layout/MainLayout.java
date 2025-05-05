@@ -1,11 +1,13 @@
 package com.hrm.application.layout;
 
+import com.hrm.application.entity.Employee;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
 import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.CalendarView;
+import com.hrm.application.views.employee.EmployeeView;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -26,8 +28,14 @@ import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.server.VaadinResponse;
+import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.lumo.Lumo;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.stream.Stream;
 
 @CssImport("./app-layout-styles.css")
 public class MainLayout extends AbstractLayout {
@@ -41,12 +49,15 @@ public class MainLayout extends AbstractLayout {
         getUserInfo();
         addHeaderContent();
         addDrawerContent();
+        setTheme();
     }
 
     @Override
     protected void createMenuEntries(SideNav nav) {
         addMenu(nav, HomePageView.class);
         addMenu(nav, CalendarView.class);
+        addMenu(nav, EmployeeView.class);
+
     }
 
     @Override
@@ -156,20 +167,54 @@ public class MainLayout extends AbstractLayout {
         addToDrawer(header, new Hr(), new Scroller(nav), footer);
     }
 
+    // -------- Theme setup --------
     protected Button themeToggle() {
-        Button themeToggle = new Button("Toggle light theme");
+        Button themeToggle = new Button("Toggle dark theme");
         themeToggle.setWidthFull();
         // 點擊後切換
         themeToggle.addClickListener(click -> {
             ThemeList currentThemeList = UI.getCurrent().getElement().getThemeList();
             if (currentThemeList.contains(Lumo.DARK)) {
+                setThemeCookie("light");
                 currentThemeList.remove(Lumo.DARK);
                 themeToggle.setText("Toggle dark theme");
             } else {
+                setThemeCookie("dark");
                 currentThemeList.add(Lumo.DARK);
                 themeToggle.setText("Toggle light theme");
             }
         });
         return themeToggle;
+    }
+
+    private void setThemeCookie(String theme) {
+        Stream.of(VaadinService.getCurrentResponse())
+                .filter(response -> response instanceof VaadinResponse)
+                .findFirst()
+                .ifPresent(response -> {
+                    Cookie cookie = new Cookie("user-theme", theme);
+                    cookie.setPath("/");
+                    cookie.setMaxAge(60 * 60 * 24 * 365); // 一年
+                    ((VaadinResponse) response).addCookie(cookie);
+                });
+    }
+
+    private String getThemeFromCookie() {
+        HttpServletRequest request = (HttpServletRequest) VaadinService.getCurrentRequest();
+        if (request != null && request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if ("user-theme".equals(cookie.getName())) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
+    }
+
+    private void setTheme() {
+        String theme = getThemeFromCookie();
+        if ("dark".equals(theme)) {
+            UI.getCurrent().getElement().getThemeList().add(Lumo.DARK);
+        }
     }
 }

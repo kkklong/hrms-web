@@ -475,7 +475,29 @@ public class Employee {
                 ", remark='" + remark + '\'' +
                 ", floor='" + floor + '\'' +
                 ", seatNumber='" + seatNumber + '\'' +
+                ", company=" + company +
                 ", role=" + role +
+                ", relationship='" + relationship + '\'' +
+                ", emergencyContactPhone='" + emergencyContactPhone + '\'' +
+                ", overtimeType=" + overtimeType +
+                ", laborInsuranceFee=" + laborInsuranceFee +
+                ", healthInsuranceFee=" + healthInsuranceFee +
+                ", holidayDutyAllowance=" + holidayDutyAllowance +
+                ", afternoonShiftAllowance=" + afternoonShiftAllowance +
+                ", nightShiftAllowance=" + nightShiftAllowance +
+                ", fullAttendanceBonus=" + fullAttendanceBonus +
+                ", idNumber='" + idNumber + '\'' +
+                ", mealAllowance=" + mealAllowance +
+                ", employeeNumber='" + employeeNumber + '\'' +
+                ", highestEducationLevel='" + highestEducationLevel + '\'' +
+                ", emergencyContactAddress='" + emergencyContactAddress + '\'' +
+                ", registeredAddress='" + registeredAddress + '\'' +
+                ", voluntaryPensionContribution=" + voluntaryPensionContribution +
+                ", insuredDependentsCount=" + insuredDependentsCount +
+                ", withholdingTax=" + withholdingTax +
+                ", companyLaborInsuranceFee=" + companyLaborInsuranceFee +
+                ", companyHealthInsuranceFee=" + companyHealthInsuranceFee +
+                ", updateShiftToDefault=" + updateShiftToDefault +
                 '}';
     }
 }

@@ -27,7 +27,7 @@ public class ResetPasswordDialog extends Dialog {
 
     public ResetPasswordDialog(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        addClassName("resetPassword-dialog");
+        addClassName("setPassword-dialog");
         binder.bindInstanceFields(this);
 
         newPassword.setWidth("24em");
@@ -50,7 +50,7 @@ public class ResetPasswordDialog extends Dialog {
     private void validateAndSave() {
         if (binder.isValid()) {
             ResetPassword resetPassword = binder.getBean();
-//            boolean success = employeeService.resetPassword(resetPassword);
+//            boolean success = employeeService.setPassword(setPassword);
 //            if (success) {
 //                Notification.show("密碼重設成功");
 //                close();
@@ -60,7 +60,7 @@ public class ResetPasswordDialog extends Dialog {
         }
     }
 
-    public void resetPassword(Integer employeeId) {
+    public void setPassword(Integer employeeId) {
         ResetPassword resetPassword = new ResetPassword();
         resetPassword.setId(employeeId);
         binder.setBean(resetPassword);

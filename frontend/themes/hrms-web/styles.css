@@ -11,3 +11,25 @@
 /*    text-align: center;*/
 /*}*/
 
+.background-plan {
+    background-color: var(--lumo-contrast-10pct);
+}
+.title-heading {
+    color: var(--lumo-base-color);
+    font-family: var(--lumo-font-family);
+}
+.title-config {
+    background-color: var(--lumo-contrast-50pct);
+    border-radius: var(--lumo-border-radius-s);
+    padding: 10px; /* 内边距 */
+}
+.grid-content {
+    background-color: var(--lumo-base-color);
+    border: 1px solid var(--lumo-contrast-30pct);
+    padding: 10px; /* 内边距 */
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
+    /*border-radius: 20px; !* 设置圆角，如果你想要方形外框，可以设置为0 *!*/
+    border-radius: var(--lumo-border-radius-l);
+}
+

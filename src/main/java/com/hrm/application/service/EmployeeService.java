@@ -12,10 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class EmployeeService {
@@ -24,7 +21,7 @@ public class EmployeeService {
     private String backEndDomain;
 
     // 獲取所有員工列表 (權限limit)
-    protected List<Employee> getEmployeeList() {
+    public List<Employee> getEmployeeList() {
         String url = backEndDomain + API.GET_EMPLOYEES.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -38,7 +35,7 @@ public class EmployeeService {
     }
 
     // 取得員工清單 下拉選單
-    protected List<Option<Integer>> getEmployeeOptionList() {
+    public List<Option<Integer>> getEmployeeOptionList() {
         String url = backEndDomain + API.GET_EMPLOYEE_OPTIONS.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -52,7 +49,7 @@ public class EmployeeService {
     }
 
     // 獲取特定員工資訊
-    protected Employee getEmployeeById(Integer id) {
+    public Employee getEmployeeById(Integer id) {
         String url = backEndDomain + API.QUERY_EMPLOYEE.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -68,7 +65,7 @@ public class EmployeeService {
     }
 
     // 根據部門ID查詢該部門員工
-    protected List<Employee> getEmployeeListByDepartmentId(Integer departmentId) {
+    public List<Employee> getEmployeeListByDepartmentId(Integer departmentId) {
         String url = backEndDomain + API.QUERY_EMPLOYEES_IN_DEPARTMENT.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -85,7 +82,7 @@ public class EmployeeService {
     }
 
     // 新增員工資料
-    protected boolean createEmployee(Employee employee) {
+    public boolean createEmployee(Employee employee) {
         String url = backEndDomain + API.CREATE_EMPLOYEE.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -103,7 +100,7 @@ public class EmployeeService {
     }
 
     // 修改員工資料
-    protected boolean updateEmployee(Employee employee) {
+    public boolean updateEmployee(Employee employee) {
         String url = backEndDomain + API.UPDATE_EMPLOYEE.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -121,7 +118,7 @@ public class EmployeeService {
     }
 
     // 刪除員工資料
-    protected boolean deleteEmployee(Employee employee) {
+    public boolean deleteEmployee(Employee employee) {
         String url = backEndDomain + API.DELETE_EMPLOYEE.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -138,6 +135,60 @@ public class EmployeeService {
         return false;
     }
 
+    //取得員工狀態列表
+    public List<Option<Byte>> getEmployeeStatusOptionList() {
+        String url = backEndDomain + API.GET_EMPLOYEE_STATUS_OPTIONS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+        ParameterizedTypeReference<ApiResponse<List<Option<Byte>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+
+        ApiResponse<List<Option<Byte>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    // ---- company ----
+    public List<Option<Integer>> getCompanyTypeOptionList() {
+        String url = backEndDomain + API.GET_COMPANY_TYPE_OPTIONS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+        ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<Integer>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    // ---- department ----
+    public List<Option<Integer>> getDepartmentOptionList() {
+        String url = backEndDomain + API.GET_DEPARTMENT_OPTIONS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+
+        ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<Integer>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    // ---- role ----
+    public List<Option<Integer>> getRoleEnumList() {
+        String url = backEndDomain + API.GET_ROLE_OPTIONS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+        ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<Integer>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
 
     private enum API {
 
@@ -148,6 +199,17 @@ public class EmployeeService {
         CREATE_EMPLOYEE("/employee/create", HttpMethod.POST, MediaType.APPLICATION_JSON),
         UPDATE_EMPLOYEE("/employee/update", HttpMethod.POST, MediaType.APPLICATION_JSON),
         DELETE_EMPLOYEE("/employee/delete/{id}", HttpMethod.POST, null),
+        // ---- employee enum ----
+        GET_EMPLOYEE_STATUS_OPTIONS("/enum/getEmployeeStatus", HttpMethod.GET, null),
+        // ---- company ----
+        GET_COMPANY_TYPE_OPTIONS("/enum/getCompanyType", HttpMethod.GET, null),
+        // ---- department ----
+        GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
+        // ---- role ----
+        GET_ROLE_OPTIONS("/role/getEnumList", HttpMethod.GET, null),
+
+
+
 
         NONE("", null, null);
 

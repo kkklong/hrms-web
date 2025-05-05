@@ -36,7 +36,7 @@ public class DepartmentService {
     }
 
     public List<Option<Integer>> getOptionList() {
-        String url = backEndDomain + API.GET_DEPARTMENTS.getPath();
+        String url = backEndDomain + API.GET_DEPARTMENT_OPTIONS.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {

@@ -7,6 +7,7 @@ import com.hrm.application.util.ToolUtil;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -36,7 +37,7 @@ public class EmployeeDialog extends Dialog {
     List<Option<Integer>> departmentList;
     Map<Integer, Option<Integer>> departmentMap;
     Map<Integer, Option<Integer>> roleMap;
-    private final EmployeeService employeeService;
+    private final EmployeeService service;
 
     TextField fullName = new TextField("全名");
     TextField nickName = new TextField("英文名");
@@ -86,31 +87,31 @@ public class EmployeeDialog extends Dialog {
 
     Button resetPassword = new Button("重設密碼");
     Button save = new Button("儲存");
+    Button update = new Button("更新");
     Button delete = new Button("刪除");
     Button close = new Button("取消");
     // Other fields omitted
     Binder<Employee> binder = new BeanValidationBinder<>(Employee.class);
-    VerticalLayout vt = new VerticalLayout();
     HorizontalLayout ht = new HorizontalLayout();
     ResetPasswordDialog resetPasswordDialog;
     private Integer oldDepartmentId;
 
-    public EmployeeDialog(List<Option<Integer>> companyList,
-                          List<Option<Integer>> departmentList,
-                          List<Option<Integer>> roles,
-                          EmployeeService employeeService,
+    public EmployeeDialog(EmployeeService service,
+                          List<Option<Integer>> companyList,
                           List<Option<Byte>> employeeStatusEnumList,
+                          List<Option<Integer>> departmentList,
+                          List<Option<Integer>> roleList,
                           Map<Byte, Option<Byte>> employeeStatusEnumMap) {
 
-        this.employeeService = employeeService;
+        this.service = service;
         this.companyList = companyList;
         this.companyMap = ToolUtil.transToMap(companyList, Option::getValue);
         this.departmentList = departmentList;
         this.departmentMap = ToolUtil.transToMap(departmentList, Option::getValue);
-        this.roleMap = ToolUtil.transToMap(roles, Option::getValue);
+        this.roleMap = ToolUtil.transToMap(roleList, Option::getValue);
         addClassName("employee-dialog");
         setComponentSize();
-        resetPasswordDialog = new ResetPasswordDialog(employeeService);
+        resetPasswordDialog = new ResetPasswordDialog(service);
         resetPasswordDialog.addCloseListener(event -> resetPasswordDialog.close());
         company.setItems(companyList);
         company.setItemLabelGenerator(Option::getName);
@@ -118,7 +119,7 @@ public class EmployeeDialog extends Dialog {
         department.setItemLabelGenerator(Option::getName);
         status.setItems(employeeStatusEnumList);
         status.setItemLabelGenerator(Option::getName);
-        role.setItems(roles);
+        role.setItems(roleList);
         role.setItemLabelGenerator(Option::getName);
         gender.setLabel("性別");
         gender.setItems("其他", "男", "女");
@@ -126,6 +127,7 @@ public class EmployeeDialog extends Dialog {
         overtimeType.setItems(1, 2);
         overtimeType.setItemLabelGenerator(value -> value.equals(1) ? "是" : "否");
 
+        VerticalLayout vt = new VerticalLayout();
         vt.add(
                 getLayoutLine(fullName, nickName),
                 getLayoutLine(account, password),
@@ -172,52 +174,43 @@ public class EmployeeDialog extends Dialog {
     }
 
     private void setComponentSize() {
-        List<TextField> fields = Arrays.asList(
+        List<HasSize> fields = Arrays.asList(
                 fullName, nickName, position, salary, account, phone, emergencyContact, relationship, emergencyContactPhone,
                 address, remark, floor, seatNumber, laborInsuranceFee, healthInsuranceFee, holidayDutyAllowance, afternoonShiftAllowance
                 , nightShiftAllowance, fullAttendanceBonus, idNumber, mealAllowance, employeeNumber, highestEducationLevel,
                 emergencyContactAddress, registeredAddress, voluntaryPensionContribution, insuredDependentsCount, withholdingTax,
-                companyLaborInsuranceFee, companyHealthInsuranceFee, skype, telegram
+                companyLaborInsuranceFee, companyHealthInsuranceFee, skype, telegram, role, password, company, department, gender, birthday, email
+                , entryDate, outDate, status, overtimeType
         );
         fields.forEach(field -> {
             field.setWidthFull();
         });
-        role.setWidthFull();
-        password.setWidthFull();
-        company.setWidthFull();
-        department.setWidthFull();
-        gender.setWidthFull();
-        birthday.setWidthFull();
-        email.setWidthFull();
-        entryDate.setWidthFull();
-        outDate.setSizeFull();
-        status.setSizeFull();
-        overtimeType.setWidthFull();
     }
 
     private Component createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        update.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
         close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
         resetPassword.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
 
         resetPassword.addClickListener(event -> resetPassword());
         save.addClickListener(event -> validateAndSave());
+        update.addClickListener(event -> validateAndUpdate());
         delete.addClickListener(event -> fireEvent(new DeleteEvent(this, binder.getBean())));
         close.addClickListener(event -> fireEvent(new CloseEvent(this)));
 
         binder.addStatusChangeListener(e -> save.setEnabled(binder.isValid()));
-        return new HorizontalLayout(resetPassword, save, delete, close);
+        return new HorizontalLayout(resetPassword, save, update, delete, close);
     }
 
     private void validateAndSave() {
+            fireEvent(new SaveEvent(EmployeeDialog.this, binder.getBean()));
+    }
+
+    private void validateAndUpdate() {
         Employee employeeBeforeSave = binder.getBean();
         Integer newDepartment = employeeBeforeSave.getDepartmentId();
-
-        if (employeeBeforeSave.getId() == null) {
-            fireEvent(new SaveEvent(EmployeeDialog.this, binder.getBean()));
-            return;
-        }
 
         if (binder.isValid()) {
             // 檢查部門是否變更
@@ -247,17 +240,22 @@ public class EmployeeDialog extends Dialog {
     public void resetPassword() {
         Employee currentEmployee = binder.getBean();
         if (currentEmployee != null && currentEmployee.getId() != null) {
-            resetPasswordDialog.resetPassword(currentEmployee.getId());
+            resetPasswordDialog.setPassword(currentEmployee.getId());
             resetPasswordDialog.open();
         } else {
             Notification.show("請先選擇員工");
         }
     }
 
-    private boolean isEmployeeSet = false;
+    public void setDialogView (Boolean isCreate) {
+        save.setVisible(isCreate);
+        update.setVisible(!isCreate);
+        delete.setVisible(!isCreate);
+        password.setVisible(isCreate);
+        resetPassword.setVisible(!isCreate);
+    }
 
     public void setEmployee(Employee employee) {
-        isEmployeeSet = true;
         binder.setBean(employee);
         if (employee != null && employee.getId() != null)
             this.oldDepartmentId = binder.getBean().getDepartmentId();
