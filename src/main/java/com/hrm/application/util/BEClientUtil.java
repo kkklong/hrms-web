@@ -35,8 +35,11 @@ public class BEClientUtil {
     }
 
     // JSON 請求
-    public <T> T doPostJson(String url, Object jsonBody, ParameterizedTypeReference<T> responseType) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(url).build().toUri();
+    public <T> T doPostJson(String url, Map<String, Object> pathValues, Object jsonBody, ParameterizedTypeReference<T> responseType) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
         Map<String, Object> headers = new HashMap<>();
         headers.put("Content-Type", HttpMethod.POST);
         headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
@@ -44,8 +47,11 @@ public class BEClientUtil {
     }
 
     // FORM 請求
-    public <T> T doPostForm(String url, Map<String, Object> formBody, ParameterizedTypeReference<T> responseType) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(url).build().toUri();
+    public <T> T doPostForm(String url, Map<String, Object> pathValues, Map<String, Object> formBody, ParameterizedTypeReference<T> responseType) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
         Map<String, Object> headers = new HashMap<>();
         headers.put("Content-Type", HttpMethod.POST);
         headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
@@ -56,13 +62,12 @@ public class BEClientUtil {
     public <T> T doGet(String url, Map<String, Object> pathValues,
                        Map<String, Object> queryParams, ParameterizedTypeReference<T> responseType) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
-        if (pathValues != null) {
-            builder.buildAndExpand(pathValues).toUri();
-        }
         if (queryParams != null) {
             queryParams.forEach(builder::queryParam);
         }
-        URI uri = builder.build().toUri();
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
         Map<String, Object> headers = new HashMap<>();
         headers.put("Content-Type", HttpMethod.GET);
         headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());

@@ -24,14 +24,20 @@ public class WebClientUtil {
     }
 
     // JSON 請求
-    public <T> T doPostJson(String url, Map<String, Object> headers, Object jsonBody, ParameterizedTypeReference<T> responseType) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(url).build().toUri();
+    public <T> T doPostJson(String url, Map<String, Object> headers, Map<String, Object> pathValues, Object jsonBody, ParameterizedTypeReference<T> responseType) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
         return requestData(uri, HttpMethod.POST, MediaType.APPLICATION_JSON, headers, jsonBody, null, responseType);
     }
 
     // FORM 請求
-    public <T> T doPostForm(String url, Map<String, Object> headers, Map<String, Object> formBody, ParameterizedTypeReference<T> responseType) {
-        URI uri = UriComponentsBuilder.fromHttpUrl(url).build().toUri();
+    public <T> T doPostForm(String url, Map<String, Object> headers, Map<String, Object> pathValues, Map<String, Object> formBody, ParameterizedTypeReference<T> responseType) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
         return requestData(uri, HttpMethod.POST, MediaType.APPLICATION_FORM_URLENCODED, headers, null, formBody, responseType);
     }
 
@@ -39,13 +45,12 @@ public class WebClientUtil {
     public <T> T doGet(String url, Map<String, Object> headers, Map<String, Object> pathValues,
                        Map<String, Object> queryParams, ParameterizedTypeReference<T> responseType) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
-        if (pathValues != null) {
-            builder.buildAndExpand(pathValues).toUri();
-        }
         if (queryParams != null) {
             queryParams.forEach(builder::queryParam);
         }
-        URI uri = builder.build().toUri();
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
         return requestData(uri, HttpMethod.GET, MediaType.APPLICATION_JSON, headers, null, null, responseType);
     }
 

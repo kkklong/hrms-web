@@ -7,6 +7,7 @@ import com.hrm.application.service.AccountService;
 import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.CalendarView;
+import com.hrm.application.views.department.DepartmentView;
 import com.hrm.application.views.employee.EmployeeView;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -57,7 +58,7 @@ public class MainLayout extends AbstractLayout {
         addMenu(nav, HomePageView.class);
         addMenu(nav, CalendarView.class);
         addMenu(nav, EmployeeView.class);
-
+        addMenu(nav, DepartmentView.class);
     }
 
     @Override

@@ -57,6 +57,7 @@ public class CalendarViewToolbar extends MenuBar {
         buttonDatePicker = new Button();
         buttonDatePicker.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
         buttonDatePicker.getElement().appendChild(gotoDate.getElement());
+        buttonDatePicker.getStyle().set("border", "none");
         buttonDatePicker.addClickListener(event -> gotoDate.open());
         buttonDatePicker.setWidthFull();
         addItem(buttonDatePicker);
@@ -122,7 +123,7 @@ public class CalendarViewToolbar extends MenuBar {
 
         calendarViews.sort(Comparator.comparing(CalendarView::getName));
 
-        viewSelector = addItem("View: " + getViewName(selectedView));
+        viewSelector = addItem(getViewName(selectedView));
         SubMenu subMenu = viewSelector.getSubMenu();
         calendarViews.stream()
                 .sorted(Comparator.comparing(this::getViewName))
@@ -130,7 +131,7 @@ public class CalendarViewToolbar extends MenuBar {
                     String viewName = getViewName(view);
                     subMenu.addItem(viewName, event -> {
                         calendar.changeView(view);
-                        viewSelector.setText("View: " + viewName);
+                        viewSelector.setText(getViewName(view));
                         selectedView = view;
                     });
                 });
@@ -141,13 +142,13 @@ public class CalendarViewToolbar extends MenuBar {
         if (name == null) {
             name = StringUtils.capitalize(String.join(" ", StringUtils.splitByCharacterTypeCamelCase(view.getClientSideValue())));
         }
-
-        return name;
+        String lastWord = name.substring(name.lastIndexOf(' ') + 1);
+        return lastWord;
     }
 
     public void updateSelectedView(CalendarView view) {
         if (viewSelector != null) {
-            viewSelector.setText("View: " + getViewName(view));
+            viewSelector.setText(getViewName(view));
         }
         selectedView = view;
     }

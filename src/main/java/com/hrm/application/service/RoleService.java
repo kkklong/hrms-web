@@ -66,7 +66,7 @@ public class RoleService {
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
 
-        ApiResponse<Object> response = client.doPostJson(url, role, responseType);
+        ApiResponse<Object> response = client.doPostJson(url, null, role, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());
@@ -83,7 +83,7 @@ public class RoleService {
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
 
-        ApiResponse<Object> response = client.doPostJson(url, role, responseType);
+        ApiResponse<Object> response = client.doPostJson(url, null, role, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());
@@ -102,7 +102,7 @@ public class RoleService {
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
 
-        ApiResponse<Object> response = client.doPostJson(url, role, responseType);
+        ApiResponse<Object> response = client.doPostJson(url, null, role, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());

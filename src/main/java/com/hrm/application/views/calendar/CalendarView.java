@@ -64,9 +64,6 @@ public class CalendarView extends AbstractCalendarView implements AfterNavigatio
     private void loadShiftSchedules() {
         setData();
 
-//        String accessToken = accountService.login("admin", "123456");
-//        SessionUtil.setToken(accessToken);
-
         // 設定查詢的時間範圍 (這裡舉例用當月的第一天和最後一天)
         LocalDate now = LocalDate.now();
         String startDate = now.withDayOfMonth(1).toString();

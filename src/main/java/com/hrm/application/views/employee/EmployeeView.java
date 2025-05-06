@@ -11,10 +11,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridSortOrder;
-import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.grid.HeaderRow;
+import com.vaadin.flow.component.grid.*;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
@@ -39,7 +36,7 @@ import java.util.Optional;
 @Scope("prototype")
 @Route(value = "employee", layout = MainLayout.class)
 @MenuRouter(label = "Employee", icon = VaadinIcon.USER)
-@PageTitle("EmployeeData | 人力資源管理系統")
+@PageTitle("員工資料 | 人力資源管理系統")
 public class EmployeeView extends VerticalLayout {
     //
     Grid<Employee> grid = new Grid<>(Employee.class, false);
@@ -127,6 +124,7 @@ public class EmployeeView extends VerticalLayout {
     private void configureDialog() {
         dialog = new EmployeeDialog(service, companyList, employeeStatusEnumList, departmentList, roleList, employeeStatusEnumMap);
         dialog.addSaveListener(this::saveEmployee);
+        dialog.addUpdateListener(this::updateEmployee);
         dialog.addDeleteListener(this::deleteEmployee);
         dialog.addCloseListener(e -> closeEditor());
     }
@@ -134,6 +132,16 @@ public class EmployeeView extends VerticalLayout {
     private void saveEmployee(EmployeeDialog.SaveEvent event) {
         Employee employee = event.getEmployee();
         boolean success = service.createEmployee(employee);
+        if (success) {
+            Notification.show("儲存成功");
+            updateList();
+            closeEditor();
+        }
+    }
+
+    private void updateEmployee(EmployeeDialog.UpdateEvent event) {
+        Employee employee = event.getEmployee();
+        boolean success = service.updateEmployee(employee);
         if (success) {
             Notification.show("儲存成功");
             updateList();
@@ -162,7 +170,7 @@ public class EmployeeView extends VerticalLayout {
         grid.addColumn(employee -> Optional.ofNullable(employeeStatusEnumMap.get(employee.getStatus())).map(Option::getName).orElse("未知狀態")).setHeader("狀態").setKey("status");
         grid.addColumn(Employee::getGender).setHeader("性別").setKey("gender");
         grid.addColumn(Employee::getEntryDate).setHeader("入職時間").setKey("entryDate");
-        grid.addColumn(Employee::getFloor).setHeader("所在樓層").setKey("floor");
+        grid.addColumn(Employee::getFloor).setHeader("所在樓層").setKey("floor").setTextAlign(ColumnTextAlign.CENTER);
         grid.addColumn(Employee::getEmail).setHeader("信箱").setKey("email");
         grid.addColumn(Employee::getSeatNumber).setHeader("座位編號").setKey("seatNumber");
         grid.addColumn(Employee::getRemark).setHeader("備註說明").setKey("remark");
@@ -174,8 +182,9 @@ public class EmployeeView extends VerticalLayout {
     }
 
     private Component getToolbar() {
-        Button addEmployeeButton = new Button("新增員工", click -> createEmployee(new Employee()));
+        Button addEmployeeButton = new Button("新增員工", click -> createEmployee());
         Button clearFiltersButton = new Button("重置篩選", event -> initializeFilters());
+        clearFiltersButton.getStyle().set("--vaadin-button-border", "1px solid");
         clearFiltersButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
         var toolbar = new HorizontalLayout(addEmployeeButton, clearFiltersButton);
         toolbar.addClassName("toolbar");
@@ -281,16 +290,11 @@ public class EmployeeView extends VerticalLayout {
         }
     }
 
-    public void createEmployee(Employee employee) {
+    public void createEmployee() {
         grid.asSingleSelect().clear();
-        if (employee == null) {
-            closeEditor();
-        } else {
-            dialog.setEmployee(employee);
-            dialog.setDialogView(true);
-            dialog.open();
-            addClassName("editing");
-        }
+        dialog.setEmployee(new Employee());
+        dialog.setDialogView(true);
+        dialog.open();
     }
 
     public void editEmployee(Employee employee) {
@@ -300,7 +304,6 @@ public class EmployeeView extends VerticalLayout {
             dialog.setEmployee(employee);
             dialog.setDialogView(false);
             dialog.open();
-            addClassName("editing");
         }
     }
 

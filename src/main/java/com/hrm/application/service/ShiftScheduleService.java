@@ -4,10 +4,12 @@ import com.hrm.application.config.BackendConfig;
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
+import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.WebClientUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -20,17 +22,13 @@ import java.util.*;
 @Service
 public class ShiftScheduleService {
 
-    @Resource
-    BackendConfig backendConfig;
+    @Value("${hrm.url}")
+    private String backEndDomain;
 
     //查詢班表
     public List<ShiftSchedules> queryShiftSchedules(String startDate, String endDate, Integer departmentId) {
-        String url = backendConfig.getBackendDomain() + API.QUERY_SHIFT_SCHEDULES.getPath();
-        WebClientUtil client = new WebClientUtil(WebClient.builder().build());
-        //login GET Token
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", API.QUERY_SHIFT_SCHEDULES.getType());
-        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+        String url = backEndDomain + API.QUERY_SHIFT_SCHEDULES.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         LinkedHashMap<String, Object> queryParams = new LinkedHashMap<>();
         queryParams.put("startDate", startDate);
@@ -39,7 +37,7 @@ public class ShiftScheduleService {
 
         ParameterizedTypeReference<ApiResponse<List<ShiftSchedules>>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<List<ShiftSchedules>> response = client.doGet(url, headers, null, queryParams, responseType);
+        ApiResponse<List<ShiftSchedules>> response = client.doGet(url, null, queryParams, responseType);
         if (response != null && response.getData() != null) {
             return response.getData();
         }
@@ -48,16 +46,12 @@ public class ShiftScheduleService {
 
     //查詢班別資訊
     public List<ShiftType> getShiftAndHolidayConfigList() {
-        String url = backendConfig.getBackendDomain() + API.GET_SHIFT_HOLIDAY_TYPES.getPath();
-        WebClientUtil client = new WebClientUtil(WebClient.builder().build());
-//        //login GET Token
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("Content-Type", API.GET_SHIFT_HOLIDAY_TYPES.getType());
-        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+        String url = backEndDomain + API.GET_SHIFT_HOLIDAY_TYPES.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<List<ShiftType>>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<List<ShiftType>> response = client.doGet(url, headers, null, null, responseType);
+        ApiResponse<List<ShiftType>> response = client.doGet(url, null, null, responseType);
         if (response != null && response.getData() != null) {
             return response.getData();
         }

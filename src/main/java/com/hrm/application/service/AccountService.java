@@ -33,7 +33,7 @@ public class AccountService {
 
         ParameterizedTypeReference<ApiResponse<Map<String, String>>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<Map<String, String>> response = client.doPostJson(url, requestBody, responseType);
+        ApiResponse<Map<String, String>> response = client.doPostJson(url,null, requestBody, responseType);
         String accessToken = "";
         if (response != null) {
             if (response.getCode().equals(0)) {
@@ -54,7 +54,7 @@ public class AccountService {
 
         ParameterizedTypeReference<ApiResponse<String>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<String> response = client.doPostJson(url, null, responseType);
+        ApiResponse<String> response = client.doPostJson(url,null, null, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 SessionUtil.cleanSession();

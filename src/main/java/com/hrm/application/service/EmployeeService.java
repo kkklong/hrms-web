@@ -88,7 +88,7 @@ public class EmployeeService {
 
         ParameterizedTypeReference<ApiResponse<Employee>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<Employee> response = client.doPostJson(url, employee, responseType);
+        ApiResponse<Employee> response = client.doPostJson(url,null, employee, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());
@@ -106,7 +106,7 @@ public class EmployeeService {
 
         ParameterizedTypeReference<ApiResponse<Employee>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<Employee> response = client.doPostJson(url, employee, responseType);
+        ApiResponse<Employee> response = client.doPostJson(url,null, employee, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());
@@ -124,7 +124,7 @@ public class EmployeeService {
 
         ParameterizedTypeReference<ApiResponse<Employee>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<Employee> response = client.doPostJson(url, employee, responseType);
+        ApiResponse<Employee> response = client.doPostJson(url,null, employee, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());

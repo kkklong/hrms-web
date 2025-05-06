@@ -3,6 +3,7 @@ package com.hrm.application.service;
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.Department;
 import com.hrm.application.entity.Option;
+import com.hrm.application.entity.ShiftType;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +22,7 @@ public class DepartmentService {
     private String backEndDomain;
 
     // 查詢部門資料
-    protected List<Department> getAll() {
+    public List<Department> getAll() {
         String url = backEndDomain + API.GET_DEPARTMENTS.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -48,13 +49,12 @@ public class DepartmentService {
         return new ArrayList<>();
     }
 
-    protected boolean save(Department department) {
+    public boolean save(Department department) {
         String url = backEndDomain + API.CREATE_DEPARTMENT.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
-
-        ApiResponse<Object> response = client.doPostJson(url, department, responseType);
+        ApiResponse<Object> response = client.doPostJson(url,null, department, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());
@@ -65,13 +65,13 @@ public class DepartmentService {
         return false;
     }
 
-    protected boolean updateDepartment(Department department) {
+    public boolean update(Department department) {
         String url = backEndDomain + API.UPDATE_DEPARTMENT.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
 
-        ApiResponse<Object> response = client.doPostJson(url, department, responseType);
+        ApiResponse<Object> response = client.doPostJson(url,null, department, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());
@@ -82,13 +82,14 @@ public class DepartmentService {
         return false;
     }
 
-    protected boolean delete(Department department) {
+    public boolean delete(Department department) {
         String url = backEndDomain + API.DELETE_DEPARTMENT.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+        Map<String, Object> pathValues = new LinkedHashMap<>();
+        pathValues.put("id", department.getId());
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
-
-        ApiResponse<Object> response = client.doPostJson(url, department, responseType);
+        ApiResponse<Object> response = client.doPostJson(url, pathValues, null, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
                 NotificationUtil.success(response.getMessage());
@@ -97,6 +98,34 @@ public class DepartmentService {
         }
         NotificationUtil.error(response.getMessage());
         return false;
+    }
+
+    // 取得員工清單 下拉選單
+    public List<Option<Integer>> getEmployeeOptionList() {
+        String url = backEndDomain + API.GET_EMPLOYEE_OPTIONS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+
+        ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<Integer>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    //查詢班別資訊
+    public List<ShiftType> getShiftAndHolidayConfigList() {
+        String url = backEndDomain + API.GET_SHIFT_HOLIDAY_TYPES.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+
+        ParameterizedTypeReference<ApiResponse<List<ShiftType>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<ShiftType>> response = client.doGet(url, null, null, responseType);
+        if (response != null && response.getData() != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
     }
 
 
@@ -107,6 +136,11 @@ public class DepartmentService {
         CREATE_DEPARTMENT("/department/create", HttpMethod.POST, MediaType.APPLICATION_JSON),
         UPDATE_DEPARTMENT("/department/update", HttpMethod.POST, MediaType.APPLICATION_JSON),
         DELETE_DEPARTMENT("/department/delete/{id}", HttpMethod.POST, null),
+        // ---- employee enum ----
+        GET_EMPLOYEE_OPTIONS("/employee/getEnumList", HttpMethod.GET, null),
+        // ----  ----
+        GET_SHIFT_HOLIDAY_TYPES("/shiftSchedules/getShiftAndHolidayConfig", HttpMethod.GET, null),
+
 
 
         NONE("", null, null);

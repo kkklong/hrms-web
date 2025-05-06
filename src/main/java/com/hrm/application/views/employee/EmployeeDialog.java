@@ -1,9 +1,11 @@
 package com.hrm.application.views.employee;
 
+import com.hrm.application.component.ConfirmDialog;
 import com.hrm.application.entity.Employee;
 import com.hrm.application.entity.Option;
 import com.hrm.application.service.EmployeeService;
 import com.hrm.application.util.ToolUtil;
+import com.hrm.application.views.department.DepartmentDialog;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -94,6 +96,7 @@ public class EmployeeDialog extends Dialog {
     Binder<Employee> binder = new BeanValidationBinder<>(Employee.class);
     HorizontalLayout ht = new HorizontalLayout();
     ResetPasswordDialog resetPasswordDialog;
+    ConfirmDialog confirmDialog;
     private Integer oldDepartmentId;
 
     public EmployeeDialog(EmployeeService service,
@@ -188,6 +191,7 @@ public class EmployeeDialog extends Dialog {
     }
 
     private Component createButtonsLayout() {
+        confirmDialog = new ConfirmDialog();
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         update.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
@@ -197,9 +201,14 @@ public class EmployeeDialog extends Dialog {
         resetPassword.addClickListener(event -> resetPassword());
         save.addClickListener(event -> validateAndSave());
         update.addClickListener(event -> validateAndUpdate());
-        delete.addClickListener(event -> fireEvent(new DeleteEvent(this, binder.getBean())));
         close.addClickListener(event -> fireEvent(new CloseEvent(this)));
-
+        delete.addClickListener(click -> {
+            confirmDialog.openDialogWithParameter("確認執行刪除?", "刪除");
+        });
+        confirmDialog.setConfirmAction(() -> {
+            fireEvent(new DeleteEvent(this, binder.getBean()));
+            confirmDialog.close();
+        });
         binder.addStatusChangeListener(e -> save.setEnabled(binder.isValid()));
         return new HorizontalLayout(resetPassword, save, update, delete, close);
     }
@@ -220,19 +229,19 @@ public class EmployeeDialog extends Dialog {
                             @Override
                             public void onDefaultScheduleSelected() {
                                 binder.getBean().setUpdateShiftToDefault(true);
-                                fireEvent(new SaveEvent(EmployeeDialog.this, binder.getBean()));
+                                fireEvent(new UpdateEvent(EmployeeDialog.this, binder.getBean()));
                             }
 
                             @Override
                             public void onKeepCurrentScheduleSelected() {
                                 binder.getBean().setUpdateShiftToDefault(false);
-                                fireEvent(new SaveEvent(EmployeeDialog.this, binder.getBean()));
+                                fireEvent(new UpdateEvent(EmployeeDialog.this, binder.getBean()));
                             }
                         }
                 );
                 departmentChangeDialog.open();
             } else {
-                fireEvent(new SaveEvent(EmployeeDialog.this, binder.getBean()));
+                fireEvent(new UpdateEvent(EmployeeDialog.this, binder.getBean()));
             }
         }
     }
@@ -285,6 +294,12 @@ public class EmployeeDialog extends Dialog {
         }
     }
 
+    public static class UpdateEvent extends EmployeeDialogEvent {
+        UpdateEvent(EmployeeDialog source, Employee employee) {
+            super(source, employee);
+        }
+    }
+
     public static class DeleteEvent extends EmployeeDialogEvent {
         DeleteEvent(EmployeeDialog source, Employee employee) {
             super(source, employee);
@@ -304,6 +319,10 @@ public class EmployeeDialog extends Dialog {
 
     public Registration addSaveListener(ComponentEventListener<SaveEvent> listener) {
         return addListener(SaveEvent.class, listener);
+    }
+
+    public Registration addUpdateListener(ComponentEventListener<UpdateEvent> listener) {
+        return addListener(UpdateEvent.class, listener);
     }
 
     public Registration addCloseListener(ComponentEventListener<CloseEvent> listener) {
