@@ -95,9 +95,7 @@ public class DepartmentDialog extends Dialog {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         update.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
-        close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-
-        close.addClickShortcut(Key.ESCAPE);
+        close.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
 
         save.addClickListener(event -> validateAndSave());
         update.addClickListener(event -> validateAndUpdate());

@@ -39,7 +39,7 @@ public class ResetPasswordDialog extends Dialog {
 
     private Component createButtonsLayout() {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        close.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
 
         save.addClickListener(event -> validateAndSave());
         close.addClickListener(event -> fireEvent(new CloseEvent(this)));
@@ -50,13 +50,13 @@ public class ResetPasswordDialog extends Dialog {
     private void validateAndSave() {
         if (binder.isValid()) {
             ResetPassword resetPassword = binder.getBean();
-//            boolean success = employeeService.setPassword(setPassword);
-//            if (success) {
-//                Notification.show("密碼重設成功");
-//                close();
-//            } else {
-//                Notification.show("密碼重設失敗");
-//            }
+            boolean success = employeeService.setPassword(setPassword);
+            if (success) {
+                Notification.show("密碼重設成功");
+                close();
+            } else {
+                Notification.show("密碼重設失敗");
+            }
         }
     }
 

@@ -195,8 +195,8 @@ public class EmployeeDialog extends Dialog {
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         update.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
         delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
-        close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
-        resetPassword.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        close.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        resetPassword.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 
         resetPassword.addClickListener(event -> resetPassword());
         save.addClickListener(event -> validateAndSave());
