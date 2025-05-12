@@ -2,8 +2,8 @@ package com.hrm.application.views.department;
 
 import com.hrm.application.component.ConfirmDialog;
 import com.hrm.application.entity.Department;
-import com.hrm.application.entity.Option;
 import com.hrm.application.entity.ShiftType;
+import com.hrm.application.model.Option;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -30,7 +30,7 @@ public class DepartmentDialog extends Dialog {
     private TextField departmentName = new TextField("部門名稱");
     private TextField description = new TextField("描述");
     private ComboBox<Option<Integer>> managerId = new ComboBox<>("部門主管");
-    private ComboBox<ShiftType> workType = new ComboBox<>("預設班別");
+    private ComboBox<Option<String>> workType = new ComboBox<>("預設班別");
 
     private TextField everyDayMorningCount = new TextField("早班最少上班人數");
     private TextField everyDayAfternoonCount = new TextField("午班最少上班人數");
@@ -46,14 +46,14 @@ public class DepartmentDialog extends Dialog {
     // Other fields omitted
     Binder<Department> binder = new BeanValidationBinder<>(Department.class);
 
-    public DepartmentDialog(List<Option<Integer>> employeeList, Map<Integer, Option<Integer>> employeeMap, List<ShiftType> shiftTypeList, Map<String, ShiftType> shiftTypeMap) {
+    public DepartmentDialog(List<Option<Integer>> employeeList, Map<Integer, Option<Integer>> employeeMap, List<Option<String>> shiftTypeList, Map<String, Option<String>> shiftTypeMap) {
         addClassName("department-dialog");
         VerticalLayout vt = new VerticalLayout();
         setUpComponentSize();
         managerId.setItems(employeeList);
         managerId.setItemLabelGenerator(Option::getName);
         workType.setItems(shiftTypeList);
-        workType.setItemLabelGenerator(ShiftType::getShiftName);
+        workType.setItemLabelGenerator(Option::getName);
 
         everyDayMorningCount.setRequired(true);
         everyDayAfternoonCount.setRequired(true);
@@ -74,7 +74,7 @@ public class DepartmentDialog extends Dialog {
         getFooter().add(createButtonsLayout());
 
         binder.bind(managerId, d -> employeeMap.get(d.getManagerId()), (d, s) -> d.setManagerId(s.getValue()));
-        binder.bind(workType, d -> shiftTypeMap.get(d.getWorkType()), (d, s) -> d.setWorkType(s.getShiftKey()));
+        binder.bind(workType, d -> shiftTypeMap.get(d.getWorkType()), (d, s) -> d.setWorkType(s.getValue()));
 
         binder.bindInstanceFields(this);
     }

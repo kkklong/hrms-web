@@ -1,12 +1,15 @@
 package com.hrm.application.views.employee;
 
 import com.hrm.application.entity.Employee;
-import com.hrm.application.entity.Option;
+import com.hrm.application.model.Option;
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.EmployeeService;
+import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.ToolUtil;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -25,6 +28,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -70,18 +74,13 @@ public class EmployeeView extends VerticalLayout {
 
     private ListDataProvider<Employee> dataProvider;
     private HeaderRow headerRow;
-//
+
+    //
 //
     public EmployeeView(EmployeeService service) {
         this.service = service;
-        setData();
         setSizeFull();
-        configureGrid();
-        configureDialog();
-        configureFilter();
         this.addClassName("background-plan");
-        add(titleConfigure(), getToolbar(), getContent());
-        updateList();
     }
 
     private void setData() {
@@ -150,7 +149,7 @@ public class EmployeeView extends VerticalLayout {
     }
 
     private void deleteEmployee(EmployeeDialog.DeleteEvent event) {
-        boolean success = service.updateEmployee(event.getEmployee());
+        boolean success = service.deleteEmployee(event.getEmployee());
         if (success) {
             Notification.show("刪除成功");
             updateList();
@@ -363,4 +362,22 @@ public class EmployeeView extends VerticalLayout {
         entryDateFilter.clear();
     }
 
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        UI ui = attachEvent.getUI();
+        ui.access(() -> {
+            try {
+                setData(); // 執行會觸發 webClient.block() 的方法
+                configureGrid();
+                configureDialog();
+                configureFilter();
+                add(titleConfigure(), getToolbar(), getContent());
+                updateList();
+            } catch (WebClientResponseException e) {
+            } catch (Exception e) {
+                NotificationUtil.error("載入資料失敗：" + e.getMessage());
+            }
+        });
+    }
 }

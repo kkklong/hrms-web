@@ -1,7 +1,7 @@
 package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
-import com.hrm.application.entity.Option;
+import com.hrm.application.model.Option;
 import com.hrm.application.entity.Role;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;

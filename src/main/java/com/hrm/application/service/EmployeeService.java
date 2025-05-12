@@ -2,7 +2,8 @@ package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.Employee;
-import com.hrm.application.entity.Option;
+import com.hrm.application.model.Option;
+import com.hrm.application.entity.ResetPassword;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
 import org.springframework.beans.factory.annotation.Value;
@@ -189,6 +190,24 @@ public class EmployeeService {
         return new ArrayList<>();
     }
 
+    // ---- account ----
+    public boolean resetPassword(ResetPassword resetPassword) {
+        String url = backEndDomain + API.RESET_PASSWORD.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+        ParameterizedTypeReference<ApiResponse<ResetPassword>> responseType = new ParameterizedTypeReference<>() {
+        };
+
+        ApiResponse<ResetPassword> response = client.doPostJson(url,null, resetPassword, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return false;
+    }
+
 
     private enum API {
 
@@ -207,7 +226,8 @@ public class EmployeeService {
         GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
         // ---- role ----
         GET_ROLE_OPTIONS("/role/getEnumList", HttpMethod.GET, null),
-
+        // ---- account ----
+        RESET_PASSWORD("/account/resetPassword", HttpMethod.POST, MediaType.APPLICATION_JSON),
 
 
 

@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -87,40 +88,38 @@ public class BEClientUtil {
         if (headers != null) {
             headers.forEach((key, value) -> requestSpec.header(key, String.valueOf(value)));
         }
-
         // 處理 JSON 或 Form 參數
         if (mediaType.equals(MediaType.APPLICATION_JSON) && jsonBody != null) {
             requestSpec.bodyValue(jsonBody);
         } else if (mediaType.equals(MediaType.APPLICATION_FORM_URLENCODED) && formBody != null) {
             requestSpec.bodyValue(formBody);
         }
-
         T response = null;
         try {
-            response = requestSpec.exchangeToMono(resp -> {
-                HttpStatusCode status = resp.statusCode();
-                log.info("Request to URL: {}, HTTP Status: {}", uri, status);
-                return resp.bodyToMono(responseType);
-            }).block();
-        } catch (HttpClientErrorException e) {  // HTTP status code 為 4xx、5xx
+            response = requestSpec
+                    .retrieve()
+                    .onStatus(HttpStatusCode::isError, clientResponse -> {
+                        log.error("Request to URL: {}, HTTP Status: {}", uri, clientResponse.statusCode());
+                        return clientResponse.createException(); // 自動轉為 WebClientResponseException
+                    })
+                    .bodyToMono(responseType)
+                    .block();
+        } catch (WebClientResponseException e) {
             log.error("ClientError: request URI: {}; HTTP error: {}; {} - status ; Header: {};", uri, e.getStatusCode(), e.getMessage(), headers);
-            NotificationUtil.error(e.getStatusCode().toString() +"-"+ e.getMessage());
+            NotificationUtil.error(e.getStatusCode().toString() + "-" + e.getMessage());
             handleHttpError(e);
-
             throw e;
         } catch (Exception e) {
             NotificationUtil.error(e.getMessage());
             log.error("Error: request URI: {}; msg: {}; Header: {};", uri, e.getMessage(), headers);
         }
-
         return response;
     }
 
     /**
      * 處理未登入
      */
-    private void handleHttpError(HttpClientErrorException e) {
-
+    private void handleHttpError(WebClientResponseException e) {
         if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
             SessionUtil.cleanSession();
             // Redirect to login page

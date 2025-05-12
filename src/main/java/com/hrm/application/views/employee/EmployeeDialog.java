@@ -2,10 +2,9 @@ package com.hrm.application.views.employee;
 
 import com.hrm.application.component.ConfirmDialog;
 import com.hrm.application.entity.Employee;
-import com.hrm.application.entity.Option;
+import com.hrm.application.model.Option;
 import com.hrm.application.service.EmployeeService;
 import com.hrm.application.util.ToolUtil;
-import com.hrm.application.views.department.DepartmentDialog;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;

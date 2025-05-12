@@ -1,4 +1,4 @@
-package com.hrm.application.entity;
+package com.hrm.application.model;
 
 public class Option<T> {
 

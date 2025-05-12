@@ -50,7 +50,7 @@ public class ResetPasswordDialog extends Dialog {
     private void validateAndSave() {
         if (binder.isValid()) {
             ResetPassword resetPassword = binder.getBean();
-            boolean success = employeeService.setPassword(setPassword);
+            boolean success = employeeService.resetPassword(resetPassword);
             if (success) {
                 Notification.show("密碼重設成功");
                 close();

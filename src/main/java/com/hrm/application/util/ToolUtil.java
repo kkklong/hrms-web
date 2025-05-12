@@ -1,5 +1,9 @@
 package com.hrm.application.util;
 
+import com.hrm.application.model.Option;
+import com.vaadin.flow.data.binder.Result;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.converter.Converter;
 import com.vaadin.flow.server.StreamResource;
 import org.springframework.util.Assert;
 
@@ -7,10 +11,10 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.time.Duration;
 import java.time.temporal.Temporal;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ToolUtil {
 
@@ -54,5 +58,37 @@ public class ToolUtil {
 //        Duration duration = Duration.between(startDateTime, endDateTime);
 //        return duration.toHours() + (duration.toMinutesPart() / 60.0);
 //    }
+
+    public static <V> String convertOptionValuesToNames(List<V> values, List<Option<V>> optionList) {
+        if (values == null || values.isEmpty()) return "";
+        Map<V, String> valueToNameMap = optionList.stream()
+                .collect(Collectors.toMap(Option::getValue, Option::getName));
+        return values.stream()
+                .map(v -> valueToNameMap.getOrDefault(v, String.valueOf(v)))
+                .collect(Collectors.joining(", "));
+    }
+
+    public static <V> Converter<Set<Option<V>>, List<V>> getOptionConverter(List<Option<V>> optionList) {
+        Map<V, Option<V>> valueMap = optionList.stream()
+                .collect(Collectors.toMap(Option::getValue, o -> o));
+        return new Converter<>() {
+            @Override
+            public Result<List<V>> convertToModel(Set<Option<V>> fieldValue, ValueContext context) {
+                List<V> result = fieldValue.stream()
+                        .map(Option::getValue)
+                        .collect(Collectors.toList());
+                return Result.ok(result);
+            }
+
+            @Override
+            public Set<Option<V>> convertToPresentation(List<V> modelValue, ValueContext context) {
+                if (modelValue == null) return Collections.emptySet();
+                return modelValue.stream()
+                        .map(valueMap::get)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet());
+            }
+        };
+    }
 
 }

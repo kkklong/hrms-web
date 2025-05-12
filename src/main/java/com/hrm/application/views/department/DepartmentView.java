@@ -2,13 +2,16 @@ package com.hrm.application.views.department;
 
 import com.hrm.application.entity.Department;
 import com.hrm.application.entity.Employee;
-import com.hrm.application.entity.Option;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.menu.MenuRouter;
+import com.hrm.application.model.Option;
 import com.hrm.application.service.DepartmentService;
+import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.ToolUtil;
 import com.hrm.application.layout.MainLayout;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
@@ -24,6 +27,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,10 +42,10 @@ public class DepartmentView extends VerticalLayout {
 
     DepartmentService service;
 
-    private final List<Option<Integer>> employeeList;
-    private final Map<Integer, Option<Integer>> employeeMap;
-    private List<ShiftType> shiftTypeList;
-    private Map<String, ShiftType> shiftTypeMap = new HashMap<>();
+    private List<Option<Integer>> employeeList;
+    private Map<Integer, Option<Integer>> employeeMap;
+    private List<Option<String>> shiftTypeList;
+    private Map<String, Option<String>> shiftTypeMap = new HashMap<>();
 
 
     Grid<Department> grid = new Grid<>(Department.class, false);
@@ -50,22 +54,16 @@ public class DepartmentView extends VerticalLayout {
 
     public DepartmentView(DepartmentService service) {
         this.service = service;
-
-        this.employeeList = service.getEmployeeOptionList();
-        this.employeeMap = ToolUtil.transToMap(employeeList, Option::getValue);
-        this.shiftTypeList = service.getShiftAndHolidayConfigList();
-        this.shiftTypeMap = ToolUtil.transToMap(shiftTypeList, ShiftType::getShiftKey);
         this.addClassName("background-plan");
-
         addClassName("department-view");
         setSizeFull();
-        configureGrid();
-        configureDialog();
-        configureFilter();
+    }
 
-        add(titleConfigure(), getToolbar(), getContent());
-        updateList();
-        closeEditor();
+    private void setData(){
+        employeeList = service.getEmployeeOptionList();
+        employeeMap = ToolUtil.transToMap(employeeList, Option::getValue);
+        shiftTypeList = service.getShiftType();
+        shiftTypeMap = ToolUtil.transToMap(shiftTypeList, Option::getValue);
     }
 
     private HorizontalLayout titleConfigure() {
@@ -129,7 +127,7 @@ public class DepartmentView extends VerticalLayout {
 
         grid.addColumn(Department::getCreatedDate).setHeader("創建時間");
         grid.addColumn(Department::getUpdatedDate).setHeader("更新時間");
-        grid.addColumn(d -> Optional.ofNullable(shiftTypeMap.get(d.getWorkType())).map(ShiftType::getShiftName).orElse(d.getWorkType())).setHeader("預設班別");
+        grid.addColumn(d -> Optional.ofNullable(shiftTypeMap.get(d.getWorkType())).map(Option::getName).orElse(d.getWorkType())).setHeader("預設班別");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.addColumn(Department::getEveryDayMorningCount).setHeader("早班最少人數").setTextAlign(ColumnTextAlign.CENTER).setWidth("3em");
@@ -194,5 +192,24 @@ public class DepartmentView extends VerticalLayout {
 
     private void updateList() {
             grid.setItems(service.getAll());
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        UI ui = attachEvent.getUI();
+        ui.access(() -> {
+            try {
+                setData(); // 執行會觸發 webClient.block() 的方法
+                configureGrid();
+                configureDialog();
+                configureFilter();
+                add(titleConfigure(), getToolbar(), getContent());
+                updateList();
+            } catch (WebClientResponseException e) {
+            } catch (Exception e) {
+                NotificationUtil.error("載入資料失敗：" + e.getMessage());
+            }
+        });
     }
 }

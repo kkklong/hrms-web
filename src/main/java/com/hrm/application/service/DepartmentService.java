@@ -2,8 +2,8 @@ package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.Department;
-import com.hrm.application.entity.Option;
 import com.hrm.application.entity.ShiftType;
+import com.hrm.application.model.Option;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
 import org.springframework.beans.factory.annotation.Value;
@@ -128,6 +128,20 @@ public class DepartmentService {
         return new ArrayList<>();
     }
 
+    //查詢班別EnumList
+    public List<Option<String>> getShiftType() {
+        String url = backEndDomain + API.GET_SHIFT_TYPE_OPTIONS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+
+        ParameterizedTypeReference<ApiResponse<List<Option<String>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<String>>> response = client.doGet(url, null, null, responseType);
+        if (response != null && response.getData() != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
 
     private enum API {
 
@@ -136,10 +150,13 @@ public class DepartmentService {
         CREATE_DEPARTMENT("/department/create", HttpMethod.POST, MediaType.APPLICATION_JSON),
         UPDATE_DEPARTMENT("/department/update", HttpMethod.POST, MediaType.APPLICATION_JSON),
         DELETE_DEPARTMENT("/department/delete/{id}", HttpMethod.POST, null),
-        // ---- employee enum ----
-        GET_EMPLOYEE_OPTIONS("/employee/getEnumList", HttpMethod.GET, null),
-        // ----  ----
+
+        // ---- shift ----
         GET_SHIFT_HOLIDAY_TYPES("/shiftSchedules/getShiftAndHolidayConfig", HttpMethod.GET, null),
+        // ---- enum ----
+        GET_EMPLOYEE_OPTIONS("/employee/getEnumList", HttpMethod.GET, null),
+        GET_SHIFT_TYPE_OPTIONS("/enum/getShiftType", HttpMethod.GET, null),
+
 
 
 
