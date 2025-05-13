@@ -39,4 +39,46 @@ html {
     padding: 10px; /* 内边距 */
     border-radius: var(--lumo-border-radius-l);
 }
+/* ---- shiftSchedules ---- */
+.shiftSchedules-grid::part(first-header-row-cell) {
+    border-bottom: 2px solid #ccc; /* 设置底部边框 */
+    background-color: var(--lumo-contrast-10pct);
+}
+.shiftSchedules-grid::part(last-header-row-cell) {
+    border-bottom: 3px solid #ccc; /* 设置底部边框 */
+    font-weight: bold;
+}
+.shiftSchedules-grid::part(holiday-cell) {
+    background-color: #f08080; /* f08080 LightCoral */
+}
+.shiftSchedules-grid::part(cell-period0) {
+    background-color: #afd1da;
+}
+.shiftSchedules-grid::part(cell-period1) {
+    background-color: #76b5c5;
+}
+.shiftSchedules-grid::part(gray-row) {
+    background-color: #d3d3d3;
+}
+.shiftSchedules-grid::part(footer-cell) {
+    border-top: 3px solid #ccc;
+    background-color: var(--lumo-contrast-10pct);
+    line-height: 10%;
+}
+.shiftType-combo-holiday::part(label) {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 2px;
+    margin-bottom: 2px;
+    color: #ffffff;
+    background-color: #FF5151;
+}
+.shiftType-combo-shiftday::part(label) {
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 2px;
+    margin-bottom: 2px;
+    color: #ffffff;
+    background-color: #0080FF;
+}
 

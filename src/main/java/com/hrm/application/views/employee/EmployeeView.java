@@ -318,7 +318,6 @@ public class EmployeeView extends VerticalLayout {
     private void updateList() {
         employeeList = service.getEmployeeList();
         if (employeeList != null && !employeeList.isEmpty()) {
-
 //            List<Role> roles = roleService.getAll();
 //            Map<Integer, Role> roleMap = roles.stream().collect(Collectors.toMap(Role::getId, d -> d, (a, b) -> b));
 //            employeeList.forEach(e -> e.setRole(roleMap.get(e.getId())));

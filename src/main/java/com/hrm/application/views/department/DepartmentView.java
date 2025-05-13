@@ -62,7 +62,7 @@ public class DepartmentView extends VerticalLayout {
     private void setData(){
         employeeList = service.getEmployeeOptionList();
         employeeMap = ToolUtil.transToMap(employeeList, Option::getValue);
-        shiftTypeList = service.getShiftType();
+        shiftTypeList = service.getShiftTypeOptionList();
         shiftTypeMap = ToolUtil.transToMap(shiftTypeList, Option::getValue);
     }
 
@@ -84,7 +84,7 @@ public class DepartmentView extends VerticalLayout {
     }
 
     private void configureDialog() {
-        dialog = new DepartmentDialog(employeeList, employeeMap, shiftTypeList, shiftTypeMap);
+        dialog = new DepartmentDialog(employeeList, shiftTypeList);
         dialog.addSaveListener(this::saveDepartment);
         dialog.addUpdateListener(this::updateDepartment);
         dialog.addDeleteListener(this::deleteDepartment);

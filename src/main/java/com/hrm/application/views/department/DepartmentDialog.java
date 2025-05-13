@@ -2,17 +2,14 @@ package com.hrm.application.views.department;
 
 import com.hrm.application.component.ConfirmDialog;
 import com.hrm.application.entity.Department;
-import com.hrm.application.entity.ShiftType;
 import com.hrm.application.model.Option;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.dialog.Dialog;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -22,6 +19,8 @@ import com.vaadin.flow.shared.Registration;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.hrm.application.util.ToolUtil.dataConverter;
 
 public class DepartmentDialog extends Dialog {
 
@@ -46,7 +45,7 @@ public class DepartmentDialog extends Dialog {
     // Other fields omitted
     Binder<Department> binder = new BeanValidationBinder<>(Department.class);
 
-    public DepartmentDialog(List<Option<Integer>> employeeList, Map<Integer, Option<Integer>> employeeMap, List<Option<String>> shiftTypeList, Map<String, Option<String>> shiftTypeMap) {
+    public DepartmentDialog(List<Option<Integer>> employeeList, List<Option<String>> shiftTypeList) {
         addClassName("department-dialog");
         VerticalLayout vt = new VerticalLayout();
         setUpComponentSize();
@@ -72,10 +71,12 @@ public class DepartmentDialog extends Dialog {
         );
         add(vt);
         getFooter().add(createButtonsLayout());
-
-        binder.bind(managerId, d -> employeeMap.get(d.getManagerId()), (d, s) -> d.setManagerId(s.getValue()));
-        binder.bind(workType, d -> shiftTypeMap.get(d.getWorkType()), (d, s) -> d.setWorkType(s.getValue()));
-
+        binder.forField(managerId)
+                .withConverter(dataConverter(employeeList)) // 產生 Map 並包進 Converter
+                .bind(Department::getManagerId, Department::setManagerId);
+        binder.forField(workType)
+                .withConverter(dataConverter(shiftTypeList)) // 產生 Map 並包進 Converter
+                .bind(Department::getWorkType, Department::setWorkType);
         binder.bindInstanceFields(this);
     }
 

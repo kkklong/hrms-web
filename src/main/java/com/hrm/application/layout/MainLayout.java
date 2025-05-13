@@ -1,6 +1,7 @@
 package com.hrm.application.layout;
 
 import com.hrm.application.entity.Employee;
+import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
@@ -9,6 +10,7 @@ import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.CalendarView;
 import com.hrm.application.views.department.DepartmentView;
 import com.hrm.application.views.employee.EmployeeView;
+import com.hrm.application.views.shift.ShiftSchedulesQueryView;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -59,6 +61,8 @@ public class MainLayout extends AbstractLayout {
         addMenu(nav, CalendarView.class);
         addMenu(nav, EmployeeView.class);
         addMenu(nav, DepartmentView.class);
+        addMenu(nav, ShiftSchedulesQueryView.class);
+
     }
 
     @Override
@@ -116,6 +120,7 @@ public class MainLayout extends AbstractLayout {
 
     private TextField accountInfo() {
         TextField account = new TextField();
+        account.setWidth("8em");
         account.setReadOnly(true);
         account.addClassName("account-textfield");
         account.getStyle().set("--vaadin-input-field-readonly-border", "none");

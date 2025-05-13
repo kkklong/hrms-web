@@ -5,12 +5,9 @@ import com.vaadin.flow.data.binder.Result;
 import com.vaadin.flow.data.binder.ValueContext;
 import com.vaadin.flow.data.converter.Converter;
 import com.vaadin.flow.server.StreamResource;
-import org.springframework.util.Assert;
 
 import java.awt.*;
 import java.io.ByteArrayInputStream;
-import java.time.Duration;
-import java.time.temporal.Temporal;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
@@ -59,6 +56,21 @@ public class ToolUtil {
 //        return duration.toHours() + (duration.toMinutesPart() / 60.0);
 //    }
 
+    //---- Converter singleData to binder ----
+    public static <V> Converter<Option<V>, V> dataConverter(List<Option<V>> options) {
+        Map<V, Option<V>> map = options.stream().collect(Collectors.toMap(Option::getValue, o -> o));
+        return new Converter<>() {
+            public Result<V> convertToModel(Option<V> fieldValue, ValueContext context) {
+                return fieldValue == null ? Result.ok(null) : Result.ok(fieldValue.getValue());
+            }
+
+            public Option<V> convertToPresentation(V modelValue, ValueContext context) {
+                return modelValue == null ? null : map.get(modelValue);
+            }
+        };
+    }
+
+    //---- Converter nameList ----
     public static <V> String convertOptionValuesToNames(List<V> values, List<Option<V>> optionList) {
         if (values == null || values.isEmpty()) return "";
         Map<V, String> valueToNameMap = optionList.stream()
@@ -68,6 +80,7 @@ public class ToolUtil {
                 .collect(Collectors.joining(", "));
     }
 
+    //---- Converter List to binder ----
     public static <V> Converter<Set<Option<V>>, List<V>> getOptionConverter(List<Option<V>> optionList) {
         Map<V, Option<V>> valueMap = optionList.stream()
                 .collect(Collectors.toMap(Option::getValue, o -> o));

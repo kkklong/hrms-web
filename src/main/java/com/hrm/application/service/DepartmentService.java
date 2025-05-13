@@ -6,6 +6,7 @@ import com.hrm.application.entity.ShiftType;
 import com.hrm.application.model.Option;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.*;
 
+@Slf4j
 @Service
 public class DepartmentService {
 
@@ -114,22 +116,8 @@ public class DepartmentService {
         return new ArrayList<>();
     }
 
-    //查詢班別資訊
-    public List<ShiftType> getShiftAndHolidayConfigList() {
-        String url = backEndDomain + API.GET_SHIFT_HOLIDAY_TYPES.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
-
-        ParameterizedTypeReference<ApiResponse<List<ShiftType>>> responseType = new ParameterizedTypeReference<>() {
-        };
-        ApiResponse<List<ShiftType>> response = client.doGet(url, null, null, responseType);
-        if (response != null && response.getData() != null) {
-            return response.getData();
-        }
-        return new ArrayList<>();
-    }
-
     //查詢班別EnumList
-    public List<Option<String>> getShiftType() {
+    public List<Option<String>> getShiftTypeOptionList() {
         String url = backEndDomain + API.GET_SHIFT_TYPE_OPTIONS.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -137,6 +125,9 @@ public class DepartmentService {
         };
         ApiResponse<List<Option<String>>> response = client.doGet(url, null, null, responseType);
         if (response != null && response.getData() != null) {
+//            response.getData().forEach(option ->
+//                    log.info("Option - Value: {}, Label: {}", option.getValue(), option.getName())
+//            );
             return response.getData();
         }
         return new ArrayList<>();
@@ -151,8 +142,6 @@ public class DepartmentService {
         UPDATE_DEPARTMENT("/department/update", HttpMethod.POST, MediaType.APPLICATION_JSON),
         DELETE_DEPARTMENT("/department/delete/{id}", HttpMethod.POST, null),
 
-        // ---- shift ----
-        GET_SHIFT_HOLIDAY_TYPES("/shiftSchedules/getShiftAndHolidayConfig", HttpMethod.GET, null),
         // ---- enum ----
         GET_EMPLOYEE_OPTIONS("/employee/getEnumList", HttpMethod.GET, null),
         GET_SHIFT_TYPE_OPTIONS("/enum/getShiftType", HttpMethod.GET, null),

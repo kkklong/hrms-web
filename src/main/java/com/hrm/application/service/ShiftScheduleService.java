@@ -3,6 +3,7 @@ package com.hrm.application.service;
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
+import com.hrm.application.model.Option;
 import com.hrm.application.model.ShiftSchedulePeriod;
 import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
@@ -15,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,7 +46,27 @@ public class ShiftScheduleService {
         return new ArrayList<>();
     }
 
-    //查詢班別資訊
+    //查詢班表轉成VO
+    public List<ShiftSchedulesQueryVO> queryShiftSchedulesVO(String startDate, String endDate, Integer departmentId) {
+        String url = backEndDomain + API.QUERY_SHIFT_SCHEDULES.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+
+        LinkedHashMap<String, Object> queryParams = new LinkedHashMap<>();
+        queryParams.put("startDate", startDate);
+        queryParams.put("endDate", endDate);
+        queryParams.put("departmentId", departmentId);
+
+        ParameterizedTypeReference<ApiResponse<List<ShiftSchedules>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<ShiftSchedules>> response = client.doGet(url, null, queryParams, responseType);
+        if (response != null && response.getData() != null) {
+            List<ShiftSchedulesQueryVO> shiftSchedulesVOList = this.convertToShiftSchedulesQueryVO(response.getData());
+            return shiftSchedulesVOList;
+        }
+        return new ArrayList<>();
+    }
+
+    //取得班別及假日配置
     public List<ShiftType> getShiftAndHolidayConfigList() {
         String url = backEndDomain + API.GET_SHIFT_HOLIDAY_TYPES.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
@@ -53,13 +75,30 @@ public class ShiftScheduleService {
         };
         ApiResponse<List<ShiftType>> response = client.doGet(url, null, null, responseType);
         if (response != null && response.getData() != null) {
+//            response.getData().forEach(option ->
+//            log.info("Option - Value: {}, Label: {}", option.getShiftKey(), option.getShiftName())
+//            );
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    //取得部門清單
+    public List<Option<Integer>> getDepartmentOptionList() {
+        String url = backEndDomain + API.GET_DEPARTMENT_OPTIONS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+
+        ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<Integer>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
             return response.getData();
         }
         return new ArrayList<>();
     }
 
     //查詢各個排班區間
-    protected List<ShiftSchedulePeriod> getShiftSchedulePeriods(String startDate, String endDate) {
+    public List<ShiftSchedulePeriod> getShiftSchedulePeriods(String startDate, String endDate) {
         String url = backEndDomain + API.QUERY_SCHEDULE_PERIODS.getPath();
         BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
@@ -69,13 +108,26 @@ public class ShiftScheduleService {
         queryParams.put("startDate", startDate);
         queryParams.put("endDate", endDate);
 
-        ApiResponse<List<ShiftSchedulePeriod>> response = client.doPostJson(url, null, queryParams, responseType);
+        ApiResponse<List<ShiftSchedulePeriod>> response = client.doGet(url, null, queryParams, responseType);
         if (response != null && response.getData() != null) {
             return response.getData();
         }
         return new ArrayList<>();
     }
 
+    public Map<LocalDate, ShiftSchedulesDateTimeQueryVO> mapSchedulesDateByDate(ShiftSchedulesQueryVO shiftSchedules) {
+        if (shiftSchedules == null || shiftSchedules.getSchedulesDates() == null) {
+            return Map.of(); // 回傳空 Map 如果資料為空
+        }
+        return shiftSchedules.getSchedulesDates().stream()
+                .collect(Collectors.toMap(
+                        ShiftSchedulesDateTimeQueryVO::getShiftDate, // 使用 shiftDate 作為 key
+                        schedule -> schedule,
+                        (existing, replacement) -> existing         // 如果有重複的 key，保留現有的值
+                ));
+    }
+
+    //將時間區間內的shiftSchedule裝填成各別員工的排班物件
     public List<ShiftSchedulesQueryVO> convertToShiftSchedulesQueryVO(List<ShiftSchedules> shiftSchedules) {
         // 按 employeeId 分組
         Map<Integer, List<ShiftSchedules>> groupedByEmployee = shiftSchedules.stream()
@@ -125,8 +177,11 @@ public class ShiftScheduleService {
 
         GET_SHIFT_HOLIDAY_TYPES("/shiftSchedules/getShiftAndHolidayConfig", HttpMethod.GET, null),
         QUERY_SHIFT_SCHEDULES("/shiftSchedules/queryByMonthAndDepartment", HttpMethod.GET, null),
-
         QUERY_SCHEDULE_PERIODS("/shiftSchedules/getShiftSchedulePeriods", HttpMethod.GET, null),
+
+        // ---- department ----
+        GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
+
 
         NONE("", null, null);
 

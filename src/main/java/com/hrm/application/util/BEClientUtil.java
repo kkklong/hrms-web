@@ -15,6 +15,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -96,17 +97,14 @@ public class BEClientUtil {
         }
         T response = null;
         try {
-            response = requestSpec
-                    .retrieve()
-                    .onStatus(HttpStatusCode::isError, clientResponse -> {
-                        log.error("Request to URL: {}, HTTP Status: {}", uri, clientResponse.statusCode());
-                        return clientResponse.createException(); // 自動轉為 WebClientResponseException
-                    })
-                    .bodyToMono(responseType)
-                    .block();
-        } catch (WebClientResponseException e) {
+            response = requestSpec.exchangeToMono(resp -> {
+                HttpStatusCode status = resp.statusCode();
+                log.info("Request to URL: {}, HTTP Status: {}", uri, status);
+                return resp.bodyToMono(responseType);
+            }).block();
+        } catch (WebClientResponseException e) {  // HTTP status code 為 4xx、5xx
             log.error("ClientError: request URI: {}; HTTP error: {}; {} - status ; Header: {};", uri, e.getStatusCode(), e.getMessage(), headers);
-            NotificationUtil.error(e.getStatusCode().toString() + "-" + e.getMessage());
+            NotificationUtil.error(e.getStatusCode().toString() +"-"+ e.getMessage());
             handleHttpError(e);
             throw e;
         } catch (Exception e) {

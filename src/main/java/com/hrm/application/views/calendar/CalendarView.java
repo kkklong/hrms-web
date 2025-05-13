@@ -83,7 +83,7 @@ public class CalendarView extends AbstractCalendarView implements AfterNavigatio
                 .collect(Collectors.toList());
 
         System.out.println("Loaded Entries: " + entries.size());
-        entries.forEach(entry -> System.out.println("Each data" + entry.getTitle()));
+//        entries.forEach(entry -> System.out.println("Each data" + entry.getTitle()));
 
         calendar.getEntryProvider().asInMemory().removeAllEntries();
         calendar.getEntryProvider().asInMemory().addEntries(entries);
