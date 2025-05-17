@@ -99,6 +99,11 @@ public class BEClientUtil {
         try {
             response = requestSpec.exchangeToMono(resp -> {
                 HttpStatusCode status = resp.statusCode();
+//                if(status == HttpStatus.UNAUTHORIZED) {
+//                    NotificationUtil.error("Request to URL: " + uri + " HTTP Status: {}" + status);
+//                    SessionUtil.cleanSession();
+//                    UI.getCurrent().getPage().setLocation("/login");
+//                }
                 log.info("Request to URL: {}, HTTP Status: {}", uri, status);
                 return resp.bodyToMono(responseType);
             }).block();

@@ -5,6 +5,7 @@ import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
+import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.CalendarView;
@@ -37,6 +38,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.stream.Stream;
 
@@ -49,10 +51,6 @@ public class MainLayout extends AbstractLayout {
 
     public MainLayout(AccountService accountService) {
         this.accountService = accountService;
-        getUserInfo();
-        addHeaderContent();
-        addDrawerContent();
-        setTheme();
     }
 
     @Override
@@ -222,5 +220,21 @@ public class MainLayout extends AbstractLayout {
         if ("dark".equals(theme)) {
             UI.getCurrent().getElement().getThemeList().add(Lumo.DARK);
         }
+    }
+
+    @Override
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        UI ui = attachEvent.getUI();
+        ui.access(() -> {
+            try {
+                getUserInfo();
+                addHeaderContent();
+                addDrawerContent();
+                setTheme();
+            } catch (Exception e) {
+                NotificationUtil.error("載入資料失敗：" + e.getMessage());
+            }
+        });
     }
 }

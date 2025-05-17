@@ -1,6 +1,7 @@
 package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
+import com.hrm.application.entity.ResetPassword;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.model.Option;
@@ -8,6 +9,7 @@ import com.hrm.application.model.ShiftSchedulePeriod;
 import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
 import com.hrm.application.util.BEClientUtil;
+import com.hrm.application.util.NotificationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -115,60 +117,42 @@ public class ShiftScheduleService {
         return new ArrayList<>();
     }
 
-    public Map<LocalDate, ShiftSchedulesDateTimeQueryVO> mapSchedulesDateByDate(ShiftSchedulesQueryVO shiftSchedules) {
-        if (shiftSchedules == null || shiftSchedules.getSchedulesDates() == null) {
-            return Map.of(); // 回傳空 Map 如果資料為空
+    // 儲存員工排班
+    public boolean savePersonalShiftSchedules(List<ShiftSchedules> personalShiftSchedules) {
+        String url = backEndDomain + API.UPDATE_PERSONAL_SHIFT_SCHEDULES.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+        ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
+        };
+
+        ApiResponse<Object> response =  client.doPostJson(url,null, personalShiftSchedules, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
         }
-        return shiftSchedules.getSchedulesDates().stream()
-                .collect(Collectors.toMap(
-                        ShiftSchedulesDateTimeQueryVO::getShiftDate, // 使用 shiftDate 作為 key
-                        schedule -> schedule,
-                        (existing, replacement) -> existing         // 如果有重複的 key，保留現有的值
-                ));
+        NotificationUtil.error(response.getMessage());
+        return false;
     }
 
-    //將時間區間內的shiftSchedule裝填成各別員工的排班物件
-    public List<ShiftSchedulesQueryVO> convertToShiftSchedulesQueryVO(List<ShiftSchedules> shiftSchedules) {
-        // 按 employeeId 分組
-        Map<Integer, List<ShiftSchedules>> groupedByEmployee = shiftSchedules.stream()
-                .collect(Collectors.groupingBy(ShiftSchedules::getEmployeeId));
+    // 手動調整排班
+    public boolean manuallyAdjustShiftSchedules(List<ShiftSchedules> manualShiftSchedules){
+        String url = backEndDomain + API.UPDATE_PERSONAL_SHIFT_SCHEDULES.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+        ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
+        };
 
-        // 轉換成 List<ShiftSchedulesQueryVO>
-        List<ShiftSchedulesQueryVO> shiftSchedulesQueryVOList = new ArrayList<>();
-
-        for (Map.Entry<Integer, List<ShiftSchedules>> entry : groupedByEmployee.entrySet()) {
-            Integer employeeId = entry.getKey();
-            List<ShiftSchedules> employeeSchedules = entry.getValue();
-
-            // 建立 ShiftSchedulesQueryVO 對像
-            ShiftSchedulesQueryVO shiftSchedulesQueryVO = new ShiftSchedulesQueryVO();
-            shiftSchedulesQueryVO.setEmployeeId(employeeId);
-            shiftSchedulesQueryVO.setNickName(employeeSchedules.get(0).getNickName());
-            shiftSchedulesQueryVO.setDepartmentId(employeeSchedules.get(0).getDepartmentId()); // 取第一個記錄的部門ID
-            shiftSchedulesQueryVO.setDepartmentName(employeeSchedules.get(0).getDepartmentName());
-            shiftSchedulesQueryVO.setId(employeeSchedules.get(0).getId()); // 設定第一個記錄的ID（可根據業務需求調整）
-            // 將 ShiftSchedules 轉換為 ShiftSchedulesDateTime 列表
-            List<ShiftSchedulesDateTimeQueryVO> schedulesDates = employeeSchedules.stream()
-                    .sorted(Comparator.comparing(ShiftSchedules::getShiftDate)) // 按 shiftDate 排序
-                    .map(schedule -> {
-                        ShiftSchedulesDateTimeQueryVO scheduleDateTimeQueryVO = new ShiftSchedulesDateTimeQueryVO();
-                        scheduleDateTimeQueryVO.setId(schedule.getId());
-                        scheduleDateTimeQueryVO.setShiftTypes(schedule.getShiftTypes());
-                        scheduleDateTimeQueryVO.setShiftDate(schedule.getShiftDate());
-                        scheduleDateTimeQueryVO.setStatus(schedule.getStatus());
-                        scheduleDateTimeQueryVO.setWeekType(schedule.getWeekType());
-                        scheduleDateTimeQueryVO.setRemark(schedule.getRemark());
-                        scheduleDateTimeQueryVO.setActionType(schedule.getActionType());
-                        scheduleDateTimeQueryVO.setShiftColorCode(schedule.getShiftColorCode());
-                        return scheduleDateTimeQueryVO;
-                    }).collect(Collectors.toList());
-            shiftSchedulesQueryVO.setSchedulesDates(schedulesDates);
-            shiftSchedulesQueryVOList.add(shiftSchedulesQueryVO);
+        ApiResponse<Object> response =  client.doPostJson(url,null, manualShiftSchedules, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
         }
-        // sort by employee id
-        shiftSchedulesQueryVOList.sort(Comparator.comparingInt(ShiftSchedulesQueryVO::getEmployeeId));
-        return shiftSchedulesQueryVOList;
+        NotificationUtil.error(response.getMessage());
+        return false;
     }
+
 
     /**
      * 接口信息
@@ -178,6 +162,8 @@ public class ShiftScheduleService {
         GET_SHIFT_HOLIDAY_TYPES("/shiftSchedules/getShiftAndHolidayConfig", HttpMethod.GET, null),
         QUERY_SHIFT_SCHEDULES("/shiftSchedules/queryByMonthAndDepartment", HttpMethod.GET, null),
         QUERY_SCHEDULE_PERIODS("/shiftSchedules/getShiftSchedulePeriods", HttpMethod.GET, null),
+        UPDATE_PERSONAL_SHIFT_SCHEDULES("/shiftSchedules/savePersonalShiftSchedules", HttpMethod.POST, MediaType.APPLICATION_JSON),
+        UPDATE_OTHERS_SHIFT_SCHEDULES("/shiftSchedules/manuallyAdjustShiftSchedules", HttpMethod.POST, MediaType.APPLICATION_JSON),
 
         // ---- department ----
         GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
@@ -221,4 +207,97 @@ public class ShiftScheduleService {
         }
 
     }
+
+    /**
+     * 處理ShiftSchedulesQueryVO跟ShiftSchedulesDateTimeQueryVO
+     */
+    public Map<LocalDate, ShiftSchedulesDateTimeQueryVO> mapSchedulesDateByDate(ShiftSchedulesQueryVO shiftSchedules) {
+        if (shiftSchedules == null || shiftSchedules.getSchedulesDates() == null) {
+            return Map.of(); // 回傳空 Map 如果資料為空
+        }
+        return shiftSchedules.getSchedulesDates().stream()
+                .collect(Collectors.toMap(
+                        ShiftSchedulesDateTimeQueryVO::getShiftDate, // 使用 shiftDate 作為 key
+                        schedule -> schedule,
+                        (existing, replacement) -> existing         // 如果有重複的 key，保留現有的值
+                ));
+    }
+
+    /**
+    *將時間區間內的shiftSchedule裝填成各別員工的排班物件
+    */
+    public List<ShiftSchedulesQueryVO> convertToShiftSchedulesQueryVO(List<ShiftSchedules> shiftSchedules) {
+        // 按 employeeId 分組
+        Map<Integer, List<ShiftSchedules>> groupedByEmployee = shiftSchedules.stream()
+                .collect(Collectors.groupingBy(ShiftSchedules::getEmployeeId));
+
+        // 轉換成 List<ShiftSchedulesQueryVO>
+        List<ShiftSchedulesQueryVO> shiftSchedulesQueryVOList = new ArrayList<>();
+
+        for (Map.Entry<Integer, List<ShiftSchedules>> entry : groupedByEmployee.entrySet()) {
+            Integer employeeId = entry.getKey();
+            List<ShiftSchedules> employeeSchedules = entry.getValue();
+
+            // 建立 ShiftSchedulesQueryVO 對像
+            ShiftSchedulesQueryVO shiftSchedulesQueryVO = new ShiftSchedulesQueryVO();
+            shiftSchedulesQueryVO.setEmployeeId(employeeId);
+            shiftSchedulesQueryVO.setNickName(employeeSchedules.get(0).getNickName());
+            shiftSchedulesQueryVO.setDepartmentId(employeeSchedules.get(0).getDepartmentId()); // 取第一個記錄的部門ID
+            shiftSchedulesQueryVO.setDepartmentName(employeeSchedules.get(0).getDepartmentName());
+            shiftSchedulesQueryVO.setId(employeeSchedules.get(0).getId()); // 設定第一個記錄的ID（可根據業務需求調整）
+            // 將 ShiftSchedules 轉換為 ShiftSchedulesDateTime 列表
+            List<ShiftSchedulesDateTimeQueryVO> schedulesDates = employeeSchedules.stream()
+                    .sorted(Comparator.comparing(ShiftSchedules::getShiftDate)) // 按 shiftDate 排序
+                    .map(schedule -> {
+                        ShiftSchedulesDateTimeQueryVO scheduleDateTimeQueryVO = new ShiftSchedulesDateTimeQueryVO();
+                        scheduleDateTimeQueryVO.setId(schedule.getId());
+                        scheduleDateTimeQueryVO.setShiftTypes(schedule.getShiftTypes());
+                        scheduleDateTimeQueryVO.setShiftDate(schedule.getShiftDate());
+                        scheduleDateTimeQueryVO.setStatus(schedule.getStatus());
+                        scheduleDateTimeQueryVO.setWeekType(schedule.getWeekType());
+                        scheduleDateTimeQueryVO.setRemark(schedule.getRemark());
+                        scheduleDateTimeQueryVO.setActionType(schedule.getActionType());
+                        scheduleDateTimeQueryVO.setShiftColorCode(schedule.getShiftColorCode());
+                        return scheduleDateTimeQueryVO;
+                    }).collect(Collectors.toList());
+            shiftSchedulesQueryVO.setSchedulesDates(schedulesDates);
+            shiftSchedulesQueryVOList.add(shiftSchedulesQueryVO);
+        }
+        // sort by employee id
+        shiftSchedulesQueryVOList.sort(Comparator.comparingInt(ShiftSchedulesQueryVO::getEmployeeId));
+        return shiftSchedulesQueryVOList;
+    }
+
+    /**
+     *將shiftSchedulesQueryVO轉回ShiftSchedulesList
+     */
+    public List<ShiftSchedules> convertToShiftSchedules(ShiftSchedulesQueryVO shiftSchedulesQueryVO) {
+        List<ShiftSchedules> shiftSchedulesList = new ArrayList<>();
+
+        Integer employeeId = shiftSchedulesQueryVO.getEmployeeId();
+        String nickName = shiftSchedulesQueryVO.getNickName();
+        Integer departmentId = shiftSchedulesQueryVO.getDepartmentId();
+        String departmentName = shiftSchedulesQueryVO.getDepartmentName();
+
+        // 遍歷 schedulesDates，將每個 ShiftSchedulesDateTimeQueryVO 轉換為 ShiftSchedules
+        for (ShiftSchedulesDateTimeQueryVO dateTimeVO : shiftSchedulesQueryVO.getSchedulesDates()) {
+            ShiftSchedules shiftSchedule = new ShiftSchedules();
+            shiftSchedule.setId(dateTimeVO.getId());
+            shiftSchedule.setEmployeeId(employeeId);
+            shiftSchedule.setNickName(nickName);
+            shiftSchedule.setDepartmentId(departmentId);
+            shiftSchedule.setDepartmentName(departmentName);
+            shiftSchedule.setShiftTypes(dateTimeVO.getShiftTypes());
+            shiftSchedule.setShiftDate(dateTimeVO.getShiftDate());
+            shiftSchedule.setStatus(dateTimeVO.getStatus());
+            shiftSchedule.setWeekType(dateTimeVO.getWeekType());
+            shiftSchedule.setRemark(dateTimeVO.getRemark());
+            shiftSchedule.setActionType(dateTimeVO.getActionType());
+            shiftSchedule.setShiftColorCode(dateTimeVO.getShiftColorCode());
+            shiftSchedulesList.add(shiftSchedule);
+        }
+        return shiftSchedulesList;
+    }
+
+
 }

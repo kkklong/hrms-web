@@ -1,5 +1,6 @@
 package com.hrm.application.views.shift;
 
+import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.layout.MainLayout;
@@ -26,6 +27,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -33,9 +35,9 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -48,6 +50,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Scope("prototype")
 @Route(value = "shiftSchedules", layout = MainLayout.class)
 @MenuRouter(label = "ShiftSchedules", icon = VaadinIcon.CALENDAR)
@@ -56,6 +59,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     private ShiftScheduleService service;
 
     // data
+    private List<ShiftType> shiftTypeList;
     private Map<String, ShiftType> shiftTypeMap = new HashMap<>();
     private List<Option<Integer>> departmentList;
     private Map<Integer, Option<Integer>> departmentMap;
@@ -88,6 +92,8 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     private HeaderRow weekHeader = grid.prependHeaderRow();
     private HeaderRow monthHeader = grid.prependHeaderRow();
 
+    private ShiftSchedulesQueryDialog dialog;
+
 
     public ShiftSchedulesQueryView(ShiftScheduleService service) {
         this.service = service;
@@ -96,7 +102,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     }
 
     private void setData() {
-        List<ShiftType> shiftTypeList = service.getShiftAndHolidayConfigList();
+        shiftTypeList = service.getShiftAndHolidayConfigList();
         shiftTypeMap = ToolUtil.transToMap(shiftTypeList, ShiftType::getShiftKey);
         departmentList = service.getDepartmentOptionList();
         departmentMap = ToolUtil.transToMap(departmentList, Option::getValue);
@@ -152,8 +158,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         yearPicker.setItems(years);
         yearPicker.setValue(selectedDate.getYear());
         yearPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
-        yearPicker.setWidth("6em");
-
+        yearPicker.setWidth("5em");
         List<Integer> months = IntStream.rangeClosed(1, 12)
                 .boxed()
                 .collect(Collectors.toList());
@@ -161,8 +166,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         monthPicker.setValue(selectedDate.getMonth().getValue());
         monthPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         monthPicker.setItemLabelGenerator(value -> value + "月");
-        monthPicker.setWidth("6em");
-
+        monthPicker.setWidth("5em");
         // 拼接的查詢日期顯示
         HorizontalLayout DatePickerHt = new HorizontalLayout(yearPicker, monthPicker);
         // 佈局
@@ -247,6 +251,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
             updateSchedulesData();
         });
         nickNameFilter.addValueChangeListener(event -> applyFilter());
+        grid.asSingleSelect().addValueChangeListener(event -> checkShiftSchedules(event.getValue()));
     }
 
     private void updateSchedulesData() {
@@ -268,13 +273,13 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         List<ShiftSchedulesQueryVO> shiftSchedulesList = service.queryShiftSchedulesVO(startDate.format(dateFormatter), endDate.format(dateFormatter), selectedDepartment);
         configureGrid(shiftSchedulesList);  // 重新產生 Grid
         resetEmployeeFilter(shiftSchedulesList);
-        // 總計人數, 假日 ------------------------------------------------------------------------------
-        int empCount = shiftSchedulesList == null ? 0 : shiftSchedulesList.size();
+        // ---- 總計人數, 假日 ----
+        //int empCount = shiftSchedulesList == null ? 0 : shiftSchedulesList.size();
         List<String> restKey = Arrays.asList("REST");
         List<String> regularKey = Arrays.asList("REGULAR");
         List<String> nationalKey = Arrays.asList("NATIONAL");
-        countDetail.setValue(String.format("[部門人數: %d] [休假日: %d] [例假日: %d] [國定假日: %d]"
-                , empCount, getHolidayShiftTypeCount(periods, restKey)
+        countDetail.setValue(String.format("[休假日: %d][例假日: %d][國定假日: %d]"
+                , getHolidayShiftTypeCount(periods, restKey)
                 , getHolidayShiftTypeCount(periods, regularKey)
                 , getHolidayShiftTypeCount(periods, nationalKey)
         ));
@@ -306,7 +311,6 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         nickNameFilter.setItems(employeeList);
         nickNameFilter.setValue(currentValue);
     }
-
 
     /**
      * 設定grid
@@ -485,7 +489,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
 
     // 計算各個timeSlot數量----------------------------------------------------------------------------------------------------
 
-    //統計各時段數量#status=0
+    // 統計各時段數量#status=0
     private Map<String, Long> calculateTimeSlotCountsForDay(List<ShiftSchedulesQueryVO> shiftSchedulesList, LocalDate targetDate, String shiftKeyword) {
         Map<String, Long> result = shiftSchedulesList.stream()
                 .flatMap(shiftSchedule -> shiftSchedule.getSchedulesDates().stream())
@@ -535,10 +539,64 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 updateSchedulesData();
                 setParameterListener();
                 add(titleConfigure(), getToolbar(), getContent());
-            } catch (WebClientResponseException e) {
+                configureDialog(null);
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
             }
         });
     }
+
+    // ---- dialog ----
+    private void configureDialog(ShiftSchedulesQueryVO shiftSchedules) {
+        dialog = new ShiftSchedulesQueryDialog(shiftTypeList, shiftTypeMap, selectedDate, shiftSchedules);
+        dialog.addUpdateListener(this::manuallyAdjustShiftSchedules);
+        dialog.addCloseListener(e -> closeEditor());
+    }
+
+    private void closeEditor() {
+        grid.asSingleSelect().clear();
+        dialog.close();
+    }
+
+    //查看
+    public void checkShiftSchedules(ShiftSchedulesQueryVO schedules) {
+        if (schedules == null) {
+            closeEditor();
+        } else {
+            configureDialog(schedules);
+            dialog.setShiftSchedules(schedules);
+            dialog.open();
+            addClassName("checking");
+        }
+    }
+
+    //儲存1
+    public void saveShiftSchedules(ShiftSchedulesQueryDialog.UpdateEvent event) {
+        ShiftSchedulesQueryVO schedulesVO = event.getShiftSchedules();
+        List<ShiftSchedules> personalSchedulesList = service.convertToShiftSchedules(schedulesVO);
+        boolean success = service.savePersonalShiftSchedules(personalSchedulesList);
+        if (success) {
+            Notification.show("儲存成功");
+            updateSchedulesData();
+            closeEditor();
+        } else {
+            Notification.show("儲存失敗");
+        }
+    }
+
+    //儲存2
+    public void manuallyAdjustShiftSchedules(ShiftSchedulesQueryDialog.UpdateEvent event) {
+        List<ShiftSchedules> personalSchedulesList = service.convertToShiftSchedules(event.getShiftSchedules());
+        boolean success = service.manuallyAdjustShiftSchedules(personalSchedulesList);
+        if (success) {
+            Notification.show("儲存成功");
+            log.info("nickNameFilter0" + nickNameFilter.getValue());
+
+            updateSchedulesData();
+            closeEditor();
+        } else {
+            Notification.show("儲存失敗");
+        }
+    }
+
 }

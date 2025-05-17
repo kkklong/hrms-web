@@ -206,7 +206,6 @@ public class DepartmentView extends VerticalLayout {
                 configureFilter();
                 add(titleConfigure(), getToolbar(), getContent());
                 updateList();
-            } catch (WebClientResponseException e) {
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
             }
