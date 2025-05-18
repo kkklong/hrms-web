@@ -16,6 +16,8 @@ import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
@@ -29,6 +31,7 @@ import java.util.*;
 public class ShiftSchedulesQueryDialog extends Dialog {
     private LocalDate selectedDate;
     private Map<LocalDate, ComboBox<ShiftType>> comboBoxes = new HashMap<>();
+    private Map<LocalDate, TextField> remarkFieldsMap = new HashMap<>();
     private List<ShiftType> shiftTypeList;
     private Map<String, ShiftType> shiftTypeMap;
     private ShiftSchedulesQueryVO shiftSchedules;
@@ -55,102 +58,180 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             return new VerticalLayout();
         }
         comboBoxes.clear();
-        VerticalLayout Vt = new VerticalLayout();
+
+        // 主容器
+        VerticalLayout mainLayout = new VerticalLayout();
+        mainLayout.setMinWidth("40em");
+        mainLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
+
+        // 標題
         TextField countDetail = new TextField();
         countDetail.setReadOnly(true);
         countDetail.setWidth("20em");
         countDetail.getStyle().set("font-weight", "bold");
         countDetail.getStyle().set("--vaadin-input-field-readonly-border", "none");
-        Vt.add(new HorizontalLayout(new H3("員工: " + shiftSchedules.getNickName() + " 排班"), countDetail), new Hr());
-        Vt.addClassName("background-plan");
-        Vt.setMinWidth("40em");
+        mainLayout.add(new HorizontalLayout(new H3("員工: " + shiftSchedules.getNickName() + " 排班"), countDetail));
+        mainLayout.addClassName("background-plan");
 
-        Vt.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
+        // 建立兩個 Tab
+        Tab tab1 = new Tab("排班設定");
+        Tab tab2 = new Tab("備註說明");
+
+        // 每個 Tab 對應的內容
+        Div tab1Content = createComboBoxLayout(shiftSchedules, countDetail);
+        Div tab2Content = createRemarksLayout(shiftSchedules);
+
+        Map<Tab, Component> tabsToPages = new HashMap<>();
+        tabsToPages.put(tab1, tab1Content);
+        tabsToPages.put(tab2, tab2Content);
+
+        Tabs tabs = new Tabs(tab1, tab2);
+        tabs.setWidthFull();
+
+        Div pages = new Div(tab1Content, tab2Content);
+        pages.setWidthFull();
+        pages.setHeightFull();
+
+        tabs.addSelectedChangeListener(event -> {
+            tabsToPages.values().forEach(page -> page.setVisible(false));
+            Component selectedPage = tabsToPages.get(tabs.getSelectedTab());
+            if (selectedPage != null) selectedPage.setVisible(true);
+        });
+
+        tab1Content.setVisible(true);
+        tab2Content.setVisible(false);
+
+        mainLayout.add(tabs, pages);
+        return mainLayout;
+    }
+
+    // 排班設定的layout
+    private Div createComboBoxLayout(ShiftSchedulesQueryVO shiftSchedules, TextField countDetail) {
+        Div wrapper = new Div();
+        wrapper.setWidthFull();
+        wrapper.setHeightFull();
+
         FormLayout contentLayout = new FormLayout();
         contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
-        contentLayout.setMaxWidth("100em");
-        contentLayout.setMinWidth("40em");
+        contentLayout.setWidthFull();
+
         List<ShiftSchedulesDateTimeQueryVO> datesList = shiftSchedules.getSchedulesDates();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM-dd");
 
-        // 添加星期一到星期日的標題
-        DateTimeFormatter dayOfWeekFormatter = DateTimeFormatter.ofPattern("EEEE", Locale.CHINESE);
-        for (int i = 0; i < 7; i++) {
-            LocalDate anyDate = LocalDate.now().with(DayOfWeek.of(i + 1)); // 使用任意日期來獲取星期幾名稱
-            Div dayOfWeekLabel = new Div(anyDate.format(dayOfWeekFormatter));
-            dayOfWeekLabel.getStyle().set("font-weight", "bold");
-            dayOfWeekLabel.getStyle().set("text-align", "center");
-            contentLayout.add(dayOfWeekLabel);
-        }
-
-        int itemCount = 0; // 計數器
+        int itemCount = 0;
         for (int i = 0; i < datesList.size(); i++) {
             LocalDate date = datesList.get(i).getShiftDate();
-            // 計算每週的開始位置：在周一前加入空白格
-            if (i == 0) {  // 對於第一個日期
-                int emptySlots = date.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue(); // 得到應加的空白數量
+
+            if (i == 0) {
+                int emptySlots = date.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue();
                 for (int j = 0; j < emptySlots; j++) {
-                    contentLayout.add(new TextField()); // 添加空白格
+                    contentLayout.add(new TextField());
                     itemCount++;
                 }
             }
-            // 找到該日期對應的班次安排
-            ShiftSchedulesDateTimeQueryVO shiftSchedulesDateTime = shiftSchedules.getSchedulesDates().stream()
-                    .filter(schedule -> schedule.getShiftDate().equals(date))
-                    .findFirst()
-                    .orElse(new ShiftSchedulesDateTimeQueryVO()); // 如果找不到，創建一默認值
 
-            ComboBox<ShiftType> shiftTypesField = new ComboBox<>(date.format(dateFormatter));
+            ShiftSchedulesDateTimeQueryVO shiftSchedulesDateTime = datesList.get(i);
+            ComboBox<ShiftType> shiftTypesField = new ComboBox<>();
             shiftTypesField.setWidthFull();
-            shiftTypesField.setMinWidth("0%");
+            shiftTypesField.setItems(shiftTypeList);
+            shiftTypesField.setLabel(shiftSchedulesDateTime.getActionType() == 0
+                    ? date.format(dateFormatter)
+                    : date.format(dateFormatter) + " [R]");
+            shiftTypesField.setReadOnly(shiftSchedulesDateTime.getActionType() == 1);
             shiftTypesField.getStyle().set("--vaadin-input-field-border-width", "1.5px");
             shiftTypesField.getElement().getStyle().set("font-size", "14px");
             shiftTypesField.getStyle().set("--vaadin-combo-box-overlay-width", "11em");
-            shiftTypesField.setItems(shiftTypeList);
-            shiftTypesField.setLabel(shiftSchedulesDateTime.getActionType() == 0
-                    ? date.format(dateFormatter) : date.format(dateFormatter) + " [R]");
-            shiftTypesField.setReadOnly(shiftSchedulesDateTime.getActionType() == 1);
-            shiftTypesField.getStyle().set("--vaadin-input-field-readonly-border", "1px solid");
-            shiftTypesField.addValueChangeListener(e -> {
-                if (e.getValue() != null && e.getValue().getShiftKey().contains("HOLIDAY")) {
-                    shiftTypesField.removeClassName("shiftType-combo-shiftday");
-                    shiftTypesField.addClassName("shiftType-combo-holiday");
-                } else {
-                    shiftTypesField.removeClassName("shiftType-combo-holiday");
-                    shiftTypesField.addClassName("shiftType-combo-shiftday");
-                }
-                setBackgroundColor(shiftTypesField, shiftTypesField.getValue().getShiftColorCode());
-                countDetail.setValue(String.format("[休假日: %d] [例假日: %d] [國定假: %d]"
-                        , getShiftTypeCount(comboBoxes, "REST")
-                        , getShiftTypeCount(comboBoxes, "REGULAR")
-                        , getShiftTypeCount(comboBoxes, "NATIONAL")
-                ));
-            });
-            // 设置当前值
-            shiftTypesField.setValue(Optional.ofNullable(shiftTypeMap.get(shiftSchedulesDateTime.getShiftTypes())).orElse(null));
+            shiftTypesField.setValue(shiftTypeMap.getOrDefault(shiftSchedulesDateTime.getShiftTypes(), null));
             shiftTypesField.setItemLabelGenerator(ShiftType::getShiftName);
-            // 保存 ComboBox 以便在保存时读取用户的选择
-            comboBoxes.put(date, shiftTypesField);
-            countDetail.setValue(String.format("[休假日: %d] [例假日: %d] [國定假: %d]"
-                    , getShiftTypeCount(comboBoxes, "REST")
-                    , getShiftTypeCount(comboBoxes, "REGULAR")
-                    , getShiftTypeCount(comboBoxes, "NATIONAL")
-            ));
-            contentLayout.add(shiftTypesField);
+            updateShiftTypeStyles(shiftTypesField, shiftTypesField.getValue(), countDetail);
+            shiftTypesField.addValueChangeListener(e -> {
+                updateShiftTypeStyles(shiftTypesField, e.getValue(), countDetail);
+            });
 
-            itemCount++; // 每次添加一筆資料，計數器加 1
+            comboBoxes.put(date, shiftTypesField); // 更新後的shiftType存進全域變數裡
+            contentLayout.add(shiftTypesField);
+            itemCount++;
+
             if (itemCount % 14 == 0) {
-                Vt.add(contentLayout, new Hr());
-                contentLayout = new FormLayout(); // 創建新的 FormLayout
+                wrapper.add(contentLayout, new Hr());
+                contentLayout = new FormLayout();
                 contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
-                contentLayout.setMaxWidth("100em");
-                contentLayout.setMinWidth("40em");
             }
         }
-        // 將最後剩餘的 contentLayout 添加到 Vt
+
         if (itemCount % 14 != 0) {
-            Vt.add(contentLayout);
+            wrapper.add(contentLayout);
         }
-        return Vt;
+
+        return wrapper;
+    }
+
+    private void updateShiftTypeStyles(ComboBox<ShiftType> comboBox, ShiftType shiftType, TextField countDetail) {
+        if (shiftType != null && shiftType.getShiftKey().contains("HOLIDAY")) {
+            comboBox.removeClassName("shiftType-combo-shiftday");
+            comboBox.addClassName("shiftType-combo-holiday");
+        } else {
+            comboBox.removeClassName("shiftType-combo-holiday");
+            comboBox.addClassName("shiftType-combo-shiftday");
+        }
+
+        setBackgroundColor(comboBox, shiftType != null ? shiftType.getShiftColorCode() : null);
+
+        countDetail.setValue(String.format("[休假日: %d] [例假日: %d] [國定假: %d]",
+                getShiftTypeCount(comboBoxes, "REST"),
+                getShiftTypeCount(comboBoxes, "REGULAR"),
+                getShiftTypeCount(comboBoxes, "NATIONAL")));
+    }
+
+    // 備註設定的layout
+    private Div createRemarksLayout(ShiftSchedulesQueryVO shiftSchedules) {
+        Div wrapper = new Div();
+        wrapper.setWidthFull();
+        wrapper.setHeightFull();
+
+        FormLayout contentLayout = new FormLayout();
+        contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+        contentLayout.setWidthFull();
+
+        List<ShiftSchedulesDateTimeQueryVO> datesList = shiftSchedules.getSchedulesDates();
+        int itemCount = 0;
+
+        for (int i = 0; i < datesList.size(); i++) {
+            LocalDate date = datesList.get(i).getShiftDate();
+
+            if (i == 0) {
+                int emptySlots = date.getDayOfWeek().getValue() - DayOfWeek.MONDAY.getValue();
+                for (int j = 0; j < emptySlots; j++) {
+                    contentLayout.add(new TextField());
+                    itemCount++;
+                }
+            }
+
+            ShiftSchedulesDateTimeQueryVO shiftSchedulesDateTime = datesList.get(i);
+            TextField remarkField = new TextField();
+            remarkField.setValue(Optional.ofNullable(shiftSchedulesDateTime.getRemark()).orElse(""));
+//            remarkField.setReadOnly(true);
+            remarkField.setWidthFull();
+            remarkField.getStyle().set("font-size", "14px");
+            remarkField.setLabel(shiftSchedulesDateTime.getActionType() == 0
+                    ? date.format(dateFormatter)
+                    : date.format(dateFormatter) + " [R]");
+            contentLayout.add(remarkField);
+            remarkFieldsMap.put(date, remarkField); // 更新後的remark存進全域變數裡
+            itemCount++;
+
+            if (itemCount % 14 == 0) {
+                wrapper.add(contentLayout, new Hr());
+                contentLayout = new FormLayout();
+                contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+            }
+        }
+
+        if (itemCount % 14 != 0) {
+            wrapper.add(contentLayout);
+        }
+
+        return wrapper;
     }
 
     private void setBackgroundColor(HasStyle component, String backgroundColorCode) {
@@ -191,9 +272,14 @@ public class ShiftSchedulesQueryDialog extends Dialog {
                 shiftSchedules.getSchedulesDates().stream()
                         .filter(schedule -> schedule.getShiftDate().equals(date))
                         .findFirst()
-                        .ifPresent(schedule -> schedule.setShiftTypes(selectedShiftType != null ? selectedShiftType.getShiftKey() : null));
+                        .ifPresent(schedule -> {
+                            schedule.setShiftTypes(selectedShiftType != null ? selectedShiftType.getShiftKey() : null);
+                            TextField remarkField = remarkFieldsMap.get(date);
+                            if (remarkField != null) {
+                                schedule.setRemark(remarkField.getValue());
+                            }
+                        });
             }
-
             // 觸發 UpdateEvent，將更新後的 shiftSchedules 傳遞出去
             fireEvent(new UpdateEvent(this, shiftSchedules));
         }
@@ -214,10 +300,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
     }
 
     // Events
-    public static abstract class ShiftSchedulesQueryDialogEvent extends ComponentEvent<ShiftSchedulesQueryDialog> {
+    public static abstract class ShiftSchedulesQueryDialog1Event extends ComponentEvent<ShiftSchedulesQueryDialog> {
         private final ShiftSchedulesQueryVO shiftSchedules;
 
-        public ShiftSchedulesQueryDialogEvent(ShiftSchedulesQueryDialog source, ShiftSchedulesQueryVO shiftSchedules) {
+        public ShiftSchedulesQueryDialog1Event(ShiftSchedulesQueryDialog source, ShiftSchedulesQueryVO shiftSchedules) {
             super(source, false);
             this.shiftSchedules = shiftSchedules;
         }
@@ -227,13 +313,13 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         }
     }
 
-    public static class UpdateEvent extends ShiftSchedulesQueryDialogEvent {
+    public static class UpdateEvent extends ShiftSchedulesQueryDialog1Event {
         public UpdateEvent(ShiftSchedulesQueryDialog source, ShiftSchedulesQueryVO shiftSchedules) {
             super(source, shiftSchedules);
         }
     }
 
-    public static class CloseEvent extends ShiftSchedulesQueryDialogEvent {
+    public static class CloseEvent extends ShiftSchedulesQueryDialog1Event {
         public CloseEvent(ShiftSchedulesQueryDialog source) {
             super(source, null);
         }

@@ -158,7 +158,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         yearPicker.setItems(years);
         yearPicker.setValue(selectedDate.getYear());
         yearPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
-        yearPicker.setWidth("5em");
+        yearPicker.setWidth("6em");
         List<Integer> months = IntStream.rangeClosed(1, 12)
                 .boxed()
                 .collect(Collectors.toList());
