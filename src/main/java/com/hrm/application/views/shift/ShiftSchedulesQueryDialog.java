@@ -62,15 +62,16 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         // 主容器
         VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setMinWidth("40em");
-        mainLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
-
         // 標題
         TextField countDetail = new TextField();
         countDetail.setReadOnly(true);
         countDetail.setWidth("20em");
         countDetail.getStyle().set("font-weight", "bold");
         countDetail.getStyle().set("--vaadin-input-field-readonly-border", "none");
-        mainLayout.add(new HorizontalLayout(new H3("員工: " + shiftSchedules.getNickName() + " 排班"), countDetail));
+        HorizontalLayout titleHt = new HorizontalLayout(new H3("員工: " + shiftSchedules.getNickName() + " 排班"), countDetail);
+        titleHt.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.BASELINE);
+        mainLayout.add(titleHt);
+        mainLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
         mainLayout.addClassName("background-plan");
 
         // 建立兩個 Tab
@@ -132,7 +133,7 @@ public class ShiftSchedulesQueryDialog extends Dialog {
 
             ShiftSchedulesDateTimeQueryVO shiftSchedulesDateTime = datesList.get(i);
             ComboBox<ShiftType> shiftTypesField = new ComboBox<>();
-            shiftTypesField.setWidthFull();
+//            shiftTypesField.setWidthFull();
             shiftTypesField.setItems(shiftTypeList);
             shiftTypesField.setLabel(shiftSchedulesDateTime.getActionType() == 0
                     ? date.format(dateFormatter)
@@ -141,6 +142,7 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             shiftTypesField.getStyle().set("--vaadin-input-field-border-width", "1.5px");
             shiftTypesField.getElement().getStyle().set("font-size", "14px");
             shiftTypesField.getStyle().set("--vaadin-combo-box-overlay-width", "11em");
+//            shiftTypesField.setWidth("8em");
             shiftTypesField.setValue(shiftTypeMap.getOrDefault(shiftSchedulesDateTime.getShiftTypes(), null));
             shiftTypesField.setItemLabelGenerator(ShiftType::getShiftName);
             shiftTypesField.addValueChangeListener(e -> {
@@ -209,9 +211,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             ShiftSchedulesDateTimeQueryVO shiftSchedulesDateTime = datesList.get(i);
             TextField remarkField = new TextField();
             remarkField.setValue(Optional.ofNullable(shiftSchedulesDateTime.getRemark()).orElse(""));
-            remarkField.setWidthFull();
+//            remarkField.setWidthFull();
             remarkField.getStyle().set("font-size", "14px");
             remarkField.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+//            remarkField.setWidth("8em");
             setRemarkStyles(remarkField, shiftSchedulesDateTime.getShiftTypes());
             remarkField.setLabel(shiftSchedulesDateTime.getActionType() == 0
                     ? date.format(dateFormatter)

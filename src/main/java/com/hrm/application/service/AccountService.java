@@ -1,6 +1,7 @@
 package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
+import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
@@ -106,10 +107,22 @@ public class AccountService {
         return null;
     }
 
+    public boolean updatePassword(UpdatePassword updatePassword) {
+        String url = backEndDomain + API.UPDATE_PASSWORD;
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
-//    public boolean updatePassword(UpdatePassword updatePassword) {
-//        return apiService.updatePassword(updatePassword);
-//    }
+        ParameterizedTypeReference<ApiResponse<UpdatePassword>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<UpdatePassword> response = client.doPostJson(url, null, updatePassword, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return false;
+    }
 //
 //    public boolean updateUserInfo(UserInfo userInfo) {
 //        return apiService.updateUserInfo(userInfo);
@@ -120,6 +133,8 @@ public class AccountService {
         LOGIN("/account/login", HttpMethod.POST, MediaType.APPLICATION_JSON),
         LOGOUT("/account/logout", HttpMethod.POST, null),
         GET_CURRENT_USER("/account/currentEmployee", HttpMethod.GET, null),
+        UPDATE_PASSWORD("/account/updatePassword", HttpMethod.POST, MediaType.APPLICATION_JSON),
+
         NONE("", null, null);
 
 

@@ -2,6 +2,7 @@ package com.hrm.application.layout;
 
 import com.hrm.application.entity.Employee;
 import com.hrm.application.entity.ShiftSchedules;
+import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
@@ -11,6 +12,7 @@ import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.CalendarView;
 import com.hrm.application.views.department.DepartmentView;
 import com.hrm.application.views.employee.EmployeeView;
+import com.hrm.application.views.employee.ResetPasswordDialog;
 import com.hrm.application.views.shift.ShiftSchedulesQueryView;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -47,6 +49,7 @@ public class MainLayout extends AbstractLayout {
 
     AccountService accountService;
     UserInfo currentEmployee;
+    UpdatePasswordDialog dialog;
 
 
     public MainLayout(AccountService accountService) {
@@ -102,7 +105,9 @@ public class MainLayout extends AbstractLayout {
         accountMenu.setOpenOnHover(true);
         MenuItem profileItem = accountMenu.addItem(new Avatar());
         SubMenu accountSubMenu = profileItem.getSubMenu();
-        accountSubMenu.addItem("Change Password");
+        accountSubMenu.addItem("Change Password", event -> {
+            openDialog();
+        });
         accountSubMenu.add(new Hr());
         accountSubMenu.addItem("Logout", event -> {
             boolean result = this.accountService.logout();
@@ -114,6 +119,31 @@ public class MainLayout extends AbstractLayout {
             }
         });
         return accountMenu;
+    }
+
+    private void configureDialog() {
+        dialog = new UpdatePasswordDialog();
+        dialog.addSaveListener(this::updatePassword);
+        dialog.addCloseListener(e -> closeEditor());
+    }
+
+    private void openDialog() {
+        dialog.setPassword(new UpdatePassword());
+        dialog.open();
+    }
+
+    private void closeEditor() {
+        dialog.setPassword(null);
+        dialog.close();
+    }
+
+    private void updatePassword(UpdatePasswordDialog.SaveEvent event) {
+        UpdatePassword updatePassword = event.getUpdatePassword();
+        boolean success = accountService.updatePassword(updatePassword);
+        if (success) {
+            Notification.show("變更成功");
+            closeEditor();
+        }
     }
 
     private TextField accountInfo() {
@@ -231,6 +261,7 @@ public class MainLayout extends AbstractLayout {
                 getUserInfo();
                 addHeaderContent();
                 addDrawerContent();
+                configureDialog();
                 setTheme();
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());

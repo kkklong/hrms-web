@@ -122,7 +122,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     }
 
     private HorizontalLayout getContent() {
-        HorizontalLayout content = new HorizontalLayout(grid);
+        HorizontalLayout content = new HorizontalLayout(grid, dialog);
         content.addClassNames("grid-content");
         content.setSizeFull();
         return content;
@@ -543,8 +543,8 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 setData(); // 執行會觸發 webClient.block() 的方法
                 updateSchedulesData();
                 setParameterListener();
-                add(titleConfigure(), getToolbar(), getContent());
                 configureDialog(null);
+                add(titleConfigure(), getToolbar(), getContent());
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
             }
