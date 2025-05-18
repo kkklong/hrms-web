@@ -137,9 +137,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
 
         // 右側的過濾器佈局
         HorizontalLayout tool2 = new HorizontalLayout();
-        departmentSelector.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         configureDepartmentSelector();
-        nickNameFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         configureFilter();
         tool2.add(countDetail, nickNameFilter, departmentSelector);
 
@@ -220,17 +218,24 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         departmentSelector.setItemLabelGenerator(Option::getName);
         departmentSelector.setPlaceholder("部門...");
         departmentSelector.setValue(departmentMap.get(userDepartmentId));
-        departmentSelector.setWidth("10em");
+        departmentSelector.setWidth("6em");
+        departmentSelector.getElement().getStyle().set("font-size", "14px");
+        departmentSelector.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        departmentSelector.getStyle().set("--vaadin-combo-box-overlay-width", "8em");
+
         countDetail.setReadOnly(true);
         countDetail.getStyle().set("font-weight", "bold");
         countDetail.getStyle().set("--vaadin-input-field-readonly-border", "none");
-        countDetail.setWidth("25em");
+        countDetail.setWidth("20em");
     }
 
     private void configureFilter() {
         nickNameFilter.setPlaceholder("員工...");
-        nickNameFilter.setWidth("10em");
+        nickNameFilter.setWidth("6em");
         nickNameFilter.setClearButtonVisible(true);
+        nickNameFilter.getElement().getStyle().set("font-size", "14px");
+        nickNameFilter.getStyle().set("--vaadin-combo-box-overlay-width", "8em");
+        nickNameFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         nickNameFilter.setItemLabelGenerator(Option::getName);
     }
 

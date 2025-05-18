@@ -72,10 +72,10 @@ public class DepartmentDialog extends Dialog {
         add(vt);
         getFooter().add(createButtonsLayout());
         binder.forField(managerId)
-                .withConverter(dataConverter(employeeList)) // 產生 Map 並包進 Converter
+                .withConverter(dataConverter(employeeList))
                 .bind(Department::getManagerId, Department::setManagerId);
         binder.forField(workType)
-                .withConverter(dataConverter(shiftTypeList)) // 產生 Map 並包進 Converter
+                .withConverter(dataConverter(shiftTypeList))
                 .bind(Department::getWorkType, Department::setWorkType);
         binder.bindInstanceFields(this);
     }

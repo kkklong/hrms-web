@@ -121,7 +121,7 @@ public class EmployeeView extends VerticalLayout {
     }
 
     private void configureDialog() {
-        dialog = new EmployeeDialog(service, companyList, employeeStatusEnumList, departmentList, roleList, employeeStatusEnumMap);
+        dialog = new EmployeeDialog(service, companyList, employeeStatusEnumList, departmentList, roleList);
         dialog.addSaveListener(this::saveEmployee);
         dialog.addUpdateListener(this::updateEmployee);
         dialog.addDeleteListener(this::deleteEmployee);
@@ -164,7 +164,7 @@ public class EmployeeView extends VerticalLayout {
         grid.addColumn(Employee::getFullName).setHeader("員工全名").setKey("fullName");
         grid.addColumn(Employee::getNickName).setHeader("員工英文名").setKey("nickName");
         grid.addColumn(Employee::getAccount).setHeader("帳號").setKey("account");
-        grid.addColumn(employee -> dialog.getDepartmentMap().get(employee.getDepartmentId()).getName()).setHeader("部門").setKey("departmentId");
+        grid.addColumn(e ->  Optional.ofNullable(departmentMap.get(e.getDepartmentId())).map(Option::getName).orElse("未知部門")).setHeader("部門").setKey("departmentId");
         grid.addColumn(Employee::getPosition).setHeader("職位").setKey("position");
         grid.addColumn(employee -> Optional.ofNullable(employeeStatusEnumMap.get(employee.getStatus())).map(Option::getName).orElse("未知狀態")).setHeader("狀態").setKey("status");
         grid.addColumn(Employee::getGender).setHeader("性別").setKey("gender");

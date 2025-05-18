@@ -143,12 +143,11 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             shiftTypesField.getStyle().set("--vaadin-combo-box-overlay-width", "11em");
             shiftTypesField.setValue(shiftTypeMap.getOrDefault(shiftSchedulesDateTime.getShiftTypes(), null));
             shiftTypesField.setItemLabelGenerator(ShiftType::getShiftName);
-            updateShiftTypeStyles(shiftTypesField, shiftTypesField.getValue(), countDetail);
             shiftTypesField.addValueChangeListener(e -> {
                 updateShiftTypeStyles(shiftTypesField, e.getValue(), countDetail);
             });
-
             comboBoxes.put(date, shiftTypesField); // 更新後的shiftType存進全域變數裡
+            updateShiftTypeStyles(shiftTypesField, shiftTypesField.getValue(), countDetail);
             contentLayout.add(shiftTypesField);
             itemCount++;
 
@@ -210,9 +209,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             ShiftSchedulesDateTimeQueryVO shiftSchedulesDateTime = datesList.get(i);
             TextField remarkField = new TextField();
             remarkField.setValue(Optional.ofNullable(shiftSchedulesDateTime.getRemark()).orElse(""));
-//            remarkField.setReadOnly(true);
             remarkField.setWidthFull();
             remarkField.getStyle().set("font-size", "14px");
+            remarkField.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+            setRemarkStyles(remarkField, shiftSchedulesDateTime.getShiftTypes());
             remarkField.setLabel(shiftSchedulesDateTime.getActionType() == 0
                     ? date.format(dateFormatter)
                     : date.format(dateFormatter) + " [R]");
@@ -232,6 +232,16 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         }
 
         return wrapper;
+    }
+
+    private void setRemarkStyles(TextField textField, String shiftKey) {
+        if (shiftKey != null && shiftKey.contains("HOLIDAY")) {
+            textField.removeClassName("shiftType-combo-shiftday");
+            textField.addClassName("shiftType-combo-holiday");
+        } else {
+            textField.removeClassName("shiftType-combo-holiday");
+            textField.addClassName("shiftType-combo-shiftday");
+        }
     }
 
     private void setBackgroundColor(HasStyle component, String backgroundColorCode) {

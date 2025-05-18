@@ -1,6 +1,7 @@
 package com.hrm.application.views.employee;
 
 import com.hrm.application.component.ConfirmDialog;
+import com.hrm.application.entity.Department;
 import com.hrm.application.entity.Employee;
 import com.hrm.application.model.Option;
 import com.hrm.application.service.EmployeeService;
@@ -31,13 +32,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.hrm.application.util.ToolUtil.dataConverter;
+
 public class EmployeeDialog extends Dialog {
 
     List<Option<Integer>> companyList;
     Map<Integer, Option<Integer>> companyMap;
     List<Option<Integer>> departmentList;
     Map<Integer, Option<Integer>> departmentMap;
-    Map<Integer, Option<Integer>> roleMap;
     private final EmployeeService service;
 
     TextField fullName = new TextField("全名");
@@ -102,15 +104,10 @@ public class EmployeeDialog extends Dialog {
                           List<Option<Integer>> companyList,
                           List<Option<Byte>> employeeStatusEnumList,
                           List<Option<Integer>> departmentList,
-                          List<Option<Integer>> roleList,
-                          Map<Byte, Option<Byte>> employeeStatusEnumMap) {
-
+                          List<Option<Integer>> roleList) {
         this.service = service;
         this.companyList = companyList;
-        this.companyMap = ToolUtil.transToMap(companyList, Option::getValue);
         this.departmentList = departmentList;
-        this.departmentMap = ToolUtil.transToMap(departmentList, Option::getValue);
-        this.roleMap = ToolUtil.transToMap(roleList, Option::getValue);
         addClassName("employee-dialog");
         setComponentSize();
         resetPasswordDialog = new ResetPasswordDialog(service);
@@ -154,17 +151,20 @@ public class EmployeeDialog extends Dialog {
         add(vt);
         getFooter().add(createButtonsLayout());
 
-        binder.bind(department, employee -> departmentMap.get(employee.getDepartmentId()),
-                (employee, select) -> employee.setDepartmentId(select.getValue()));
+        binder.forField(department)
+                .withConverter(dataConverter(departmentList))
+                .bind(Employee::getDepartmentId, Employee::setDepartmentId);
 
-        binder.bind(role, employee -> roleMap.get(employee.getRoleId()),
-                (employee, select) -> employee.setRoleId(select.getValue()));
+        binder.forField(role)
+                .withConverter(dataConverter(roleList))
+                .bind(Employee::getRoleId, Employee::setRoleId);
 
-        binder.bind(status, employee -> employeeStatusEnumMap.get(employee.getStatus()),
-                (employee, select) -> employee.setStatus(select.getValue()));
-
-        binder.bind(company, employee -> companyMap.get(employee.getCompany()),
-                (employee, select) -> employee.setCompany(select.getValue()));
+        binder.forField(status)
+                .withConverter(dataConverter(employeeStatusEnumList))
+                .bind(Employee::getStatus, Employee::setStatus);
+        binder.forField(company)
+                .withConverter(dataConverter(companyList))
+                .bind(Employee::getCompany, Employee::setCompany);
 
         binder.bindInstanceFields(this);
     }
