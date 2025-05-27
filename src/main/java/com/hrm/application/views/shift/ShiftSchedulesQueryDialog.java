@@ -80,17 +80,16 @@ public class ShiftSchedulesQueryDialog extends Dialog {
 
         // 每個 Tab 對應的內容
         Div tab1Content = createComboBoxLayout(shiftSchedules, countDetail);
-//        Div tab2Content = createRemarksLayout(shiftSchedules);
+        Div tab2Content = createRemarksLayout(shiftSchedules);
 
         Map<Tab, Component> tabsToPages = new HashMap<>();
         tabsToPages.put(tab1, tab1Content);
-//        tabsToPages.put(tab2, tab2Content);
+        tabsToPages.put(tab2, tab2Content);
 
         Tabs tabs = new Tabs(tab1, tab2);
         tabs.setWidthFull();
 
-//        Div pages = new Div(tab1Content, tab2Content);
-        Div pages = new Div(tab1Content);
+        Div pages = new Div(tab1Content, tab2Content);
 
         pages.setWidthFull();
         pages.setHeightFull();
@@ -102,7 +101,7 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         });
 
         tab1Content.setVisible(true);
-//        tab2Content.setVisible(false);
+        tab2Content.setVisible(false);
 
         mainLayout.add(tabs, pages);
         return mainLayout;
