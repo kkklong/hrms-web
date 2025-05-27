@@ -40,7 +40,7 @@ import java.util.Optional;
 @PageTitle("部門資料 | 人力資源管理系統")
 public class DepartmentView extends VerticalLayout {
 
-    DepartmentService service;
+    private DepartmentService service;
 
     private List<Option<Integer>> employeeList;
     private Map<Integer, Option<Integer>> employeeMap;
@@ -55,7 +55,9 @@ public class DepartmentView extends VerticalLayout {
     public DepartmentView(DepartmentService service) {
         this.service = service;
         this.addClassName("background-plan");
-        addClassName("department-view");
+        configureGrid();
+        configureFilter();
+        add(titleConfigure(), getToolbar(), getContent());
         setSizeFull();
     }
 
@@ -77,7 +79,7 @@ public class DepartmentView extends VerticalLayout {
     }
 
     private HorizontalLayout getContent() {
-        HorizontalLayout content = new HorizontalLayout(grid, dialog);
+        HorizontalLayout content = new HorizontalLayout(grid);
         content.addClassNames("grid-content");
         content.setSizeFull();
         return content;
@@ -201,10 +203,7 @@ public class DepartmentView extends VerticalLayout {
         ui.access(() -> {
             try {
                 setData(); // 執行會觸發 webClient.block() 的方法
-                configureGrid();
                 configureDialog();
-                configureFilter();
-                add(titleConfigure(), getToolbar(), getContent());
                 updateList();
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());

@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 @Route("login")
 @PageTitle("登入 | 人力資源管理系統")
 public class LoginView extends VerticalLayout {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LoginView.class);
     private final LoginForm login = new LoginForm();
     private final AccountService service;
 

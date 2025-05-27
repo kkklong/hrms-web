@@ -1,18 +1,17 @@
 package com.hrm.application.layout;
 
-import com.hrm.application.entity.Employee;
-import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
 import com.hrm.application.util.NotificationUtil;
+import com.hrm.application.util.SessionUtil;
 import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
-import com.hrm.application.views.calendar.CalendarView;
+import com.hrm.application.views.calendar.FullCalendar;
 import com.hrm.application.views.department.DepartmentView;
 import com.hrm.application.views.employee.EmployeeView;
-import com.hrm.application.views.employee.ResetPasswordDialog;
+import com.hrm.application.views.notice.NoticeView;
 import com.hrm.application.views.shift.ShiftSchedulesQueryView;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.applayout.DrawerToggle;
@@ -25,7 +24,6 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
-import com.vaadin.flow.component.menubar.MenuBarVariant;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -33,17 +31,17 @@ import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.dom.ThemeList;
-import com.vaadin.flow.router.RouteConfiguration;
+import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.server.VaadinResponse;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.lumo.Lumo;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.stream.Stream;
 
+@PreserveOnRefresh
 @CssImport("./app-layout-styles.css")
 public class MainLayout extends AbstractLayout {
 
@@ -54,16 +52,19 @@ public class MainLayout extends AbstractLayout {
 
     public MainLayout(AccountService accountService) {
         this.accountService = accountService;
+        getUserInfo();
+        addHeaderContent();
+        addDrawerContent();
     }
 
     @Override
     protected void createMenuEntries(SideNav nav) {
         addMenu(nav, HomePageView.class);
-        addMenu(nav, CalendarView.class);
+        addMenu(nav, FullCalendar.class);
         addMenu(nav, EmployeeView.class);
         addMenu(nav, DepartmentView.class);
         addMenu(nav, ShiftSchedulesQueryView.class);
-
+        addMenu(nav, NoticeView.class);
     }
 
     @Override
@@ -258,9 +259,7 @@ public class MainLayout extends AbstractLayout {
         UI ui = attachEvent.getUI();
         ui.access(() -> {
             try {
-                getUserInfo();
-                addHeaderContent();
-                addDrawerContent();
+//                SessionUtil.cleanSession();
                 configureDialog();
                 setTheme();
             } catch (Exception e) {

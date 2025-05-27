@@ -7,11 +7,10 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -60,6 +59,16 @@ public class BEClientUtil {
         return requestData(uri, HttpMethod.POST, MediaType.APPLICATION_FORM_URLENCODED, headers, null, formBody, responseType);
     }
 
+    public <T> T doPostMultipart(String url, Map<String, Object> pathValues, MultiValueMap<String, HttpEntity<?>> multipartBody, ParameterizedTypeReference<T> responseType) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+        return requestMultipartData(uri, HttpMethod.POST, MediaType.MULTIPART_FORM_DATA, headers, null, multipartBody, responseType);
+    }
+
     // GET 請求
     public <T> T doGet(String url, Map<String, Object> pathValues,
                        Map<String, Object> queryParams, ParameterizedTypeReference<T> responseType) {
@@ -97,19 +106,56 @@ public class BEClientUtil {
         }
         T response = null;
         try {
+            UI ui = UI.getCurrent();
             response = requestSpec.exchangeToMono(resp -> {
                 HttpStatusCode status = resp.statusCode();
-//                if(status == HttpStatus.UNAUTHORIZED) {
-//                    NotificationUtil.error("Request to URL: " + uri + " HTTP Status: {}" + status);
-//                    SessionUtil.cleanSession();
-//                    UI.getCurrent().getPage().setLocation("/login");
-//                }
+                if(status == HttpStatus.UNAUTHORIZED) {
+                    if (ui != null) {
+                        //  WebClient callback thread 中操作 Vaadin UI。必須透過 UI.access() 包起來，確保安全地操作 UI 元件
+                        ui.access(() -> ui.getPage().setLocation("/login"));
+                    }                }
                 log.info("Request to URL: {}, HTTP Status: {}", uri, status);
                 return resp.bodyToMono(responseType);
             }).block();
         } catch (WebClientResponseException e) {  // HTTP status code 為 4xx、5xx
             log.error("ClientError: request URI: {}; HTTP error: {}; {} - status ; Header: {};", uri, e.getStatusCode(), e.getMessage(), headers);
             NotificationUtil.error(e.getStatusCode().toString() +"-"+ e.getMessage());
+            handleHttpError(e);
+            throw e;
+        } catch (Exception e) {
+            NotificationUtil.error(e.getMessage());
+            log.error("Error: request URI: {}; msg: {}; Header: {};", uri, e.getMessage(), headers);
+        }
+        return response;
+    }
+
+    private <T> T requestMultipartData(URI uri, HttpMethod method, MediaType multipartFormData, Map<String, Object> headers, Object o, MultiValueMap<String, HttpEntity<?>> multipartBody, ParameterizedTypeReference<T> responseType) {
+        WebClient.RequestBodySpec requestSpec = webClient
+                .method(method)
+                .uri(uri)
+                .contentType(MediaType.MULTIPART_FORM_DATA);
+
+        // 設置 headers
+        if (headers != null) {
+            headers.forEach((key, value) -> requestSpec.header(key, String.valueOf(value)));
+        }
+
+        requestSpec.body(BodyInserters.fromMultipartData(multipartBody));
+
+        T response = null;
+        try {
+            UI ui = UI.getCurrent();
+            response = requestSpec.exchangeToMono(resp -> {
+                HttpStatusCode status = resp.statusCode();
+                if (status == HttpStatus.UNAUTHORIZED && ui != null) {
+                    ui.access(() -> ui.getPage().setLocation("/login"));
+                }
+                log.info("Request to URL: {}, HTTP Status: {}", uri, status);
+                return resp.bodyToMono(responseType);
+            }).block();
+        } catch (WebClientResponseException e) {
+            log.error("ClientError: request URI: {}; HTTP error: {}; {} - status ; Header: {};", uri, e.getStatusCode(), e.getMessage(), headers);
+            NotificationUtil.error(e.getStatusCode().toString() + "-" + e.getMessage());
             handleHttpError(e);
             throw e;
         } catch (Exception e) {

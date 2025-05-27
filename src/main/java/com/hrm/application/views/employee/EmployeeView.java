@@ -43,9 +43,9 @@ import java.util.Optional;
 @PageTitle("員工資料 | 人力資源管理系統")
 public class EmployeeView extends VerticalLayout {
     //
-    Grid<Employee> grid = new Grid<>(Employee.class, false);
-    EmployeeDialog dialog;
-    EmployeeService service;
+    private Grid<Employee> grid = new Grid<>(Employee.class, false);
+    private EmployeeDialog dialog;
+    private EmployeeService service;
 
     private List<Option<Integer>> companyList;
     private List<Option<Integer>> departmentList;
@@ -71,14 +71,14 @@ public class EmployeeView extends VerticalLayout {
     ComboBox<Option<Integer>> departmentFilter = new ComboBox<>();
     ComboBox<Option<Byte>> employeeStatusFilter = new ComboBox<>();
 
-
     private ListDataProvider<Employee> dataProvider;
     private HeaderRow headerRow;
 
-    //
-//
     public EmployeeView(EmployeeService service) {
         this.service = service;
+        configureGrid();
+        configureFilter();
+        add(titleConfigure(), getToolbar(), getContent());
         setSizeFull();
         this.addClassName("background-plan");
     }
@@ -114,7 +114,7 @@ public class EmployeeView extends VerticalLayout {
     }
 
     private HorizontalLayout getContent() {
-        HorizontalLayout content = new HorizontalLayout(grid, dialog);
+        HorizontalLayout content = new HorizontalLayout(grid);
         content.addClassNames("grid-content");
         content.setSizeFull();
         return content;
@@ -368,10 +368,7 @@ public class EmployeeView extends VerticalLayout {
         ui.access(() -> {
             try {
                 setData(); // 執行會觸發 webClient.block() 的方法
-                configureGrid();
                 configureDialog();
-                configureFilter();
-                add(titleConfigure(), getToolbar(), getContent());
                 updateList();
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());

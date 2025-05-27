@@ -71,11 +71,9 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     private LocalDate selectedDate = now; // 目前選擇的年月
     private List<ShiftSchedulePeriod> periods;
 
-
     //從api getPeriods後的日期資料
     private LocalDate startDate;
     private int selectDays;
-
 
     // selector
     private final Button leftButton = new Button("<");
@@ -91,13 +89,14 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     private HeaderRow dayOfWeekHeader = grid.prependHeaderRow();
     private HeaderRow weekHeader = grid.prependHeaderRow();
     private HeaderRow monthHeader = grid.prependHeaderRow();
-
     private ShiftSchedulesQueryDialog dialog;
-
 
     public ShiftSchedulesQueryView(ShiftScheduleService service) {
         this.service = service;
         this.addClassName("background-plan");
+        configureDialog(null);
+        setParameterListener();
+        add(titleConfigure(), getToolbar(), getContent());
         setSizeFull();
     }
 
@@ -109,6 +108,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         years = IntStream.range(now.getYear() - 1, now.getYear() + 2)
                 .boxed()
                 .collect(Collectors.toList());
+        yearPicker.setItems(years);
+        yearPicker.setValue(selectedDate.getYear());
+        monthPicker.setValue(selectedDate.getMonth().getValue());
+        configureDepartmentSelector();
     }
 
     private HorizontalLayout titleConfigure() {
@@ -122,7 +125,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     }
 
     private HorizontalLayout getContent() {
-        HorizontalLayout content = new HorizontalLayout(grid, dialog);
+        HorizontalLayout content = new HorizontalLayout(grid);
         content.addClassNames("grid-content");
         content.setSizeFull();
         return content;
@@ -137,7 +140,6 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
 
         // 右側的過濾器佈局
         HorizontalLayout tool2 = new HorizontalLayout();
-        configureDepartmentSelector();
         configureFilter();
         tool2.add(countDetail, nickNameFilter, departmentSelector);
 
@@ -153,15 +155,13 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
      * 設定DateSelector ToolBar
      */
     private HorizontalLayout configureDateSelector() {
-        yearPicker.setItems(years);
-        yearPicker.setValue(selectedDate.getYear());
+
         yearPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         yearPicker.setWidth("6em");
         List<Integer> months = IntStream.rangeClosed(1, 12)
                 .boxed()
                 .collect(Collectors.toList());
         monthPicker.setItems(months);
-        monthPicker.setValue(selectedDate.getMonth().getValue());
         monthPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         monthPicker.setItemLabelGenerator(value -> value + "月");
         monthPicker.setWidth("5em");
@@ -533,7 +533,6 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 .count();
     }
 
-
     @Override
     protected void onAttach(AttachEvent attachEvent) {
         super.onAttach(attachEvent);
@@ -542,9 +541,6 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
             try {
                 setData(); // 執行會觸發 webClient.block() 的方法
                 updateSchedulesData();
-                setParameterListener();
-                configureDialog(null);
-                add(titleConfigure(), getToolbar(), getContent());
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
             }
@@ -556,10 +552,11 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         dialog = new ShiftSchedulesQueryDialog(shiftTypeList, shiftTypeMap, selectedDate, shiftSchedules);
         dialog.addUpdateListener(this::manuallyAdjustShiftSchedules);
         dialog.addCloseListener(e -> closeEditor());
+        dialog.addDialogCloseActionListener(e -> closeEditor());
     }
 
     private void closeEditor() {
-        grid.asSingleSelect().clear();
+//        grid.asSingleSelect().clear();
         dialog.close();
     }
 
@@ -595,13 +592,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         boolean success = service.manuallyAdjustShiftSchedules(personalSchedulesList);
         if (success) {
             Notification.show("儲存成功");
-            log.info("nickNameFilter0" + nickNameFilter.getValue());
-
             updateSchedulesData();
             closeEditor();
         } else {
             Notification.show("儲存失敗");
         }
     }
-
 }
