@@ -195,7 +195,6 @@ public class NoticeService {
         ApiResponse<Employee> response = client.doPostJson(url,pathValues, null, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
-                NotificationUtil.success(response.getMessage());
                 NotificationUtil.success("成功啟用");
                 return true;
             }
@@ -214,7 +213,6 @@ public class NoticeService {
         ApiResponse<Employee> response = client.doPostJson(url,pathValues, null, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
-                NotificationUtil.success(response.getMessage());
                 NotificationUtil.success("成功停用");
                 return true;
             }

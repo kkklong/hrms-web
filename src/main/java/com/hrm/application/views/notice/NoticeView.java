@@ -14,13 +14,12 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.grid.ColumnTextAlign;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridSortOrder;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -32,17 +31,17 @@ import com.vaadin.flow.component.upload.receivers.MultiFileMemoryBuffer;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.springframework.context.annotation.Scope;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
+@Slf4j
 @Scope("prototype")
 @Route(value = "notice", layout = MainLayout.class)
 @MenuRouter(label = "NoticeManager", icon = VaadinIcon.MEGAPHONE)
@@ -59,14 +58,24 @@ public class NoticeView extends VerticalLayout {
     private final List<Integer> selectedNoticeIds = new ArrayList<>();
     private List<Option<String>> noticeTypeOptionList;
 
+    // ---- Add PageData ----
+    private List<Notice> allNotices = new ArrayList<>();
+    private int currentPage = 0;
+    private int pageSize = 10;
+    private ComboBox<Integer> pageSizeSelector = new ComboBox<>();
+    private Button prevButton = new Button("上一頁");
+    private Button nextButton = new Button("下一頁");
+    private Span pageIndicator = new Span();
+
     public NoticeView(NoticeService service) {
         this.service = service;
         this.addClassName("background-plan");
+        updateList();
+        configureFilter();
         configureGrid();
-        add(titleConfigure(), getToolBar(), getContent());
+        add(titleConfigure(), getToolBar(), getContent(), getPageTool());
         setSizeFull();
     }
-
 
     private HorizontalLayout titleConfigure() {
         HorizontalLayout titleHt = new HorizontalLayout();
@@ -162,13 +171,15 @@ public class NoticeView extends VerticalLayout {
     private void setData() {
         List<Option<Byte>> noticeStatusList = service.getNoticeStatusOptionList();
         noticeTypeOptionList = service.getNoticeTypeOptionList();
-        dataProvider = (ListDataProvider<Notice>) grid.getDataProvider();
+        pageSizeSelector.setItems(10, 20, 50, 100);
+        pageSizeSelector.setValue(10);
     }
 
     private Component getToolBar() {
         Button createNoticeButton = new Button("新增公告");
         titleFilter.setPlaceholder("搜尋標題...");
         titleFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        titleFilter.setValueChangeMode(ValueChangeMode.LAZY);
         titleFilter.setClearButtonVisible(true);
         batchDeleteButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
         createNoticeButton.addClickListener(click -> createNotice());
@@ -183,8 +194,19 @@ public class NoticeView extends VerticalLayout {
     }
 
     private void updateList() {
-        dataProvider = new ListDataProvider<>(service.getNoticeList());
+        allNotices = service.getNoticeList();
+        int fromIndex = currentPage * pageSize;
+        int toIndex = Math.min(fromIndex + pageSize, allNotices.size());
+        List<Notice> paginatedList = allNotices.subList(fromIndex, toIndex);
+
+        dataProvider = new ListDataProvider<>(paginatedList);
         grid.setItems(dataProvider);
+        int totalPages = (int) Math.ceil((double) allNotices.size() / pageSize);
+        pageIndicator.setText("第 " + (currentPage + 1) + " / " + totalPages + " 頁");
+
+        prevButton.setEnabled(currentPage > 0);
+        nextButton.setEnabled(currentPage < totalPages - 1);
+        reApplyFilter();
     }
 
     private void saveNotice(NoticeDialog.SaveEvent event) {
@@ -315,6 +337,60 @@ public class NoticeView extends VerticalLayout {
         openEditor(new Notice());
     }
 
+    private void configureFilter() {
+        titleFilter.addValueChangeListener(event -> applyFilter());
+        titleFilter.setClearButtonVisible(true);
+    }
+
+    private void applyFilter() {
+        ListDataProvider<Notice> provider = (ListDataProvider<Notice>) grid.getDataProvider();
+        provider.clearFilters();
+
+        if (!titleFilter.isEmpty()) {
+            provider.addFilter(notification -> notification.getTitle().toLowerCase().contains(titleFilter.getValue().toLowerCase()));
+        }
+    }
+
+    private void reApplyFilter() {
+        String currentValue = titleFilter.getValue();
+        titleFilter.setValue(currentValue);
+        applyFilter();
+    }
+
+    private Component getPageTool() {
+        pageSizeSelector.addValueChangeListener(e -> {
+            if (e.getValue() != null) {
+                pageSize = e.getValue();
+                currentPage = 0; // Reset to first page
+                updateList();
+            }
+        });
+        pageSizeSelector.setWidth("8em");
+        pageSizeSelector.setItemLabelGenerator(e -> e + "筆/頁");
+        pageSizeSelector.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        pageSizeSelector.getStyle().set("--vaadin-combo-box-overlay-width", "8em");
+        prevButton.addClickListener(e -> {
+            if (currentPage > 0) {
+                currentPage--;
+                updateList();
+            }
+        });
+
+        nextButton.addClickListener(e -> {
+            int maxPage = (allNotices.size() - 1) / pageSize;
+            log.info("allNotices.size()" + allNotices.size());
+            if (currentPage < maxPage) {
+                currentPage++;
+                updateList();
+            }
+        });
+
+        HorizontalLayout pagingControls = new HorizontalLayout(
+                pageSizeSelector, prevButton, pageIndicator, nextButton
+        );
+        pagingControls.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
+        return pagingControls;
+    }
 
     @Override
     protected void onAttach(AttachEvent attachEvent) {
@@ -324,7 +400,6 @@ public class NoticeView extends VerticalLayout {
             try {
                 setData();
                 configureDialog();
-                updateList();
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
             }

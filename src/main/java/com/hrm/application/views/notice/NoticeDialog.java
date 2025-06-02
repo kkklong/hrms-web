@@ -61,10 +61,10 @@ public class NoticeDialog extends Dialog {
     private void setComponentSize() {
         type.setWidth("20em");
         title.setWidth("20em");
-        content.setWidth("40em");
-        content.setHeight("20em");
-        publishDate.setWidth("20em");
-        endDate.setWidth("20em");
+        content.setWidthFull();
+        content.setMinHeight("40em");
+        publishDate.setWidth("30em");
+        endDate.setWidth("30em");
 //        fileForm.setWidth("40em");
     }
 
