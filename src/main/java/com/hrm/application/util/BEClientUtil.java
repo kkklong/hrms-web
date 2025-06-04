@@ -1,6 +1,8 @@
 package com.hrm.application.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hrm.application.entity.ApiResponse;
+import com.hrm.application.entity.UserInfo;
 import com.hrm.application.service.AccountService;
 import com.vaadin.flow.component.UI;
 import jakarta.annotation.Resource;
@@ -85,8 +87,7 @@ public class BEClientUtil {
         return requestData(uri, HttpMethod.GET, MediaType.APPLICATION_JSON, headers, null, null, responseType);
     }
 
-
-    private <T> T requestData(URI uri, HttpMethod method, MediaType mediaType,
+        private <T> T requestData(URI uri, HttpMethod method, MediaType mediaType,
                               Map<String, Object> headers, Object jsonBody, Map<String, Object> formBody, ParameterizedTypeReference<T> responseType) {
 
         WebClient.RequestBodySpec requestSpec = webClient
@@ -164,6 +165,80 @@ public class BEClientUtil {
         }
         return response;
     }
+
+    // ---- getFile ----
+    public byte[] doGetFile(String url, Map<String, Object> pathValues, Map<String, Object> queryParams) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        if (queryParams != null) {
+            queryParams.forEach(builder::queryParam);
+        }
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
+
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+
+        WebClient.RequestHeadersSpec<?> requestSpec = webClient
+                .get()
+                .uri(uri)
+                .headers(httpHeaders -> headers.forEach((key, value) -> httpHeaders.add(key, String.valueOf(value))));
+
+        byte[] fileBytes = null;
+        try {
+            fileBytes = requestSpec
+                    .retrieve()
+                    .bodyToMono(byte[].class)
+                    .block();
+        } catch (WebClientResponseException e) {
+            log.error("ClientError: request URI: {}; HTTP error: {}; {}", uri, e.getStatusCode(), e.getMessage());
+            NotificationUtil.error(e.getStatusCode().toString() + "-" + e.getMessage());
+            handleHttpError(e);
+            throw e;
+        } catch (Exception e) {
+            log.error("Error: request URI: {}; msg: {}", uri, e.getMessage());
+            NotificationUtil.error(e.getMessage());
+        }
+        return fileBytes;
+    }
+
+    // ---- getFile 直接return StreamResource ----
+    public byte[] doGetFileBinary(String url, Map<String, Object> pathValues, Map<String, Object> queryParams) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        if (queryParams != null) {
+            queryParams.forEach(builder::queryParam);
+        }
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
+
+        try {
+            return webClient.get()
+                    .uri(uri)
+                    .header("Cookie", "JSESSIONID=" + SessionUtil.getToken())
+                    .accept(MediaType.APPLICATION_OCTET_STREAM)
+                    .retrieve()
+                    .onStatus(HttpStatus.UNAUTHORIZED::equals, response -> {
+                        UI ui = UI.getCurrent();
+                        if (ui != null) {
+                            ui.access(() -> ui.getPage().setLocation("/login"));
+                        }
+                        return Mono.error(new RuntimeException("Unauthorized"));
+                    })
+                    .bodyToMono(byte[].class)
+                    .block();
+        } catch (WebClientResponseException e) {
+            log.error("ClientError: request URI: {}; HTTP error: {}; {}", uri, e.getStatusCode(), e.getMessage());
+            NotificationUtil.error(e.getStatusCode().toString() + "-" + e.getMessage());
+            handleHttpError(e);
+            throw e;
+        } catch (Exception e) {
+            log.error("Error: request URI: {}; msg: {}", uri, e.getMessage());
+            NotificationUtil.error(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
 
     /**
      * 處理未登入

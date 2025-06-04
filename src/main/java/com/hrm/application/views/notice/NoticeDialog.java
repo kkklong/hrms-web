@@ -1,5 +1,7 @@
 package com.hrm.application.views.notice;
 
+import com.hrm.application.component.FileListForm;
+import com.hrm.application.component.ImagePreviewLayout;
 import com.hrm.application.entity.Department;
 import com.hrm.application.entity.Notice;
 import com.hrm.application.model.Option;
@@ -11,6 +13,9 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
@@ -43,12 +48,12 @@ public class NoticeDialog extends Dialog {
     private Button close = new Button("取消");
     List<Option<String>> noticeTypeOptionList;
 
-//    FileListForm fileForm = new FileListForm();
-    // file
+    // ---- file ----
+    FileListForm fileForm = new FileListForm();
+
     private MultiFileMemoryBuffer buffer = new MultiFileMemoryBuffer();
     private Upload uploadFile = new Upload(buffer);
-
-//    private ImagePreviewLayout imagePreviewLayout; // 右側預覽區域
+    private ImagePreviewLayout imagePreviewLayout; // 右側預覽區域
     private Binder<Notice> binder = new BeanValidationBinder<>(Notice.class);
 
     public NoticeDialog(List<Option<String>> noticeTypeOptionList) {
@@ -58,20 +63,47 @@ public class NoticeDialog extends Dialog {
         getFooter().add(createButtonsLayout());
     }
 
+    public Upload setUploadFile() {
+        uploadFile.setMaxFiles(10 * 1024 * 1024);  //預設是1M
+        uploadFile.setAcceptedFileTypes("image/jpeg", "image/png", "image/jpg", ".pdf", ".txt", ".doc", ".xls", ".docx", ".xlsx", ".png");
+        uploadFile.setDropAllowed(false);
+        uploadFile.setMaxFiles(1);
+        Button uploadButton = new Button("上傳檔案", new Icon(VaadinIcon.UPLOAD));
+        uploadButton.getStyle().set("--vaadin-button-border", "1px solid");
+        uploadFile.setUploadButton(uploadButton);
+
+        uploadFile.addSucceededListener(event -> fileForm.handleFileUpload(event.getFileName(), buffer.getInputStream(event.getFileName()), imagePreviewLayout));
+        uploadFile.getElement().addEventListener("file-remove", domEvent -> {
+            String fileName = domEvent.getEventData().getString("event.detail.file.name");
+            fileForm.handleFileRemove(fileName);
+            imagePreviewLayout.hidePreview();
+            //從 buffer 中移除
+            buffer.getFiles().remove(fileName);
+        }).addEventData("event.detail.file.name");
+
+        return uploadFile;
+    }
+
     private void setComponentSize() {
         type.setWidth("20em");
         title.setWidth("20em");
         content.setWidthFull();
         content.setMinHeight("40em");
-        publishDate.setWidth("30em");
-        endDate.setWidth("30em");
-//        fileForm.setWidth("40em");
+        publishDate.setWidth("20em");
+        endDate.setWidth("20em");
+        fileForm.setWidth("40em");
     }
 
     private void getContent() {
+        VerticalLayout fileLayout = new VerticalLayout(new H4("附件"), setUploadFile(), fileForm);
         setComponentSize();
-        VerticalLayout noticeMessage = new VerticalLayout(configureForm());
-        add(noticeMessage);
+        imagePreviewLayout = new ImagePreviewLayout();
+        VerticalLayout noticeMessage = new VerticalLayout(configureForm(), fileLayout);
+        HorizontalLayout contentHt = new HorizontalLayout(noticeMessage, imagePreviewLayout);
+        contentHt.setFlexGrow(1, noticeMessage);
+        contentHt.setFlexGrow(1, imagePreviewLayout);
+        contentHt.setMaxWidth("100%");
+        add(contentHt);
     }
 
     private Component createButtonsLayout() {
@@ -136,12 +168,12 @@ public class NoticeDialog extends Dialog {
     public void setNotice(Notice notice) {
         resetDialog();
         binder.setBean(notice);
-//        fileForm.displayFiles(notice.getFiles(), imagePreviewLayout);
+        fileForm.displayFiles(notice.getFiles(), imagePreviewLayout);
     }
 
     private void resetDialog() {
-//        fileForm.removeAll();
-//        imagePreviewLayout.hidePreview();
+        fileForm.removeAll();
+        imagePreviewLayout.hidePreview();
         uploadFile.clearFileList();
         buffer = new MultiFileMemoryBuffer();  // 清除 buffer
         uploadFile.setReceiver(buffer);  // 重新設置 buffer 到 uploadFile
@@ -215,16 +247,5 @@ public class NoticeDialog extends Dialog {
     public Registration addCloseListener(ComponentEventListener<NoticeDialog.CloseEvent> listener) {
         return addListener(NoticeDialog.CloseEvent.class, listener);
     }
-//    @Override
-//    protected void onAttach(AttachEvent attachEvent) {
-//        super.onAttach(attachEvent);
-//        UI ui = attachEvent.getUI();
-//        ui.access(() -> {
-//            try {
-//                setData();
-//            } catch (Exception e) {
-//                NotificationUtil.error("載入資料失敗：" + e.getMessage());
-//            }
-//        });
-//    }
+
 }
