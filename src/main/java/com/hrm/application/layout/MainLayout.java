@@ -1,9 +1,12 @@
 package com.hrm.application.layout;
 
+import com.hrm.application.entity.Menu;
 import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
+import com.hrm.application.menu.MenuLink;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
+import com.hrm.application.service.MenuService;
 import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.views.HomePageView;
@@ -37,22 +40,32 @@ import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.theme.lumo.Lumo;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Slf4j
 @PreserveOnRefresh
 @CssImport("./app-layout-styles.css")
 public class MainLayout extends AbstractLayout {
 
     AccountService accountService;
+    MenuService menuService;
     UserInfo currentEmployee;
     UpdatePasswordDialog dialog;
+    List<SideNavItem> userMenu;
 
 
-    public MainLayout(AccountService accountService) {
+    public MainLayout(AccountService accountService, MenuService menuService) {
         this.accountService = accountService;
-        getUserInfo();
+        this.menuService = menuService;
+//        getUserInfo();
+        getUserMenuList();
+
         addHeaderContent();
         addDrawerContent();
     }
@@ -62,9 +75,9 @@ public class MainLayout extends AbstractLayout {
         addMenu(nav, HomePageView.class);
         addMenu(nav, FullCalendar.class);
         addMenu(nav, EmployeeView.class);
-        addMenu(nav, DepartmentView.class);
-        addMenu(nav, ShiftSchedulesQueryView.class);
-        addMenu(nav, NoticeView.class);
+//        addMenu(nav, DepartmentView.class);
+//        addMenu(nav, ShiftSchedulesQueryView.class);
+//        addMenu(nav, NoticeView.class);
     }
 
     @Override
@@ -199,7 +212,49 @@ public class MainLayout extends AbstractLayout {
 
         SideNav nav = new SideNav();
         createMenuEntries(nav);
-        addToDrawer(header, new Hr(), new Scroller(nav), footer);
+
+//        VerticalLayout layout = new VerticalLayout();
+//        if(userMenu != null) {
+//            for (SideNavItem item : userMenu) {
+//                layout.add(item);
+//            }
+//        }
+        addToDrawer(header, new Hr(), nav, footer);
+    }
+
+    private void getUserMenuList() {
+        List<Menu> menuList = menuService.getMenuList();
+//        if (menuList == null || menuList.isEmpty()) {
+//            userMenu = new ArrayList<>();
+//        }
+//        userMenu = menuList.stream().map(this::createNavItem).collect(Collectors.toList());
+    }
+
+    private SideNavItem createNavItem(Menu menu) {
+
+        MenuLink link = MenuLink.getMenuByCode(menu.getCode());
+
+        SideNavItem item = createNavItem(menu.getText(), link.getPage(), link.getIcon());
+        if (menu.getData() == null) {
+            if (link.getPage() == null) {
+                item.setClassName("menu-item-disable");
+            }
+            return item;
+        }
+        for (Menu subMenu : menu.getData()) {
+            item.addItem(createNavItem(subMenu));
+        }
+        return item;
+    }
+
+    private SideNavItem createNavItem(String text, Class<? extends Component> page, VaadinIcon icon) {
+
+        SideNavItem item = new SideNavItem(text);
+        if (page != null) {
+            item.setPath(page);
+        }
+        item.setPrefixComponent(icon != null ? icon.create() : VaadinIcon.COG.create());
+        return item;
     }
 
     // -------- Theme setup --------
@@ -259,9 +314,10 @@ public class MainLayout extends AbstractLayout {
         UI ui = attachEvent.getUI();
         ui.access(() -> {
             try {
-//                SessionUtil.cleanSession();
+                getUserInfo();
                 configureDialog();
                 setTheme();
+//                getUserMenuList();
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
             }

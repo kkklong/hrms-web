@@ -39,6 +39,10 @@ html {
     padding: 10px; /* 内边距 */
     border-radius: var(--lumo-border-radius-l);
 }
+
+.menu-item-disable {
+    background-color: #d3d3d3;
+}
 /* ---- shiftSchedules ---- */
 .shiftSchedules-grid::part(first-header-row-cell) {
     border-bottom: 2px solid #ccc; /* 设置底部边框 */
