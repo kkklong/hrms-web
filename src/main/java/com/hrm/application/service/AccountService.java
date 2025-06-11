@@ -3,6 +3,7 @@ package com.hrm.application.service;
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
+import com.hrm.application.util.BEClientRestUtil;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
@@ -24,9 +25,13 @@ public class AccountService {
     @Value("${hrm.url}")
     private String backEndDomain;
 
+    private final BEClientRestUtil client;
+    public AccountService(BEClientRestUtil client) {
+        this.client = client;
+    }
+
     public String login(String username, String password) {
         String url = backEndDomain + API.LOGIN.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("account", username);
@@ -51,7 +56,6 @@ public class AccountService {
 
     public boolean logout() {
         String url = backEndDomain + API.LOGOUT.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<String>> responseType = new ParameterizedTypeReference<>() {
         };
@@ -92,7 +96,6 @@ public class AccountService {
     // 獲取當前用戶資訊
     protected UserInfo getCurrentUserInfo() {
         String url = backEndDomain + API.GET_CURRENT_USER.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<UserInfo>> responseType = new ParameterizedTypeReference<>() {
         };
@@ -109,7 +112,6 @@ public class AccountService {
 
     public boolean updatePassword(UpdatePassword updatePassword) {
         String url = backEndDomain + API.UPDATE_PASSWORD;
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<UpdatePassword>> responseType = new ParameterizedTypeReference<>() {
         };

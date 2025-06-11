@@ -3,10 +3,7 @@ package com.hrm.application.service;
 import com.hrm.application.config.BackendConfig;
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.Menu;
-import com.hrm.application.util.BEClientUtil;
-import com.hrm.application.util.NotificationUtil;
-import com.hrm.application.util.SessionUtil;
-import com.hrm.application.util.WebClientUtil;
+import com.hrm.application.util.*;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,24 +24,27 @@ public class MenuService {
     @Value("${hrm.url}")
     private String backEndDomain;
 
+    private final BEClientRestUtil client;
+    public MenuService(BEClientRestUtil client) {
+        this.client = client;
+    }
+
     public List<Menu> getMenuList() {
         String url = backEndDomain + API.GET_MENU.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<List<Menu>>> responseType = new ParameterizedTypeReference<>() {
         };
         ApiResponse<List<Menu>> response = client.doGet(url, null, null, responseType);
         if (response != null) {
             if (response.getCode().equals(0)) {
-                SessionUtil.cleanSession();
-                NotificationUtil.success(response.getMessage());
-                for (Menu menu : response.getData()) {
-                    log.info("MenuData: "+ menu.toString());
-                }
+//                NotificationUtil.success(response.getMessage());
+//                for (Menu menu : response.getData()) {
+//                    log.info("MenuData: "+ menu.toString());
+//                }
                 return response.getData();
             }
         }
-        NotificationUtil.error(response.getMessage());
+        NotificationUtil.error(response.getMessage() + "登陸者menu建立失敗");
         return null;
     }
 

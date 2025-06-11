@@ -41,7 +41,7 @@ html {
 }
 
 .menu-item-disable {
-    background-color: #d3d3d3;
+    background-color: var(--lumo-contrast-30pct);
 }
 /* ---- shiftSchedules ---- */
 .shiftSchedules-grid::part(first-header-row-cell) {

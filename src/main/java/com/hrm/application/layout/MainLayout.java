@@ -63,7 +63,10 @@ public class MainLayout extends AbstractLayout {
     public MainLayout(AccountService accountService, MenuService menuService) {
         this.accountService = accountService;
         this.menuService = menuService;
-//        getUserInfo();
+
+        getUserInfo();
+        configureDialog();
+        setTheme();
         getUserMenuList();
 
         addHeaderContent();
@@ -74,7 +77,7 @@ public class MainLayout extends AbstractLayout {
     protected void createMenuEntries(SideNav nav) {
         addMenu(nav, HomePageView.class);
         addMenu(nav, FullCalendar.class);
-        addMenu(nav, EmployeeView.class);
+//        addMenu(nav, EmployeeView.class);
 //        addMenu(nav, DepartmentView.class);
 //        addMenu(nav, ShiftSchedulesQueryView.class);
 //        addMenu(nav, NoticeView.class);
@@ -213,21 +216,21 @@ public class MainLayout extends AbstractLayout {
         SideNav nav = new SideNav();
         createMenuEntries(nav);
 
-//        VerticalLayout layout = new VerticalLayout();
-//        if(userMenu != null) {
-//            for (SideNavItem item : userMenu) {
-//                layout.add(item);
-//            }
-//        }
-        addToDrawer(header, new Hr(), nav, footer);
+        VerticalLayout layout = new VerticalLayout();
+        if(userMenu != null) {
+            for (SideNavItem item : userMenu) {
+                layout.add(item);
+            }
+        }
+        addToDrawer(header, new Hr(), nav, layout, footer);
     }
 
     private void getUserMenuList() {
         List<Menu> menuList = menuService.getMenuList();
-//        if (menuList == null || menuList.isEmpty()) {
-//            userMenu = new ArrayList<>();
-//        }
-//        userMenu = menuList.stream().map(this::createNavItem).collect(Collectors.toList());
+        if (menuList == null || menuList.isEmpty()) {
+            userMenu = new ArrayList<>();
+        }
+        userMenu = menuList.stream().map(this::createNavItem).collect(Collectors.toList());
     }
 
     private SideNavItem createNavItem(Menu menu) {
@@ -314,9 +317,9 @@ public class MainLayout extends AbstractLayout {
         UI ui = attachEvent.getUI();
         ui.access(() -> {
             try {
-                getUserInfo();
-                configureDialog();
-                setTheme();
+//                getUserInfo();
+//                configureDialog();
+//                setTheme();
 //                getUserMenuList();
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
