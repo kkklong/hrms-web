@@ -39,8 +39,8 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
             UI.getCurrent().setLocale(locale);
     }
 
-    protected Component generateTitle(String title) {
-        Span span = new Span(title);
+    protected Component generateTitle() {
+        Span span = new Span();
 
         span.setWidthFull();
         span.getStyle()
@@ -49,7 +49,21 @@ public abstract class AbstractLayout extends AppLayout implements AfterNavigatio
                 .set("text-overflow", "ellipsis")
                 .set("text-align", "center")
                 .set("font-size", "var(--lumo-font-size-l)");
-//                .set("font-weight", "bold");
+// 畫面size縮小時, 變更tile顯示的文字
+        span.getElement().executeJs(
+                """
+                const titleEl = this;
+                function updateTitleText() {
+                    if (window.matchMedia('(max-width: 40em)').matches) {
+                        titleEl.textContent = 'HRM';
+                    } else {
+                        titleEl.textContent = 'HRM System Demo';
+                    }
+                }
+                updateTitleText();
+                window.addEventListener('resize', updateTitleText);
+                """
+        );
         return span;
     }
 

@@ -104,7 +104,7 @@ public class MainLayout extends AbstractLayout {
 
     @Override
     protected void addHeaderContent() {
-        Component title = generateTitle("HRM System Demo");
+        Component title = generateTitle();
         title.getStyle().set("font-size", "var(--lumo-font-size-l)");
         title.getStyle().set("font-weight", "bold");
         addToNavbar(true, new DrawerToggle(), title, createNotificationBell(), accountMenu(), accountInfo());
@@ -222,6 +222,7 @@ public class MainLayout extends AbstractLayout {
                 layout.add(item);
             }
         }
+        layout.setHeightFull();
         addToDrawer(header, new Hr(), nav, layout, footer);
     }
 

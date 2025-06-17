@@ -126,15 +126,14 @@ public class DepartmentView extends VerticalLayout {
         grid.addColumn(Department::getDepartmentName).setHeader("部門名稱");
         grid.addColumn(Department::getDescription).setHeader("描述");
         grid.addColumn(d -> employeeMap.get(d.getManagerId()).getName()).setHeader("部門主管");
-
-        grid.addColumn(Department::getCreatedDate).setHeader("創建時間");
-        grid.addColumn(Department::getUpdatedDate).setHeader("更新時間");
         grid.addColumn(d -> Optional.ofNullable(shiftTypeMap.get(d.getWorkType())).map(Option::getName).orElse(d.getWorkType())).setHeader("預設班別");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
 
         grid.addColumn(Department::getEveryDayMorningCount).setHeader("早班最少人數").setTextAlign(ColumnTextAlign.CENTER).setWidth("3em");
         grid.addColumn(Department::getEveryDayAfternoonCount).setHeader("午班最少人數").setTextAlign(ColumnTextAlign.CENTER).setWidth("3em");
         grid.addColumn(Department::getEveryDayNightCount).setHeader("晚班最少人數").setTextAlign(ColumnTextAlign.CENTER).setWidth("3em");
+        grid.addColumn(Department::getCreatedDate).setHeader("創建時間");
+        grid.addColumn(Department::getUpdatedDate).setHeader("更新時間");
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.asSingleSelect().addValueChangeListener(event ->

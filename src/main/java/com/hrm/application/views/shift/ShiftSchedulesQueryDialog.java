@@ -74,6 +74,12 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         mainLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
         mainLayout.addClassName("background-plan");
 
+        // 添加星期一到星期日的標題
+        FormLayout periodLayout = new FormLayout();
+        periodLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+        addWeekdayHeaders(periodLayout);
+        mainLayout.add(periodLayout);
+
         // 建立兩個 Tab
         Tab tab1 = new Tab("排班設定");
         Tab tab2 = new Tab("備註說明");
@@ -107,6 +113,17 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         return mainLayout;
     }
 
+    protected void addWeekdayHeaders(FormLayout formLayout) {
+        DateTimeFormatter dayOfWeekFormatter = DateTimeFormatter.ofPattern("EEEE", Locale.CHINESE);
+        for (int i = 0; i < 7; i++) {
+            LocalDate anyDate = LocalDate.now().with(DayOfWeek.of(i + 1)); // 使用任意日期來獲取星期幾名稱
+            Div dayOfWeekLabel = new Div(anyDate.format(dayOfWeekFormatter));
+            dayOfWeekLabel.getStyle().set("font-weight", "bold");
+            dayOfWeekLabel.getStyle().set("text-align", "center");
+            formLayout.add(dayOfWeekLabel);
+        }
+    }
+
     // 排班設定的layout
     private Div createComboBoxLayout(ShiftSchedulesQueryVO shiftSchedules, TextField countDetail) {
         Div wrapper = new Div();
@@ -138,7 +155,7 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             shiftTypesField.setItems(shiftTypeList);
             shiftTypesField.setLabel(shiftSchedulesDateTime.getActionType() == 0
                     ? date.format(dateFormatter)
-                    : date.format(dateFormatter) + " [R]");
+                    : date.format(dateFormatter) + " [L]");
             shiftTypesField.setReadOnly(shiftSchedulesDateTime.getActionType() == 1);
             shiftTypesField.getStyle().set("--vaadin-input-field-border-width", "1.5px");
             shiftTypesField.getElement().getStyle().set("font-size", "14px");

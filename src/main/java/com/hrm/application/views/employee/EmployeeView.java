@@ -161,23 +161,23 @@ public class EmployeeView extends VerticalLayout {
         grid.addClassNames("employee-grid");
         grid.setSizeFull();
         Grid.Column<Employee> employeeNumber = grid.addColumn(Employee::getEmployeeNumber).setHeader("員工編號").setKey("employeeNumber");
-        grid.addColumn(Employee::getFullName).setHeader("員工全名").setKey("fullName");
+//        grid.addColumn(Employee::getFullName).setHeader("員工全名").setKey("fullName");
         grid.addColumn(Employee::getNickName).setHeader("員工英文名").setKey("nickName");
         grid.addColumn(Employee::getAccount).setHeader("帳號").setKey("account");
         grid.addColumn(e ->  Optional.ofNullable(departmentMap.get(e.getDepartmentId())).map(Option::getName).orElse("未知部門")).setHeader("部門").setKey("departmentId");
         grid.addColumn(Employee::getPosition).setHeader("職位").setKey("position");
         grid.addColumn(employee -> Optional.ofNullable(employeeStatusEnumMap.get(employee.getStatus())).map(Option::getName).orElse("未知狀態")).setHeader("狀態").setKey("status");
-        grid.addColumn(Employee::getGender).setHeader("性別").setKey("gender");
-        grid.addColumn(Employee::getEntryDate).setHeader("入職時間").setKey("entryDate");
+//        grid.addColumn(Employee::getGender).setHeader("性別").setKey("gender");
+//        grid.addColumn(Employee::getEntryDate).setHeader("入職時間").setKey("entryDate");
         grid.addColumn(Employee::getFloor).setHeader("所在樓層").setKey("floor").setTextAlign(ColumnTextAlign.CENTER);
-        grid.addColumn(Employee::getEmail).setHeader("信箱").setKey("email");
+//        grid.addColumn(Employee::getEmail).setHeader("信箱").setKey("email");
         grid.addColumn(Employee::getSeatNumber).setHeader("座位編號").setKey("seatNumber");
         grid.addColumn(Employee::getRemark).setHeader("備註說明").setKey("remark");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.asSingleSelect().addValueChangeListener(event -> editEmployee(event.getValue()));
         grid.sort(List.of(new GridSortOrder<>(employeeNumber, SortDirection.ASCENDING)));
-        grid.setSortableColumns("employeeNumber", "fullName", "nickName", "entryDate", "floor", "departmentId", "status", "gender");
+        grid.setSortableColumns("employeeNumber", "nickName", "floor", "departmentId", "status");
     }
 
     private Component getToolbar() {
@@ -333,17 +333,17 @@ public class EmployeeView extends VerticalLayout {
 
     private void configureHeaderRow() {
         headerRow.getCell(grid.getColumnByKey("employeeNumber")).setComponent(employeeNumberFilter);
-        headerRow.getCell(grid.getColumnByKey("fullName")).setComponent(fullNameFilter);
+//        headerRow.getCell(grid.getColumnByKey("fullName")).setComponent(fullNameFilter);
         headerRow.getCell(grid.getColumnByKey("nickName")).setComponent(nickNameFilter);
         headerRow.getCell(grid.getColumnByKey("account")).setComponent(accountFilter);
         headerRow.getCell(grid.getColumnByKey("departmentId")).setComponent(departmentFilter);
         headerRow.getCell(grid.getColumnByKey("status")).setComponent(employeeStatusFilter);
-        headerRow.getCell(grid.getColumnByKey("gender")).setComponent(genderFilter);
+//        headerRow.getCell(grid.getColumnByKey("gender")).setComponent(genderFilter);
         headerRow.getCell(grid.getColumnByKey("position")).setComponent(positionFilter);
         headerRow.getCell(grid.getColumnByKey("floor")).setComponent(floorFilter);
-        headerRow.getCell(grid.getColumnByKey("email")).setComponent(mailFilter);
+//        headerRow.getCell(grid.getColumnByKey("email")).setComponent(mailFilter);
         headerRow.getCell(grid.getColumnByKey("seatNumber")).setComponent(seatNumberFilter);
-        headerRow.getCell(grid.getColumnByKey("entryDate")).setComponent(entryDateFilter);
+//        headerRow.getCell(grid.getColumnByKey("entryDate")).setComponent(entryDateFilter);
     }
 
     private void initializeFilters() {
