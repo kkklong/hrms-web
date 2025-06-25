@@ -54,4 +54,14 @@ public class Permission {
         this.checked = checked;
     }
 
+    @Override
+    public String toString() {
+        return "Permission{" +
+                "code='" + code + '\'' +
+                ", text='" + text + '\'' +
+                ", cate=" + cate +
+                ", children=" + children +
+                ", checked=" + checked +
+                '}';
+    }
 }

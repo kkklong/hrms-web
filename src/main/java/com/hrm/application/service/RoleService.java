@@ -7,6 +7,9 @@ import com.hrm.application.entity.Role;
 import com.hrm.application.util.BEClientRestUtil;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
+import com.vaadin.flow.data.binder.Result;
+import com.vaadin.flow.data.binder.ValueContext;
+import com.vaadin.flow.data.converter.Converter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -171,27 +174,105 @@ public class RoleService {
     }
 
     //將平面的 permissionList 封裝成層級結構的 Permission：
-    public List<Permission> buildPermissionHierarchy(List<Permission> permissions, Map<String, Permission> permissionMap) {
-//        Map<String, Permission> codeToPermissionMap = permissions.stream()
-//                .collect(Collectors.toMap(Permission::getCode, p -> p));
+    //------------------------------------------------
+//    public RoleVO convertRoleToRoleVO(Role role) {
+//        RoleVO roleVO = new RoleVO();
+//        roleVO.setId(role.getId());
+//        roleVO.setRoleName(role.getRoleName());
+//        roleVO.setMenuPermission(buildPermissionTree(role.getMenuPermission()));
+//        return roleVO;
+//    }
 
-        List<Permission> rootPermissions = new ArrayList<>();
+    // Converter for Set<Permission> to String
+    public static Converter<Set<Permission>, String> permissionSetStringConverter(List<Permission> availablePermissions) {
+        Map<String, Permission> codeToPermission = availablePermissions.stream()
+                .collect(Collectors.toMap(Permission::getCode, p -> p));
 
-        for (Permission permission : permissions) {
-            if (permission.getCode().length() == 4) {
-                // 根節點
-                rootPermissions.add(permission);
-            } else {
-                // 子節點
-                String parentCode = permission.getCode().substring(0, permission.getCode().length() - 3);
-                Permission parent = permissionMap.get(parentCode);
-                if (parent != null) {
-                    parent.getChildren().add(permission);
+        return new Converter<>() {
+
+            @Override
+            public Result<String> convertToModel(Set<Permission> fieldValue, ValueContext context) {
+                if (fieldValue == null || fieldValue.isEmpty()) {
+                    return Result.ok("");
                 }
+                String result = fieldValue.stream()
+                        .map(Permission::getCode)
+                        .filter(StringUtils::isNotBlank)
+                        .collect(Collectors.joining(","));
+                return Result.ok(result);
             }
+
+            @Override
+            public Set<Permission> convertToPresentation(String modelValue, ValueContext context) {
+                if (StringUtils.isBlank(modelValue)) {
+                    return new HashSet<>();
+                }
+                return Arrays.stream(modelValue.split(","))
+                        .map(codeToPermission::get)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toSet());
+            }
+        };
+    }
+
+    public String convertPermissionList2String(List<Permission> permissionRawList) {
+        if (permissionRawList == null || permissionRawList.isEmpty()) {
+            return ""; // 返回空字串，如果列表為空
         }
 
-        return rootPermissions;
+        return permissionRawList.stream()
+                .map(Permission::getCode) // 提取每個 Permission 的 code
+                .collect(Collectors.joining(",")); // 用逗號連接
+    }
+
+    public List<Permission> buildPermissionTree(String menuPermission) {
+        if (menuPermission == null || menuPermission.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        // 將 menuPermission 轉為 List<String>
+        List<String> permissionCodes = Arrays.asList(menuPermission.split(","));
+
+        // 根據層級長度分組
+        Map<Integer, List<String>> groupedCodes = permissionCodes.stream()
+                .collect(Collectors.groupingBy(String::length));
+
+        // 構建分層結構
+        Map<String, Permission> permissionMap = new HashMap<>();
+
+        for (String code : permissionCodes) {
+            Permission permission = new Permission();
+            permission.setCode(code);
+            permission.setText("Permission " + code); // 可根據實際需求填充文本
+            permission.setCate(code.length()); // 設定類別對應碼長度
+            permission.setChildren(new ArrayList<>()); // 確保 children 已初始化
+
+            // 尋找父階
+            String parentCode = getParentCode(code);
+            if (parentCode != null && permissionMap.containsKey(parentCode)) {
+                Permission parent = permissionMap.get(parentCode);
+                parent.getChildren().add(permission);
+            } else {
+                permission.setChildren(new ArrayList<>());
+            }
+
+            permissionMap.put(code, permission);
+        }
+
+        // 返回第一層 (無父階) 的權限
+        return permissionMap.values().stream()
+                .filter(p -> getParentCode(p.getCode()) == null)
+                .sorted(Comparator.comparing(Permission::getCode))
+                .collect(Collectors.toList());
+    }
+
+    private String getParentCode(String code) {
+        if (code.length() == 6) {
+            return code.substring(0, 4);
+        } else if (code.length() == 9) {
+            return code.substring(0, 6);
+        }
+        return null; // 第一階 (無父階)
     }
 
     private enum API {

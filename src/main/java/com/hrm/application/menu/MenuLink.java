@@ -3,6 +3,7 @@ package com.hrm.application.menu;
 import com.hrm.application.views.department.DepartmentView;
 import com.hrm.application.views.employee.EmployeeView;
 import com.hrm.application.views.notice.NoticeView;
+import com.hrm.application.views.role.Role2View;
 import com.hrm.application.views.role.RoleView;
 import com.hrm.application.views.shift.ShiftSchedulesQueryView;
 import com.vaadin.flow.component.Component;
@@ -17,6 +18,7 @@ public enum MenuLink {
 
     AUTHORIZATION_MANAGE("權限管理", "0000", null, VaadinIcon.KEY),
     ROLE("角色權限", "000001", RoleView.class, VaadinIcon.MEDAL),
+
 
     MEMBER_MANAGE("人事資料管理", "0001", null, VaadinIcon.BUILDING),
     DEPARTMENT("部門資料", "000101", DepartmentView.class, VaadinIcon.GROUP),

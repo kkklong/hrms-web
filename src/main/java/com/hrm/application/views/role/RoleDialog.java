@@ -1,5 +1,6 @@
 package com.hrm.application.views.role;
 
+import com.hrm.application.entity.Employee;
 import com.hrm.application.entity.Permission;
 import com.hrm.application.entity.Role;
 import com.hrm.application.service.RoleService;
@@ -52,6 +53,10 @@ public class RoleDialog extends Dialog {
 
         binder.bind(menuPermission, r -> service.mapPermissionsToSet(r.getMenuPermission(), permissionMap)
                 , (r, pSet) -> r.setMenuPermission(service.transPermissionsSetToCodes(pSet)));
+
+//        binder.forField(menuPermission)
+//                .withConverter(ToolUtil.permissionSetStringConverter(permissionList))
+//                .bind(Role::getMenuPermission, Role::setMenuPermission);
         binder.bindInstanceFields(this);
     }
 

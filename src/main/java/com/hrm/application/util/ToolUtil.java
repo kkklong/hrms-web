@@ -1,10 +1,12 @@
 package com.hrm.application.util;
 
+import com.hrm.application.entity.Permission;
 import com.hrm.application.model.Option;
 import com.vaadin.flow.data.binder.Result;
 import com.vaadin.flow.data.binder.ValueContext;
 import com.vaadin.flow.data.converter.Converter;
 import com.vaadin.flow.server.StreamResource;
+import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.io.ByteArrayInputStream;
@@ -56,7 +58,28 @@ public class ToolUtil {
 //        return duration.toHours() + (duration.toMinutesPart() / 60.0);
 //    }
 
-    //---- Converter singleData to binder ----
+//    public static <V> Converter<Set<V>, V> valueConverter(List<V> options) {
+//        Map<Object, V> valueMap = options.stream()
+//                .collect(Collectors.toMap(Object::hashCode, Function.identity())); // 可自定義 key
+//        return new Converter<>() {
+//            @Override
+//            public Result<V> convertToModel(Set<V> fieldValues, ValueContext context) {
+//                if (fieldValues == null || fieldValues.isEmpty()) {
+//                    return Result.ok(null);
+//                }
+//                return Result.ok(fieldValues.iterator().next()); // 取第一個選項
+//            }
+//            @Override
+//            public Set<V> convertToPresentation(V modelValue, ValueContext context) {
+//                if (modelValue == null) {
+//                    return Collections.emptySet();
+//                }
+//                return Set.of(modelValue);
+//            }
+//        };
+//    }
+
+    //---- Converter OptionData to binder ----
     public static <V> Converter<Option<V>, V> dataConverter(List<Option<V>> options) {
         Map<V, Option<V>> map = options.stream().collect(Collectors.toMap(Option::getValue, o -> o));
         return new Converter<>() {
@@ -80,7 +103,7 @@ public class ToolUtil {
                 .collect(Collectors.joining(", "));
     }
 
-    //---- Converter List to binder ----
+    //---- Converter OptionList to binder ----
     public static <V> Converter<Set<Option<V>>, List<V>> getOptionConverter(List<Option<V>> optionList) {
         Map<V, Option<V>> valueMap = optionList.stream()
                 .collect(Collectors.toMap(Option::getValue, o -> o));
