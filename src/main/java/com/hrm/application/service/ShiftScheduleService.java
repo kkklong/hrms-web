@@ -8,8 +8,11 @@ import com.hrm.application.model.Option;
 import com.hrm.application.model.ShiftSchedulePeriod;
 import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
+import com.hrm.application.util.BEClientRestUtil;
 import com.hrm.application.util.BEClientUtil;
+import com.hrm.application.util.FileDownloadUtil;
 import com.hrm.application.util.NotificationUtil;
+import com.vaadin.flow.server.StreamResource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -29,10 +32,15 @@ public class ShiftScheduleService {
     @Value("${hrm.url}")
     private String backEndDomain;
 
+    private final BEClientRestUtil client;
+
+    public ShiftScheduleService(BEClientRestUtil client) {
+        this.client = client;
+    }
+
     //查詢班表
     public List<ShiftSchedules> queryShiftSchedules(String startDate, String endDate, Integer departmentId) {
         String url = backEndDomain + API.QUERY_SHIFT_SCHEDULES.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         LinkedHashMap<String, Object> queryParams = new LinkedHashMap<>();
         queryParams.put("startDate", startDate);
@@ -51,7 +59,6 @@ public class ShiftScheduleService {
     //查詢班表轉成VO
     public List<ShiftSchedulesQueryVO> queryShiftSchedulesVO(String startDate, String endDate, Integer departmentId) {
         String url = backEndDomain + API.QUERY_SHIFT_SCHEDULES.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         LinkedHashMap<String, Object> queryParams = new LinkedHashMap<>();
         queryParams.put("startDate", startDate);
@@ -71,7 +78,6 @@ public class ShiftScheduleService {
     //取得班別及假日配置
     public List<ShiftType> getShiftAndHolidayConfigList() {
         String url = backEndDomain + API.GET_SHIFT_HOLIDAY_TYPES.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<List<ShiftType>>> responseType = new ParameterizedTypeReference<>() {
         };
@@ -88,7 +94,6 @@ public class ShiftScheduleService {
     //取得部門清單
     public List<Option<Integer>> getDepartmentOptionList() {
         String url = backEndDomain + API.GET_DEPARTMENT_OPTIONS.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
         };
@@ -102,7 +107,6 @@ public class ShiftScheduleService {
     //查詢各個排班區間
     public List<ShiftSchedulePeriod> getShiftSchedulePeriods(String startDate, String endDate) {
         String url = backEndDomain + API.QUERY_SCHEDULE_PERIODS.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
 
         ParameterizedTypeReference<ApiResponse<List<ShiftSchedulePeriod>>> responseType = new ParameterizedTypeReference<>() {
         };
@@ -120,7 +124,6 @@ public class ShiftScheduleService {
     // 儲存員工排班
     public boolean savePersonalShiftSchedules(List<ShiftSchedules> personalShiftSchedules) {
         String url = backEndDomain + API.UPDATE_PERSONAL_SHIFT_SCHEDULES.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
 
@@ -138,7 +141,6 @@ public class ShiftScheduleService {
     // 手動調整排班
     public boolean manuallyAdjustShiftSchedules(List<ShiftSchedules> manualShiftSchedules){
         String url = backEndDomain + API.UPDATE_PERSONAL_SHIFT_SCHEDULES.getPath();
-        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
 
@@ -151,6 +153,15 @@ public class ShiftScheduleService {
         }
         NotificationUtil.error(response.getMessage());
         return false;
+    }
+
+    // 導出班表
+    public StreamResource exportShiftSchedules(String shiftDate, Integer departmentId, String fileName) {
+        String url = backEndDomain + API.DOWNLOAD_SHIFT_SCHEDULES.getPath();
+        Map<String, Object> queryParams = new LinkedHashMap<>();
+        queryParams.put("shiftDate", shiftDate);
+        queryParams.put("departmentId", departmentId);
+        return FileDownloadUtil.getFile(url, null, queryParams, fileName);
     }
 
 
@@ -167,6 +178,10 @@ public class ShiftScheduleService {
 
         // ---- department ----
         GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
+
+        // ---- report ----
+        DOWNLOAD_SHIFT_SCHEDULES("/report/download/shiftSchedules", HttpMethod.GET, null),
+
 
 
         NONE("", null, null);

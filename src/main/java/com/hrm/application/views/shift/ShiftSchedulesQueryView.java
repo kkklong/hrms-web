@@ -16,23 +16,32 @@ import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.ToolUtil;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
+import com.vaadin.flow.component.contextmenu.MenuItem;
+import com.vaadin.flow.component.contextmenu.SubMenu;
+import com.vaadin.flow.component.details.Details;
+import com.vaadin.flow.component.details.DetailsVariant;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import com.vaadin.flow.dom.Style;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.extern.slf4j.Slf4j;
@@ -94,6 +103,8 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     public ShiftSchedulesQueryView(ShiftScheduleService service) {
         this.service = service;
         this.addClassName("background-plan");
+        setData(); // 執行會觸發 webClient.block() 的方法
+        updateSchedulesData();
         configureDialog(null);
         setParameterListener();
         add(titleConfigure(), getToolbar(), getContent());
@@ -108,6 +119,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         years = IntStream.range(now.getYear() - 1, now.getYear() + 2)
                 .boxed()
                 .collect(Collectors.toList());
+        List<Integer> months = IntStream.rangeClosed(1, 12)
+                .boxed()
+                .collect(Collectors.toList());
+        monthPicker.setItems(months);
         yearPicker.setItems(years);
         yearPicker.setValue(selectedDate.getYear());
         monthPicker.setValue(selectedDate.getMonth().getValue());
@@ -141,14 +156,41 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         // 右側的過濾器佈局
         HorizontalLayout tool2 = new HorizontalLayout();
         configureFilter();
-        tool2.add(countDetail, nickNameFilter, departmentSelector);
+        tool2.add(nickNameFilter, departmentSelector);
 
         // 將各個部分新增到工具欄
-        toolbar.add(centerLayout, tool2);
+        toolbar.add(managerToolConfigure(), centerLayout, tool2);
         toolbar.setWidthFull();
         toolbar.setJustifyContentMode(JustifyContentMode.BETWEEN);
         toolbar.setAlignItems(Alignment.BASELINE);
         return toolbar;
+    }
+
+    private MenuBar managerToolConfigure() {
+        MenuBar managerToolMenu = new MenuBar();
+        managerToolMenu.getStyle().set("border", "1px solid var(--lumo-contrast-30pct)");
+        managerToolMenu.getStyle().set("border-radius", "var(--lumo-border-radius-s");
+
+        HorizontalLayout detailHt = new HorizontalLayout();
+        MenuItem toolDetailItem = managerToolMenu.addItem("管理者工具");
+        Button importShiftSchedules = new Button("載入預設班表");
+        Button exportShiftSchedules = new Button("導出班表");
+        detailHt.add(importShiftSchedules, exportShiftSchedules);
+        SubMenu detailSubMenu = toolDetailItem.getSubMenu();
+        importShiftSchedules.addClickListener(e -> NotificationUtil.info("載入預設班表"));
+//        exportShiftSchedules.addClickListener(e -> NotificationUtil.info("導出班表"));
+
+        // 創建導出班表對話框及按鈕事件
+        exportShiftSchedules.addClickListener(e -> {
+            Integer year = yearPicker.getValue();
+            Integer month = monthPicker.getValue();
+            Option<Integer> department = departmentSelector.getValue();
+            Dialog exportShiftSchedulesDialog = new ExportShiftSchedulesDialog(service, year, month, department);
+            exportShiftSchedulesDialog.open();
+        });
+
+        detailSubMenu.addItem(detailHt);
+        return managerToolMenu;
     }
 
     /**
@@ -158,10 +200,6 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
 
         yearPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         yearPicker.setWidth("6em");
-        List<Integer> months = IntStream.rangeClosed(1, 12)
-                .boxed()
-                .collect(Collectors.toList());
-        monthPicker.setItems(months);
         monthPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         monthPicker.setItemLabelGenerator(value -> value + "月");
         monthPicker.setWidth("5em");
@@ -280,14 +318,14 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         resetEmployeeFilter(shiftSchedulesList);
         // ---- 總計人數, 假日 ----
         //int empCount = shiftSchedulesList == null ? 0 : shiftSchedulesList.size();
-        List<String> restKey = Arrays.asList("REST");
-        List<String> regularKey = Arrays.asList("REGULAR");
-        List<String> nationalKey = Arrays.asList("NATIONAL");
-        countDetail.setValue(String.format("[休假日: %d][例假日: %d][國定假日: %d]"
-                , getHolidayShiftTypeCount(periods, restKey)
-                , getHolidayShiftTypeCount(periods, regularKey)
-                , getHolidayShiftTypeCount(periods, nationalKey)
-        ));
+//        List<String> restKey = Arrays.asList("REST");
+//        List<String> regularKey = Arrays.asList("REGULAR");
+//        List<String> nationalKey = Arrays.asList("NATIONAL");
+//        countDetail.setValue(String.format("[休假日: %d][例假日: %d][國定假日: %d]"
+//                , getHolidayShiftTypeCount(periods, restKey)
+//                , getHolidayShiftTypeCount(periods, regularKey)
+//                , getHolidayShiftTypeCount(periods, nationalKey)
+//        ));
     }
 
     private void applyFilter() {
@@ -533,19 +571,19 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 .count();
     }
 
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        UI ui = attachEvent.getUI();
-        ui.access(() -> {
-            try {
-                setData(); // 執行會觸發 webClient.block() 的方法
-                updateSchedulesData();
-            } catch (Exception e) {
-                NotificationUtil.error("載入資料失敗：" + e.getMessage());
-            }
-        });
-    }
+//    @Override
+//    protected void onAttach(AttachEvent attachEvent) {
+//        super.onAttach(attachEvent);
+//        UI ui = attachEvent.getUI();
+//        ui.access(() -> {
+//            try {
+//                setData(); // 執行會觸發 webClient.block() 的方法
+//                updateSchedulesData();
+//            } catch (Exception e) {
+//                NotificationUtil.error("載入資料失敗：" + e.getMessage());
+//            }
+//        });
+//    }
 
     // ---- dialog ----
     private void configureDialog(ShiftSchedulesQueryVO shiftSchedules) {
@@ -556,7 +594,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     }
 
     private void closeEditor() {
-//        grid.asSingleSelect().clear();
+        grid.asSingleSelect().clear();
         dialog.close();
     }
 
