@@ -25,6 +25,7 @@ import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.details.DetailsVariant;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -146,8 +147,8 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         return content;
     }
 
-    private HorizontalLayout getToolbar() {
-        var toolbar = new HorizontalLayout();
+    private FormLayout getToolbar() {
+        var toolbar = new FormLayout();
         // 中間的日期選擇器佈局，居中顯示
         HorizontalLayout centerLayout = new HorizontalLayout(configureDateSelector());
         centerLayout.setWidthFull();
@@ -157,12 +158,20 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         HorizontalLayout tool2 = new HorizontalLayout();
         configureFilter();
         tool2.add(nickNameFilter, departmentSelector);
+        HorizontalLayout managerTool = new HorizontalLayout(managerToolConfigure());
 
         // 將各個部分新增到工具欄
-        toolbar.add(managerToolConfigure(), centerLayout, tool2);
+        toolbar.add(managerTool, centerLayout, tool2);
         toolbar.setWidthFull();
-        toolbar.setJustifyContentMode(JustifyContentMode.BETWEEN);
-        toolbar.setAlignItems(Alignment.BASELINE);
+        toolbar.setColspan(managerTool, 4);
+        toolbar.setColspan(centerLayout, 8);
+        toolbar.setColspan(tool2, 5);
+        toolbar.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("20em", 4),
+                new FormLayout.ResponsiveStep("30em", 13),
+                new FormLayout.ResponsiveStep("50em", 17)
+        );
+
         return toolbar;
     }
 
@@ -178,7 +187,6 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         detailHt.add(importShiftSchedules, exportShiftSchedules);
         SubMenu detailSubMenu = toolDetailItem.getSubMenu();
         importShiftSchedules.addClickListener(e -> NotificationUtil.info("載入預設班表"));
-//        exportShiftSchedules.addClickListener(e -> NotificationUtil.info("導出班表"));
 
         // 創建導出班表對話框及按鈕事件
         exportShiftSchedules.addClickListener(e -> {
@@ -256,7 +264,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         departmentSelector.setItemLabelGenerator(Option::getName);
         departmentSelector.setPlaceholder("部門...");
         departmentSelector.setValue(departmentMap.get(userDepartmentId));
-        departmentSelector.setWidth("6em");
+        departmentSelector.setWidth("7em");
         departmentSelector.getElement().getStyle().set("font-size", "14px");
         departmentSelector.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         departmentSelector.getStyle().set("--vaadin-combo-box-overlay-width", "8em");

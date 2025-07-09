@@ -8,28 +8,27 @@ import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
 import com.hrm.application.service.MenuService;
 import com.hrm.application.util.NotificationUtil;
-import com.hrm.application.util.SessionUtil;
 import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.FullCalendar;
-import com.hrm.application.views.department.DepartmentView;
-import com.hrm.application.views.employee.EmployeeView;
-import com.hrm.application.views.notice.NoticeView;
-import com.hrm.application.views.shift.ShiftSchedulesQueryView;
-import com.vaadin.flow.component.*;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H4;
+import com.vaadin.flow.component.html.Hr;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
@@ -109,6 +108,34 @@ public class MainLayout extends AbstractLayout {
         title.getStyle().set("font-size", "var(--lumo-font-size-l)");
         title.getStyle().set("font-weight", "bold");
         addToNavbar(true, new DrawerToggle(), title, createNotificationBell(), accountMenu(), accountInfo());
+    }
+
+    protected Component generateTitle() {
+        Span span = new Span();
+
+        span.setWidthFull();
+        span.getStyle()
+                .set("margin-left", "var(--app-layout-menu-toggle-button-padding)")
+                .set("overflow", "hidden")
+                .set("text-overflow", "ellipsis")
+                .set("text-align", "center")
+                .set("font-size", "var(--lumo-font-size-l)");
+// 畫面size縮小時, 變更title顯示的文字
+        span.getElement().executeJs(
+                """
+                const titleEl = this;
+                function updateTitleText() {
+                    if (window.matchMedia('(max-width: 40em)').matches) {
+                        titleEl.textContent = 'HRM';
+                    } else {
+                        titleEl.textContent = 'HRM System Demo';
+                    }
+                }
+                updateTitleText();
+                window.addEventListener('resize', updateTitleText);
+                """
+        );
+        return span;
     }
 
     private void getUserInfo() {

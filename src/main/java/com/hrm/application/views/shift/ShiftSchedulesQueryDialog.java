@@ -61,7 +61,7 @@ public class ShiftSchedulesQueryDialog extends Dialog {
 
         // 主容器
         VerticalLayout mainLayout = new VerticalLayout();
-        mainLayout.setMinWidth("40em");
+        mainLayout.setWidthFull();
         // 標題
         TextField countDetail = new TextField();
         countDetail.setReadOnly(true);
@@ -75,10 +75,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         mainLayout.addClassName("background-plan");
 
         // 添加星期一到星期日的標題
-        FormLayout periodLayout = new FormLayout();
-        periodLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
-        addWeekdayHeaders(periodLayout);
-        mainLayout.add(periodLayout);
+//        FormLayout periodLayout = new FormLayout();
+//        periodLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+//        addWeekdayHeaders(periodLayout);
+//        mainLayout.add(periodLayout);
 
         // 建立兩個 Tab
         Tab tab1 = new Tab("排班設定");
@@ -131,7 +131,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         wrapper.setHeightFull();
 
         FormLayout contentLayout = new FormLayout();
-        contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+        contentLayout.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("0", 1),
+                new FormLayout.ResponsiveStep("40em", 7)
+        );
         contentLayout.setWidthFull();
 
         List<ShiftSchedulesDateTimeQueryVO> datesList = shiftSchedules.getSchedulesDates();
@@ -174,7 +177,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             if (itemCount % 14 == 0) {
                 wrapper.add(contentLayout, new Hr());
                 contentLayout = new FormLayout();
-                contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+                contentLayout.setResponsiveSteps(
+                        new FormLayout.ResponsiveStep("0", 1),
+                        new FormLayout.ResponsiveStep("40em", 7)
+                );
             }
         }
 
@@ -209,7 +215,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         wrapper.setHeightFull();
 
         FormLayout contentLayout = new FormLayout();
-        contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+        contentLayout.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("0", 1),
+                new FormLayout.ResponsiveStep("40em", 7)
+        );
         contentLayout.setWidthFull();
 
         List<ShiftSchedulesDateTimeQueryVO> datesList = shiftSchedules.getSchedulesDates();
@@ -242,7 +251,10 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             if (itemCount % 14 == 0) {
                 wrapper.add(contentLayout, new Hr());
                 contentLayout = new FormLayout();
-                contentLayout.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 7));
+                contentLayout.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("0", 1),
+                new FormLayout.ResponsiveStep("40em", 7)
+        );
             }
         }
 
