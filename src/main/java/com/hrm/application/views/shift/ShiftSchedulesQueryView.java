@@ -175,6 +175,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         return toolbar;
     }
 
+    //管理者Tool
     private MenuBar managerToolConfigure() {
         MenuBar managerToolMenu = new MenuBar();
         managerToolMenu.getStyle().set("border", "1px solid var(--lumo-contrast-30pct)");
@@ -186,8 +187,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         Button exportShiftSchedules = new Button("導出班表");
         detailHt.add(importShiftSchedules, exportShiftSchedules);
         SubMenu detailSubMenu = toolDetailItem.getSubMenu();
-        importShiftSchedules.addClickListener(e -> NotificationUtil.info("載入預設班表"));
 
+        // 創建載入預設班表對話框及按鈕事件
+        Dialog loadDefaultShiftScheduleDialog = new ImportShiftSchedulesDialog(service);
+        importShiftSchedules.addClickListener(e -> loadDefaultShiftScheduleDialog.open());
         // 創建導出班表對話框及按鈕事件
         exportShiftSchedules.addClickListener(e -> {
             Integer year = yearPicker.getValue();

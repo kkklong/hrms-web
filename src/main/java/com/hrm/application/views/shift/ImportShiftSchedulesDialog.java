@@ -1,7 +1,10 @@
 package com.hrm.application.views.shift;
 
 
+import com.hrm.application.entity.ApiResponse;
+import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.service.ShiftScheduleService;
+import com.hrm.application.util.MultipartFileUtil;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
@@ -13,6 +16,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -126,22 +130,24 @@ public class ImportShiftSchedulesDialog extends Dialog {
     }
 
     private void uploadSchedule() throws IOException {
-        // 檢查檔案是否存在
-//        InputStream fileData = buffer.getInputStream();
-//        if (fileData == null || buffer.getFileName().isEmpty()) {
-//            Notification.show("請選擇一個要上傳的檔案", 3000, Notification.Position.MIDDLE);
-//            return;
-//        }
-//
-//        NameAddedByteArrayResource resource = new NameAddedByteArrayResource(buffer.getFileName(), fileData.readAllBytes());
-//        ApiResponse<List<ShiftSchedules>> response = service.uploadShiftSchedules(resource);
-//
-//        if (response != null && response.getCode() == 0) {
-//            Notification.show("上傳成功", 3000, Notification.Position.TOP_CENTER);
-//            closeDialog();
-//        } else {
-//            Notification.show("上傳失敗", 3000, Notification.Position.TOP_CENTER);
-//        }
+         //檢查檔案是否存在
+        InputStream fileData = buffer.getInputStream();
+        if (fileData == null || buffer.getFileName().isEmpty()) {
+            Notification.show("請選擇一個要上傳的檔案", 3000, Notification.Position.MIDDLE);
+            return;
+        }
+
+        // 創建MultipartFile物件
+        MultipartFile multipartFile = new MultipartFileUtil(
+                "file", buffer.getFileName(), "text/csv", fileData);
+        ApiResponse<List<ShiftSchedules>> response = service.uploadShiftSchedules(multipartFile);
+
+        if (response != null && response.getCode() == 0) {
+            Notification.show("上傳成功", 3000, Notification.Position.TOP_CENTER);
+            closeDialog();
+        } else {
+            Notification.show("上傳失敗", 3000, Notification.Position.TOP_CENTER);
+        }
     }
 
     private void closeDialog() {

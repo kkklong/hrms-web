@@ -18,7 +18,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDate;
@@ -164,6 +166,24 @@ public class ShiftScheduleService {
         return FileDownloadUtil.getFile(url, null, queryParams, fileName);
     }
 
+    // 上傳班表
+    public ApiResponse<List<ShiftSchedules>> uploadShiftSchedules(MultipartFile file) {
+        String url = backEndDomain +  API.SAVE_DEFAULT_SCHEDULES;
+        ParameterizedTypeReference<ApiResponse<List<ShiftSchedules>>> responseType = new ParameterizedTypeReference<>() {
+        };
+
+        MultipartBodyBuilder builder = new MultipartBodyBuilder();
+        builder.part("file", file)
+                .header("Content-Disposition", "form-data; name=file; filename="
+                        + file.getOriginalFilename());
+
+        ApiResponse<List<ShiftSchedules>> response = client.doPostJson(url, null, builder.build(), responseType);
+
+        if (response != null) {
+            return response;
+        }
+        return null;
+    }
 
     /**
      * 接口信息
@@ -175,6 +195,7 @@ public class ShiftScheduleService {
         QUERY_SCHEDULE_PERIODS("/shiftSchedules/getShiftSchedulePeriods", HttpMethod.GET, null),
         UPDATE_PERSONAL_SHIFT_SCHEDULES("/shiftSchedules/savePersonalShiftSchedules", HttpMethod.POST, MediaType.APPLICATION_JSON),
         UPDATE_OTHERS_SHIFT_SCHEDULES("/shiftSchedules/manuallyAdjustShiftSchedules", HttpMethod.POST, MediaType.APPLICATION_JSON),
+        SAVE_DEFAULT_SCHEDULES("/shiftSchedules/loadShiftSchedule", HttpMethod.POST, MediaType.MULTIPART_FORM_DATA),
 
         // ---- department ----
         GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
