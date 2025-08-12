@@ -16,6 +16,7 @@ import com.vaadin.flow.server.StreamResource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.MultipartBodyBuilder;
@@ -167,17 +168,25 @@ public class ShiftScheduleService {
     }
 
     // 上傳班表
-    public ApiResponse<List<ShiftSchedules>> uploadShiftSchedules(MultipartFile file) {
-        String url = backEndDomain +  API.SAVE_DEFAULT_SCHEDULES;
+    public ApiResponse<List<ShiftSchedules>> uploadShiftSchedules(byte[] fileBytes, String fileName) {
+        String url = backEndDomain +  API.SAVE_DEFAULT_SCHEDULES.getPath();
         ParameterizedTypeReference<ApiResponse<List<ShiftSchedules>>> responseType = new ParameterizedTypeReference<>() {
         };
 
         MultipartBodyBuilder builder = new MultipartBodyBuilder();
-        builder.part("file", file)
-                .header("Content-Disposition", "form-data; name=file; filename="
-                        + file.getOriginalFilename());
+//        builder.part("file", file)
+//                .header("Content-Disposition", "form-data; name=file; filename="
+//                        + file.getOriginalFilename());
+        if (fileBytes != null) {
+            builder.part("file", new ByteArrayResource(fileBytes) {
+                @Override
+                public String getFilename() {
+                    return fileName;
+                }
+            });
+        }
 
-        ApiResponse<List<ShiftSchedules>> response = client.doPostJson(url, null, builder.build(), responseType);
+        ApiResponse<List<ShiftSchedules>> response = client.doPostMultipart(url, null, builder.build(), responseType);
 
         if (response != null) {
             return response;

@@ -67,6 +67,20 @@ public class BEClientRestUtil {
         return requestData(uri, HttpMethod.GET, MediaType.APPLICATION_JSON, headers, null, null, responseType);
     }
 
+    // 新增 Multipart Post
+    public <T> T doPostMultipart(String url, Map<String, Object> pathValues,MultiValueMap<String, HttpEntity<?>> multipartBody, ParameterizedTypeReference<T> responseType) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url);
+        URI uri = (pathValues != null)
+                ? builder.buildAndExpand(pathValues).toUri()
+                : builder.build().toUri();
+
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("Cookie", "JSESSIONID=" + SessionUtil.getToken());
+        return requestMultipartData(uri, HttpMethod.POST, MediaType.MULTIPART_FORM_DATA, headers, null, multipartBody, responseType);
+
+    }
+
+
     private <T> T requestData(URI uri, HttpMethod method, MediaType mediaType,
                               Map<String, Object> headers, Object jsonBody, Map<String, Object> formBody, ParameterizedTypeReference<T> responseType) {
 
@@ -107,9 +121,40 @@ public class BEClientRestUtil {
         }
     }
 
-    /**
-     * 處理未登入
-     */
+
+    private <T> T requestMultipartData(URI uri, HttpMethod method, MediaType multipartFormData, Map<String, Object> headers, Object o
+        , MultiValueMap<String, HttpEntity<?>> multipartBody, ParameterizedTypeReference<T> responseType) {
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(multipartFormData);
+        if (headers != null) {
+            headers.forEach((key, value) -> {
+                if (key.equalsIgnoreCase(HttpHeaders.COOKIE) && value instanceof String) {
+                    httpHeaders.add(HttpHeaders.COOKIE, (String) value);
+                } else {
+                    httpHeaders.set(key, value.toString());
+                }
+            });
+        }
+        Object body = multipartBody;
+        HttpEntity<?> entity = new HttpEntity<>(body, httpHeaders);
+
+        try {
+            log.info("request uri: {}, method: {}, type: {},  body: {}", uri, method, multipartBody, body);
+            ResponseEntity<T> response = restTemplate.exchange(uri, method, entity, responseType);
+            return response.getBody();
+        } catch (HttpStatusCodeException ex) {
+            handleHttpError(ex);
+            throw new RuntimeException("HTTP request failed: " + ex.getStatusCode() + " - " + ex.getResponseBodyAsString(), ex);
+        } catch (Exception e) {
+            log.error("Error: request URI: {}; msg: {}", uri, e.getMessage());
+            throw new RuntimeException("Unexpected error occurred during HTTP request", e);
+        }
+    }
+
+
+        /**
+         * 處理未登入
+         */
     private void handleHttpError(HttpStatusCodeException e) {
 
         if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
