@@ -9,6 +9,7 @@ import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.ToolUtil;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -347,18 +348,21 @@ public class EmployeeView extends VerticalLayout {
     }
 
     private void initializeFilters() {
-        employeeNumberFilter.clear();
-        fullNameFilter.clear();
-        nickNameFilter.clear();
-        accountFilter.clear();
-        departmentFilter.clear();
-        employeeStatusFilter.clear();
-        genderFilter.clear();
-        positionFilter.clear();
-        floorFilter.clear();
-        mailFilter.clear();
-        seatNumberFilter.clear();
-        entryDateFilter.clear();
+        List<HasValue<?, ?>> filters = List.of(
+                employeeNumberFilter,
+                fullNameFilter,
+                nickNameFilter,
+                accountFilter,
+                departmentFilter,
+                employeeStatusFilter,
+                genderFilter,
+                positionFilter,
+                floorFilter,
+                mailFilter,
+                seatNumberFilter,
+                entryDateFilter
+        );
+        filters.forEach(HasValue::clear);
     }
 
     @Override

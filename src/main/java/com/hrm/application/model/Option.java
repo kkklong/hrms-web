@@ -1,9 +1,13 @@
 package com.hrm.application.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 public class Option<T> {
 
+    @JsonAlias({"name","key"})
     private String name;
     private T value;
+    private T referenceValue;
 
     public Option(String name, T value) {
         this.name = name;
@@ -24,6 +28,14 @@ public class Option<T> {
 
     public void setValue(T value) {
         this.value = value;
+    }
+
+    public T getReferenceValue() {
+        return referenceValue;
+    }
+
+    public void setReferenceValue(T referenceValue) {
+        this.referenceValue = referenceValue;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.hrm.application.layout;
 
+import com.hrm.application.demo.TestView;
 import com.hrm.application.entity.Menu;
 import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
@@ -10,6 +11,7 @@ import com.hrm.application.service.MenuService;
 import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
+import com.hrm.application.views.approvalFlowConfig.ApprovalFlowConfigView;
 import com.hrm.application.views.calendar.FullCalendar;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
@@ -77,6 +79,9 @@ public class MainLayout extends AbstractLayout {
     protected void createMenuEntries(SideNav nav) {
         addMenu(nav, HomePageView.class);
         addMenu(nav, FullCalendar.class);
+        addMenu(nav, ApprovalFlowConfigView.class);
+        addMenu(nav, TestView.class);
+
 //        addMenu(nav, EmployeeView.class);
 //        addMenu(nav, DepartmentView.class);
 //        addMenu(nav, ShiftSchedulesQueryView.class);
