@@ -1,4 +1,4 @@
-package com.hrm.application.demo;
+package com.hrm.application.component;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
@@ -38,13 +38,7 @@ public class DragAndSelect<T> extends VerticalLayout {
         });
         grid.addDropListener(this::onGridDrop);
 
-        // 隱藏
-        invisibleObj.setHeight("0");
-        invisibleObj.getStyle().set("padding", "0");
-        invisibleObj.getStyle().set("margin", "0");
-
-
-        add(invisibleObj, grid);
+        add(grid);
     }
 
     public DragAndSelect(List<T> items) {
@@ -117,4 +111,9 @@ public class DragAndSelect<T> extends VerticalLayout {
     public void deselectAll() {
         grid.asMultiSelect().deselectAll();
     }
+
+    public void setAllRowsVisible(Boolean isVisible) {
+        grid.setAllRowsVisible(isVisible);
+    }
+
 }

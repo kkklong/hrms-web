@@ -96,6 +96,7 @@ html {
     cursor: pointer;
     width: 36px;
     height: 20px;
+    line-height: 20px;   /* 跟高度一樣，就會垂直置中 */
 }
 .my-switch > label::before {
     content: "";
@@ -120,6 +121,7 @@ html {
     transition: 0.3s;
 }
 .my-switch[checked] > label::before {
+    content: "";
     background: #0b6efd;
 }
 .my-switch[checked] > label::after {

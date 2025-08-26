@@ -1,29 +1,37 @@
 package com.hrm.application.views.approvalFlowConfig;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hrm.application.entity.ApprovalFlowConfig;
-import com.hrm.application.entity.Employee;
+import com.hrm.application.enums.ApprovalScopeType;
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.model.Option;
 import com.hrm.application.service.ApprovalFlowConfigService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Scope("prototype")
@@ -36,6 +44,9 @@ public class ApprovalFlowConfigView extends VerticalLayout {
     private ApprovalFlowConfigService service;
     private ListDataProvider<ApprovalFlowConfig> dataProvider;
     private ApprovalFlowConfigDialog dialog;
+    @Resource
+    ObjectMapper objectMapper;
+    private static final String ARROW = " \u2192 ";
 
 
     private final ComboBox<Option<String>> scopeTypeFilter = new ComboBox<>();
@@ -47,7 +58,6 @@ public class ApprovalFlowConfigView extends VerticalLayout {
     private List<Option<String>> intervalList;
     private List<Option<Integer>> departmentList;
     private List<Option<Integer>> employeeList;
-
 
     private final Map<String, String> scopeTypeLut = new HashMap<>();
     private final Map<String, String> companyLut = new HashMap<>();
@@ -101,6 +111,10 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         departmentList = service.getDepartmentOptionList();
         employeeList = service.getEmployeeOptionList();
         loadSelectors();
+        configureFilter();
+    }
+
+    private void configureFilter() {
         scopeTypeFilter.setItems(scopeTypeList);
         scopeTypeFilter.setPlaceholder("範圍類型...");
         scopeTypeFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
@@ -111,19 +125,84 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         activeFilter.setClearButtonVisible(true);
         activeFilter.setPlaceholder("狀態...");
         activeFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        scopeTypeFilter.addValueChangeListener(event -> applyFilter());
+        activeFilter.addValueChangeListener(event -> applyFilter());
+    }
 
-
+    private void applyFilter() {
+        dataProvider.clearFilters();
+        if (!scopeTypeFilter.isEmpty()) {
+            dataProvider.addFilter(afcfg -> afcfg.getScopeType() != null && afcfg.getScopeType().toLowerCase().contains(scopeTypeFilter.getValue().getValue().toLowerCase()));
+        }
+        if (!activeFilter.isEmpty()) {
+            dataProvider.addFilter(afcfg -> afcfg.getScopeType() != null && afcfg.getActive().equals(activeFilter.getValue()));
+        }
     }
 
     private void configureGrid() {
-        grid.addColumn(ApprovalFlowConfig::getScopeType).setHeader("範圍類型").setKey("ScopeType");
+        grid.addColumn(cfg -> scopeTypeLut.getOrDefault(cfg.getScopeType(), cfg.getScopeType())).setHeader("範圍類型").setKey("ScopeType");
         grid.addColumn(this::displayNameForScopeValue).setHeader("範圍值").setKey("ScopeValue");
-        grid.addColumn(ApprovalFlowConfig::getFlowJson).setHeader("簽核流程").setKey("FlowJson");
+        grid.addColumn(new ComponentRenderer<>(this::flowCell)).setHeader("簽核流程").setKey("FlowJson");
         grid.addColumn(cfg -> (cfg.getActive() != null && cfg.getActive() == 1) ? "啟用" : "停用").setHeader("狀態").setKey("Active");
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.setSizeFull();
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
         grid.asSingleSelect().addValueChangeListener(event -> editApprovalFlowConfig(event.getValue()));
+    }
+
+    private Component flowCell(ApprovalFlowConfig cfg) {
+        Div box = new Div();
+        try {
+            Map<String, List<String>> flow = objectMapper.readValue(cfg.getFlowJson(), new TypeReference<>() {
+            });
+            flow.forEach((interval, reviewers) -> {
+                String intervalName = intervalLut.getOrDefault(interval, interval);
+                String reviewersStr = reviewers.stream()
+                        .map(r -> reviewLut.getOrDefault(r, r))
+                        .collect(Collectors.joining(ARROW));
+                box.add(new Div(new Text(intervalName + ": " + reviewersStr)));
+            });
+        } catch (Exception e) {
+            box.add(new Text(cfg.getFlowJson()));
+        }
+        return box;
+    }
+
+    private void saveApprovalFlowConfig(ApprovalFlowConfigDialog.SaveEvent event) {
+        ApprovalFlowConfig approvalFlowConfig = event.getApprovalFlowConfig();
+        boolean success = service.createApprovalFlowConfig(approvalFlowConfig);
+        if (success) {
+            Notification.show("儲存成功");
+            updateList();
+            closeEditor();
+        } else {
+            Notification.show("儲存失敗");
+        }
+    }
+
+    private void updateApprovalFlowConfig(ApprovalFlowConfigDialog.UpdateEvent event) {
+        ApprovalFlowConfig approvalFlowConfig = event.getApprovalFlowConfig();
+        boolean success = service.updateApprovalFlowConfig(approvalFlowConfig);
+        if (success) {
+            Notification.show("更新成功");
+            updateList();
+            closeEditor();
+        } else {
+            Notification.show("更新失敗");
+        }
+    }
+
+    private void deleteApprovalFlowConfig(ApprovalFlowConfigDialog.DeleteEvent event) {
+        ApprovalFlowConfig approvalFlowConfig = event.getApprovalFlowConfig();
+        Integer cfgId = approvalFlowConfig.getId();
+        boolean success = service.deleteApprovalFlowConfig(cfgId);
+        if (success) {
+            Notification.show("刪除成功");
+            updateList();
+            closeEditor();
+        } else {
+            Notification.show("刪除失敗");
+        }
     }
 
     private void updateList() {
@@ -168,25 +247,29 @@ public class ApprovalFlowConfigView extends VerticalLayout {
      * 依 scopeType 將 scopeValue 轉成對應名稱
      */
     private String displayNameForScopeValue(ApprovalFlowConfig cfg) {
-        return switch (cfg.getScopeType()) {
-            case "COMPANY" -> companyLut.getOrDefault(cfg.getScopeValue(), cfg.getScopeValue());
-            case "DEPARTMENT" -> deptLut.getOrDefault(cfg.getScopeValue(), cfg.getScopeValue());
-            case "EMPLOYEE" -> empLut.getOrDefault(cfg.getScopeValue(), cfg.getScopeValue());
-            default -> cfg.getScopeValue();
+        ApprovalScopeType t = ApprovalScopeType.fromValue(cfg.getScopeType());
+        if (t == null) return cfg.getScopeValue();
+
+        return switch (t) {
+            case COMPANY -> companyLut.getOrDefault(cfg.getScopeValue(), cfg.getScopeValue());
+            case DEPARTMENT -> deptLut.getOrDefault(cfg.getScopeValue(), cfg.getScopeValue());
+            case EMPLOYEE -> empLut.getOrDefault(cfg.getScopeValue(), cfg.getScopeValue());
+            case GLOBAL -> cfg.getScopeValue();
         };
     }
 
     private void configureDialog() {
         dialog = new ApprovalFlowConfigDialog(service, scopeTypeList, companyList, reviewList, intervalList, departmentList, employeeList);
-//        dialog.addSaveListener(this::saveEmployee);
-//        dialog.addUpdateListener(this::updateEmployee);
-//        dialog.addDeleteListener(this::deleteEmployee);
+        dialog.addSaveListener(this::saveApprovalFlowConfig);
+        dialog.addUpdateListener(this::updateApprovalFlowConfig);
+        dialog.addDeleteListener(this::deleteApprovalFlowConfig);
         dialog.addCloseListener(e -> closeEditor());
     }
 
     public void createApprovalFlowConfig() {
         grid.asSingleSelect().clear();
-        dialog.setApprovalFlowDialog(new ApprovalFlowConfig());
+        dialog.resetScopeInputs();
+        dialog.setNewApprovalFlowDialog(new ApprovalFlowConfig());
         dialog.setDialogView(true);
         dialog.open();
     }
@@ -202,10 +285,6 @@ public class ApprovalFlowConfigView extends VerticalLayout {
     }
 
     private void closeEditor() {
-        if (dialog != null) {
-            dialog.setApprovalFlowDialog(new ApprovalFlowConfig());
-            dialog.close();
-        }
         dialog.close();
     }
 }

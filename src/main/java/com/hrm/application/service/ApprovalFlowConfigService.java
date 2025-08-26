@@ -4,6 +4,7 @@ import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.ApprovalFlowConfig;
 import com.hrm.application.model.Option;
 import com.hrm.application.util.BEClientRestUtil;
+import com.hrm.application.util.NotificationUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ApprovalFlowConfigService {
@@ -19,6 +21,7 @@ public class ApprovalFlowConfigService {
     private String backEndDomain;
 
     private final BEClientRestUtil client;
+
     public ApprovalFlowConfigService(BEClientRestUtil client) {
         this.client = client;
     }
@@ -70,7 +73,7 @@ public class ApprovalFlowConfigService {
 
         ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
         };
-        ApiResponse<List<Option<Integer>>> response = client.doPostJson(url, null, null, responseType);
+        ApiResponse<List<Option<Integer>>> response = client.doGet(url, null, null, responseType);
         if (response != null) {
             return response.getData();
         }
@@ -102,18 +105,79 @@ public class ApprovalFlowConfigService {
         return new ArrayList<>();
     }
 
+    public boolean createApprovalFlowConfig(ApprovalFlowConfig approvalFlowConfig) {
+        String url = backEndDomain + API.APPROVAL_FLOW_CONFIG_CREATE.getPath();
+        ParameterizedTypeReference<ApiResponse<ApprovalFlowConfig>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<ApprovalFlowConfig> response = client.doPostJson(url, null, approvalFlowConfig, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return false;
+    }
 
-    // enum
-//    public List<Option<Integer>> getCompanyTypeOptionList() {
-//        String url = backEndDomain + API.GET_COMPANY_TYPE_OPTIONS.getPath();
-//        ParameterizedTypeReference<ApiResponse<List<Option<Integer>>>> responseType = new ParameterizedTypeReference<>() {
-//        };
-//        ApiResponse<List<Option<Integer>>> response = client.doGet(url, null, null, responseType);
-//        if (response != null) {
-//            return response.getData();
-//        }
-//        return new ArrayList<>();
-//    }
+    public boolean updateApprovalFlowConfig(ApprovalFlowConfig approvalFlowConfig) {
+        String url = backEndDomain + API.APPROVAL_FLOW_CONFIG_UPDATE.getPath();
+        ParameterizedTypeReference<ApiResponse<ApprovalFlowConfig>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<ApprovalFlowConfig> response = client.doPostJson(url, null, approvalFlowConfig, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return false;
+    }
+
+    public boolean deleteApprovalFlowConfig(Integer cfgId) {
+        String url = backEndDomain + API.APPROVAL_FLOW_CONFIG_DELETE.getPath();
+        ParameterizedTypeReference<ApiResponse<ApprovalFlowConfig>> responseType = new ParameterizedTypeReference<>() {
+        };
+        Map<String, Object> pathValues = new LinkedHashMap<>();
+        pathValues.put("id", cfgId);
+        ApiResponse<ApprovalFlowConfig> response = client.doPostJson(url, pathValues, null, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return false;
+    }
+
+    /**
+     * Map deptToEmployees
+     *
+     * @param employees
+     * @return
+     */
+    public Map<Integer, List<Option<Integer>>> buildDeptToEmployeesMap(List<Option<Integer>> employees) {
+        return employees.stream()
+                .collect(Collectors.groupingBy(
+                        Option::getReferenceValue  // key = deptId
+                ));
+    }
+
+    /**
+     * Map empToDept
+     *
+     * @param employees
+     * @return
+     */
+    public Map<Integer, Integer> buildEmployeeToDeptMap(List<Option<Integer>> employees) {
+        return employees.stream()
+                .collect(Collectors.toMap(
+                        Option::getValue,          // key = employeeId
+                        Option::getReferenceValue  // value = deptId
+                ));
+    }
 
 
     private enum API {
