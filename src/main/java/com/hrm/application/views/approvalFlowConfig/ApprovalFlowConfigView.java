@@ -9,8 +9,10 @@ import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.model.Option;
 import com.hrm.application.service.ApprovalFlowConfigService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -97,8 +99,9 @@ public class ApprovalFlowConfigView extends VerticalLayout {
 
     private Component getToolbar() {
         Button addConfigButton = new Button("新增", click -> createApprovalFlowConfig());
-
-        var toolbar = new HorizontalLayout(addConfigButton, scopeTypeFilter, activeFilter);
+        Button resetFilterButton = new Button("重製篩選", click -> resetFilters());
+        resetFilterButton.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        var toolbar = new HorizontalLayout(addConfigButton, scopeTypeFilter, activeFilter, resetFilterButton);
         toolbar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
         return toolbar;
     }
@@ -118,6 +121,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         scopeTypeFilter.setItems(scopeTypeList);
         scopeTypeFilter.setPlaceholder("範圍類型...");
         scopeTypeFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        scopeTypeFilter.setMaxWidth("8em");
         scopeTypeFilter.setItemLabelGenerator(Option::getName);
         scopeTypeFilter.setClearButtonVisible(true);
         activeFilter.setItems(0, 1); // 選項是 0 和 1
@@ -125,6 +129,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         activeFilter.setClearButtonVisible(true);
         activeFilter.setPlaceholder("狀態...");
         activeFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        activeFilter.setMaxWidth("8em");
         scopeTypeFilter.addValueChangeListener(event -> applyFilter());
         activeFilter.addValueChangeListener(event -> applyFilter());
     }
@@ -137,6 +142,11 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         if (!activeFilter.isEmpty()) {
             dataProvider.addFilter(afcfg -> afcfg.getScopeType() != null && afcfg.getActive().equals(activeFilter.getValue()));
         }
+    }
+
+    private void resetFilters() {
+        scopeTypeFilter.clear();
+        activeFilter.clear();
     }
 
     private void configureGrid() {
@@ -285,6 +295,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
     }
 
     private void closeEditor() {
+        grid.asSingleSelect().clear();
         dialog.close();
     }
 }

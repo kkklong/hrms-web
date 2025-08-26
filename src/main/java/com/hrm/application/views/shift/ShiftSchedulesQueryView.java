@@ -398,6 +398,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 String shiftTypeName = Optional.ofNullable(shiftTypeMap.get(shiftType))
                         .map(ShiftType::getShiftName)
                         .orElse("未知班別");
+                String remark = getRemarkForDate(schedulesDateMap, date);
                 String backgroundColor = getShiftColorCodeForDate(schedulesDateMap, date);
                 String fontColor = ToolUtil.getTextColorForHexBackground(backgroundColor);
                 Byte status = getShiftStatusForDate(schedulesDateMap, date);
@@ -412,7 +413,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                     text = shiftType == null || shiftType.equals("NA") ? "NA" : (shiftType.contains("HOLIDAY") ? "假" : "班");
                 }
 
-                return setupCellDiv(text, backgroundColor, fontColor, shiftTypeName);
+                return setupCellDiv(text, backgroundColor, fontColor, shiftTypeName, remark);
             })).setFooter(setEmployeeFooterText(
                     String.valueOf(timeSlotCountMap.getOrDefault("morning", 0L)),
                     String.valueOf(timeSlotCountMap.getOrDefault("afternoon", 0L)),
@@ -432,18 +433,36 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         grid.getStyle().set("--vaadin-grid-cell-padding", "0px");
     }
 
-    private Div setupCellDiv(String text, String backgroundColor, String fontColor, String toolTip) {
+    private Div setupCellDiv(String text, String backgroundColor, String fontColor, String toolTip, String remark) {
         Div cellDiv = new Div();
         cellDiv.setText(text); // 設定文本內容
         cellDiv.getStyle().set("background-color", backgroundColor == null ? "#FFFFFF" : backgroundColor); // 默認為白色
         cellDiv.getStyle().set("color", fontColor == null ? "#000000" : fontColor); // 默認為黑色
         cellDiv.getStyle().set("padding", "5px"); // 添加一些內距
-        cellDiv.getElement().setProperty("title", toolTip == null ? "" : toolTip); // toolTip 默認為空
+        cellDiv.getElement().setProperty("title", toolTip == null ? "" + "\n" + remark : toolTip + "\n" + remark); // toolTip 默認為空
+
+        if (!remark.isEmpty()) {
+            // 建立右上角的小紅色三角形
+            Div marker = new Div();
+            marker.getStyle()
+                    .set("width", "0")
+                    .set("height", "0")
+                    .set("border-bottom", "8px solid transparent")
+                    .set("border-right", "8px solid red")
+                    .set("position", "absolute")
+                    .set("top", "0")
+                    .set("right", "0");
+            cellDiv.add(marker);
+        }
         return cellDiv;
     }
 
     private String getShiftTypeForDate(Map<LocalDate, ShiftSchedulesDateTimeQueryVO> schedulesDateMap, LocalDate date) {
         return schedulesDateMap.get(date) != null ? Optional.ofNullable(schedulesDateMap.get(date).getShiftTypes()).orElse("NA") : "NA";
+    }
+
+    private String getRemarkForDate(Map<LocalDate, ShiftSchedulesDateTimeQueryVO> schedulesDateMap, LocalDate date) {
+        return schedulesDateMap.get(date) != null ? Optional.ofNullable(schedulesDateMap.get(date).getRemark()).orElse("") : "";
     }
 
     private String getShiftColorCodeForDate(Map<LocalDate, ShiftSchedulesDateTimeQueryVO> schedulesDateMap, LocalDate date) {

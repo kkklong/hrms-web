@@ -10,6 +10,7 @@ import com.hrm.application.enums.ApprovalScopeType;
 import com.hrm.application.model.Option;
 import com.hrm.application.service.ApprovalFlowConfigService;
 import com.hrm.application.util.ToolUtil;
+import com.hrm.application.views.shift.ShiftSchedulesQueryDialog;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
@@ -433,6 +434,7 @@ public class ApprovalFlowConfigDialog extends Dialog {
             confirmDialog.close();
         });
         close.addClickListener(event -> fireEvent(new CloseEvent(this)));
+        addDialogCloseActionListener(event -> fireEvent(new CloseEvent(this)));
         binder.addStatusChangeListener(e -> save.setEnabled(binder.isValid()));
         return new HorizontalLayout(save, update, delete, close);
     }

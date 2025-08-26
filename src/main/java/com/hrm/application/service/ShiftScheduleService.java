@@ -143,7 +143,7 @@ public class ShiftScheduleService {
 
     // 手動調整排班
     public boolean manuallyAdjustShiftSchedules(List<ShiftSchedules> manualShiftSchedules){
-        String url = backEndDomain + API.UPDATE_PERSONAL_SHIFT_SCHEDULES.getPath();
+        String url = backEndDomain + API.UPDATE_OTHERS_SHIFT_SCHEDULES.getPath();
         ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
         };
 

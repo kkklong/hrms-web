@@ -79,8 +79,8 @@ public class MainLayout extends AbstractLayout {
     protected void createMenuEntries(SideNav nav) {
         addMenu(nav, HomePageView.class);
         addMenu(nav, FullCalendar.class);
-        addMenu(nav, ApprovalFlowConfigView.class);
-        addMenu(nav, TestView.class);
+//        addMenu(nav, ApprovalFlowConfigView.class);
+//        addMenu(nav, TestView.class);
 
 //        addMenu(nav, EmployeeView.class);
 //        addMenu(nav, DepartmentView.class);

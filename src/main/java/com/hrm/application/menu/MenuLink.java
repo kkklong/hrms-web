@@ -1,5 +1,6 @@
 package com.hrm.application.menu;
 
+import com.hrm.application.views.approvalFlowConfig.ApprovalFlowConfigView;
 import com.hrm.application.views.department.DepartmentView;
 import com.hrm.application.views.employee.EmployeeView;
 import com.hrm.application.views.notice.NoticeView;
@@ -42,6 +43,7 @@ public enum MenuLink {
 //    SHIFT("班別管理", "000311", ShiftTypeConfigView.class, VaadinIcon.MOON),
 //    OVERTIME_APPLY("個人加班", "000313", OvertimeView.class, VaadinIcon.USER_CLOCK),
 //    OVERTIME_APPROVE("審核加班", "000314", OvertimeApprovalView.class, VaadinIcon.TIME_FORWARD),
+    APPROVAL_FLOW_CONFIG("審核流程", "000315", ApprovalFlowConfigView.class, VaadinIcon.ARROWS_LONG_RIGHT),
 
     REPORT_MANAGE("報表管理", "0004", null, VaadinIcon.NEWSPAPER),
     //    EMPLOYEE_CARD_REPORT("員工名卡", "000401", EmployeeCardView.class, VaadinIcon.USER_CARD),
