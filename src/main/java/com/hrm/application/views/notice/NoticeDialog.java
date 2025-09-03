@@ -13,6 +13,7 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -27,6 +28,7 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,13 +87,19 @@ public class NoticeDialog extends Dialog {
     }
 
     private void setComponentSize() {
-        type.setWidth("20em");
-        title.setWidth("20em");
-        content.setWidthFull();
+//        type.setWidth("20em");
+//        title.setWidth("20em");
+//        content.setWidthFull();
         content.setMinHeight("40em");
-        publishDate.setWidth("20em");
-        endDate.setWidth("20em");
-        fileForm.setWidth("40em");
+//        publishDate.setWidth("20em");
+//        endDate.setWidth("20em");
+//        fileForm.setWidth("40em");
+        List<HasSize> fields = Arrays.asList(
+                type, title, content, publishDate, endDate, fileForm
+        );
+        fields.forEach(field -> {
+            field.setWidthFull();
+        });
     }
 
     private void getContent() {
@@ -133,9 +141,15 @@ public class NoticeDialog extends Dialog {
     private VerticalLayout configureForm() {
         publishDate.setStep(Duration.ofMinutes(30));
         endDate.setStep(Duration.ofMinutes(30));
+        FormLayout form = new FormLayout();
+        form.add(title, type, publishDate, endDate);
+        form.setResponsiveSteps(
+                new FormLayout.ResponsiveStep("0", 1),
+                new FormLayout.ResponsiveStep("30em", 2)
+        );
+        form.setWidth("50em");
         return new VerticalLayout(
-                new HorizontalLayout(title, type),
-                new HorizontalLayout(publishDate, endDate),
+                form,
                 content
         );
     }

@@ -8,8 +8,8 @@ import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.model.Option;
 import com.hrm.application.service.ApprovalFlowConfigService;
+import com.hrm.application.util.NotificationUtil;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -30,6 +30,7 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Scope("prototype")
-@Route(value = "approvalflowconfig", layout = MainLayout.class)
+@Route(value = "approvalFlowConfig", layout = MainLayout.class)
 @MenuRouter(label = "ApprovalFlowConfig", icon = VaadinIcon.COG)
 @PageTitle("審核流程設定 | 人力資源管理系統")
 public class ApprovalFlowConfigView extends VerticalLayout {
@@ -48,7 +49,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
     private ApprovalFlowConfigDialog dialog;
     @Resource
     ObjectMapper objectMapper;
-    private static final String ARROW = " \u2192 ";
+    private static final String ARROW = " → ";
 
 
     private final ComboBox<Option<String>> scopeTypeFilter = new ComboBox<>();
@@ -71,9 +72,10 @@ public class ApprovalFlowConfigView extends VerticalLayout {
 
     public ApprovalFlowConfigView(ApprovalFlowConfigService service) {
         this.service = service;
+        dataProvider = new ListDataProvider<>(new ArrayList<>());
         setData();
-        updateList();
         configureGrid();
+        updateList();
         configureDialog();
         add(titleConfigure(), getToolbar(), getContent());
         setSizeFull();
@@ -137,7 +139,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
     private void applyFilter() {
         dataProvider.clearFilters();
         if (!scopeTypeFilter.isEmpty()) {
-            dataProvider.addFilter(afcfg -> afcfg.getScopeType() != null && afcfg.getScopeType().toLowerCase().contains(scopeTypeFilter.getValue().getValue().toLowerCase()));
+            dataProvider.addFilter(afcfg -> afcfg.getScopeType() != null && afcfg.getScopeType().equals(scopeTypeFilter.getValue().getValue()));
         }
         if (!activeFilter.isEmpty()) {
             dataProvider.addFilter(afcfg -> afcfg.getScopeType() != null && afcfg.getActive().equals(activeFilter.getValue()));
@@ -173,6 +175,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
                 box.add(new Div(new Text(intervalName + ": " + reviewersStr)));
             });
         } catch (Exception e) {
+            NotificationUtil.error("轉換流程Data異常");
             box.add(new Text(cfg.getFlowJson()));
         }
         return box;
@@ -218,7 +221,10 @@ public class ApprovalFlowConfigView extends VerticalLayout {
     private void updateList() {
         String selectedScopeType = scopeTypeFilter.getValue() != null
                 ? scopeTypeFilter.getValue().getValue() : null;
-        dataProvider = new ListDataProvider<>(service.queryApprovalFlowConfigs(selectedScopeType, activeFilter.getValue()));
+//        dataProvider = new ListDataProvider<>(service.queryApprovalFlowConfigs(selectedScopeType, activeFilter.getValue()));
+        dataProvider.getItems().clear();
+        dataProvider.getItems().addAll(service.queryApprovalFlowConfigs(selectedScopeType, activeFilter.getValue()));
+        dataProvider.refreshAll();
         grid.setItems(dataProvider);
     }
 
@@ -280,7 +286,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         grid.asSingleSelect().clear();
         dialog.resetScopeInputs();
         dialog.setNewApprovalFlowDialog(new ApprovalFlowConfig());
-        dialog.setDialogView(true);
+        dialog.setDialogView(true, false);
         dialog.open();
     }
 
@@ -289,7 +295,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
             closeEditor();
         } else {
             dialog.setApprovalFlowDialog(afcfg);
-            dialog.setDialogView(false);
+            dialog.setDialogView(false, afcfg.getScopeType().equals(ApprovalScopeType.GLOBAL.value()));
             dialog.open();
         }
     }

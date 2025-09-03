@@ -49,6 +49,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.context.annotation.Scope;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -385,8 +386,18 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                                 .orElse("未知員工"))
                 .setHeader("員工\\日期").setKey("nickName").setFrozen(true).setFooter(
                         setEmployeeFooterText("日班", "午班", "夜班", "休假"));
+        grid.addColumn(shiftSchedulesVO ->
+                        countWeekendShiftTimes(shiftSchedulesVO, selectedDate))
+                .setHeader("週末班")
+                .setKey("weekendCount")
+                .setFrozen(true)
+                .setTextAlign(ColumnTextAlign.CENTER);
 
-        List<String> headerArrayList = Arrays.asList("部門", "員工");
+        Span weekendHeader = new Span("週末");
+        weekendHeader.getStyle().set("color", "#2828FF");
+        grid.getColumnByKey("weekendCount").setHeader(weekendHeader);
+
+        List<String> headerArrayList = Arrays.asList("部門", "員工", "週末班");
         // 為每一天創建
         for (int i = 0; i < selectDays; i++) {
             LocalDate date = startDate.plusDays(i);
@@ -500,7 +511,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         int weekOfYear = date.get(WeekFields.ISO.weekOfWeekBasedYear());
         weekHeader.getCell(grid.getColumns().get(index)).setText("W" + weekOfYear);
         monthHeader.getCell(grid.getColumns().get(1)).setText("月份");
+        monthHeader.getCell(grid.getColumns().get(2)).setText("總數");
+
         dayOfWeekHeader.getCell(grid.getColumns().get(1)).setText("星期");
+        dayOfWeekHeader.getCell(grid.getColumns().get(2)).setText("值班");
         weekHeader.getCell(grid.getColumns().get(1)).setText("週數");
     }
 
@@ -511,6 +525,22 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 .map(ShiftSchedulePeriodHoliday::getShiftTypes)
                 .findFirst()
                 .orElse(null);
+    }
+
+    private int countWeekendShiftTimes(ShiftSchedulesQueryVO vo, LocalDate month) {
+        return (int) vo.getSchedulesDates().stream()
+//                .filter(sd -> sd.getShiftDate().getYear() == month.getYear()
+//                        && sd.getShiftDate().getMonthValue() == month.getMonthValue())
+                .filter(sd -> {
+                    DayOfWeek dow = sd.getShiftDate().getDayOfWeek();
+                    return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
+                })
+                .filter(sd -> sd.getStatus() == 0)                         // 非請假
+                .filter(sd -> {
+                    String t = sd.getShiftTypes();
+                    return t != null && t.contains("SHIFT_TYPE");          // 排除假日/NA，只算上班班別
+                })
+                .count();
     }
 
     private int getPeriodIndexForDate(LocalDate date, List<ShiftSchedulePeriod> periods) {

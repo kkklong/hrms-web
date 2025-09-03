@@ -15,5 +15,6 @@ public class HomePageView extends VerticalLayout {
 
     public HomePageView() {
         this.addClassName("background-plan");
+        setSizeFull();
     }
 }

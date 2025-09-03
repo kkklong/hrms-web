@@ -9,6 +9,7 @@ import com.hrm.application.entity.ApprovalFlowConfig;
 import com.hrm.application.enums.ApprovalScopeType;
 import com.hrm.application.model.Option;
 import com.hrm.application.service.ApprovalFlowConfigService;
+import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.ToolUtil;
 import com.hrm.application.views.shift.ShiftSchedulesQueryDialog;
 import com.vaadin.flow.component.Component;
@@ -29,6 +30,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.shared.Registration;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
@@ -68,8 +70,6 @@ public class ApprovalFlowConfigDialog extends Dialog {
     private Button delete = new Button("刪除");
     private Button close = new Button("關閉");
 
-    //    @Resource
-//    ObjectMapper objectMapper;
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final VerticalLayout flowLayout = new VerticalLayout();
     private ConfirmDialog confirmDialog;
@@ -140,21 +140,19 @@ public class ApprovalFlowConfigDialog extends Dialog {
         scopeType.setItemLabelGenerator(Option::getName);
         scopeType.setPlaceholder("請選擇");
         scopeType.addValueChangeListener(e -> {
-            resetScopeInputs();
+            resetScopeInputs(); // 全reset的話, 切換員工/部門會要重拉
             applyScopeTypeRules(e.getValue() != null ? e.getValue().getValue() : null);
         });
         // 公司
         companySelect.setItems(companyOpts);
         companySelect.setItemLabelGenerator(Option::getName);
         companySelect.addValueChangeListener(e -> {
-            scopeValue.setValue(e.getValue() != null ? e.getValue().getValue() : "");
         });
         // 部門
         departmentSelect.setItems(departmentOpts);
         departmentSelect.setItemLabelGenerator(Option::getName);
         departmentSelect.addValueChangeListener(e -> {
             if (e.getValue() != null) {
-                scopeValue.setValue(String.valueOf(e.getValue().getValue()));
                 // 若為 EMPLOYEE：依部門載入員工
                 if (scopeType.getValue().getValue().equals(ApprovalScopeType.EMPLOYEE.value())) {
                     Integer deptId = e.getValue().getValue();
@@ -171,9 +169,6 @@ public class ApprovalFlowConfigDialog extends Dialog {
         // 員工
         employeeSelect.setItems(employeeOpts);
         employeeSelect.setItemLabelGenerator(Option::getName);
-        employeeSelect.addValueChangeListener(e -> {
-            if (e.getValue() != null) scopeValue.setValue(String.valueOf(e.getValue().getValue()));
-        });
         // 其他
         setComponentSize();
     }
@@ -191,18 +186,27 @@ public class ApprovalFlowConfigDialog extends Dialog {
         if (value == null) {
             return;
         }
-        if (value.equals(ApprovalScopeType.COMPANY.value())) {
+        if (value.equals(ApprovalScopeType.GLOBAL.value())) {
+            scopeValue.setVisible(true);
+        }
+        else if (value.equals(ApprovalScopeType.COMPANY.value())) {
             companySelect.setVisible(true);
             companySelect.focus();
         } else if (value.equals(ApprovalScopeType.DEPARTMENT.value())) {
             departmentSelect.setVisible(true);
             departmentSelect.focus();
         } else if (value.equals(ApprovalScopeType.EMPLOYEE.value())) {
-            departmentSelect.setVisible(true);
-            employeeSelect.clear();
-            employeeSelect.setItems(List.of());
-            employeeSelect.setVisible(false);
-            departmentSelect.focus();
+            if(departmentSelect.getValue() != null) {
+                departmentSelect.setVisible(true);
+                employeeSelect.setVisible(true);
+                employeeSelect.focus();
+            } else {
+                departmentSelect.setVisible(true);
+                employeeSelect.clear();
+                employeeSelect.setItems(List.of());
+                employeeSelect.setVisible(false);
+                departmentSelect.focus();
+            }
         }
     }
 
@@ -244,11 +248,9 @@ public class ApprovalFlowConfigDialog extends Dialog {
         ApprovalScopeType type = ApprovalScopeType.fromValue(bean.getScopeType());
         switch (type) {
             case COMPANY -> {
-                companySelect.setVisible(true);
                 companySelect.setValue(companyOptMap.get(bean.getScopeValue()));
             }
             case DEPARTMENT -> {
-                departmentSelect.setVisible(true);
                 Integer deptId = Integer.valueOf(bean.getScopeValue());
                 departmentSelect.setValue(departmentOptMap.get(deptId));
             }
@@ -256,12 +258,9 @@ public class ApprovalFlowConfigDialog extends Dialog {
                 Integer empId = Integer.valueOf((bean.getScopeValue()));
                 departmentSelect.setVisible(true);
                 departmentSelect.setValue(departmentOptMap.get(empToDept.get(empId)));
-                employeeSelect.setVisible(true);
                 employeeSelect.setValue(employeeOptMap.get(empId));
             }
             case GLOBAL -> {
-                scopeValue.setVisible(true);
-                scopeValue.setReadOnly(true);
                 scopeValue.setValue("*");
             }
         }
@@ -277,9 +276,10 @@ public class ApprovalFlowConfigDialog extends Dialog {
         } else {
             Map<String, List<String>> flowMap;
             try {
-                flowMap = objectMapper.readValue(bean.getFlowJson(), new TypeReference<>() {
+                flowMap = objectMapper.readValue(bean.getFlowJson(), new TypeReference<Map<String, List<String>>>() {
                 });
             } catch (JsonProcessingException e) {
+                NotificationUtil.error("轉換流程Data異常");
                 throw new RuntimeException(e);
             }
 
@@ -314,27 +314,37 @@ public class ApprovalFlowConfigDialog extends Dialog {
     private void validateAndSave() {
         if (binder.isValid()) {
             ApprovalFlowConfig bean = binder.getBean();
-            setSelectorDataToScopeValue(bean);
-            bean.setScopeValue(scopeValue.getValue());
-            bean.setFlowJson(setFlowGridToFlowJson());
-            fireEvent(new SaveEvent(this, bean));
+            Boolean isValidScope = setSelectorDataToScopeValue();
+            String flowData = setFlowGridToFlowJson();
+            if(isValidScope && flowData != null) {
+                bean.setScopeValue(scopeValue.getValue());
+                bean.setFlowJson(flowData);
+                fireEvent(new SaveEvent(this, bean));
+            } else {
+                NotificationUtil.error("資料異常");
+            }
         }
     }
 
     private void validateAndUpdate() {
         if (binder.isValid()) {
             ApprovalFlowConfig bean = binder.getBean();
-            bean.setFlowJson(setFlowGridToFlowJson());
-            fireEvent(new UpdateEvent(this, bean));
+            String flowData = setFlowGridToFlowJson();
+            if(flowData != null) {
+                bean.setFlowJson(setFlowGridToFlowJson());
+                fireEvent(new UpdateEvent(this, bean));
+            } else {
+                NotificationUtil.error("資料異常");
+            }
         }
     }
 
-    public void setSelectorDataToScopeValue(ApprovalFlowConfig bean) {
+    public Boolean setSelectorDataToScopeValue() {
         Option<String> st = scopeType.getValue();
         if (st == null) {
             scopeType.setInvalid(true);
             scopeType.setErrorMessage("請選擇範圍類型");
-            return;
+            return false;
         }
         ApprovalScopeType type = ApprovalScopeType.fromValue(st.getValue());
 
@@ -342,32 +352,42 @@ public class ApprovalFlowConfigDialog extends Dialog {
             case COMPANY -> {
                 if (companySelect.isEmpty()) {
                     companySelect.setInvalid(true);
-                    return;
+                    companySelect.setErrorMessage("請選擇公司");
+                    return false;
                 }
                 scopeValue.setValue(companySelect.getValue().getValue());
+                return true;
             }
             case DEPARTMENT -> {
                 if (departmentSelect.isEmpty()) {
                     departmentSelect.setInvalid(true);
-                    return;
+                    departmentSelect.setErrorMessage("請選擇部門");
+                    return false;
                 }
                 scopeValue.setValue(String.valueOf(departmentSelect.getValue().getValue()));
-
+                return true;
             }
             case EMPLOYEE -> {
                 if (departmentSelect.isEmpty()) {
                     departmentSelect.setInvalid(true);
-                    return;
+                    departmentSelect.setErrorMessage("請選擇部門");
+                    return false;
                 }
                 if (employeeSelect.isEmpty()) {
                     employeeSelect.setInvalid(true);
-                    return;
+                    employeeSelect.setErrorMessage("請選擇員工");
+                    return false;
                 }
                 scopeValue.setValue(String.valueOf(employeeSelect.getValue().getValue()));
-
+                return true;
             }
             case GLOBAL -> {
-                return;
+                scopeValue.setValue("*");
+                return true;
+            }
+            default -> {
+                scopeType.setErrorMessage("範圍類型異常");
+                return false;
             }
         }
     }
@@ -389,7 +409,8 @@ public class ApprovalFlowConfigDialog extends Dialog {
         try {
             return objectMapper.writeValueAsString(flowMap);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to convert flowMap to JSON", e);
+            NotificationUtil.error("轉換流程Data異常");
+            return null;
         }
     }
 
@@ -405,10 +426,10 @@ public class ApprovalFlowConfigDialog extends Dialog {
         employeeSelect.clear();
     }
 
-    public void setDialogView(Boolean isCreate) {
+    public void setDialogView(Boolean isCreate, Boolean isGlobal) {
         save.setVisible(isCreate);
         update.setVisible(!isCreate);
-        delete.setVisible(!isCreate);
+        delete.setVisible(!isCreate && !isGlobal);
 
         companySelect.setReadOnly(!isCreate);
         departmentSelect.setReadOnly(!isCreate);

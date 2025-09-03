@@ -36,7 +36,7 @@ public class RoleView extends VerticalLayout {
         configureDialog();
 
         add(titleConfigure(), getToolbar(), getContent());
-
+        this.addClassName("background-plan");
         updateList();
         closeEditor();
     }
@@ -53,6 +53,7 @@ public class RoleView extends VerticalLayout {
 
     private HorizontalLayout getToolbar() {
         filterText.setPlaceholder("搜尋...");
+        filterText.getStyle().set("--vaadin-input-field-border-width", "1px");
         filterText.setClearButtonVisible(true);
         filterText.setValueChangeMode(ValueChangeMode.LAZY);
         filterText.addValueChangeListener(e -> applyFilter());

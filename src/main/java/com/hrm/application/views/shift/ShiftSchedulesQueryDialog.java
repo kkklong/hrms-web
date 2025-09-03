@@ -47,6 +47,8 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         this.shiftTypeList = shiftTypeList;
         this.shiftTypeMap = shiftTypeMap;
         this.shiftSchedules = shiftSchedules;
+        setDraggable(true);
+        setResizable(true);
         setBinder();
         add(createSelectionLayout(shiftSchedules));
         addClassName("background-plan");

@@ -13,6 +13,8 @@ import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.approvalFlowConfig.ApprovalFlowConfigView;
 import com.hrm.application.views.calendar.FullCalendar;
+import com.hrm.application.views.leave.leaveTemplate.LeaveTemplateView;
+import com.hrm.application.views.leave.leaveType.LeaveTypeView;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
@@ -78,18 +80,18 @@ public class MainLayout extends AbstractLayout {
     @Override
     protected void createMenuEntries(SideNav nav) {
         addMenu(nav, HomePageView.class);
-        addMenu(nav, FullCalendar.class);
+        SideNavItem leaveTypeLink = new SideNavItem("假別資料");
+        leaveTypeLink.setPrefixComponent(VaadinIcon.COG_O.create());
+        leaveTypeLink.addItem(createMenuItem(LeaveTemplateView.class));
+        leaveTypeLink.addItem(createMenuItem(LeaveTypeView.class));
+        nav.addItem(leaveTypeLink);
+
 //        addMenu(nav, ApprovalFlowConfigView.class);
 //        addMenu(nav, TestView.class);
 
-//        addMenu(nav, EmployeeView.class);
-//        addMenu(nav, DepartmentView.class);
-//        addMenu(nav, ShiftSchedulesQueryView.class);
-//        addMenu(nav, NoticeView.class);
     }
 
-    @Override
-    protected void addMenu(SideNav navigation, Class<? extends Component> clazz) {
+    protected SideNavItem createMenuItem(Class<? extends Component> clazz) {
         MenuRouter item = clazz.getAnnotation(MenuRouter.class);
 
         String caption = item != null
@@ -100,10 +102,17 @@ public class MainLayout extends AbstractLayout {
                 ? item.icon().create()
                 : VaadinIcon.COG_O.create();
 
-        SideNavItem sideNavItem = (iconComponent != null)
+        return  (iconComponent != null)
                 ? new SideNavItem(caption, clazz, iconComponent)
                 : new SideNavItem(caption, clazz);
+    }
 
+    @Override
+    protected void addMenu(SideNav navigation, Class<? extends Component> clazz) {
+        MenuRouter item = clazz.getAnnotation(MenuRouter.class);
+        String caption = item != null ? item.label() : String.join(" ", StringUtils.splitByCharacterTypeCamelCase(clazz.getSimpleName()));
+        Component iconComponent = item != null ? item.icon().create() : VaadinIcon.COG_O.create();
+        SideNavItem sideNavItem = (iconComponent != null) ? new SideNavItem(caption, clazz, iconComponent) : new SideNavItem(caption, clazz);
         navigation.addItem(sideNavItem);
     }
 
