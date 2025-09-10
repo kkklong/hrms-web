@@ -1,17 +1,14 @@
 package com.hrm.application.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hrm.application.entity.ApiResponse;
-import com.hrm.application.entity.UserInfo;
-import com.hrm.application.service.AccountService;
 import com.vaadin.flow.component.UI;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -103,7 +100,9 @@ public class BEClientUtil {
         if (mediaType.equals(MediaType.APPLICATION_JSON) && jsonBody != null) {
             requestSpec.bodyValue(jsonBody);
         } else if (mediaType.equals(MediaType.APPLICATION_FORM_URLENCODED) && formBody != null) {
-            requestSpec.bodyValue(formBody);
+            MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+            formBody.forEach((key, value) -> formData.add(key, value.toString()));
+            requestSpec.body(BodyInserters.fromFormData(formData));
         }
         T response = null;
         try {

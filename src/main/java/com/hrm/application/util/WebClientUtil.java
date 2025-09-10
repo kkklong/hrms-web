@@ -7,7 +7,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -15,13 +19,9 @@ import java.net.URI;
 import java.util.Map;
 
 @Slf4j
-public class WebClientUtil {
-
+@Component public class WebClientUtil {
     private final WebClient webClient;
-
-    public WebClientUtil(WebClient webClient) {
-        this.webClient = webClient;
-    }
+    public WebClientUtil(WebClient.Builder builder) { this.webClient = builder.build(); }
 
     // JSON 請求
     public <T> T doPostJson(String url, Map<String, Object> headers, Map<String, Object> pathValues, Object jsonBody, ParameterizedTypeReference<T> responseType) {
@@ -72,7 +72,9 @@ public class WebClientUtil {
         if (mediaType.equals(MediaType.APPLICATION_JSON) && jsonBody != null) {
             requestSpec.bodyValue(jsonBody);
         } else if (mediaType.equals(MediaType.APPLICATION_FORM_URLENCODED) && formBody != null) {
-            requestSpec.bodyValue(formBody);
+            MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
+            formBody.forEach((key, value) -> formData.add(key, value.toString()));
+            requestSpec.body(BodyInserters.fromFormData(formData));
         }
 
         T response = null;

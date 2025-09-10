@@ -183,7 +183,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         managerToolMenu.getStyle().set("border-radius", "var(--lumo-border-radius-s");
 
         HorizontalLayout detailHt = new HorizontalLayout();
-        MenuItem toolDetailItem = managerToolMenu.addItem("管理者工具");
+        MenuItem toolDetailItem = managerToolMenu.addItem("管理工具");
         Button importShiftSchedules = new Button("載入預設班表");
         Button exportShiftSchedules = new Button("導出班表");
         detailHt.add(importShiftSchedules, exportShiftSchedules);
@@ -211,8 +211,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     private HorizontalLayout configureDateSelector() {
 
         yearPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        yearPicker.getStyle().set("--vaadin-combo-box-overlay-width", "6em");
         yearPicker.setWidth("6em");
         monthPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        monthPicker.getStyle().set("--vaadin-combo-box-overlay-width", "6em");
         monthPicker.setItemLabelGenerator(value -> value + "月");
         monthPicker.setWidth("5em");
         // 拼接的查詢日期顯示
@@ -284,7 +286,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         nickNameFilter.setWidth("6em");
         nickNameFilter.setClearButtonVisible(true);
         nickNameFilter.getElement().getStyle().set("font-size", "14px");
-        nickNameFilter.getStyle().set("--vaadin-combo-box-overlay-width", "8em");
+        nickNameFilter.getStyle().set("--vaadin-multi-select-combo-box-overlay-width", "8em");
         nickNameFilter.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         nickNameFilter.setItemLabelGenerator(Option::getName);
     }
@@ -387,7 +389,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 .setHeader("員工\\日期").setKey("nickName").setFrozen(true).setFooter(
                         setEmployeeFooterText("日班", "午班", "夜班", "休假"));
         grid.addColumn(shiftSchedulesVO ->
-                        countWeekendShiftTimes(shiftSchedulesVO, selectedDate))
+                        countHolidayWorkTimes(shiftSchedulesVO, selectedDate))
                 .setHeader("週末班")
                 .setKey("weekendCount")
                 .setFrozen(true)
@@ -515,7 +517,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
 
         dayOfWeekHeader.getCell(grid.getColumns().get(1)).setText("星期");
         dayOfWeekHeader.getCell(grid.getColumns().get(2)).setText("值班");
+
         weekHeader.getCell(grid.getColumns().get(1)).setText("週數");
+        weekHeader.getCell(grid.getColumns().get(2)).setText(selectedDate.format(DateTimeFormatter.ofPattern("MM")) + "月");
+
     }
 
     private String getCalendarHolidayForDate(LocalDate date, List<ShiftSchedulePeriod> periods) {
@@ -527,20 +532,21 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                 .orElse(null);
     }
 
-    private int countWeekendShiftTimes(ShiftSchedulesQueryVO vo, LocalDate month) {
+    private int countHolidayWorkTimes(ShiftSchedulesQueryVO vo, LocalDate month) {
         return (int) vo.getSchedulesDates().stream()
-//                .filter(sd -> sd.getShiftDate().getYear() == month.getYear()
-//                        && sd.getShiftDate().getMonthValue() == month.getMonthValue())
-                .filter(sd -> {
-                    DayOfWeek dow = sd.getShiftDate().getDayOfWeek();
-                    return dow == DayOfWeek.SATURDAY || dow == DayOfWeek.SUNDAY;
-                })
-                .filter(sd -> sd.getStatus() == 0)                         // 非請假
+                .filter(sd -> sd.getShiftDate().getYear() == month.getYear()
+                        && sd.getShiftDate().getMonthValue() == month.getMonthValue())
+                .filter(sd -> isHoliday(sd.getShiftDate()))
+                .filter(sd -> sd.getStatus() == 0)
                 .filter(sd -> {
                     String t = sd.getShiftTypes();
-                    return t != null && t.contains("SHIFT_TYPE");          // 排除假日/NA，只算上班班別
+                    return t != null && t.contains("SHIFT_TYPE");
                 })
                 .count();
+    }
+
+    private boolean isHoliday(LocalDate d) {
+        return getCalendarHolidayForDate(d, periods) != null;
     }
 
     private int getPeriodIndexForDate(LocalDate date, List<ShiftSchedulePeriod> periods) {

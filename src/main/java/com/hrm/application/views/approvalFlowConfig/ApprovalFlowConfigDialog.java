@@ -430,12 +430,14 @@ public class ApprovalFlowConfigDialog extends Dialog {
         save.setVisible(isCreate);
         update.setVisible(!isCreate);
         delete.setVisible(!isCreate && !isGlobal);
+        active.setReadOnly(isGlobal);
 
         companySelect.setReadOnly(!isCreate);
         departmentSelect.setReadOnly(!isCreate);
         employeeSelect.setReadOnly(!isCreate);
         scopeType.setReadOnly(!isCreate);
         scopeValue.setReadOnly(!isCreate);
+
     }
 
     private Component createButtonsLayout() {

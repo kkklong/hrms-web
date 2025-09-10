@@ -31,11 +31,10 @@ public class DepartmentService {
         ParameterizedTypeReference<ApiResponse<List<Department>>> responseType = new ParameterizedTypeReference<>() {
         };
         ApiResponse<List<Department>> response = client.doGet(url, null, null, responseType);
-        List<Department> result = new ArrayList<>();
         if (response != null) {
             return response.getData();
         }
-        return result;
+        return new ArrayList<>();
     }
 
     public List<Option<Integer>> getOptionList() {

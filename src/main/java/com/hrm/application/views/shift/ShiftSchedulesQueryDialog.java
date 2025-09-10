@@ -70,8 +70,9 @@ public class ShiftSchedulesQueryDialog extends Dialog {
         countDetail.setWidth("20em");
         countDetail.getStyle().set("font-weight", "bold");
         countDetail.getStyle().set("--vaadin-input-field-readonly-border", "none");
-        HorizontalLayout titleHt = new HorizontalLayout(new H3("員工: " + shiftSchedules.getNickName() + " 排班"), countDetail);
-        titleHt.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.BASELINE);
+//        HorizontalLayout titleHt = new HorizontalLayout(new H3("員工: " + shiftSchedules.getNickName() + " 排班"), countDetail);
+        FormLayout titleHt = new FormLayout(new H3("員工: " + shiftSchedules.getNickName() + " 排班"), countDetail);
+//        titleHt.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.BASELINE);
         mainLayout.add(titleHt);
         mainLayout.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.CENTER);
         mainLayout.addClassName("background-plan");
@@ -245,7 +246,7 @@ public class ShiftSchedulesQueryDialog extends Dialog {
             setRemarkStyles(remarkField, shiftSchedulesDateTime.getShiftTypes());
             remarkField.setLabel(shiftSchedulesDateTime.getActionType() == 0
                     ? date.format(dateFormatter)
-                    : date.format(dateFormatter) + " [R]");
+                    : date.format(dateFormatter) + " [L]");
             contentLayout.add(remarkField);
             remarkFieldsMap.put(date, remarkField); // 更新後的remark存進全域變數裡
             itemCount++;

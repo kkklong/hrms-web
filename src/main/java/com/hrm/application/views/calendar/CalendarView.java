@@ -1,4 +1,7 @@
 package com.hrm.application.views.calendar;
 
-public class CalendarView {
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+
+public class CalendarView extends VerticalLayout {
+
 }

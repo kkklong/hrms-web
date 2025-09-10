@@ -1,6 +1,8 @@
 package com.hrm.application.layout;
 
+import com.hrm.application.demo.TestLotteryView;
 import com.hrm.application.demo.TestView;
+import com.hrm.application.demo.sport.SportView;
 import com.hrm.application.entity.Menu;
 import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
@@ -13,6 +15,7 @@ import com.hrm.application.views.HomePageView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.approvalFlowConfig.ApprovalFlowConfigView;
 import com.hrm.application.views.calendar.FullCalendar;
+import com.hrm.application.views.leave.leaveHour.PersonalLeaveSpecialRecordView;
 import com.hrm.application.views.leave.leaveTemplate.LeaveTemplateView;
 import com.hrm.application.views.leave.leaveType.LeaveTypeView;
 import com.vaadin.flow.component.AttachEvent;
@@ -84,7 +87,13 @@ public class MainLayout extends AbstractLayout {
         leaveTypeLink.setPrefixComponent(VaadinIcon.COG_O.create());
         leaveTypeLink.addItem(createMenuItem(LeaveTemplateView.class));
         leaveTypeLink.addItem(createMenuItem(LeaveTypeView.class));
-        nav.addItem(leaveTypeLink);
+        leaveTypeLink.addItem(createMenuItem(PersonalLeaveSpecialRecordView.class));
+
+        SideNavItem TestLink = new SideNavItem("測試畫面");
+        TestLink.setPrefixComponent(VaadinIcon.COG_O.create());
+//        TestLink.addItem(createMenuItem(TestLotteryView.class));
+        TestLink.addItem(createMenuItem(SportView.class));
+        nav.addItem(leaveTypeLink, TestLink);
 
 //        addMenu(nav, ApprovalFlowConfigView.class);
 //        addMenu(nav, TestView.class);
