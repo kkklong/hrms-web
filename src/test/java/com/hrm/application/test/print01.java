@@ -20,5 +20,11 @@ public class print01 {
         System.out.println(ip);
     }
 
+    @Test
+    public void SportTest() throws IOException {
+        String ip = Jsoup.connect("https://api.ipify.org").ignoreContentType(true).execute().body();
+        System.out.println(ip);
+    }
+
 
 }

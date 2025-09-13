@@ -83,41 +83,66 @@ public class SportService {
 
     private static Map<String, Object> setHeader(String host) {
         Map<String, Object> headers = new HashMap<>();
-        headers.put("Accept", "*/*");
-        headers.put("Accept-encoding", "gzip, deflate, br, zstd");
-        headers.put("Accept-language", "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6");
-        headers.put("Connection", "keep-alive");
-        headers.put("content-length", "212");
-        headers.put("User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36");
-        headers.put("Content-type", "application/x-www-form-urlencoded");
-        headers.put("Cookie", "LPVID=a3lORE01T0dWak1UYzJZakUxTkROaA==; protocolstr=aHR0cHM=; test=aW5pdA; box4pwd_notshow_38922868=Mzg5MjI4NjhfTg==; CookieChk=WQ; iorChgSw=WQ==; myGameVer_38922868=XzIxMTIyOA==; ft_myGame_38922868=e30=; bk_myGame_38922868=e30=; login_38922868=MTc1NzU0NTcyMA; cu=Tg==; cuipv6=Tg==; ipv6=Tg==");
-        headers.put("Host", host);
-        headers.put("Origin", MEMBER_HOST);
-        headers.put("sec-ch-ua", "Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"");
-        headers.put("sec-ch-ua-mobile", "?0");
-        headers.put("sec-ch-ua-platform", "Windows");
-        headers.put("Sec-Fetch-Dest", "empty");
-        headers.put("Sec-Fetch-Mode", "cors");
-        headers.put("Sec-Fetch-Site", "same-origin");
+//        headers.put("Accept", "*/*");
+//        headers.put("Accept-encoding", "gzip, deflate, br, zstd");
+//        headers.put("Accept-language", "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6");
+//        headers.put("Connection", "keep-alive");
+//        headers.put("content-length", "132");
+//        headers.put("User-Agent",
+//                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36");
+//        headers.put("Content-type", "application/x-www-form-urlencoded");
+//        headers.put("Cookie", "test=aW5pdA; myGameVer_38922868=XzIxMTIyOA==; login_38922868=MTc1Nzc4MDM3NQ; cu=Tg==; cuipv6=Tg==; ipv6=Tg==; iorChgSw=WQ==; protocolstr=aHR0cHM=; CookieChk=WQ; box4pwd_notshow_38922868=Mzg5MjI4NjhfTg==");
+//        headers.put("Host", host);
+//        headers.put("Origin", MEMBER_HOST);
+//        headers.put("sec-ch-ua", "Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"");
+////        headers.put("sec-ch-ua-mobile", "?0");
+////        headers.put("sec-ch-ua-platform", "Windows");
+//        headers.put("Sec-Fetch-Dest", "empty");
+//        headers.put("Sec-Fetch-Mode", "cors");
+//        headers.put("Sec-Fetch-Site", "same-origin");
+//        headers.put("Referer", MEMBER_HOST);
+        return headers;
+    }
+
+    private static Map<String, Object> setListFTHeader(String host) {
+        Map<String, Object> headers = new HashMap<>();
+//        headers.put("Accept", "*/*");
+//        headers.put("Accept-encoding", "gzip, deflate, br, zstd");
+//        headers.put("Accept-language", "zh-TW,zh;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6");
+//        headers.put("Connection", "keep-alive");
+//        headers.put("content-length", "213");
+//        headers.put("User-Agent",
+//                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36");
+//        headers.put("Content-type", "application/x-www-form-urlencoded");
+//        headers.put("Cookie", "myGameVer_38922868=XzIxMTIyOA==; test=aW5pdA; login_38922868=MTc1Nzc4MDQzNQ; cu=Tg==; cuipv6=Tg==; ipv6=Tg==; iorChgSw=WQ==; protocolstr=aHR0cHM=; CookieChk=WQ; box4pwd_notshow_38922868=Mzg5MjI4NjhfTg==");
+//        headers.put("Host", host);
+//        headers.put("Origin", MEMBER_HOST);
+//        headers.put("sec-ch-ua", "Chromium\";v=\"140\", \"Not=A?Brand\";v=\"24\", \"Google Chrome\";v=\"140\"");
+//        headers.put("sec-ch-ua-mobile", "?0");
+//        headers.put("sec-ch-ua-platform", "Windows");
+//        headers.put("Sec-Fetch-Dest", "empty");
+//        headers.put("Sec-Fetch-Mode", "cors");
+//        headers.put("Sec-Fetch-Site", "same-origin");
 //        headers.put("Referer", MEMBER_HOST);
         return headers;
     }
 
     private static Map<String, Object> setGameListParam() {
         Map<String, Object> param = new HashMap<>();
-        param.put("uid", "s0kp9fj9pm38922868l11403b0");
+        param.put("uid", "zqx76kse10m38922868l48030b0");
         param.put("ver", "2025-09-10-c1bug_115");
         param.put("langx", "zh-tw");
         param.put("p", "get_game_list");
-        param.put("p3type", "");
-        param.put("date", "");
+//        param.put("p3type", "");
+//        param.put("date", "");
         param.put("gtype", "ft");
-        param.put("ltype", "4");
-        param.put("filter", "");
+        param.put("showtype", "live");
+        param.put("rtype", "rb");
+        param.put("ltype", "1");
+//        param.put("filter", "");
         param.put("cupFantasy", "N");
-        param.put("sorttype", "L");
-        param.put("specialClick", "");
+        param.put("sorttype", "T");
+//        param.put("specialClick", "");
         param.put("isFantasy", "N");
         param.put("ts", String.valueOf(System.currentTimeMillis()));
         return param;

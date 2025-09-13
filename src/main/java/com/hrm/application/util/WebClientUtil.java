@@ -2,6 +2,7 @@ package com.hrm.application.util;
 
 import com.vaadin.flow.component.UI;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -21,7 +23,14 @@ import java.util.Map;
 @Slf4j
 @Component public class WebClientUtil {
     private final WebClient webClient;
-    public WebClientUtil(WebClient.Builder builder) { this.webClient = builder.build(); }
+    public WebClientUtil(WebClient.Builder builder) {
+        this.webClient = builder
+                .exchangeStrategies(ExchangeStrategies.builder()
+                        .codecs(configurer ->
+                                configurer.defaultCodecs().maxInMemorySize(10 * 1024 * 1024)) // 設定成 10MB
+                        .build())
+                .build();
+    }
 
     // JSON 請求
     public <T> T doPostJson(String url, Map<String, Object> headers, Map<String, Object> pathValues, Object jsonBody, ParameterizedTypeReference<T> responseType) {
