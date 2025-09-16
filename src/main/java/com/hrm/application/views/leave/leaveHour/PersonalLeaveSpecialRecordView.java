@@ -6,6 +6,7 @@ import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.model.Option;
 import com.hrm.application.service.LeaveTypeService;
+import com.hrm.application.util.DateUtil;
 import com.hrm.application.util.ToolUtil;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
+import static com.hrm.application.util.DateUtil.DatePattern.YYYY_MM_DD;
 
 @Scope("prototype")
 @Route(value = "PersonalLeaveSpecialRecordMenu", layout = MainLayout.class)
@@ -93,8 +96,10 @@ public class PersonalLeaveSpecialRecordView extends VerticalLayout {
         grid.addColumn(l -> l.getStartDate().getYear()).setHeader("年分").setKey("year");
         grid.addColumn(LeaveSpecialRecord::getChineseName).setHeader("假別").setKey("leaveTypes");
         grid.addColumn(l -> l.getMaxLeaveDays() + "天").setHeader("可請假天數").setTextAlign(ColumnTextAlign.CENTER).setKey("maxLeaveDays");
-        grid.addColumn(LeaveSpecialRecord::getStartDate).setHeader("生效日期").setTextAlign(ColumnTextAlign.CENTER).setKey("startDate");
-        grid.addColumn(LeaveSpecialRecord::getEndDate).setHeader("失效日期").setTextAlign(ColumnTextAlign.CENTER).setKey("endDate");
+        grid.addColumn(l -> DateUtil.format(l.getStartDate(), YYYY_MM_DD.getPattern(), DateUtil.Zone.P_8.getZoneId()))
+                .setHeader("生效日期").setTextAlign(ColumnTextAlign.CENTER).setKey("startDate");
+        grid.addColumn(l -> DateUtil.format(l.getEndDate(), YYYY_MM_DD.getPattern(), DateUtil.Zone.P_8.getZoneId()))
+                .setHeader("失效日期").setTextAlign(ColumnTextAlign.CENTER).setKey("endDate");
         grid.addColumn(record ->
                 Objects.requireNonNull(salaryStandardMap.get(record.getSalaryStandard())).getName()
         ).setHeader("計薪標準").setTextAlign(ColumnTextAlign.CENTER).setKey("salaryStandard");

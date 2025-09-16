@@ -92,7 +92,7 @@ public class MainLayout extends AbstractLayout {
         SideNavItem TestLink = new SideNavItem("測試畫面");
         TestLink.setPrefixComponent(VaadinIcon.COG_O.create());
 //        TestLink.addItem(createMenuItem(TestLotteryView.class));
-        TestLink.addItem(createMenuItem(SportView.class));
+//        TestLink.addItem(createMenuItem(SportView.class));
         nav.addItem(leaveTypeLink, TestLink);
 
 //        addMenu(nav, ApprovalFlowConfigView.class);

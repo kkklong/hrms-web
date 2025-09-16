@@ -32,19 +32,20 @@ public class SportService {
         this.client = client;
 
     }
-    public List fetchResult() {
+    public String fetchResult() {
         String url = PORXY_URL + "?ver=" + VER;
-        String response = client.doPostForm(
+        String xmlResponse = client.doPostForm(
                 url,
                 setHeader(PORXY_HOST),
                 null,
                 setGameListParam(),
                 new ParameterizedTypeReference<String>() {}
         );
-        if (response != null) {
-            System.out.println("ResponseData: " + response);
+        if (xmlResponse != null) {
+            return  xmlResponse;
+//            System.out.println("ResponseData: " + response);
         }
-        return Collections.emptyList();
+        return "GG";
     }
 
     public List getMemberLogin() {
@@ -129,7 +130,7 @@ public class SportService {
 
     private static Map<String, Object> setGameListParam() {
         Map<String, Object> param = new HashMap<>();
-        param.put("uid", "zqx76kse10m38922868l48030b0");
+        param.put("uid", "oghr9riaxam38922868l84613b0");
         param.put("ver", "2025-09-10-c1bug_115");
         param.put("langx", "zh-tw");
         param.put("p", "get_game_list");
