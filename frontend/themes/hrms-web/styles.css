@@ -66,7 +66,7 @@ html {
 }
 .shiftSchedules-grid::part(footer-cell) {
     border-top: 3px solid #ccc;
-    background-color: var(--lumo-contrast-10pct);
+    background-color: #f5f5f5;
     line-height: 10%;
 }
 .shiftType-combo-holiday::part(label) {

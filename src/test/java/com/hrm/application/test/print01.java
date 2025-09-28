@@ -121,13 +121,13 @@ public class print01 {
         params.put("userAgent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15");
 
         String response = SportsHttp.doPost(url, params, headers);
-        log.info("[{}] get data from api url:{} params:{} response:\n{}"
-                , "Rb get_list"
-                , url
-                , params.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).collect(Collectors.joining("&"))
-                , response);
+//        log.info("[{}] get data from api url:{} params:{} response:\n{}"
+//                , "Rb get_list"
+//                , url
+//                , params.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).collect(Collectors.joining("&"))
+//                , response);
 
-        System.out.println("jsonData: " + XMLUtils.xml2json(response));
+        log.info("jsonData: " + XMLUtils.xml2json(response));
     }
 
 }

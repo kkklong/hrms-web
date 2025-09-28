@@ -1,8 +1,5 @@
 package com.hrm.application.layout;
 
-import com.hrm.application.demo.TestLotteryView;
-import com.hrm.application.demo.TestView;
-import com.hrm.application.demo.sport.SportView;
 import com.hrm.application.entity.Menu;
 import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
@@ -11,10 +8,9 @@ import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
 import com.hrm.application.service.MenuService;
 import com.hrm.application.util.NotificationUtil;
-import com.hrm.application.views.HomePageView;
+import com.hrm.application.views.DashboardView;
 import com.hrm.application.views.LoginView;
-import com.hrm.application.views.approvalFlowConfig.ApprovalFlowConfigView;
-import com.hrm.application.views.calendar.FullCalendar;
+import com.hrm.application.views.calendar.CalendarConfig;
 import com.hrm.application.views.leave.leaveHour.PersonalLeaveSpecialRecordView;
 import com.hrm.application.views.leave.leaveTemplate.LeaveTemplateView;
 import com.hrm.application.views.leave.leaveType.LeaveTypeView;
@@ -82,7 +78,7 @@ public class MainLayout extends AbstractLayout {
 
     @Override
     protected void createMenuEntries(SideNav nav) {
-        addMenu(nav, HomePageView.class);
+        addMenu(nav, DashboardView.class);
         SideNavItem leaveTypeLink = new SideNavItem("假別資料");
         leaveTypeLink.setPrefixComponent(VaadinIcon.COG_O.create());
         leaveTypeLink.addItem(createMenuItem(LeaveTemplateView.class));
@@ -91,6 +87,9 @@ public class MainLayout extends AbstractLayout {
 
         SideNavItem TestLink = new SideNavItem("測試畫面");
         TestLink.setPrefixComponent(VaadinIcon.COG_O.create());
+//        TestLink.addItem(createMenuItem(CalendarConfig.class));
+//        TestLink.addItem(createMenuItem(ShiftSchedulesQueryView.class));
+
 //        TestLink.addItem(createMenuItem(TestLotteryView.class));
 //        TestLink.addItem(createMenuItem(SportView.class));
         nav.addItem(leaveTypeLink, TestLink);

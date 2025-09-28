@@ -3,57 +3,47 @@ package com.hrm.application.views.calendar;
 import com.hrm.application.calendar.AbstractCalendarView;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
-import com.hrm.application.layout.MainLayout;
-import com.hrm.application.menu.MenuRouter;
-import com.hrm.application.service.AccountService;
 import com.hrm.application.service.ShiftScheduleService;
 import com.hrm.application.util.ToolUtil;
-import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
 import elemental.json.JsonObject;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.vaadin.stefan.fullcalendar.*;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Route(value = "calendar", layout = MainLayout.class)
-@MenuRouter(label = "Calendar", icon = VaadinIcon.CALENDAR_O)
-@PageTitle("Calendar | HRMSystemDemo")
-public class FullCalendar extends AbstractCalendarView implements AfterNavigationObserver {
+@Component
+public class CalendarConfig extends AbstractCalendarView implements AfterNavigationObserver {
 
-    @Autowired
     private ShiftScheduleService shiftScheduleService;
-    @Autowired
-    private AccountService accountService;
 
-    private org.vaadin.stefan.fullcalendar.FullCalendar calendar;
-    protected List<ShiftType> shiftTypeList;
+    private FullCalendar calendar;
+    private List<ShiftType> shiftTypeList;
     private Map<String, ShiftType> shiftTypeMap = new HashMap<>();
 
 
+    public CalendarConfig(ShiftScheduleService shiftScheduleService) {
+        this.shiftScheduleService = shiftScheduleService;
+    }
+
     @Override
-    protected org.vaadin.stefan.fullcalendar.FullCalendar createCalendar(JsonObject defaultInitialOptions) {
+    protected FullCalendar createCalendar(JsonObject defaultInitialOptions) {
         defaultInitialOptions.put("firstDay", 1);
+//        loadShiftSchedules();
         calendar = FullCalendarBuilder.create()
                 .withInitialOptions(defaultInitialOptions)
                 .withEntryLimit(3)
                 .build();
-
+        calendar.setSizeFull();
         return calendar;
-    }
-
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        loadShiftSchedules();
     }
 
     private void setData() {
@@ -61,24 +51,10 @@ public class FullCalendar extends AbstractCalendarView implements AfterNavigatio
         shiftTypeMap = ToolUtil.transToMap(shiftTypeList, ShiftType::getShiftKey);
     }
 
-    private void loadShiftSchedules() {
+    public void loadShiftSchedules(List<ShiftSchedules> schedulesSorted) {
         setData();
-
-        // 設定查詢的時間範圍 (這裡舉例用當月的第一天和最後一天)
-        LocalDate now = LocalDate.now();
-        String startDate = now.withDayOfMonth(1).toString();
-        LocalDate endMonth = now.plusMonths(1);
-        String endDate = endMonth.withDayOfMonth(endMonth.lengthOfMonth()).toString();
-        Integer departmentId = 4;
-
-        List<ShiftSchedules> schedules = shiftScheduleService.queryShiftSchedules(startDate, endDate, departmentId);
-        List<ShiftSchedules> schedulesSorted = schedules.stream()
-                .filter(shift -> shift.getEmployeeId().equals(14))
-                .collect(Collectors.toList());
-//        log.info("ShiftData" + schedulesSorted.toString());
         // 轉換成 Entry 物件
         List<Entry> entries = schedulesSorted.stream()
-//                .filter(shift -> shift.getEmployeeId().equals(14))
                 .map(this::convertToEntry)
                 .collect(Collectors.toList());
 
@@ -118,6 +94,6 @@ public class FullCalendar extends AbstractCalendarView implements AfterNavigatio
 
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
-        loadShiftSchedules();
+
     }
 }

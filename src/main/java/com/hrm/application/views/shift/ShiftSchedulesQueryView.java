@@ -387,17 +387,13 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
                         Optional.ofNullable(shiftSchedulesVO.getNickName())
                                 .orElse("未知員工"))
                 .setHeader("員工\\日期").setKey("nickName").setFrozen(true).setFooter(
-                        setEmployeeFooterText("日班", "午班", "夜班", "休假"));
+                        setEmployeeFooterText("日班", "午班", "夜班"));
         grid.addColumn(shiftSchedulesVO ->
                         countHolidayWorkTimes(shiftSchedulesVO, selectedDate))
-                .setHeader("週末班")
-                .setKey("weekendCount")
+                .setKey("holidayCount")
                 .setFrozen(true)
                 .setTextAlign(ColumnTextAlign.CENTER);
-
-        Span weekendHeader = new Span("週末");
-        weekendHeader.getStyle().set("color", "#2828FF");
-        grid.getColumnByKey("weekendCount").setHeader(weekendHeader);
+        grid.getColumnByKey("holidayCount").setHeader(setUpSpan("假日班","#2828FF"));
 
         List<String> headerArrayList = Arrays.asList("部門", "員工", "週末班");
         // 為每一天創建
@@ -430,11 +426,11 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
             })).setFooter(setEmployeeFooterText(
                     String.valueOf(timeSlotCountMap.getOrDefault("morning", 0L)),
                     String.valueOf(timeSlotCountMap.getOrDefault("afternoon", 0L)),
-                    String.valueOf(timeSlotCountMap.getOrDefault("night", 0L)),
-                    String.valueOf(
-                            Optional.ofNullable(calculateStatusCountsForDay(shiftSchedulesList, date, (byte) 1, null)).orElse(0L)
-                                    + Optional.ofNullable(calculateStatusCountsForDay(shiftSchedulesList, date, (byte) 0, "HOLIDAY")).orElse(0L)
-                    )
+                    String.valueOf(timeSlotCountMap.getOrDefault("night", 0L))
+//                    String.valueOf(
+//                            Optional.ofNullable(calculateStatusCountsForDay(shiftSchedulesList, date, (byte) 1, null)).orElse(0L)
+//                                    + Optional.ofNullable(calculateStatusCountsForDay(shiftSchedulesList, date, (byte) 0, "HOLIDAY")).orElse(0L)
+//                    )
             ));
             setUpHeadersForDate(i + 1, date, headerArrayList.size());
         }
@@ -564,7 +560,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
 
     // 設定footer----------------------------------------------------------------------------------------------------
 
-    private VerticalLayout setEmployeeFooterText(String dayShift, String afternoonShift, String nightShift, String holidayShift) {
+    private VerticalLayout setEmployeeFooterText(String dayShift, String afternoonShift, String nightShift) {
         VerticalLayout gridFooterVt = new VerticalLayout();
         gridFooterVt.addClassName("footer-vertical-layout");
 
@@ -573,11 +569,11 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         HorizontalLayout layout2 = setUpLayout(setUpSpan(afternoonShift, "#d2691e"));
         HorizontalLayout layout3 = setUpLayout(setUpSpan(nightShift, "#800080"));
 //        HorizontalLayout layout4 = setUpLayout(setUpSpan(leaveShift, "#006400"));
-        HorizontalLayout layout5 = setUpLayout(setUpSpan(holidayShift, "#0000cd"));
+//        HorizontalLayout layout5 = setUpLayout(setUpSpan(holidayShift, "#0000cd"));
 //        HorizontalLayout layout6 = setUpLayout(setUpSpan(noShift, "#8b0000"));
 //        HorizontalLayout layout7 = setUpLayout(setUpSpan(totalSize, "#222222"));
 
-        gridFooterVt.add(layout1, layout2, layout3, layout5);
+        gridFooterVt.add(layout1, layout2, layout3);
         return gridFooterVt;
     }
 
