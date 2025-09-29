@@ -42,7 +42,6 @@ public class CalendarConfig extends AbstractCalendarView implements AfterNavigat
                 .withInitialOptions(defaultInitialOptions)
                 .withEntryLimit(3)
                 .build();
-        calendar.setSizeFull();
         return calendar;
     }
 
@@ -81,7 +80,11 @@ public class CalendarConfig extends AbstractCalendarView implements AfterNavigat
 //        entry.setDurationEditable(false); // 禁止改變長度（防止調整大小）
         entry.setAllDay(true);
         // 根據 ShiftType 設定不同的配置
-        if (shiftType.contains("SHIFT")) {
+        if (schedule.getStatus() == 1) {
+            entry.setColor("#000000");
+            entry.setTitle("請假");
+            entry.setDisplayMode(DisplayMode.BLOCK);
+        } else if (shiftType.contains("SHIFT")) {
             entry.setDisplayMode(DisplayMode.LIST_ITEM); // 顯示為背景
         } else if (shiftType.contains("HOLIDAY")) {
             entry.setColor("#f08080");
@@ -90,6 +93,11 @@ public class CalendarConfig extends AbstractCalendarView implements AfterNavigat
             entry.setDisplayMode(DisplayMode.LIST_ITEM); // 預設顯示模式
         }
         return entry;
+    }
+
+    @Override
+    public FullCalendar getCalendar() {
+        return calendar;
     }
 
     @Override

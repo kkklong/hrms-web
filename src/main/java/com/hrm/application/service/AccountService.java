@@ -125,10 +125,23 @@ public class AccountService {
         NotificationUtil.error(response.getMessage());
         return false;
     }
-//
-//    public boolean updateUserInfo(UserInfo userInfo) {
-//        return apiService.updateUserInfo(userInfo);
-//    }
+
+    public boolean updateUserInfo(UserInfo userInfo) {
+        String url = backEndDomain + API.UPDATE_USER_INFO;
+
+        ParameterizedTypeReference<ApiResponse<UpdatePassword>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<UpdatePassword> response = client.doPostJson(url, null, userInfo, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+        NotificationUtil.error(response.getMessage());
+        return false;
+    }
+
 
     private enum API {
 
@@ -136,6 +149,7 @@ public class AccountService {
         LOGOUT("/account/logout", HttpMethod.POST, null),
         GET_CURRENT_USER("/account/currentEmployee", HttpMethod.GET, null),
         UPDATE_PASSWORD("/account/updatePassword", HttpMethod.POST, MediaType.APPLICATION_JSON),
+        UPDATE_USER_INFO("/account/updateUserInfo", HttpMethod.POST, MediaType.APPLICATION_JSON),
 
         NONE("", null, null);
 

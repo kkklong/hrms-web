@@ -2,10 +2,14 @@ package com.hrm.application.views;
 
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
+import com.hrm.application.service.AccountService;
+import com.hrm.application.service.EmployeeService;
 import com.hrm.application.service.ShiftScheduleService;
 import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
+import com.hrm.application.views.calendar.CalendarConfig;
 import com.hrm.application.views.calendar.CalendarView;
+import com.hrm.application.views.dashboard.PersonalInfoBoard;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -21,20 +25,19 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Home | HRMSystemDemo")
 public class DashboardView extends VerticalLayout implements AfterNavigationObserver {
 
-//    CalendarView calendar;
+    CalendarView calendar;
 
-    public DashboardView(ShiftScheduleService shiftScheduleService) {
+    public DashboardView(ShiftScheduleService shiftScheduleService, AccountService accountService) {
         if (SessionUtil.getUserInfo() == null) {
             NotificationUtil.error("Session Not Ready");
             return;
         }
         this.addClassName("background-plan");
         setSizeFull();
-//        calendar = new CalendarView(shiftScheduleService);
-        CalendarView calendar = new CalendarView(shiftScheduleService);
-        calendar.setSizeFull();
-//    PersonalInfoBoard personalInfo = new PersonalInfoBoard(employeeService);
-
+        calendar = new CalendarView(shiftScheduleService);
+        calendar.setHeight("45em"); // fullCalendar父階沒有height的話初始會失敗(放入formLayout必須先給定值)
+        PersonalInfoBoard personalInfo = new PersonalInfoBoard(accountService);
+        personalInfo.setSizeFull();
         FormLayout stepLayout = new FormLayout();
         stepLayout.setSizeFull();
 
@@ -42,26 +45,24 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
                 new FormLayout.ResponsiveStep("50em", 2),
                 new FormLayout.ResponsiveStep("100em", 4)
         );
-        stepLayout.add(calendar);
+        stepLayout.add(personalInfo, calendar);
+        stepLayout.setColspan(personalInfo, 2);
         stepLayout.setColspan(calendar, 2);
 
         add(stepLayout);
+
+        // for f5時DOM未完整渲染, fullCalendar size會跑
+        addAttachListener(e -> {
+            calendar.getCalendar().setMinHeight("10em");
+            calendar.getCalendar().setSizeFull();
+            calendar.loadEntry();
+            calendar.getCalendar().render();
+        });
     }
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
 //        calendar.loadEntry();
     }
-//
-//    @Override
-//    protected void onAttach(AttachEvent attachEvent) {
-//        super.onAttach(attachEvent);
-//        UI ui = attachEvent.getUI();
-//        ui.access(() -> {
-//            try {
-//                calendar.loadEntry();
-//            } catch (Exception e) {
-//                NotificationUtil.error("載入資料失敗：" + e.getMessage());
-//            }
-//        });
-//    }
+
+
 }

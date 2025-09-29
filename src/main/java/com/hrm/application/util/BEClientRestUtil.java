@@ -111,9 +111,9 @@ public class BEClientRestUtil {
         try {
             log.info("request uri: {}, method: {}, type: {},  body: {}", uri, method, mediaType, body);
             ResponseEntity<T> response = restTemplate.exchange(uri, method, entity, responseType);
-            log.info(String.format("HTTP Response：\n<%s %s>\n<Body = %s>",
-                    response.getStatusCode(), response.getHeaders(),
-                    JsonUtils.toJSON(response.getBody())));
+//            log.info(String.format("HTTP Response：\n<%s %s>\n<Body = %s>",
+//                    response.getStatusCode(), response.getHeaders(),
+//                    JsonUtils.toJSON(response.getBody())));
             return response.getBody();
         } catch (HttpStatusCodeException ex) {
             handleHttpError(ex);

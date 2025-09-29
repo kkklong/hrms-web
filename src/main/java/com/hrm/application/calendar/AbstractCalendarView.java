@@ -85,9 +85,7 @@ public abstract class AbstractCalendarView extends VerticalLayout {
 
         setFlexGrow(1, calendar);
         setHorizontalComponentAlignment(Alignment.STRETCH, calendar);
-
         setSizeFull();
-
         postConstruct(calendar);
     }
 

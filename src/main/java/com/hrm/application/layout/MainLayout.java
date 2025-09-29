@@ -11,6 +11,7 @@ import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.views.DashboardView;
 import com.hrm.application.views.LoginView;
 import com.hrm.application.views.calendar.CalendarConfig;
+import com.hrm.application.views.calendar.CalendarView;
 import com.hrm.application.views.leave.leaveHour.PersonalLeaveSpecialRecordView;
 import com.hrm.application.views.leave.leaveTemplate.LeaveTemplateView;
 import com.hrm.application.views.leave.leaveType.LeaveTypeView;
@@ -87,11 +88,9 @@ public class MainLayout extends AbstractLayout {
 
         SideNavItem TestLink = new SideNavItem("測試畫面");
         TestLink.setPrefixComponent(VaadinIcon.COG_O.create());
-//        TestLink.addItem(createMenuItem(CalendarConfig.class));
+//        TestLink.addItem(createMenuItem(CalendarView.class));
 //        TestLink.addItem(createMenuItem(ShiftSchedulesQueryView.class));
-
 //        TestLink.addItem(createMenuItem(TestLotteryView.class));
-//        TestLink.addItem(createMenuItem(SportView.class));
         nav.addItem(leaveTypeLink, TestLink);
 
 //        addMenu(nav, ApprovalFlowConfigView.class);
@@ -132,9 +131,36 @@ public class MainLayout extends AbstractLayout {
         addToNavbar(true, new DrawerToggle(), title, createNotificationBell(), accountMenu(), accountInfo());
     }
 
-    protected Component generateTitle() {
-        Span span = new Span();
+//    protected Component generateTitle() {
+//        Span span = new Span();
+//
+//        span.setWidthFull();
+//        span.getStyle()
+//                .set("margin-left", "var(--app-layout-menu-toggle-button-padding)")
+//                .set("overflow", "hidden")
+//                .set("text-overflow", "ellipsis")
+//                .set("text-align", "center")
+//                .set("font-size", "var(--lumo-font-size-l)");
+//    // 畫面size縮小時, 變更title顯示的文字
+//        span.getElement().executeJs(
+//                """
+//                const titleEl = this;
+//                function updateTitleText() {
+//                    if (window.matchMedia('(max-width: 40em)').matches) {
+//                        titleEl.textContent = 'HRM';
+//                    } else {
+//                        titleEl.textContent = 'HRM System Demo';
+//                    }
+//                }
+//                updateTitleText();
+//                window.addEventListener('resize', updateTitleText);
+//                """
+//        );
+//        return span;
+//    }
 
+    protected Component generateTitle() {
+        Span span = new Span("HRM System Demo"); // 初始值
         span.setWidthFull();
         span.getStyle()
                 .set("margin-left", "var(--app-layout-menu-toggle-button-padding)")
@@ -142,22 +168,28 @@ public class MainLayout extends AbstractLayout {
                 .set("text-overflow", "ellipsis")
                 .set("text-align", "center")
                 .set("font-size", "var(--lumo-font-size-l)");
-// 畫面size縮小時, 變更title顯示的文字
-        span.getElement().executeJs(
-                """
-                const titleEl = this;
-                function updateTitleText() {
-                    if (window.matchMedia('(max-width: 40em)').matches) {
-                        titleEl.textContent = 'HRM';
-                    } else {
-                        titleEl.textContent = 'HRM System Demo';
-                    }
-                }
-                updateTitleText();
-                window.addEventListener('resize', updateTitleText);
-                """
-        );
+
+        // 當元件加入 UI 後註冊監聽
+        span.addAttachListener(e -> {
+            e.getUI().getPage().retrieveExtendedClientDetails(details -> {
+                int width = details.getBodyClientWidth();
+                updateTitleByWidth(span, width);
+            });
+
+            e.getUI().getPage().addBrowserWindowResizeListener(resizeEvent -> {
+                updateTitleByWidth(span, resizeEvent.getWidth());
+            });
+        });
+
         return span;
+    }
+
+    private void updateTitleByWidth(Span span, int width) {
+        if (width < 640) { // 40em ≈ 640px
+            span.setText("HRM");
+        } else {
+            span.setText("HRM System Demo");
+        }
     }
 
     private void getUserInfo() {

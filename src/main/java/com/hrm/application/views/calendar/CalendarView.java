@@ -8,17 +8,18 @@ import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.ShiftScheduleService;
 import com.hrm.application.util.SessionUtil;
+import com.hrm.application.views.LoginView;
+import com.hrm.application.views.shift.ShiftSchedulesQueryView;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.AfterNavigationEvent;
-import com.vaadin.flow.router.AfterNavigationObserver;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
+import org.vaadin.stefan.fullcalendar.FullCalendar;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,19 +42,21 @@ public class CalendarView extends VerticalLayout implements AfterNavigationObser
     public CalendarView(ShiftScheduleService service) {
         this.service = service;
         calendar = new CalendarConfig(service);
-//        calendar.setSizeFull();
-//        Button refresh = new Button("更新", click -> loadEntry());
+//        calendar.setMaxHeight("40em");
         add(titleConfigure(),getContent());
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-        setSizeFull();
         this.addClassName("background-plan");
+        setSizeFull();
     }
 
     private HorizontalLayout titleConfigure() {
         HorizontalLayout titleHt = new HorizontalLayout();
+        String route = RouteConfiguration.forSessionScope().getUrl(ShiftSchedulesQueryView.class);
         H3 title = new H3("Calendar");
+        Anchor shiftSchedule = new Anchor(route, title);
+        shiftSchedule.addClassName("title-link");
         title.addClassName("title-heading");
-        titleHt.add(title);
+        titleHt.add(shiftSchedule);
         titleHt.addClassName("title-config");
         titleHt.setWidthFull();
         return titleHt;
@@ -63,6 +66,7 @@ public class CalendarView extends VerticalLayout implements AfterNavigationObser
         HorizontalLayout content = new HorizontalLayout(calendar);
         content.addClassNames("grid-content");
         content.setSizeFull();
+//        content.setMaxHeight("40em");
         return content;
     }
 
@@ -73,7 +77,7 @@ public class CalendarView extends VerticalLayout implements AfterNavigationObser
         }
         else {
             Integer userDepartmentId = userInfo.getDepartmentId();
-            Integer employeeId = userInfo.getDepartmentId();
+            Integer employeeId = userInfo.getId();
 
             // 設定查詢的時間範圍 (這裡舉例用當月的第一天和最後一天)
             LocalDate now = LocalDate.now();
@@ -88,6 +92,9 @@ public class CalendarView extends VerticalLayout implements AfterNavigationObser
 
             calendar.loadShiftSchedules(schedulesSorted);
         }
+    }
+    public FullCalendar getCalendar() {
+        return calendar.getCalendar();
     }
 
     @Override

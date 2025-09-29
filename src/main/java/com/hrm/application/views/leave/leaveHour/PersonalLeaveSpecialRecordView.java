@@ -61,7 +61,7 @@ public class PersonalLeaveSpecialRecordView extends VerticalLayout {
 
     private HorizontalLayout titleConfigure() {
         HorizontalLayout titleHt = new HorizontalLayout();
-        H3 title = new H3("PersonalLeaveSpecialRecord");
+        H3 title = new H3("PersonalLeaveSpecialRecord(Menu)");
         title.addClassName("title-heading");
         titleHt.add(title);
         titleHt.addClassName("title-config");

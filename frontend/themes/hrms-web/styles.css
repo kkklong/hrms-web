@@ -33,6 +33,12 @@ html {
     border-radius: var(--lumo-border-radius-s);
     padding: 10px; /* 内边距 */
 }
+.title-link {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;  /* 底線粗細，預設大約 1px，可自行調整 */
+    text-underline-offset: 5px; /* 讓底線與文字稍微分開 */
+}
+
 .grid-content {
     background-color: var(--lumo-base-color);
     border: 1px solid var(--lumo-contrast-30pct);
@@ -126,6 +132,23 @@ html {
 }
 .my-switch[checked] > label::after {
     left: 19px;
+}
+
+.personalInfo-board {
+    background-color: var(--lumo-base-color);
+    padding: 15px;
+    /*margin-bottom: 20px;*/
+    /*border: 1px solid #ddd;*/
+    border-radius: 5px;
+    /*width: 200%; !* 宽度 *!*/
+    /*max-width: 700px; !* 最大宽度 *!*/
+    /*min-height: 300px; !* 设置最小高度 *!*/
+    text-align: left;
+}
+
+.detail-item {
+    border-bottom: 1px solid #aaaa;
+    padding: 8px 0;
 }
 
 
