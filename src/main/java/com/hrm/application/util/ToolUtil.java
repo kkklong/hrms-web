@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.awt.*;
 import java.io.ByteArrayInputStream;
+import java.time.Duration;
+import java.time.temporal.Temporal;
 import java.util.*;
 import java.util.List;
 import java.util.function.Function;
@@ -91,6 +93,11 @@ public class ToolUtil {
                 return modelValue == null ? null : map.get(modelValue);
             }
         };
+    }
+
+    public static double getHoursWithMinutes(Temporal startDateTime, Temporal endDateTime) {
+        Duration duration = Duration.between(startDateTime, endDateTime);
+        return duration.toHours() + (duration.toMinutesPart() / 60.0);
     }
 
     //---- Converter nameList ----

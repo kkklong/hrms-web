@@ -1,16 +1,12 @@
 package com.hrm.application.views.calendar;
 
-import com.hrm.application.calendar.AbstractCalendarView;
 import com.hrm.application.entity.ShiftSchedules;
-import com.hrm.application.entity.ShiftType;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.ShiftScheduleService;
 import com.hrm.application.util.SessionUtil;
-import com.hrm.application.views.LoginView;
 import com.hrm.application.views.shift.ShiftSchedulesQueryView;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -43,13 +39,13 @@ public class CalendarView extends VerticalLayout implements AfterNavigationObser
         this.service = service;
         calendar = new CalendarConfig(service);
 //        calendar.setMaxHeight("40em");
-        add(titleConfigure(),getContent());
+        add(getTitle(),getContent());
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         this.addClassName("background-plan");
         setSizeFull();
     }
 
-    private HorizontalLayout titleConfigure() {
+    private HorizontalLayout getTitle() {
         HorizontalLayout titleHt = new HorizontalLayout();
         String route = RouteConfiguration.forSessionScope().getUrl(ShiftSchedulesQueryView.class);
         H3 title = new H3("Calendar");

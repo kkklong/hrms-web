@@ -67,6 +67,11 @@ public class ShiftSchedules {
      */
     private String shiftColorCode;
 
+    /**
+     * 員工編號
+     */
+    private String employeeNumber;
+
     public ShiftSchedules() {
     }
 
@@ -164,6 +169,14 @@ public class ShiftSchedules {
 
     public void setShiftColorCode(String shiftColorCode) {
         this.shiftColorCode = shiftColorCode;
+    }
+
+    public String getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(String employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
 
     @Override

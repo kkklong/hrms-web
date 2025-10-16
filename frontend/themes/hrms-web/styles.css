@@ -73,8 +73,52 @@ html {
 .shiftSchedules-grid::part(footer-cell) {
     border-top: 3px solid #ccc;
     background-color: #f5f5f5;
-    line-height: 10%;
+    /*line-height: 10%;*/
 }
+/*.shiftSchedules-grid .footer-vertical-layout > * {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    line-height: 1.1;*/
+/*}*/
+/*---- shift-cell S ----*/
+/* 讓 body cells 不裁切陰影 */
+.shiftSchedules-grid::part(body-cell) {
+    overflow: visible;
+}
+
+/* 基礎外觀：圓角 + 內陰影，平面狀態 */
+.shiftSchedules-grid .shift-cell {
+    border-radius: 8px;
+    box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.6),
+            inset 0 -1px 0 rgba(0,0,0,0.2);
+    transition:
+            transform 80ms ease,
+            box-shadow 120ms ease,
+            filter 120ms ease,
+            background-color 120ms ease;
+}
+
+/* 互動狀態：滑過 → 微浮起 + 外陰影 */
+.shiftSchedules-grid .shift-cell[data-state="interactive"]:hover {
+    transform: translateY(-1px);
+    box-shadow:
+            var(--lumo-box-shadow-s),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+    filter: brightness(1.02);
+}
+
+/* 按下時：回彈一點，像被按進去 */
+.shiftSchedules-grid .shift-cell[data-state="interactive"]:active {
+    transform: translateY(0);
+    box-shadow:
+            var(--lumo-box-shadow-xs),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+    filter: brightness(0.98);
+}
+
+/*---- shift-cell E ----*/
+
 .shiftType-combo-holiday::part(label) {
     border: 1px solid black;
     border-radius: 3px;
@@ -150,6 +194,8 @@ html {
     border-bottom: 1px solid #aaaa;
     padding: 8px 0;
 }
+
+
 
 
 

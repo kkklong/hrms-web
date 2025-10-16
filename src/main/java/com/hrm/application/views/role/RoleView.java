@@ -35,13 +35,13 @@ public class RoleView extends VerticalLayout {
         configureGrid();
         configureDialog();
 
-        add(titleConfigure(), getToolbar(), getContent());
+        add(getTitle(), getToolbar(), getContent());
         this.addClassName("background-plan");
         updateList();
         closeEditor();
     }
 
-    private HorizontalLayout titleConfigure() {
+    private HorizontalLayout getTitle() {
         HorizontalLayout titleHt = new HorizontalLayout();
         H3 title = new H3("RoleManager");
         title.addClassName("title-heading");

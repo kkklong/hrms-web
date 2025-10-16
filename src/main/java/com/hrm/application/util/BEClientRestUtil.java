@@ -109,7 +109,9 @@ public class BEClientRestUtil {
         HttpEntity<?> entity = new HttpEntity<>(body, httpHeaders);
 
         try {
-            log.info("request uri: {}, method: {}, type: {},  body: {}", uri, method, mediaType, body);
+//            log.info("request uri: {}, method: {}, type: {},  body: {}", uri, method, mediaType, body);
+            log.info(String.format("HTTP Request：\n<%s %s %s>\n<Body = %s>",
+                    method, uri, httpHeaders, body));
             ResponseEntity<T> response = restTemplate.exchange(uri, method, entity, responseType);
 //            log.info(String.format("HTTP Response：\n<%s %s>\n<Body = %s>",
 //                    response.getStatusCode(), response.getHeaders(),
@@ -117,7 +119,9 @@ public class BEClientRestUtil {
             return response.getBody();
         } catch (HttpStatusCodeException ex) {
             handleHttpError(ex);
-            throw new RuntimeException("HTTP request failed: " + ex.getStatusCode() + " - " + ex.getResponseBodyAsString(), ex);
+            NotificationUtil.error(ex.getMessage());
+            log.error("Error: request URI: {}; msg: {}", uri, ex.getMessage());
+            throw new RuntimeException(ex);
         } catch (Exception e) {
             log.error("Error: request URI: {}; msg: {}", uri, e.getMessage());
             throw new RuntimeException("Unexpected error occurred during HTTP request", e);

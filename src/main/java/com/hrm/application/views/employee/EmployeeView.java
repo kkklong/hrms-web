@@ -29,7 +29,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
-import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -79,7 +78,7 @@ public class EmployeeView extends VerticalLayout {
         this.service = service;
         configureGrid();
         configureFilter();
-        add(titleConfigure(), getToolbar(), getContent());
+        add(getTitle(), getToolbar(), getContent());
         setSizeFull();
         this.addClassName("background-plan");
     }
@@ -104,7 +103,7 @@ public class EmployeeView extends VerticalLayout {
     }
 
     //
-    private HorizontalLayout titleConfigure() {
+    private HorizontalLayout getTitle() {
         HorizontalLayout titleHt = new HorizontalLayout();
         H3 title = new H3("EmployeeData");
         title.addClassName("title-heading");

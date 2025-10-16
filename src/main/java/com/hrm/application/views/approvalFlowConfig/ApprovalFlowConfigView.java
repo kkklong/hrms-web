@@ -77,12 +77,12 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         configureGrid();
         updateList();
         configureDialog();
-        add(titleConfigure(), getToolbar(), getContent());
+        add(getTitle(), getToolbar(), getContent());
         setSizeFull();
         this.addClassName("background-plan");
     }
 
-    private HorizontalLayout titleConfigure() {
+    private HorizontalLayout getTitle() {
         HorizontalLayout titleHt = new HorizontalLayout();
         H3 title = new H3("ApprovalFlowConfig");
         title.addClassName("title-heading");

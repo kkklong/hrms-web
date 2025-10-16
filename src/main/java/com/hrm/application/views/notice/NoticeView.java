@@ -73,11 +73,11 @@ public class NoticeView extends VerticalLayout {
         updateList();
         configureFilter();
         configureGrid();
-        add(titleConfigure(), getToolBar(), getContent(), getPageTool());
+        add(getTitle(), getToolBar(), getContent(), getPageTool());
         setSizeFull();
     }
 
-    private HorizontalLayout titleConfigure() {
+    private HorizontalLayout getTitle() {
         HorizontalLayout titleHt = new HorizontalLayout();
         H3 title = new H3("NoticeManager");
         title.addClassName("title-heading");

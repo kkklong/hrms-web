@@ -33,6 +33,11 @@ public class ShiftSchedulesQueryVO implements Serializable {
      */
     private String departmentName;
 
+    /**
+     * 員工編號
+     */
+    private String employeeNumber;
+
 
     private List<ShiftSchedulesDateTimeQueryVO> schedulesDates;
 

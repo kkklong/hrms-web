@@ -42,7 +42,10 @@ public class print01 {
         WebClientUtil client = new WebClientUtil(builder);
 
         SportService service = new SportService(client);
-        String xmlResponse = service.fetchResult();
+//        String xmlResponse = service.fetchResult();
+//        String xmlResponse = service.gameMore();
+        String xmlResponse = service.parlayData();
+
         System.out.println("ResponseData: " + xmlResponse);
 
         System.out.println("jsonData: " + XMLUtils.xml2json(xmlResponse));
@@ -50,7 +53,7 @@ public class print01 {
 
     @Test
     public void SportTest2() throws Exception {
-        String VER = "2025-09-10-c1bug_115";
+        String VER = "2025-09-30-updateBanner_118";
         String url = "https://m806.mos011.com/transform.php" + "?ver=" + VER;
 
         Header[] headers = new Header[]{
@@ -71,8 +74,8 @@ public class print01 {
 //                new BasicHeader("Sec-Fetch-Site", "same-origin")
         };
         Map<String, Object> params = new HashMap<>();
-        params.put("uid", "9uvnzhu9m38657565l73980b0");
-        params.put("ver", "2025-09-10-c1bug_115");
+        params.put("uid", "88odetjdm38657565l29122b0");
+        params.put("ver", "2025-09-30-updateBanner_118");
         params.put("langx", "zh-tw");
         params.put("p", "get_game_list");
 //        params.put("p3type", "");

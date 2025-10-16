@@ -277,40 +277,44 @@ public class ShiftScheduleService {
                 .collect(Collectors.groupingBy(ShiftSchedules::getEmployeeId));
 
         // 轉換成 List<ShiftSchedulesQueryVO>
-        List<ShiftSchedulesQueryVO> shiftSchedulesQueryVOList = new ArrayList<>();
+        List<ShiftSchedulesQueryVO> vos = new ArrayList<>();
 
         for (Map.Entry<Integer, List<ShiftSchedules>> entry : groupedByEmployee.entrySet()) {
             Integer employeeId = entry.getKey();
             List<ShiftSchedules> employeeSchedules = entry.getValue();
+            if (employeeSchedules.isEmpty()) continue;
+
+            ShiftSchedules first = employeeSchedules.get(0); // 取第一個記錄的部門ID
 
             // 建立 ShiftSchedulesQueryVO 對像
-            ShiftSchedulesQueryVO shiftSchedulesQueryVO = new ShiftSchedulesQueryVO();
-            shiftSchedulesQueryVO.setEmployeeId(employeeId);
-            shiftSchedulesQueryVO.setNickName(employeeSchedules.get(0).getNickName());
-            shiftSchedulesQueryVO.setDepartmentId(employeeSchedules.get(0).getDepartmentId()); // 取第一個記錄的部門ID
-            shiftSchedulesQueryVO.setDepartmentName(employeeSchedules.get(0).getDepartmentName());
-            shiftSchedulesQueryVO.setId(employeeSchedules.get(0).getId()); // 設定第一個記錄的ID（可根據業務需求調整）
+            ShiftSchedulesQueryVO vo = new ShiftSchedulesQueryVO();
+            vo.setEmployeeId(employeeId);
+            vo.setNickName(first.getNickName());
+            vo.setDepartmentId(first.getDepartmentId());
+            vo.setDepartmentName(first.getDepartmentName());
+            vo.setId(first.getId());
+            vo.setEmployeeNumber(first.getEmployeeNumber());
             // 將 ShiftSchedules 轉換為 ShiftSchedulesDateTime 列表
-            List<ShiftSchedulesDateTimeQueryVO> schedulesDates = employeeSchedules.stream()
+            List<ShiftSchedulesDateTimeQueryVO> dates = employeeSchedules.stream()
                     .sorted(Comparator.comparing(ShiftSchedules::getShiftDate)) // 按 shiftDate 排序
                     .map(schedule -> {
-                        ShiftSchedulesDateTimeQueryVO scheduleDateTimeQueryVO = new ShiftSchedulesDateTimeQueryVO();
-                        scheduleDateTimeQueryVO.setId(schedule.getId());
-                        scheduleDateTimeQueryVO.setShiftTypes(schedule.getShiftTypes());
-                        scheduleDateTimeQueryVO.setShiftDate(schedule.getShiftDate());
-                        scheduleDateTimeQueryVO.setStatus(schedule.getStatus());
-                        scheduleDateTimeQueryVO.setWeekType(schedule.getWeekType());
-                        scheduleDateTimeQueryVO.setRemark(schedule.getRemark());
-                        scheduleDateTimeQueryVO.setActionType(schedule.getActionType());
-                        scheduleDateTimeQueryVO.setShiftColorCode(schedule.getShiftColorCode());
-                        return scheduleDateTimeQueryVO;
+                        ShiftSchedulesDateTimeQueryVO d = new ShiftSchedulesDateTimeQueryVO();
+                        d.setId(schedule.getId());
+                        d.setShiftTypes(schedule.getShiftTypes());
+                        d.setShiftDate(schedule.getShiftDate());
+                        d.setStatus(schedule.getStatus());
+                        d.setWeekType(schedule.getWeekType());
+                        d.setRemark(schedule.getRemark());
+                        d.setActionType(schedule.getActionType());
+                        d.setShiftColorCode(schedule.getShiftColorCode());
+                        return d;
                     }).collect(Collectors.toList());
-            shiftSchedulesQueryVO.setSchedulesDates(schedulesDates);
-            shiftSchedulesQueryVOList.add(shiftSchedulesQueryVO);
+            vo.setSchedulesDates(dates);
+            vos.add(vo);
         }
         // sort by employee id
-        shiftSchedulesQueryVOList.sort(Comparator.comparingInt(ShiftSchedulesQueryVO::getEmployeeId));
-        return shiftSchedulesQueryVOList;
+        vos.sort(Comparator.comparingInt(ShiftSchedulesQueryVO::getEmployeeId));
+        return vos;
     }
 
     /**

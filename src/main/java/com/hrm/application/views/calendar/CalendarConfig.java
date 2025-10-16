@@ -88,6 +88,7 @@ public class CalendarConfig extends AbstractCalendarView implements AfterNavigat
             entry.setDisplayMode(DisplayMode.LIST_ITEM); // 顯示為背景
         } else if (shiftType.contains("HOLIDAY")) {
             entry.setColor("#f08080");
+            entry.setTextColor("#000000");
             entry.setDisplayMode(DisplayMode.BLOCK); // 以標題顯示
         } else {
             entry.setDisplayMode(DisplayMode.LIST_ITEM); // 預設顯示模式

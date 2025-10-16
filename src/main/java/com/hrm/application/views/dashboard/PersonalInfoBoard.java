@@ -4,6 +4,7 @@ import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
 import com.hrm.application.service.AccountService;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
@@ -19,6 +20,8 @@ public class PersonalInfoBoard extends VerticalLayout {
     PersonalInfoBoardDialog dialogInfo;
     UserInfo currentEmployee;
     private FormLayout details;
+    private FormLayout extDetails;
+
     private boolean isSensitiveInfoVisible = false;
 
     public PersonalInfoBoard(AccountService service) {
@@ -66,7 +69,9 @@ public class PersonalInfoBoard extends VerticalLayout {
         // 使用FormLayout來排列詳細資訊
         details = new FormLayout();
         details.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 2));
-
+        extDetails = new FormLayout();
+        extDetails.setResponsiveSteps(new FormLayout.ResponsiveStep("0", 2));
+        extDetails.setSizeFull();
         updateUserInfo();
         updateDetails();
         board.add(headerLayout, details);
@@ -88,24 +93,28 @@ public class PersonalInfoBoard extends VerticalLayout {
 //        addDetail(details, "公司", getValueOrEmpty(service.getCompanyName(currentEmployee.getCompany())), 1);
         addDetail(details, "部門", getValueOrEmpty(currentEmployee.getDepartmentName()), 1);
         addDetail(details, "員工編號", getValueOrEmpty(currentEmployee.getEmployeeNumber()), 1);
-        addDetail(details, "身份證字號", getSensitiveValue(currentEmployee.getIdNumber()), 1);
-        addDetail(details, "職位", getValueOrEmpty(currentEmployee.getPosition()), 1);
         addDetail(details, "入職時間", getValueOrEmpty(currentEmployee.getEntryDate()), 1);
-        addDetail(details, "性別", getValueOrEmpty(currentEmployee.getGender()), 1);
-        addDetail(details, "生日", getSensitiveValue(currentEmployee.getBirthday()), 1);
-        addDetail(details, "最高學歷", getSensitiveValue(currentEmployee.getHighestEducationLevel()), 1);
-        addDetail(details, "電話", getSensitiveValue(currentEmployee.getPhone()), 1);
-
+        addDetail(details, "職位", getValueOrEmpty(currentEmployee.getPosition()), 1);
         addDetail(details, "帳號", getValueOrEmpty(currentEmployee.getAccount()), 2);
         addDetail(details, "skype帳號", getValueOrEmpty(currentEmployee.getSkype()), 1);
         addDetail(details, "telegram帳號", getValueOrEmpty(currentEmployee.getTelegram()), 1);
-        addDetail(details, "信箱", getValueOrEmpty(currentEmployee.getEmail()), 2);
-        addDetail(details, "通訊地址", getSensitiveValue(currentEmployee.getAddress()), 2);
-        addDetail(details, "戶籍地址", getSensitiveValue(currentEmployee.getRegisteredAddress()), 2);
-        addDetail(details, "緊急聯絡人", getSensitiveValue(currentEmployee.getEmergencyContact()), 2);
-        addDetail(details, "與緊急聯絡人關系", getSensitiveValue(currentEmployee.getRelationship()), 1);
-        addDetail(details, "緊急聯絡人電話", getSensitiveValue(currentEmployee.getEmergencyContactPhone()), 1);
-        addDetail(details, "緊急連絡人通訊地址", getSensitiveValue(currentEmployee.getEmergencyContactAddress()), 2);
+        extDetails.removeAll();
+        addDetail(extDetails, "身份證字號", getSensitiveValue(currentEmployee.getIdNumber()), 1);
+        addDetail(extDetails, "性別", getValueOrEmpty(currentEmployee.getGender()), 1);
+        addDetail(extDetails, "生日", getSensitiveValue(currentEmployee.getBirthday()), 1);
+        addDetail(extDetails, "最高學歷", getSensitiveValue(currentEmployee.getHighestEducationLevel()), 1);
+        addDetail(extDetails, "電話", getSensitiveValue(currentEmployee.getPhone()), 1);
+        addDetail(extDetails, "信箱", getValueOrEmpty(currentEmployee.getEmail()), 2);
+        addDetail(extDetails, "通訊地址", getSensitiveValue(currentEmployee.getAddress()), 2);
+        addDetail(extDetails, "戶籍地址", getSensitiveValue(currentEmployee.getRegisteredAddress()), 2);
+        addDetail(extDetails, "緊急聯絡人", getSensitiveValue(currentEmployee.getEmergencyContact()), 2);
+        addDetail(extDetails, "與緊急聯絡人關系", getSensitiveValue(currentEmployee.getRelationship()), 1);
+        addDetail(extDetails, "緊急聯絡人電話", getSensitiveValue(currentEmployee.getEmergencyContactPhone()), 1);
+        addDetail(extDetails, "緊急連絡人通訊地址", getSensitiveValue(currentEmployee.getEmergencyContactAddress()), 2);
+        Details exDet = new Details("EXT information", extDetails);
+        exDet.setSizeFull();
+        details.setColspan(exDet , 2);
+        details.add(exDet);
     }
 
     private void addDetail(FormLayout layout, String label, String value, int colspan) {

@@ -78,11 +78,14 @@ import java.util.Map;
         }
 
         // 處理 JSON 或 Form 參數
+        Object body = null;
         if (mediaType.equals(MediaType.APPLICATION_JSON) && jsonBody != null) {
+            body = jsonBody;
             requestSpec.bodyValue(jsonBody);
         } else if (mediaType.equals(MediaType.APPLICATION_FORM_URLENCODED) && formBody != null) {
             MultiValueMap<String, String> formData = new LinkedMultiValueMap<>();
-            formBody.forEach((key, value) -> formData.add(key, value.toString()));
+            formBody.forEach((key, value) -> formData.add(key,String.valueOf(value)));
+            body = formData;
             requestSpec.body(BodyInserters.fromFormData(formData));
         }
 
@@ -90,7 +93,8 @@ import java.util.Map;
         try {
             response = requestSpec.exchangeToMono(resp -> {
                 HttpStatusCode status = resp.statusCode();
-                log.info("Request to URL: {}, HTTP Status: {}", uri, status);
+                log.info(String.format("HTTP Request：\n<%s %s %s>>",
+                        method, uri, headers));
                 return resp.bodyToMono(responseType);
             }).block();
         } catch (HttpClientErrorException e) {  // HTTP status code 為 4xx、5xx

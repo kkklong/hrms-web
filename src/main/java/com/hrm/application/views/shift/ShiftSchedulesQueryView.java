@@ -11,19 +11,13 @@ import com.hrm.application.model.ShiftSchedulePeriodHoliday;
 import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
 import com.hrm.application.service.ShiftScheduleService;
-import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.ToolUtil;
-import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.combobox.MultiSelectComboBox;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
-import com.vaadin.flow.component.details.Details;
-import com.vaadin.flow.component.details.DetailsVariant;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
@@ -32,7 +26,6 @@ import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.grid.HeaderRow;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
-import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.menubar.MenuBar;
@@ -42,14 +35,12 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.dom.Style;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.context.annotation.Scope;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -109,7 +100,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         updateSchedulesData();
         configureDialog(null);
         setParameterListener();
-        add(titleConfigure(), getToolbar(), getContent());
+        add(getTitle(), getToolbar(), getContent());
         setSizeFull();
     }
 
@@ -131,7 +122,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         configureDepartmentSelector();
     }
 
-    private HorizontalLayout titleConfigure() {
+    private HorizontalLayout getTitle() {
         HorizontalLayout titleHt = new HorizontalLayout();
         H3 title = new H3("ShiftData");
         title.addClassName("title-heading");
@@ -145,6 +136,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         HorizontalLayout content = new HorizontalLayout(grid);
         content.addClassNames("grid-content");
         content.setSizeFull();
+        content.setFlexGrow(1, grid);
         return content;
     }
 
@@ -314,12 +306,10 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
     private void updateSchedulesData() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = selectedDate;
-        date = date.withDayOfMonth(1);
-        String startDateTemp = date.format(dateFormatter);
-        date = date.plusMonths(1).plusDays(-1);
-        String endDateTemp = date.format(dateFormatter);
+        LocalDate first = selectedDate.withDayOfMonth(1);
+        LocalDate last = selectedDate.withDayOfMonth(selectedDate.lengthOfMonth());
         //用當月資料request periodsTemp, 拿periodsTemp成為endDate來抓取完整list
-        List<ShiftSchedulePeriod> periodsTemp = service.getShiftSchedulePeriods(startDateTemp, endDateTemp);
+        List<ShiftSchedulePeriod> periodsTemp = service.getShiftSchedulePeriods(first.format(dateFormatter), last.format(dateFormatter));
         startDate = periodsTemp.getFirst().getStartDate();
         LocalDate endDate = periodsTemp.getLast().getEndDate();
         periods = service.getShiftSchedulePeriods(startDate.format(dateFormatter), endDate.format(dateFormatter));
@@ -381,19 +371,18 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
             return;
         }
         grid.addColumn(shiftSchedulesVO -> Optional.ofNullable(shiftSchedulesVO.getDepartmentName())
-                        .orElse("未知部門"))
+                .orElse("未知部門"))
                 .setHeader("部門").setKey("department").setFrozen(true).setVisible(false);
-        grid.addColumn(shiftSchedulesVO ->
-                        Optional.ofNullable(shiftSchedulesVO.getNickName())
-                                .orElse("未知員工"))
-                .setHeader("員工\\日期").setKey("nickName").setFrozen(true).setFooter(
-                        setEmployeeFooterText("日班", "午班", "夜班"));
-        grid.addColumn(shiftSchedulesVO ->
-                        countHolidayWorkTimes(shiftSchedulesVO, selectedDate))
+        grid.addColumn(shiftSchedulesVO -> Optional.ofNullable(shiftSchedulesVO.getNickName())
+                .orElse("未知員工"))
+                .setHeader("員工\\日期").setKey("nickName").setFrozen(true)
+                .setSortable(true).setComparator(Comparator.comparing(ShiftSchedulesQueryVO::getEmployeeId, Comparator.nullsLast(Integer::compareTo)))
+                .setFooter(setEmployeeFooterText("日班", "午班", "夜班"));
+        grid.addColumn(shiftSchedulesVO -> countHolidayWorkTimes(shiftSchedulesVO, selectedDate))
                 .setKey("holidayCount")
                 .setFrozen(true)
-                .setTextAlign(ColumnTextAlign.CENTER);
-        grid.getColumnByKey("holidayCount").setHeader(setUpSpan("假日班","#2828FF"));
+                .setTextAlign(ColumnTextAlign.CENTER)
+                .setHeader(setUpSpan("假日班", "#2828FF"));
 
         List<String> headerArrayList = Arrays.asList("部門", "員工", "週末班");
         // 為每一天創建
@@ -449,7 +438,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         cellDiv.getStyle().set("color", fontColor == null ? "#000000" : fontColor); // 默認為黑色
         cellDiv.getStyle().set("padding", "5px"); // 添加一些內距
         cellDiv.getElement().setProperty("title", toolTip == null ? "" + "\n" + remark : toolTip + "\n" + remark); // toolTip 默認為空
-
+        cellDiv.addClassName("shift-cell");
         if (!remark.isEmpty()) {
             // 建立右上角的小紅色三角形
             Div marker = new Div();
@@ -496,7 +485,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         monthHeader.getCell(grid.getColumns().get(index)).setText(date.format(DateTimeFormatter.ofPattern("MM")) + "月");
 
         // 設置 dayOfWeekHeader 顯示星期幾
-        String dayOfWeek = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.getDefault());
+        String dayOfWeek = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.TRADITIONAL_CHINESE);
         var cellDOW = dayOfWeekHeader.getCell(grid.getColumns().get(index));
         String holiday = getCalendarHolidayForDate(date, periods);
         if (holiday != null) {
@@ -572,7 +561,9 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
 //        HorizontalLayout layout5 = setUpLayout(setUpSpan(holidayShift, "#0000cd"));
 //        HorizontalLayout layout6 = setUpLayout(setUpSpan(noShift, "#8b0000"));
 //        HorizontalLayout layout7 = setUpLayout(setUpSpan(totalSize, "#222222"));
-
+        gridFooterVt.setPadding(false);
+        gridFooterVt.setSpacing(false);
+        gridFooterVt.setMargin(false);
         gridFooterVt.add(layout1, layout2, layout3);
         return gridFooterVt;
     }

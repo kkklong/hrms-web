@@ -26,19 +26,55 @@ public class SportService {
     static String MEMBER_URL = "https://m806.mos011.com/";
     static String MEMBER_HOST = "https://m806.mos011.com";
     //版本
-    static String VER = "2025-09-10-c1bug_115";
+    static String VER = "2025-09-30-updateBanner_118";
     static String LOCAL_LINK = "D:/accounts.txt";
     public SportService(WebClientUtil client) {
         this.client = client;
 
     }
     public String fetchResult() {
-        String url = PORXY_URL + "?ver=" + VER;
+//        String url = PORXY_URL + "?ver=" + VER;
+        String url = PORXY_URL;
+        String xmlResponse = client.doPostForm(
+                url,
+                setListFTHeader(PORXY_HOST),
+                null,
+                setGameListParam(),
+                new ParameterizedTypeReference<String>() {}
+        );
+        if (xmlResponse != null) {
+            return  xmlResponse;
+//            System.out.println("ResponseData: " + response);
+        }
+        return "GG";
+    }
+
+    public String gameMore() {
+//        String url = PORXY_URL + "?ver=" + VER;
+        String url = PORXY_URL;
+
         String xmlResponse = client.doPostForm(
                 url,
                 setHeader(PORXY_HOST),
                 null,
-                setGameListParam(),
+                setGameMoreParam(),
+                new ParameterizedTypeReference<String>() {}
+        );
+        if (xmlResponse != null) {
+            return  xmlResponse;
+//            System.out.println("ResponseData: " + response);
+        }
+        return "GG";
+    }
+
+    public String parlayData() {
+//        String url = PORXY_URL + "?ver=" + VER;
+        String url = PORXY_URL;
+        String xmlResponse = client.doPostForm(
+                url,
+                setListFTHeader(PORXY_HOST),
+                null,
+                setParlayParam(),
                 new ParameterizedTypeReference<String>() {}
         );
         if (xmlResponse != null) {
@@ -115,6 +151,8 @@ public class SportService {
 //        headers.put("User-Agent",
 //                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36");
 //        headers.put("Content-type", "application/x-www-form-urlencoded");
+        String cookieJson = "[{\"name\":\"Cookie\",\"value\":\"login_39224450=1760205409; test=init\",\"elements\":[{\"name\":\"login_39224450\",\"value\":\"1760205409\",\"parameters\":[{\"name\":\"test\",\"value\":\"init\"}],\"parameterCount\":1}]}]";
+        headers.put("Cookie",cookieJson);
 //        headers.put("Cookie", "myGameVer_38922868=XzIxMTIyOA==; test=aW5pdA; login_38922868=MTc1Nzc4MDQzNQ; cu=Tg==; cuipv6=Tg==; ipv6=Tg==; iorChgSw=WQ==; protocolstr=aHR0cHM=; CookieChk=WQ; box4pwd_notshow_38922868=Mzg5MjI4NjhfTg==");
 //        headers.put("Host", host);
 //        headers.put("Origin", MEMBER_HOST);
@@ -130,22 +168,63 @@ public class SportService {
 
     private static Map<String, Object> setGameListParam() {
         Map<String, Object> param = new HashMap<>();
-        param.put("uid", "oghr9riaxam38922868l84613b0");
-        param.put("ver", "2025-09-10-c1bug_115");
-        param.put("langx", "zh-tw");
+        param.put("uid", "gp1pj19jrm38657565l31240b0");
+        param.put("ver", null);
+        param.put("langx", "zh-cn");
         param.put("p", "get_game_list");
 //        param.put("p3type", "");
 //        param.put("date", "");
         param.put("gtype", "ft");
         param.put("showtype", "live");
         param.put("rtype", "rb");
-        param.put("ltype", "1");
+        param.put("ltype", "4");
 //        param.put("filter", "");
         param.put("cupFantasy", "N");
-        param.put("sorttype", "T");
+        param.put("sorttype", "L");
 //        param.put("specialClick", "");
+
         param.put("isFantasy", "N");
         param.put("ts", String.valueOf(System.currentTimeMillis()));
+        return param;
+    }
+
+    private static Map<String, Object> setGameMoreParam() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("uid", "pnrj10erm38657565l40977b0");
+        param.put("ver", null);
+        param.put("langx", "zh-cn");
+        param.put("p", "get_game_more");
+        param.put("gtype", "ft");
+        param.put("showtype", "live");
+        param.put("ltype", "4");
+        param.put("isRB", "Y");
+        param.put("lid", "100064");
+        //        param.put("specialClick", "");
+//        param.put("mode", "NORMAL");
+        param.put("from", "game_more");
+//        param.put("filter", "Main");
+        param.put("ts", String.valueOf(System.currentTimeMillis()));
+        param.put("ecid", "9965693");
+        return param;
+    }
+
+    private static Map<String, Object> setParlayParam() {
+        Map<String, Object> param = new HashMap<>();
+        param.put("uid", "6u5asw6wm38657565l43281b0");
+        param.put("ver", null);
+        param.put("langx", "zh-cn");
+        param.put("p", "get_game_more");
+        param.put("gtype", "ft");
+        param.put("showtype", "today");
+        param.put("ltype", "4");
+        param.put("isRB", "N");
+        param.put("lid", "101505");
+        //        param.put("specialClick", "");
+//        param.put("mode", "NORMAL");
+        param.put("from", "game_more");
+//        param.put("filter", "Main");
+        param.put("ts", String.valueOf(System.currentTimeMillis()));
+        param.put("ecid", "10011438");
         return param;
     }
 
