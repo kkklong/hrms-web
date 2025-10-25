@@ -40,6 +40,10 @@ public class CalendarViewToolbar extends MenuBar {
     }
 
     protected void initMenuBar() {
+        getElement().getStyle().set("flex-wrap", "wrap");
+        getElement().getStyle().set("white-space", "normal");
+        getElement().getStyle().set("overflow", "hidden");
+        setWidthFull();
         initDateItems();
 //        initGeneralSettings();
         initViewSelector();
@@ -53,6 +57,7 @@ public class CalendarViewToolbar extends MenuBar {
         gotoDate.getElement().getStyle().set("position", "fixed");
         gotoDate.setWidth("0px");
         gotoDate.setHeight("0px");
+        gotoDate.getStyle().set("flex-wrap", "nowrap");
         addItem(VaadinIcon.ANGLE_LEFT.create(), e -> calendar.previous());
         buttonDatePicker = new Button();
         buttonDatePicker.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
@@ -62,7 +67,7 @@ public class CalendarViewToolbar extends MenuBar {
         buttonDatePicker.setWidthFull();
         addItem(buttonDatePicker);
         addItem(VaadinIcon.ANGLE_RIGHT.create(), e -> calendar.next());
-        addItem("Today", e -> calendar.today());
+        addItem("now", e -> calendar.today());
     }
 
     public void updateInterval(LocalDate intervalStart) {

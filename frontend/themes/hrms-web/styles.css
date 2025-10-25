@@ -23,6 +23,10 @@ html {
 
 .background-plan {
     background-color: var(--lumo-contrast-10pct);
+    /*max-width: 700px; !* 最大宽度 *!*/
+    min-width: 370px; /* 最小宽度 */
+    /*padding: 10px;*/
+
 }
 .title-heading {
     color: var(--lumo-base-color);
@@ -33,6 +37,7 @@ html {
     border-radius: var(--lumo-border-radius-s);
     padding: 10px; /* 内边距 */
 }
+
 .title-link {
     text-decoration: underline;
     text-decoration-thickness: 3px;  /* 底線粗細，預設大約 1px，可自行調整 */
@@ -53,6 +58,7 @@ html {
 .shiftSchedules-grid::part(first-header-row-cell) {
     border-bottom: 2px solid #ccc; /* 设置底部边框 */
     background-color: var(--lumo-contrast-10pct);
+    backdrop-filter: blur(6px); /* 模糊效果 */
 }
 .shiftSchedules-grid::part(last-header-row-cell) {
     border-bottom: 3px solid #ccc; /* 设置底部边框 */

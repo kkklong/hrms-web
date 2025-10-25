@@ -47,4 +47,37 @@ public class print02 {
 
         System.out.println(sb.toString());
     }
+
+    @Test
+    public void Test0003(){
+        String s = "bwzz\n" +
+                "3mgm\n" +
+                "9hgc\n" +
+                "aofa\n" +
+                "7cpj\n" +
+                "8lws\n" +
+                "vtyc\n" +
+                "5000\n" +
+                "dmpj\n" +
+                "hhws\n" +
+                "cjs\n" +
+                "1yfc\n" +
+                "6hgc\n" +
+                "cai8\n" +
+                "1jlc\n" +
+                "2hgf\n" +
+                "7lpj\n" +
+                "8bjs\n" +
+                "8516\n" +
+                "2hgh\n" +
+                "6lpj\n" +
+                "9lpj\n" +
+                "1gyh\n" +
+                "2cyh\n" +
+                "hgwb\n";
+
+        String s1 = s.replace(" ","\":\"").replace("\n","\",\"");
+        //  String s2 = s1.replace("\n","\'\n");
+        System.out.printf(s1);
+    }
 }

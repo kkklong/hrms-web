@@ -7,6 +7,7 @@ import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.ShiftScheduleService;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.views.shift.ShiftSchedulesQueryView;
+import com.hrm.application.views.shift.shiftSchedule3.ScheduleView;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -47,7 +48,7 @@ public class CalendarView extends VerticalLayout implements AfterNavigationObser
 
     private HorizontalLayout getTitle() {
         HorizontalLayout titleHt = new HorizontalLayout();
-        String route = RouteConfiguration.forSessionScope().getUrl(ShiftSchedulesQueryView.class);
+        String route = RouteConfiguration.forSessionScope().getUrl(ScheduleView.class);
         H3 title = new H3("Calendar");
         Anchor shiftSchedule = new Anchor(route, title);
         shiftSchedule.addClassName("title-link");

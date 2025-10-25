@@ -38,6 +38,7 @@ import com.vaadin.flow.component.sidenav.SideNav;
 import com.vaadin.flow.component.sidenav.SideNavItem;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.dom.ThemeList;
+import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.server.VaadinResponse;
 import com.vaadin.flow.server.VaadinService;
@@ -47,8 +48,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -62,6 +62,7 @@ public class MainLayout extends AbstractLayout {
     UserInfo currentEmployee;
     UpdatePasswordDialog dialog;
     List<SideNavItem> userMenu;
+    Map<String, SideNavItem> sidePathMap = new HashMap<>();
 
 
     public MainLayout(AccountService accountService, MenuService menuService) {
@@ -324,12 +325,16 @@ public class MainLayout extends AbstractLayout {
         if (menu.getData() == null) {
             if (link.getPage() == null) {
                 item.setClassName("menu-item-disable");
+                item.getElement().setAttribute("aria-disabled", "true");
+                item.getElement().setAttribute("tabindex", "-1");
             }
             return item;
         }
         for (Menu subMenu : menu.getData()) {
             item.addItem(createNavItem(subMenu));
         }
+
+
         return item;
     }
 
@@ -340,6 +345,12 @@ public class MainLayout extends AbstractLayout {
             item.setPath(page);
         }
         item.setPrefixComponent(icon != null ? icon.create() : VaadinIcon.COG.create());
+        item.getElement().addEventListener("click", event -> {
+            collapseSiblings(item);
+            expandParents(item);
+        });
+        sidePathMap.put(item.getPath(), item);
+
         return item;
     }
 
@@ -406,6 +417,29 @@ public class MainLayout extends AbstractLayout {
 //                getUserMenuList();
             } catch (Exception e) {
                 NotificationUtil.error("載入資料失敗：" + e.getMessage());
+            }
+        });
+    }
+
+    private void expandParents(SideNavItem item) {
+        if (item == null) {
+            return;
+        }
+        Optional<Component> parent = item.getParent();
+        if (parent.isPresent() && parent.get() instanceof SideNavItem parentItem) {
+            parentItem.setExpanded(true);
+            expandParents(parentItem);
+        }
+    }
+
+    private void collapseSiblings(SideNavItem item) {
+        if (item == null) {
+            return;
+        }
+        Stream<Component> siblings = item.getParent().map(Component::getChildren).orElse(Stream.of());
+        siblings.forEach(component -> {
+            if (component instanceof SideNavItem siblingItem && !Objects.equals(item, siblingItem)) {
+                siblingItem.setExpanded(false);
             }
         });
     }
