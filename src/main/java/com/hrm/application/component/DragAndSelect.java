@@ -116,4 +116,8 @@ public class DragAndSelect<T> extends VerticalLayout {
         grid.setAllRowsVisible(isVisible);
     }
 
+    public void setRowsDraggable(Boolean isDraggable){
+        grid.setRowsDraggable(isDraggable); // 啟用拖曳列
+    }
+
 }

@@ -217,6 +217,7 @@ public class ApprovalFlowConfigDialog extends Dialog {
             H5 title = new H5("審核流程 " + "(" + interval.getName() + ")");
             DragAndSelect<Option<String>> selectGrid = new DragAndSelect<>(reviewOpts);
             selectGrid.setAllRowsVisible(true);
+            selectGrid.setRowsDraggable(true);
             selectGrid.addColumn(Option::getName).setHeader("審核人員 [全選/取消]");
             reviewFlowGridMap.put(interval.getValue(), selectGrid);
             flowLayout.add(title, selectGrid);

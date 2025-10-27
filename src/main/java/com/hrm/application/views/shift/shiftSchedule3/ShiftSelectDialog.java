@@ -8,7 +8,9 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dialog.Dialog;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -38,7 +40,7 @@ public class ShiftSelectDialog extends Dialog {
                              List<ShiftType> allTypes,
                              ShiftType current, String remarkS) {
         this.date = date;
-        setHeaderTitle(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " 班別選擇");
+//        setHeaderTitle(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " 班別選擇");
 
         rbg.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
         rbg.setWidthFull();
@@ -62,9 +64,9 @@ public class ShiftSelectDialog extends Dialog {
             close();
         });
 
-        HorizontalLayout buttons = new HorizontalLayout(cancel, save);
+        FormLayout buttons = new FormLayout(save, cancel);
         buttons.setWidthFull();
-        buttons.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
+//        buttons.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 
         Tab tab1 = new Tab("排班設定");
         Tab tab2 = new Tab("備註說明");
@@ -92,21 +94,32 @@ public class ShiftSelectDialog extends Dialog {
         tab1Content.setVisible(true);
         tab2Content.setVisible(false);
 
-        VerticalLayout body = new VerticalLayout(tabs, pages);
+        VerticalLayout body = new VerticalLayout(getTitle(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " 排班"),
+                tabs,
+                pages);
         body.setPadding(false);
         body.setSpacing(false);
         body.setWidth("15em");
-        body.setHeight("25em");
+        body.setHeight("28em");
         body.addClassName("grid-content");
         add(body);
         getFooter().add(buttons);
-        addClassName("background-plan");
     }
 
     private VerticalLayout getLayoutLine(Component... fields) {
         VerticalLayout layout = new VerticalLayout(fields);
 //        layout.setWidth("30em");
         return layout;
+    }
+
+    private HorizontalLayout getTitle(String text) {
+        HorizontalLayout titleHt = new HorizontalLayout();
+        H3 title = new H3(text);
+        title.addClassName("title-heading");
+        titleHt.add(title);
+        titleHt.addClassName("title-config");
+        titleHt.setWidthFull();
+        return titleHt;
     }
 
     // --- Events ---

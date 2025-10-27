@@ -144,7 +144,7 @@ public class ScheduleMatrixGrid extends Div {
                 .setKey("holidayCount")
                 .setFrozen(true)
                 .setTextAlign(ColumnTextAlign.CENTER)
-                .setHeader(setUpSpan("值班", "#2828FF"));
+                .setHeader(setUpSpan("值班", "var(--lumo-primary-color)"));
 
         List<LocalDate> days = generateDateRange(displayStart, displayEnd);
         dayList.addAll(days);
@@ -416,7 +416,7 @@ public class ScheduleMatrixGrid extends Div {
         weekSpan.getStyle().set("font-weight", "bold");
         weekSpan.getStyle().set("padding", "5px");
         weekHeader.getCell(col).setComponent(weekSpan);
-        weekHeader.getCell(col).setPartName("cell-period" + getPeriodIndexForDate(date, periods));
+//        weekHeader.getCell(col).setPartName("cell-period" + getPeriodIndexForDate(date, periods));
 
         // 星期
         String dowTxt = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
@@ -468,6 +468,8 @@ public class ScheduleMatrixGrid extends Div {
         if (!isManagement() && isDisplayOnly(date)) {
             dayCell.setPartName("locked-day");
         }
+        dayHeader.getCell(col).setPartName("cell-period" + getPeriodIndexForDate(date, periods));
+
 
         ensureHeaderListSize(weekHeaderSpans, idx);
         ensureHeaderListSize(dowHeaderSpans, idx);

@@ -79,8 +79,14 @@ html {
 .shiftSchedules-grid::part(footer-cell) {
     border-top: 3px solid #ccc;
     background-color: #f5f5f5;
+    /*background-color: var(--lumo-contrast-10pct);*/
+    /*backdrop-filter: blur(6px); !* 模糊效果 *!*/
     /*line-height: 10%;*/
 }
+.shiftSchedules-grid::part(locked-day) {
+    background-color: #cfcfcf;   /* 深一點的灰，可調 */
+}
+
 /*.shiftSchedules-grid .footer-vertical-layout > * {*/
 /*    margin: 0;*/
 /*    padding: 0;*/

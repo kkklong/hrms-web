@@ -348,5 +348,40 @@ public class ShiftScheduleService {
         return shiftSchedulesList;
     }
 
+    public List<ShiftSchedules> buildPayload(List<ShiftSchedulesQueryVO> rows, LocalDate start, LocalDate end) {
+        if (rows == null) return Collections.emptyList();
+        List<ShiftSchedules> result = new ArrayList<>();
+
+        for (ShiftSchedulesQueryVO row : rows) {
+            Integer employeeId = row.getEmployeeId();
+            String nickName = row.getNickName();
+            Integer departmentId = row.getDepartmentId();
+            String departmentName = row.getDepartmentName();
+
+            for (ShiftSchedulesDateTimeQueryVO sd : row.getSchedulesDates()) {
+                LocalDate d = sd.getShiftDate();
+                if (d == null) continue;
+                if (d.isBefore(start) || d.isAfter(end)) continue; // 排除顯示用擴充週
+
+                ShiftSchedules s = new ShiftSchedules();
+                s.setId(sd.getId());
+                s.setEmployeeId(employeeId);
+                s.setNickName(nickName);
+                s.setDepartmentId(departmentId);
+                s.setDepartmentName(departmentName);
+                s.setShiftTypes(sd.getShiftTypes());
+                s.setShiftDate(sd.getShiftDate());
+                s.setStatus(sd.getStatus());
+                s.setWeekType(sd.getWeekType());
+                s.setRemark(sd.getRemark());
+                s.setActionType(sd.getActionType());
+                s.setShiftColorCode(sd.getShiftColorCode());
+
+                result.add(s);
+            }
+        }
+        return result;
+    }
+
 
 }
