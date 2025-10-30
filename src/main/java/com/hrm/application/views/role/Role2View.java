@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Scope;
 
 @Scope("prototype")
 @Route(value = "role2", layout = MainLayout.class)
-@PageTitle("角色權限管理 | 人力資源管理系統")
+@PageTitle("角色權限管理 | HRM System")
 public class Role2View extends VerticalLayout {
 
     RoleService service;

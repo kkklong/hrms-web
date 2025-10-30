@@ -45,7 +45,7 @@ import java.util.*;
 @Scope("prototype")
 @Route(value = "notice", layout = MainLayout.class)
 @MenuRouter(label = "NoticeManager", icon = VaadinIcon.MEGAPHONE)
-@PageTitle("公告管理 | 人力資源管理系統")
+@PageTitle("公告管理 | HRM System")
 public class NoticeView extends VerticalLayout {
 
     private NoticeService service;

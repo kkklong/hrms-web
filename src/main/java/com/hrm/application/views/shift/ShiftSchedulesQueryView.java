@@ -56,7 +56,7 @@ import java.util.stream.IntStream;
 @Scope("prototype")
 @Route(value = "shiftSchedules", layout = MainLayout.class)
 @MenuRouter(label = "ShiftSchedules", icon = VaadinIcon.CALENDAR)
-@PageTitle("部門班表 | 人力資源管理系統")
+@PageTitle("部門班表 | HRM System")
 public class ShiftSchedulesQueryView extends VerticalLayout {
     private ShiftScheduleService service;
 

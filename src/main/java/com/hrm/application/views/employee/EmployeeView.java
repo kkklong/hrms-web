@@ -40,7 +40,7 @@ import java.util.Optional;
 @Scope("prototype")
 @Route(value = "employee", layout = MainLayout.class)
 @MenuRouter(label = "Employee", icon = VaadinIcon.USER)
-@PageTitle("員工資料 | 人力資源管理系統")
+@PageTitle("員工資料 | HRM System")
 public class EmployeeView extends VerticalLayout {
     //
     private Grid<Employee> grid = new Grid<>(Employee.class, false);

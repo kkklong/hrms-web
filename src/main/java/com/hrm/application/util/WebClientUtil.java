@@ -99,12 +99,12 @@ import java.util.Map;
             }).block();
         } catch (HttpClientErrorException e) {  // HTTP status code 為 4xx、5xx
             log.error("ClientError: request URI: {}; HTTP error: {}; {} - status ; Header: {};", uri, e.getStatusCode(), e.getMessage(), headers);
-            NotificationUtil.error(e.getStatusCode().toString() +"-"+ e.getMessage());
+//            NotificationUtil.error(e.getStatusCode().toString() +"-"+ e.getMessage());
             handleHttpError(e);
 
             throw e;
         } catch (Exception e) {
-            NotificationUtil.error(e.getMessage());
+//            NotificationUtil.error(e.getMessage());
             log.error("Error: request URI: {}; msg: {}; Header: {};", uri, e.getMessage(), headers);
         }
 

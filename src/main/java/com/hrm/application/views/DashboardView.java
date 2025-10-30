@@ -35,6 +35,7 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
         this.addClassName("background-plan");
         setSizeFull();
         calendar = new CalendarView(shiftScheduleService);
+        calendar.setWidthFull();
         calendar.setHeight("45em"); // fullCalendar父階沒有height的話初始會失敗(放入formLayout必須先給定值)
         PersonalInfoBoard personalInfo = new PersonalInfoBoard(accountService);
         personalInfo.setSizeFull();
@@ -42,12 +43,12 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
         stepLayout.setSizeFull();
 
         stepLayout.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("50em", 2),
-                new FormLayout.ResponsiveStep("100em", 4)
+                new FormLayout.ResponsiveStep("0em", 3),
+                new FormLayout.ResponsiveStep("70em", 6)
         );
         stepLayout.add(personalInfo, calendar);
-        stepLayout.setColspan(personalInfo, 2);
-        stepLayout.setColspan(calendar, 2);
+        stepLayout.setColspan(personalInfo, 3);
+        stepLayout.setColspan(calendar, 3);
 
         add(stepLayout);
 

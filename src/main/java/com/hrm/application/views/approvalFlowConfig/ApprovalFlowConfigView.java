@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @Scope("prototype")
 @Route(value = "approvalFlowConfig", layout = MainLayout.class)
 @MenuRouter(label = "ApprovalFlowConfig", icon = VaadinIcon.COG)
-@PageTitle("審核流程設定 | 人力資源管理系統")
+@PageTitle("審核流程設定 | HRM System")
 public class ApprovalFlowConfigView extends VerticalLayout {
 
     private Grid<ApprovalFlowConfig> grid = new Grid<>(ApprovalFlowConfig.class, false);
@@ -79,7 +79,7 @@ public class ApprovalFlowConfigView extends VerticalLayout {
         configureDialog();
         add(getTitle(), getToolbar(), getContent());
         setSizeFull();
-        this.addClassName("background-plan");
+        addClassName("background-plan");
     }
 
     private HorizontalLayout getTitle() {

@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route;
 import org.slf4j.LoggerFactory;
 
 @Route("login")
-@PageTitle("登入 | 人力資源管理系統")
+@PageTitle("登入 | HRM System")
 public class LoginView extends VerticalLayout {
     private final LoginForm login = new LoginForm();
     private final AccountService service;

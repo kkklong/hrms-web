@@ -37,7 +37,7 @@ import java.util.Optional;
 @Scope("prototype")
 @Route(value = "department", layout = MainLayout.class)
 @MenuRouter(label = "Department", icon = VaadinIcon.OFFICE)
-@PageTitle("部門資料 | 人力資源管理系統")
+@PageTitle("部門資料 | HRM System")
 public class DepartmentView extends VerticalLayout {
 
     private DepartmentService service;

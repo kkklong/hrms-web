@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Scope("prototype")
 @Route(value = "calendar", layout = MainLayout.class)
 @MenuRouter(label = "Calendar", icon = VaadinIcon.CALENDAR_O)
-@PageTitle("Calendar | 人力資源管理系統")
+@PageTitle("Calendar | HRM System")
 public class CalendarView extends VerticalLayout implements AfterNavigationObserver {
 
     private ShiftScheduleService service;
@@ -43,6 +43,7 @@ public class CalendarView extends VerticalLayout implements AfterNavigationObser
         add(getTitle(),getContent());
         setDefaultHorizontalComponentAlignment(Alignment.CENTER);
         this.addClassName("background-plan");
+
         setSizeFull();
     }
 

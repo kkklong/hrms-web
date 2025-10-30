@@ -1,6 +1,7 @@
 package com.hrm.application.menu;
 
 import com.hrm.application.views.approvalFlowConfig.ApprovalFlowConfigView;
+import com.hrm.application.views.attendance.RawAttendanceRecordsQueryView;
 import com.hrm.application.views.department.DepartmentView;
 import com.hrm.application.views.employee.EmployeeView;
 import com.hrm.application.views.notice.NoticeView;
@@ -34,7 +35,7 @@ public enum MenuLink {
 //    LEAVE_TYPE("員工假別", "000302", LeaveTypeView.class, VaadinIcon.GOLF),
 //    LEAVE_APPROVE("請假審核", "000303", LeaveManagerView.class, VaadinIcon.CLIPBOARD_CHECK),
 //    LEAVE_APPLY("請假申請", "000304", LeaveView.class, VaadinIcon.CLIPBOARD_USER),
-//    PUNCH("打卡紀錄", "000305", RawAttendanceRecordsQueryView.class, VaadinIcon.PRINT),
+    PUNCH("打卡紀錄", "000305", RawAttendanceRecordsQueryView.class, VaadinIcon.PRINT),
 //    ATTENDANCE("個人出勤", "000306", PersonalAttendanceRecordsView.class, VaadinIcon.OFFICE),
 //    REMOTE_ATTENDANCE_MANAGE("遠端打卡管理", "000307", RemoteAttendanceManagerView.class, VaadinIcon.CLOUD),
 //    SCHEDULING("個人排班", "000308", ShiftScheduleView.class, VaadinIcon.CALENDAR_USER),
