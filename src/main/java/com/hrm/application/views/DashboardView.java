@@ -1,14 +1,17 @@
 package com.hrm.application.views;
 
+import com.hrm.application.demo.rawAttend.CrawlRawAttendService;
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.service.AccountService;
 import com.hrm.application.service.EmployeeService;
+import com.hrm.application.service.RawAttendanceRecordsQueryService;
 import com.hrm.application.service.ShiftScheduleService;
 import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.views.calendar.CalendarConfig;
 import com.hrm.application.views.calendar.CalendarView;
+import com.hrm.application.views.dashboard.ClockInfo;
 import com.hrm.application.views.dashboard.PersonalInfoBoard;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
@@ -27,28 +30,33 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
 
     CalendarView calendar;
 
-    public DashboardView(ShiftScheduleService shiftScheduleService, AccountService accountService) {
+    public DashboardView(ShiftScheduleService s1, AccountService s2,
+                         RawAttendanceRecordsQueryService s3,
+                         CrawlRawAttendService s4) {
         if (SessionUtil.getUserInfo() == null) {
             NotificationUtil.error("Session Not Ready");
             return;
         }
         this.addClassName("background-plan");
         setSizeFull();
-        calendar = new CalendarView(shiftScheduleService);
+        calendar = new CalendarView(s1);
         calendar.setWidthFull();
         calendar.setHeight("45em"); // fullCalendar父階沒有height的話初始會失敗(放入formLayout必須先給定值)
-        PersonalInfoBoard personalInfo = new PersonalInfoBoard(accountService);
+        PersonalInfoBoard personalInfo = new PersonalInfoBoard(s2);
         personalInfo.setSizeFull();
+        ClockInfo clockInfo = new ClockInfo(s3, s4);
+        clockInfo.setSizeFull();
+
         FormLayout stepLayout = new FormLayout();
         stepLayout.setSizeFull();
 
         stepLayout.setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0em", 3),
-                new FormLayout.ResponsiveStep("70em", 6)
+                new FormLayout.ResponsiveStep("0em", 1),
+                new FormLayout.ResponsiveStep("70em", 2)
         );
-        stepLayout.add(personalInfo, calendar);
-        stepLayout.setColspan(personalInfo, 3);
-        stepLayout.setColspan(calendar, 3);
+        stepLayout.add(personalInfo, calendar, clockInfo);
+//        stepLayout.setColspan(personalInfo, 3);
+//        stepLayout.setColspan(calendar, 3);
 
         add(stepLayout);
 

@@ -2,13 +2,17 @@ package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.RawAttendanceRecords;
-import com.hrm.application.model.Option;
+import com.hrm.application.model.bo.UpdateAttendanceRequest;
 import com.hrm.application.util.BEClientRestUtil;
+import com.hrm.application.util.BEClientUtil;
+import com.hrm.application.util.NotificationUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,14 +20,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 @Service
-public class RawAttendanceRecordsQuerySevice {
+public class RawAttendanceRecordsQueryService {
 
     @Value("${hrm.url}")
     private String backEndDomain;
 
     private final BEClientRestUtil client;
 
-    public RawAttendanceRecordsQuerySevice(BEClientRestUtil client) {
+    public RawAttendanceRecordsQueryService(BEClientRestUtil client) {
         this.client = client;
     }
 
@@ -45,9 +49,27 @@ public class RawAttendanceRecordsQuerySevice {
         return new ArrayList<>();
     }
 
+    public boolean updateData(UpdateAttendanceRequest items) {
+        String url = backEndDomain + API.UPDATE_PUNCH_RECORDS.getPath();
+        BEClientUtil client = new BEClientUtil(WebClient.builder().build());
+
+        ParameterizedTypeReference<ApiResponse<List<RawAttendanceRecords>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<RawAttendanceRecords>> response = client.doPostJson(url,null, items, responseType);
+        if (response != null) {
+            if (response.getCode().equals(0)) {
+//                NotificationUtil.success(response.getMessage());
+                return true;
+            }
+        }
+//        NotificationUtil.error(response.getMessage());
+        return false;
+    }
+
+
     private enum API {
         QUERY_PUNCH_RECORDS("/rawAttendanceRecords/query", HttpMethod.GET, null),
-
+        UPDATE_PUNCH_RECORDS("/rawAttendanceRecords/update" , HttpMethod.POST, null),
 
 
         NONE("", null, null);

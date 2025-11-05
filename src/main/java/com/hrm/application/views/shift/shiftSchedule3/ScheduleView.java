@@ -140,7 +140,7 @@ public class ScheduleView extends VerticalLayout {
         HorizontalLayout left = new HorizontalLayout(saveButton, managerToolConfigure());
 
         // 中間：日期
-        HorizontalLayout dateCenter = new HorizontalLayout(configureDateSelector());
+        HorizontalLayout dateCenter = configureDateSelector();
         dateCenter.setWidthFull();
         dateCenter.setJustifyContentMode(HorizontalLayout.JustifyContentMode.CENTER);
 
@@ -227,10 +227,13 @@ public class ScheduleView extends VerticalLayout {
 
         HorizontalLayout datePair = new HorizontalLayout(yearPicker, monthPicker);
         leftButton.addClickListener(e -> decrementMonth());
+        leftButton.getStyle().set("--vaadin-button-height","--lumo-size-m");
+        leftButton.setWidth("3em");
         rightButton.addClickListener(e -> incrementMonth());
-
+        rightButton.getStyle().set("--vaadin-button-height","--lumo-size-m");
+        rightButton.setWidth("3em");
         HorizontalLayout ht = new HorizontalLayout(leftButton, datePair, rightButton);
-        ht.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
+//        ht.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
         return ht;
     }
 

@@ -8,15 +8,13 @@ import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.ToolUtil;
-import com.vaadin.flow.component.grid.ColumnTextAlign;
-import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.grid.HeaderRow;
+import com.vaadin.flow.component.grid.*;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 
 import java.time.LocalDate;
@@ -135,9 +133,9 @@ public class ScheduleMatrixGrid extends Div {
         grid.addColumn(vo -> Optional.ofNullable(vo.getDepartmentName()).orElse("未知部門"))
                 .setHeader("部門").setKey("department").setFrozen(true).setVisible(false);
 
-        grid.addColumn(vo -> Optional.ofNullable(vo.getNickName()).orElse("未知員工"))
+        Grid.Column<ShiftSchedulesQueryVO> employeeNickNameColumn = grid.addColumn(vo -> Optional.ofNullable(vo.getNickName()).orElse("未知員工"))
                 .setHeader("員工\\日期").setKey("nickName").setFrozen(true)
-                .setSortable(true).setComparator(Comparator.comparing((ShiftSchedulesQueryVO::getEmployeeId), Comparator.nullsLast(Integer::compareTo)))
+                .setComparator(Comparator.comparing(ShiftSchedulesQueryVO::getEmployeeNumber, String.CASE_INSENSITIVE_ORDER))
                 .setFooter(setEmployeeFooterText("日班", "午班", "夜班"));
 
         grid.addColumn(vo -> countHolidayWorkTimes(vo, selectedMonth))
@@ -179,6 +177,8 @@ public class ScheduleMatrixGrid extends Div {
             c.setAutoWidth(true);
             c.setTextAlign(ColumnTextAlign.CENTER);
         });
+        grid.sort(List.of(new GridSortOrder<>(employeeNickNameColumn, SortDirection.ASCENDING)));
+
     }
 
     private Grid.Column<ShiftSchedulesQueryVO> buildDayColumn(LocalDate date, Map<String, Long> slotCounts) {

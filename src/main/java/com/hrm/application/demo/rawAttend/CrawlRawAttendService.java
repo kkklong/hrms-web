@@ -2,7 +2,6 @@ package com.hrm.application.demo.rawAttend;
 
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.RawAttendanceRecords;
-import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.WebClientUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,10 +19,10 @@ public class CrawlRawAttendService {
 
     private final WebClientUtil client;
 
+
     static String HRM_OFFICIAL_URL = "http://192.168.0.75:8080";
     static String QUERY_RAW_ATTENDANCE_API = "/rawAttendanceRecords/query";
     static String LOGIN_API = "/account/login";
-    static  String saveRawAttendence = "/saveRawAttendence";
 
 
     public CrawlRawAttendService(WebClientUtil client) {
@@ -99,7 +98,7 @@ public class CrawlRawAttendService {
                 new ParameterizedTypeReference<>() {}
         );
         if(response != null) {
-            return response.getCode() = 0 ? true : false;
+            return response.getCode() == 0 ? true : false;
         }
         return false;
     }

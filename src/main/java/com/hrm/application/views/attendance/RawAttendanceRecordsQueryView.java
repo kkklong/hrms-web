@@ -1,32 +1,46 @@
 package com.hrm.application.views.attendance;
 
+import com.hrm.application.demo.rawAttend.CrawlRawAttendService;
 import com.hrm.application.entity.RawAttendanceRecords;
 import com.hrm.application.layout.MainLayout;
-import com.hrm.application.service.RawAttendanceRecordsQuerySevice;
+import com.hrm.application.model.bo.UpdateAttendanceRequest;
+import com.hrm.application.service.RawAttendanceRecordsQueryService;
+import com.hrm.application.util.NotificationUtil;
+import com.hrm.application.util.WebClientUtil;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.datetimepicker.DateTimePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.Scroller;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Scope("prototype")
 @Route(value = "RawAttendanceRecords", layout = MainLayout.class)
+@PageTitle("打卡資料 | HRM System")
 public class RawAttendanceRecordsQueryView extends VerticalLayout {
 
     Grid<RawAttendanceRecords> grid = new Grid<>(RawAttendanceRecords.class, false);
-    private final RawAttendanceRecordsQuerySevice service;
+    private final RawAttendanceRecordsQueryService service;
+    private final CrawlRawAttendService service2;
     private List<RawAttendanceRecords> rawAttendanceRecordsList;
 
     private DateTimePicker startDate = new DateTimePicker();
@@ -36,8 +50,9 @@ public class RawAttendanceRecordsQueryView extends VerticalLayout {
 
     private Button transmit = new Button("查詢");
 
-    public RawAttendanceRecordsQueryView(RawAttendanceRecordsQuerySevice service) {
+    public RawAttendanceRecordsQueryView(RawAttendanceRecordsQueryService service, CrawlRawAttendService service2) {
         this.service = service;
+        this.service2 = service2;
         setData();
         configureGrid();
         updateSchedulesData();
@@ -75,21 +90,49 @@ public class RawAttendanceRecordsQueryView extends VerticalLayout {
 
     private FormLayout getToolbar() {
         var toolbar = new FormLayout();
-        toolbar.add(startDate, endDate, nickName, showDetail, transmit);
+        Button update = new Button(new Icon(VaadinIcon.REFRESH));
+        update.getStyle().set("--vaadin-button-height","--lumo-size-m");
+        update.addClickListener(event -> updateRawData());
+
+        toolbar.add(startDate, endDate, nickName, showDetail, transmit, update);
         toolbar.setColspan(startDate, 6);
         toolbar.setColspan(endDate, 6);
         toolbar.setColspan(nickName, 3);
         toolbar.setColspan(showDetail, 3);
         toolbar.setColspan(transmit, 2);
+        toolbar.setColspan(update, 1);
+
         toolbar.setMaxWidth("70em");
         toolbar.setResponsiveSteps(
                 new FormLayout.ResponsiveStep("0em", 6),
                 new FormLayout.ResponsiveStep("20em", 7),
                 new FormLayout.ResponsiveStep("40em", 13),
-                new FormLayout.ResponsiveStep("60em", 21)
+                new FormLayout.ResponsiveStep("60em", 22)
         );
 //        toolbar.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
         return toolbar;
+    }
+
+    private void updateRawData() {
+        LocalDate now = LocalDate.now();
+//        LocalDate selectedDate = LocalDate.of(now.getYear(), now.getMonth(), 1);
+//        LocalDateTime startDate = LocalDateTime.parse(selectedDate.atStartOfDay().toString());
+//        LocalDateTime endDate = LocalDateTime.parse(selectedDate.plusMonths(1).atStartOfDay().minusSeconds(1).toString());
+
+        LocalDateTime startDate = LocalDateTime.parse(now.minusDays(3).atStartOfDay().toString());
+        LocalDateTime endDate = LocalDateTime.parse(now.plusDays(1).atStartOfDay().minusSeconds(1).toString());
+        String account = "";
+        Boolean showDetail = false;
+
+        List<RawAttendanceRecords> resp = service2.doFetchData(startDate, endDate, account, showDetail);
+        log.info("Items:" + resp);
+        UpdateAttendanceRequest items = new UpdateAttendanceRequest();
+        items.setVos(resp);
+        items.setStartDate(startDate);
+        items.setEndDate(endDate);
+
+        boolean result = service.updateData(items);
+        NotificationUtil.success(result ? "成功" : "失敗");
     }
 
     private HorizontalLayout getContent() {

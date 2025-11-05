@@ -4,8 +4,12 @@ import com.hrm.application.demo.payment.ThirdPartyService;
 import com.hrm.application.demo.rawAttend.CrawlRawAttendService;
 import com.hrm.application.demo.sport.service.SportService;
 import com.hrm.application.entity.RawAttendanceRecords;
+import com.hrm.application.service.RawAttendanceRecordsQueryService;
+import com.hrm.application.util.BEClientRestUtil;
 import com.hrm.application.util.WebClientUtil;
+import jakarta.annotation.Resource;
 import org.junit.Test;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.time.LocalDate;
@@ -13,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class print02 {
+
 
     @Test
     public void Test0001(){
@@ -102,5 +107,11 @@ public class print02 {
         List<RawAttendanceRecords> resp = service.doFetchData(startDate, endDate, account, showDetail);
         System.out.println("Response: " + resp.toString());
 
+//        RestTemplate restTemplate = new RestTemplate();
+//        BEClientRestUtil client2 = new BEClientRestUtil(restTemplate);
+//
+//        RawAttendanceRecordsQueryService service2 = new RawAttendanceRecordsQueryService(client2);
+//        boolean result = service2.updateData(resp);
+//        System.out.println("紀錄更新: " + result );
     }
 }
