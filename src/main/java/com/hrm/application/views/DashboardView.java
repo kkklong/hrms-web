@@ -3,16 +3,14 @@ package com.hrm.application.views;
 import com.hrm.application.demo.rawAttend.CrawlRawAttendService;
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
-import com.hrm.application.service.AccountService;
-import com.hrm.application.service.EmployeeService;
-import com.hrm.application.service.RawAttendanceRecordsQueryService;
-import com.hrm.application.service.ShiftScheduleService;
+import com.hrm.application.service.*;
 import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.views.calendar.CalendarConfig;
 import com.hrm.application.views.calendar.CalendarView;
 import com.hrm.application.views.dashboard.ClockInfo;
 import com.hrm.application.views.dashboard.PersonalInfoBoard;
+import com.hrm.application.views.dashboard.UserAvailableLeaveInfo;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -32,12 +30,14 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
 
     public DashboardView(ShiftScheduleService s1, AccountService s2,
                          RawAttendanceRecordsQueryService s3,
-                         CrawlRawAttendService s4) {
+                         CrawlRawAttendService s4,
+                         LeaveTypeService s5) {
         if (SessionUtil.getUserInfo() == null) {
             NotificationUtil.error("Session Not Ready");
             return;
         }
         this.addClassName("background-plan");
+        getStyle().set("overflow", "auto");
         setSizeFull();
         calendar = new CalendarView(s1);
         calendar.setWidthFull();
@@ -46,6 +46,8 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
         personalInfo.setSizeFull();
         ClockInfo clockInfo = new ClockInfo(s3, s4);
         clockInfo.setSizeFull();
+        UserAvailableLeaveInfo userALInfo = new UserAvailableLeaveInfo(s5);
+        userALInfo.setSizeFull();
 
         FormLayout stepLayout = new FormLayout();
         stepLayout.setSizeFull();
@@ -54,7 +56,7 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
                 new FormLayout.ResponsiveStep("0em", 1),
                 new FormLayout.ResponsiveStep("70em", 2)
         );
-        stepLayout.add(personalInfo, calendar, clockInfo);
+        stepLayout.add(clockInfo, userALInfo, personalInfo, calendar);
 //        stepLayout.setColspan(personalInfo, 3);
 //        stepLayout.setColspan(calendar, 3);
 

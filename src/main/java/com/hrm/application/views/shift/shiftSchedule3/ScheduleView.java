@@ -254,8 +254,10 @@ public class ScheduleView extends VerticalLayout {
     }
 
     private void updateDateComboBox() {
-        yearPicker.setValue(selectedDate.getYear());
-        monthPicker.setValue(selectedDate.getMonthValue());
+        int year = selectedDate.getYear();
+        int month = selectedDate.getMonth().getValue();
+        yearPicker.setValue(year);
+        monthPicker.setValue(month);
     }
 
     private void updateSelectedDate() {

@@ -3,6 +3,7 @@ package com.hrm.application.service;
 import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.LeaveSpecialRecord;
 import com.hrm.application.model.Option;
+import com.hrm.application.model.vo.LeaveSpecialRecordsVO2;
 import com.hrm.application.util.BEClientRestUtil;
 import com.hrm.application.util.BEClientUtil;
 import com.hrm.application.util.NotificationUtil;
@@ -138,6 +139,17 @@ public class LeaveTypeService {
         return new ArrayList<>();
     }
 
+    public List<LeaveSpecialRecordsVO2> queryCurrentLeaveSpecialRecordList2() {
+        String url = backEndDomain + API.GET_CURRENT_LEAVE_SPECIAL_RECORDS2.getPath();
+        ParameterizedTypeReference<ApiResponse<List<LeaveSpecialRecordsVO2>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<LeaveSpecialRecordsVO2>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
 
     private enum API {
         // 假別設定
@@ -146,6 +158,7 @@ public class LeaveTypeService {
         DELETE_LEAVE_SPECIAL_RECORD("/leaveSpecialRecords/delete/{id}", HttpMethod.POST, null),
         GET_LEAVE_SPECIAL_RECORDS("/leaveSpecialRecords/getAll", HttpMethod.GET, null),
         GET_CURRENT_LEAVE_SPECIAL_RECORDS("/leaveSpecialRecords/currentEmployeeLeaveSpecialRecords", HttpMethod.GET, null),
+        GET_CURRENT_LEAVE_SPECIAL_RECORDS2("/leaveSpecialRecords/currentEmployeeLeaveSpecialRecords2", HttpMethod.GET, null),
 
         // enum
         GET_NON_SCHEDULED_LEAVE_OPTIONS("/enum/getNonAutoScheduledLeaveType", HttpMethod.GET, null),

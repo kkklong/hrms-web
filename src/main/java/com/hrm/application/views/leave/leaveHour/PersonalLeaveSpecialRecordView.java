@@ -5,6 +5,7 @@ import com.hrm.application.enums.Status;
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.menu.MenuRouter;
 import com.hrm.application.model.Option;
+import com.hrm.application.model.vo.LeaveSpecialRecordsVO2;
 import com.hrm.application.service.LeaveTypeService;
 import com.hrm.application.util.DateUtil;
 import com.hrm.application.util.ToolUtil;
@@ -30,10 +31,10 @@ import static com.hrm.application.util.DateUtil.DatePattern.YYYY_MM_DD;
 
 @Scope("prototype")
 @Route(value = "PersonalLeaveSpecialRecordMenu", layout = MainLayout.class)
-@MenuRouter(label = "個人可用假別(選單)", icon = VaadinIcon.GOLF)
+@MenuRouter(label = "個人可用假別", icon = VaadinIcon.GOLF)
 public class PersonalLeaveSpecialRecordView extends VerticalLayout {
-    private final Grid<LeaveSpecialRecord> grid = new Grid<>(LeaveSpecialRecord.class, false);
-    private final ListDataProvider<LeaveSpecialRecord> dataProvider;
+    private final Grid<LeaveSpecialRecordsVO2> grid = new Grid<>(LeaveSpecialRecordsVO2.class, false);
+    private final ListDataProvider<LeaveSpecialRecordsVO2> dataProvider;
     private final LeaveTypeService service;
 
     private List<Option<Integer>> departmentList;
@@ -61,7 +62,7 @@ public class PersonalLeaveSpecialRecordView extends VerticalLayout {
 
     private HorizontalLayout titleConfigure() {
         HorizontalLayout titleHt = new HorizontalLayout();
-        H3 title = new H3("PersonalLeaveSpecialRecord(Menu)");
+        H3 title = new H3("PersonalLeaveSpecialRecord");
         title.addClassName("title-heading");
         titleHt.add(title);
         titleHt.addClassName("title-config");
@@ -86,7 +87,7 @@ public class PersonalLeaveSpecialRecordView extends VerticalLayout {
 
     private void updateList() {
         dataProvider.getItems().clear();
-        dataProvider.getItems().addAll(service.queryCurrentLeaveSpecialRecordList());
+        dataProvider.getItems().addAll(service.queryCurrentLeaveSpecialRecordList2());
         dataProvider.refreshAll();
         grid.setItems(dataProvider);
     }
@@ -94,7 +95,7 @@ public class PersonalLeaveSpecialRecordView extends VerticalLayout {
         grid.setSizeFull();
         grid.setDataProvider(dataProvider);
         grid.addColumn(l -> l.getStartDate().getYear()).setHeader("年分").setKey("year");
-        grid.addColumn(LeaveSpecialRecord::getChineseName).setHeader("假別").setKey("leaveTypes");
+        grid.addColumn(LeaveSpecialRecordsVO2::getChineseName).setHeader("假別").setKey("leaveTypes");
         grid.addColumn(l -> l.getMaxLeaveDays() + "天").setHeader("可請假天數").setTextAlign(ColumnTextAlign.CENTER).setKey("maxLeaveDays");
         grid.addColumn(l -> DateUtil.format(l.getStartDate(), YYYY_MM_DD.getPattern(), DateUtil.Zone.P_8.getZoneId()))
                 .setHeader("生效日期").setTextAlign(ColumnTextAlign.CENTER).setKey("startDate");

@@ -52,7 +52,7 @@ public class ShiftSelectDialog extends Dialog {
         this.remark.setValue(remarkS);
         save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         cancel.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
-        save.addClickShortcut(Key.ENTER);
+//        save.addClickShortcut(Key.ENTER);
         cancel.addClickShortcut(Key.ESCAPE);
 
         save.addClickListener(e -> {

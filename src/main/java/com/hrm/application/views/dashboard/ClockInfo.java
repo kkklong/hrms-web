@@ -64,7 +64,7 @@ public class ClockInfo extends VerticalLayout {
         anc.addClassName("title-link");
 
         title.addClassName("title-heading");
-        titleHt.add(anc, getToolbar());
+        titleHt.add(anc);
         titleHt.setAlignItems(Alignment.CENTER);
 
         titleHt.addClassName("title-config");
@@ -107,7 +107,7 @@ public class ClockInfo extends VerticalLayout {
     private Component getToolbar() {
         var toolbar = new FormLayout();
         Button update = new Button(new Icon(VaadinIcon.REFRESH));
-        update.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        update.addThemeVariants(ButtonVariant.LUMO_ERROR);
         update.addClickListener(e -> refreshClockData());
 //        toolbar.add(update);
         return update;
@@ -133,7 +133,7 @@ public class ClockInfo extends VerticalLayout {
 
         if (userLastClock != null) {
             clockData = userLastClock;
-            return clockData.getFirstCheckInTime();
+            return clockData.getLastCheckOutTime();
         } else {
             return null;
         }

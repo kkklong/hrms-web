@@ -366,6 +366,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
         grid.removeAllColumns();
         grid.getHeaderRows().clear();
         grid.setItems(shiftSchedulesList);
+        grid.setAllRowsVisible(true);
 
         if (shiftSchedulesList == null || shiftSchedulesList.isEmpty()) {
             return;
@@ -424,7 +425,7 @@ public class ShiftSchedulesQueryView extends VerticalLayout {
             setUpHeadersForDate(i + 1, date, headerArrayList.size());
         }
         grid.addClassNames("shiftSchedules-grid");
-        grid.setSizeFull();
+        grid.setWidthFull();
         grid.getColumns().forEach(col -> col.setAutoWidth(true));
         grid.getColumns().forEach(col -> col.setTextAlign(ColumnTextAlign.CENTER));
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER);
