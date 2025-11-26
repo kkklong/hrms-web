@@ -214,6 +214,20 @@ html {
 }
 
 
+/* =========================================== Others ================================================ */
+
+.right-side-form {
+    justify-items: end;
+}
+
+.left-side-form {
+    justify-items: start;
+}
+
+.middle-side-form {
+    justify-items: center;
+}
+
 
 
 

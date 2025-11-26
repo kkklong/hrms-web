@@ -189,7 +189,7 @@ public class ScheduleMatrixGrid extends Div {
                     cell.addClassName("shift-cell");
                     cell.getStyle().set("padding", "5px");
                     cell.getStyle().set("cursor", "pointer");
-                    cell.getStyle().set("pointer-events", "auto");
+//                    cell.getStyle().set("pointer-events", "auto");
                     cell.addClickListener(ev -> onCellClick(ev.getSource()));
                     return cell;
                 },

@@ -21,6 +21,8 @@ public class CrawlRawAttendService {
 
 
     static String HRM_OFFICIAL_URL = "http://192.168.0.75:8080";
+//    static String HRM_OFFICIAL_URL = "http://hrms.tri-soaring.com.tw:8080";
+
     static String QUERY_RAW_ATTENDANCE_API = "/rawAttendanceRecords/query";
     static String LOGIN_API = "/account/login";
 

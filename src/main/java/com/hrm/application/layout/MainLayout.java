@@ -1,5 +1,6 @@
 package com.hrm.application.layout;
 
+import com.hrm.application.demo.DemoView;
 import com.hrm.application.entity.Menu;
 import com.hrm.application.entity.UpdatePassword;
 import com.hrm.application.entity.UserInfo;
@@ -15,6 +16,7 @@ import com.hrm.application.views.calendar.CalendarView;
 import com.hrm.application.views.leave.leaveHour.PersonalLeaveSpecialRecordView;
 import com.hrm.application.views.leave.leaveTemplate.LeaveTemplateView;
 import com.hrm.application.views.leave.leaveType.LeaveTypeView;
+import com.hrm.application.views.shiftAdjust.ShiftAdjustmentRequestView;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
@@ -90,6 +92,8 @@ public class MainLayout extends AbstractLayout {
 
         SideNavItem TestLink = new SideNavItem("測試畫面");
         TestLink.setPrefixComponent(VaadinIcon.COG_O.create());
+        TestLink.addItem(createMenuItem(DemoView.class));
+        TestLink.addItem(createMenuItem(ShiftAdjustmentRequestView.class));
 //        TestLink.addItem(createMenuItem(CalendarView.class));
 //        TestLink.addItem(createMenuItem(ShiftSchedulesQueryView.class));
 //        TestLink.addItem(createMenuItem(TestLotteryView.class));
