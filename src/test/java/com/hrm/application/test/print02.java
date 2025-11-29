@@ -75,64 +75,7 @@ public class print02 {
         String s = "1519\n" +
                 "1agm\n" +
                 "1ayl\n" +
-                "1gyh\n" +
-                "1jlc\n" +
-                "1mpj\n" +
-                "1yfc\n" +
-                "2cyh\n" +
-                "2eyh\n" +
-                "2gyh\n" +
-                "2hgf\n" +
-                "2hgh\n" +
-                "2lpj\n" +
-                "33cp\n" +
-                "3eyh\n" +
-                "3gyh\n" +
-                "3kws\n" +
-                "3mgm\n" +
-                "5000\n" +
-                "5bjs\n" +
-                "5fjs\n" +
-                "5jpj\n" +
-                "5lpj\n" +
-                "63cp\n" +
-                "66cp\n" +
-                "6ajs\n" +
-                "6dpj\n" +
-                "6hgc\n" +
-                "6lpj\n" +
-                "7cpj\n" +
-                "7djs\n" +
-                "7lpj\n" +
-                "7mpj\n" +
-                "888c\n" +
-                "8bjs\n" +
-                "8cyh\n" +
-                "8dws\n" +
-                "8gws\n" +
-                "8hpj\n" +
-                "8lws\n" +
-                "9jws\n" +
-                "9lpj\n" +
-                "aofa\n" +
-                "awan\n" +
-                "betdc\n" +
-                "bwzz\n" +
-                "cai7\n" +
-                "cai8\n" +
-                "cjs\n" +
-                "cmpj\n" +
-                "cpj\n" +
-                "dmpj\n" +
-                "hgwa\n" +
-                "hgwb\n" +
-                "hhws\n" +
-                "jinc\n" +
-                "msmh\n" +
-                "vtyc\n" +
-                "ymgm\n" +
                 "zwnx\n";
-
         String s1 = s.replace(" ","\":\"").replace("\n","\",\"");
         //  String s2 = s1.replace("\n","\'\n");
         System.out.printf(s1);

@@ -1,10 +1,13 @@
 package com.hrm.application.views.shift.shiftSchedule3;
 
+import com.hrm.application.component.MonthNavigator;
+import com.hrm.application.component.ToolBar;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.model.Option;
 import com.hrm.application.layout.MainLayout;
 import com.hrm.application.model.ShiftSchedulePeriod;
+import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
 import com.hrm.application.service.ShiftScheduleService;
 import com.hrm.application.util.NotificationUtil;
@@ -14,6 +17,8 @@ import com.hrm.application.views.shift.ExportShiftSchedulesDialog;
 import com.hrm.application.views.shift.ImportShiftSchedulesDialog;
 import com.hrm.application.views.shift.managerTool.CloseShiftScheduleDialog;
 import com.hrm.application.views.shift.managerTool.ConflictCheckDialog;
+import com.hrm.application.views.shift.shiftSchedule2.ShiftTypeSelectDialog;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -22,6 +27,7 @@ import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.contextmenu.SubMenu;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Hr;
 import com.vaadin.flow.component.menubar.MenuBar;
@@ -55,9 +61,6 @@ public class ScheduleView extends VerticalLayout {
     LocalDate displayStart;
     LocalDate displayEnd;
 
-    // selected
-    private LocalDate selectedDate = now;
-
     // UI controls
     private final Button leftButton = new Button("<");
     private final Button rightButton = new Button(">");
@@ -68,6 +71,7 @@ public class ScheduleView extends VerticalLayout {
 
     // 儲存按鈕（左上）
     private final Button saveButton = new Button("儲存班表");
+    private final MonthNavigator monthNavigator;
 
     // grid
     private final ScheduleMatrixGrid matrixGrid = new ScheduleMatrixGrid();
@@ -80,7 +84,13 @@ public class ScheduleView extends VerticalLayout {
         this.service = service;
         setSizeFull();
         setData();
+
+        // 年月導覽
+        monthNavigator = new MonthNavigator(LocalDate.now());
+        monthNavigator.addValueChangeListener(e -> updateSchedulesData());
+
         configureDialog();
+        initCellClickListener();
         // 排班模式
         matrixGrid.setMode(isManager());
         add(getTitle(), getToolbar(), getContent());
@@ -114,8 +124,54 @@ public class ScheduleView extends VerticalLayout {
         departmentList = service.getDepartmentOptionList();
         departmentMap = ToolUtil.transToMap(departmentList, Option::getValue);
 
-        years = IntStream.range(now.getYear() - 1, now.getYear() + 2)
-                .boxed().collect(Collectors.toList());
+//        years = IntStream.range(now.getYear() - 1, now.getYear() + 2)
+//                .boxed().collect(Collectors.toList());
+    }
+
+    // 開班別選擇視窗
+    private void initCellClickListener() {
+        matrixGrid.addCellClickListener(ev -> {
+            ShiftSchedulesQueryVO row  = ev.getRow();
+            LocalDate date             = ev.getDate();
+            ShiftSchedulesDateTimeQueryVO sd = ev.getSchedule();
+
+            if (row == null || date == null) {
+                return;
+            }
+
+            Div cell = ev.getCell();
+
+            // 目前的班別
+            String currentKey = (sd != null ? sd.getShiftTypes() : null);
+            ShiftType current = shiftTypeMap.get(currentKey);
+            String remark = Optional.ofNullable(sd.getRemark()).orElse("");
+                    // 所有班別選項
+            List<ShiftType> allTypes = shiftTypeMap.values().stream()
+                    .sorted(Comparator.comparing(ShiftType::getId, Comparator.nullsLast(Integer::compareTo)))
+                    .collect(Collectors.toList());
+
+            ShiftSelectDialog dialog = new ShiftSelectDialog(date, allTypes, current, remark);
+            dialog.addSaveListener(saveEv -> {
+                ShiftType selected = saveEv.getShiftType();
+                String remarkEv = saveEv.getRemark();
+                if (selected == null) {
+                    return;
+                }
+                if (sd == null) {
+                    return;
+                }
+
+                // 更新當天那格的班別資料
+                sd.setShiftTypes(selected.getShiftKey());
+                sd.setRemark(remarkEv);
+                sd.setShiftColorCode(selected.getShiftColorCode());
+
+                // MatrixGrid refresh row + footer + requestContentUpdate
+                matrixGrid.updateCellAndFooter(cell, row, date);
+            });
+
+            dialog.open();
+        });
     }
 
     private void configureDialog() {
@@ -127,42 +183,21 @@ public class ScheduleView extends VerticalLayout {
         return ScheduleMatrixGrid.Mode.MANAGEMENT;
     }
 
-    private FormLayout getToolbar() {
-        var toolbar = new FormLayout();
-        toolbar.addClassName("toolbar");
-        toolbar.setWidthFull();
-//        toolbar.setJustifyContentMode(HorizontalLayout.JustifyContentMode.BETWEEN);
-//        toolbar.setAlignItems(Alignment.BASELINE);
+    private Component getToolbar() {
 
         // 左側：儲存
         saveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         saveButton.addClickListener(e -> onSaveAll());
-        HorizontalLayout left = new HorizontalLayout(saveButton, managerToolConfigure());
-
-        // 中間：日期
-        HorizontalLayout dateCenter = configureDateSelector();
-        dateCenter.setWidthFull();
-        dateCenter.setJustifyContentMode(HorizontalLayout.JustifyContentMode.CENTER);
 
         // 右側：過濾器
-        HorizontalLayout right = new HorizontalLayout();
         configureDepartmentSelector();
         configureEmployeeFilter();
-        right.add(employeeFilter, departmentSelector);
 
-        toolbar.add(left, dateCenter, right);
-        toolbar.setColspan(left, 8);
-        toolbar.setColspan(dateCenter, 10);
-        toolbar.setColspan(right, 10);
-        toolbar.setResponsiveSteps(
-//                new FormLayout.ResponsiveStep("10em", 4),
-                new FormLayout.ResponsiveStep("20em", 10),
-                new FormLayout.ResponsiveStep("40em", 20),
-        new FormLayout.ResponsiveStep("60em", 30)
+        var toolbar = new ToolBar();
+        toolbar.addLeft(saveButton, managerToolConfigure());
+        toolbar.addCenter(monthNavigator);
+        toolbar.addRight(employeeFilter, departmentSelector);
 
-
-
-        );
         return toolbar;
     }
 
@@ -206,66 +241,6 @@ public class ScheduleView extends VerticalLayout {
         return managerToolMenu;
     }
 
-    /**
-     * 設定DateSelector ToolBar
-     */
-
-    private HorizontalLayout configureDateSelector() {
-        yearPicker.setItems(years);
-        yearPicker.setValue(selectedDate.getYear());
-        yearPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
-        yearPicker.getStyle().set("--vaadin-combo-box-overlay-width", "6em");
-        yearPicker.setWidth("6em");
-
-        List<Integer> months = IntStream.rangeClosed(1, 12).boxed().collect(Collectors.toList());
-        monthPicker.setItems(months);
-        monthPicker.setValue(selectedDate.getMonth().getValue());
-        monthPicker.setItemLabelGenerator(v -> v + "月");
-        monthPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
-        monthPicker.getStyle().set("--vaadin-combo-box-overlay-width", "6em");
-        monthPicker.setWidth("6em");
-
-        HorizontalLayout datePair = new HorizontalLayout(yearPicker, monthPicker);
-        leftButton.addClickListener(e -> decrementMonth());
-        leftButton.getStyle().set("--vaadin-button-height","--lumo-size-m");
-        leftButton.setWidth("3em");
-        rightButton.addClickListener(e -> incrementMonth());
-        rightButton.getStyle().set("--vaadin-button-height","--lumo-size-m");
-        rightButton.setWidth("3em");
-        HorizontalLayout ht = new HorizontalLayout(leftButton, datePair, rightButton);
-//        ht.setDefaultVerticalComponentAlignment(Alignment.BASELINE);
-        return ht;
-    }
-
-    private void decrementMonth() {
-        selectedDate = selectedDate.minusMonths(1);
-        if (selectedDate.getYear() < Collections.min(years)) {
-            selectedDate = selectedDate.withYear(Collections.min(years)).withMonth(1);
-        }
-        updateDateComboBox();
-    }
-
-    private void incrementMonth() {
-        selectedDate = selectedDate.plusMonths(1);
-        if (selectedDate.getYear() > Collections.max(years)) {
-            selectedDate = selectedDate.withYear(Collections.max(years)).withMonth(12);
-        }
-        updateDateComboBox();
-    }
-
-    private void updateDateComboBox() {
-        int year = selectedDate.getYear();
-        int month = selectedDate.getMonth().getValue();
-        yearPicker.setValue(year);
-        monthPicker.setValue(month);
-    }
-
-    private void updateSelectedDate() {
-        if (yearPicker.isEmpty() || monthPicker.isEmpty()) return;
-        int year = yearPicker.getValue();
-        Month month = Month.of(monthPicker.getValue());
-        selectedDate = LocalDate.of(year, month, 1);
-    }
 
     private void configureDepartmentSelector() {
         Integer userDeptId = Optional.ofNullable(SessionUtil.getUserInfo())
@@ -292,6 +267,9 @@ public class ScheduleView extends VerticalLayout {
 
     // 所選月份涵蓋的雙週 ±1 週（顯示）
     private void updateSchedulesData() {
+
+        LocalDate selectedDate = monthNavigator.getSelectedDate();
+
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate first = selectedDate.withDayOfMonth(1);
         LocalDate last = selectedDate.withDayOfMonth(selectedDate.lengthOfMonth());
@@ -330,14 +308,6 @@ public class ScheduleView extends VerticalLayout {
     }
 
     private void setParameterListener() {
-        yearPicker.addValueChangeListener(e -> {
-            updateSelectedDate();
-            updateSchedulesData();
-        });
-        monthPicker.addValueChangeListener(e -> {
-            updateSelectedDate();
-            updateSchedulesData();
-        });
         departmentSelector.addValueChangeListener(e -> {
             employeeFilter.clear();
             updateSchedulesData();

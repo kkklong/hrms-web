@@ -5,8 +5,11 @@ import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.combobox.ComboBoxVariant;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.shared.Registration;
 
 import java.time.LocalDate;
@@ -56,6 +59,9 @@ public class MonthNavigator extends Composite<FlexLayout> {
 
         monthPicker.setItems(months);
         monthPicker.setItemLabelGenerator(ym -> ym.format(YM_FMT));
+        monthPicker.getStyle().set("--vaadin-input-field-border-width", "1.5px");
+        monthPicker.addThemeVariants(ComboBoxVariant.LUMO_ALIGN_CENTER);
+//        monthPicker.getStyle().set("text-align", "center");
 
         YearMonth initValue = months.contains(center) ? center : months.get(backMonths);
         monthPicker.setValue(initValue);

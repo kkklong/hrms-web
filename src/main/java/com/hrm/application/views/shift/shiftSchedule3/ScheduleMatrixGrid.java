@@ -8,6 +8,8 @@ import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.ToolUtil;
+import com.vaadin.flow.component.ComponentEvent;
+import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.grid.*;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
@@ -16,6 +18,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
+import lombok.Getter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -194,8 +197,8 @@ public class ScheduleMatrixGrid extends Div {
                     return cell;
                 },
                 (cell, row) -> {
-                    Map<LocalDate, ShiftSchedulesDateTimeQueryVO> dateMap = indexRow(row);
-                    updateCell(cell, row, date, dateMap);
+//                    Map<LocalDate, ShiftSchedulesDateTimeQueryVO> dateMap = indexRow(row);
+                    updateCell(cell, row, date);
                 }
         );
 
@@ -234,49 +237,52 @@ public class ScheduleMatrixGrid extends Div {
 
         // 生成schedulesDateMap for 統計
         Map<LocalDate, ShiftSchedulesDateTimeQueryVO> dateMap = indexRow(row);
+        ShiftSchedulesDateTimeQueryVO sd = dateMap.get(clickedDate);
 
-        String currentKey = getShiftTypeForDate(dateMap, clickedDate);
-        ShiftType current = shiftTypeMap.get(currentKey);
-        List<ShiftType> allTypes = shiftTypeMap.values().stream()
-                .sorted(Comparator.comparing(ShiftType::getId, Comparator.nullsLast(Integer::compareTo)))
-                .collect(Collectors.toList());
-        String remark = getRemarkForDate(dateMap, clickedDate);
-        ShiftSelectDialog dialog = new ShiftSelectDialog(clickedDate, allTypes, current, remark);
-        dialog.addSaveListener(saveEv -> {
-            ShiftType selected = saveEv.getShiftType();
-            String mark = saveEv.getRemark();
-            if (selected == null) return;
-
-            // 更新資料
-            indexRow(row).computeIfPresent(clickedDate, (d, sd) -> {
-                sd.setShiftTypes(selected.getShiftKey());
-                sd.setShiftColorCode(selected.getShiftColorCode());
-                sd.setRemark(mark);
-                return sd;
-            });
-
-            updateCell(cell, row, clickedDate, dateMap);
-
-            try {
-                grid.getDataProvider().refreshItem(row);
-            } catch (ClassCastException ex) {
-                grid.getDataProvider().refreshAll();
-            }
-
-            updateFooterForDate(clickedDate);
-
-            getUI().ifPresent(ui ->
-                    ui.beforeClientResponse(grid,
-                            ctx -> grid.getElement().callJsFunction("requestContentUpdate")));
-        });
-        dialog.open();
+        fireEvent(new CellClickEvent(this, cell, row, clickedDate, sd));
+//        String currentKey = getShiftTypeForDate(dateMap, clickedDate);
+//        ShiftType current = shiftTypeMap.get(currentKey);
+//        List<ShiftType> allTypes = shiftTypeMap.values().stream()
+//                .sorted(Comparator.comparing(ShiftType::getId, Comparator.nullsLast(Integer::compareTo)))
+//                .collect(Collectors.toList());
+//        String remark = getRemarkForDate(dateMap, clickedDate);
+//        ShiftSelectDialog dialog = new ShiftSelectDialog(clickedDate, allTypes, current, remark);
+//        dialog.addSaveListener(saveEv -> {
+//            ShiftType selected = saveEv.getShiftType();
+//            String mark = saveEv.getRemark();
+//            if (selected == null) return;
+//
+//            // 更新資料
+//            indexRow(row).computeIfPresent(clickedDate, (d, sd) -> {
+//                sd.setShiftTypes(selected.getShiftKey());
+//                sd.setShiftColorCode(selected.getShiftColorCode());
+//                sd.setRemark(mark);
+//                return sd;
+//            });
+//
+//            updateCell(cell, row, clickedDate);
+//
+//            try {
+//                grid.getDataProvider().refreshItem(row);
+//            } catch (ClassCastException ex) {
+//                grid.getDataProvider().refreshAll();
+//            }
+//
+//            updateFooterForDate(clickedDate);
+//
+//            getUI().ifPresent(ui ->
+//                    ui.beforeClientResponse(grid,
+//                            ctx -> grid.getElement().callJsFunction("requestContentUpdate")));
+//        });
+//        dialog.open();
     }
 
-    private void updateCell(Div cell, ShiftSchedulesQueryVO row, LocalDate date, Map<LocalDate, ShiftSchedulesDateTimeQueryVO> dateMap) {
+    private void updateCell(Div cell, ShiftSchedulesQueryVO row, LocalDate date) {
         Integer empId = (row != null ? row.getEmployeeId() : null);
         cell.getElement().setProperty("empId", empId == null ? "" : String.valueOf(empId));
         cell.getElement().setProperty("date", date == null ? "" : date.toString());
 
+        Map<LocalDate, ShiftSchedulesDateTimeQueryVO> dateMap = indexRow(row);
 
         String shiftTypeKey = (row == null) ? NO_ASSIGN : getShiftTypeForDate(dateMap, date);
         String shiftTypeName = Optional.ofNullable(shiftTypeMap.get(shiftTypeKey))
@@ -705,5 +711,58 @@ public class ScheduleMatrixGrid extends Div {
         String s = date.format(DateTimeFormatter.ofPattern("MMM", Locale.ENGLISH));
         s = s.replace(".", "");
         return s.toUpperCase(Locale.ENGLISH);
+    }
+
+    /**
+     * View 在修改 sd 後可呼叫此方法：
+     * - 重新 refresh row
+     * - 更新該日 footer
+     * - requestContentUpdate()
+     */
+    public void updateCellAndFooter(Div cell,
+                                    ShiftSchedulesQueryVO row,
+                                    LocalDate date) {
+        if (cell == null || row == null || date == null) {
+            return;
+        }
+        updateCell(cell, row, date);
+        updateFooterForDate(date);
+
+        getUI().ifPresent(ui ->
+                ui.beforeClientResponse(grid,
+                        ctx -> grid.getElement().callJsFunction("requestContentUpdate")));
+    }
+
+
+    /** Cell 點擊事件 */
+    @Getter
+    public static class CellClickEvent extends ComponentEvent<ScheduleMatrixGrid> {
+
+        private final Div cell;
+        private final ShiftSchedulesQueryVO row;
+        private final LocalDate date;
+        private final ShiftSchedulesDateTimeQueryVO schedule;
+
+        public CellClickEvent(
+                ScheduleMatrixGrid source,
+                Div cell,
+                ShiftSchedulesQueryVO row,
+                LocalDate date,
+                ShiftSchedulesDateTimeQueryVO schedule
+        ) {
+            super(source, true);
+            this.cell = cell;
+            this.row = row;
+            this.date = date;
+            this.schedule = schedule;
+        }
+
+        public Integer getEmployeeId() {
+            return row != null ? row.getEmployeeId() : null;
+        }
+    }
+
+    public void addCellClickListener(ComponentEventListener<CellClickEvent> listener) {
+        addListener(CellClickEvent.class, listener);
     }
 }

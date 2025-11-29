@@ -101,8 +101,47 @@ public class print01 {
 
     @Test
     public void SportLoginTest() throws Exception {
+//        String VER = "2025-09-10-c1bug_115";
+//        String url = "https://m806.mos011.com/transform.php" + "?ver=" + VER;
+        String VER = "2025-11-27-historybug_122";
+        String url = "https://m806.mos011.com/transform.php";
+
+        Header[] headers = new Header[]{
+                new BasicHeader("Accept", "*/*"),
+                new BasicHeader("Accept-encoding", "gzip, deflate, br"),
+//                new BasicHeader("Accept-language", "zh-TW,zhH-Hant;q=0.9"),
+                new BasicHeader("Connection", "keep-alive"),
+                new BasicHeader("Content-Type", "application/x-www-form-urlencoded"),
+                new BasicHeader("User-Agent",
+                        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15")
+        };
+        Map<String, Object> params = new HashMap<>();
+        params.put("p", "chk_login");
+        params.put("langx", "zh-cn");
+        params.put("username", "Dt7172");
+        params.put("password", "Dtv7172");
+        params.put("ver", "2025-11-27-historybug_122");
+        params.put("auto", "IAIHGD"); //ADFFID
+        params.put("app", "N");
+        params.put("userAgent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15");
+
+        String response = SportsHttp.doPost(url, params, headers);
+//        log.info("[{}] get data from api url:{} params:{} response:\n{}"
+//                , "Rb get_list"
+//                , url
+//                , params.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).collect(Collectors.joining("&"))
+//                , response);
+
+        log.info("jsonData: " + XMLUtils.xml2json(response));
+    }
+
+
+    @Test
+    public void SportLoginTest2() throws Exception {
+//        String VER = "2025-09-10-c1bug_115";
+//        String url = "https://m806.mos011.com/transform.php" + "?ver=" + VER;
         String VER = "2025-09-10-c1bug_115";
-        String url = "https://m806.mos011.com/transform.php" + "?ver=" + VER;
+        String url = "https://m806.mos011.com/transform.php";
 
         Header[] headers = new Header[]{
                 new BasicHeader("Accept", "*/*"),
@@ -119,7 +158,7 @@ public class print01 {
         params.put("username", "Dt7172");
         params.put("password", "Dtv7172");
         params.put("ver", "2025-09-10-c1bug_115");
-        params.put("auto", "IAIHGD");
+        params.put("auto", "IAIHGD"); //ADFFID
         params.put("app", "N");
         params.put("userAgent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15");
 
@@ -132,5 +171,4 @@ public class print01 {
 
         log.info("jsonData: " + XMLUtils.xml2json(response));
     }
-
 }
