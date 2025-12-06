@@ -89,10 +89,30 @@ public class ScheduleView extends VerticalLayout {
         monthNavigator = new MonthNavigator(LocalDate.now());
         monthNavigator.addValueChangeListener(e -> updateSchedulesData());
 
+        matrixGrid.setHeaderGreyStrategy(false, false);
+
+        // Cell 策略：
+        // - 延伸週：DISABLED（反灰）
+        // - 本人 actionType=1：DISABLED
+        // - 不是本人：READ_ONLY（不能點，但不反灰）
+        // - 其他：INTERACTIVE
+//        matrixGrid.setCellStateResolver(ctx -> {
+//            if (ctx.extraWeek) {
+//                return ScheduleMatrixGrid.CellVisualState.DISABLED;
+//            }
+//            if (ctx.actionType != null && ctx.actionType == 1) {
+//                return ScheduleMatrixGrid.CellVisualState.DISABLED;
+//            }
+//            if (!ctx.isCurrentUser) {
+//                return ScheduleMatrixGrid.CellVisualState.READ_ONLY;
+//            }
+//            return ScheduleMatrixGrid.CellVisualState.INTERACTIVE;
+//        });
+
         configureDialog();
         initCellClickListener();
-        // 排班模式
-        matrixGrid.setMode(isManager());
+//        // 排班模式
+//        matrixGrid.setMode(isManager());
         add(getTitle(), getToolbar(), getContent());
 
         updateSchedulesData();
@@ -179,8 +199,8 @@ public class ScheduleView extends VerticalLayout {
         closeShiftDialog = new CloseShiftScheduleDialog(service, departmentList);
     }
 
-    private ScheduleMatrixGrid.Mode isManager(){
-        return ScheduleMatrixGrid.Mode.MANAGEMENT;
+    private boolean isManager(){
+        return true;
     }
 
     private Component getToolbar() {
@@ -250,7 +270,7 @@ public class ScheduleView extends VerticalLayout {
         departmentSelector.setItemLabelGenerator(Option::getName);
         departmentSelector.setPlaceholder("部門...");
         departmentSelector.setValue(departmentMap.get(userDeptId));
-        departmentSelector.setEnabled(isManager().equals(ScheduleMatrixGrid.Mode.MANAGEMENT) ? true : false);
+//        departmentSelector.setEnabled(isManager().equals(ScheduleMatrixGrid.Mode.MANAGEMENT) ? true : false);
         departmentSelector.setWidth("8em");
         departmentSelector.getStyle().set("--vaadin-input-field-border-width", "1.5px");
         departmentSelector.getStyle().set("--vaadin-combo-box-overlay-width", "8em");
@@ -334,7 +354,7 @@ public class ScheduleView extends VerticalLayout {
         List<ShiftSchedulesQueryVO> myRows = allRows.stream()
                 .filter(r -> Objects.equals(currentUserId, r.getEmployeeId()))
                 .collect(Collectors.toList());
-        requestRows = isManager() == ScheduleMatrixGrid.Mode.MANAGEMENT ?
+        requestRows = isManager() ?
                 allRows :
                 myRows;
         EmpSelectDialog selectDialog = new EmpSelectDialog(requestRows);

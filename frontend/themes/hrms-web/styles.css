@@ -49,7 +49,7 @@ html {
 .grid-content {
     background-color: var(--lumo-base-color);
     border: 1px solid var(--lumo-contrast-30pct);
-    padding: 10px; /* 内边距 */
+    padding: 2px; /* 内边距 */
     border-radius: var(--lumo-border-radius-l);
 }
 

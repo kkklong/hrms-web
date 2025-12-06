@@ -28,14 +28,17 @@ public class DateUtil {
     @AllArgsConstructor
     public enum DatePattern {
 
+        YYYY_MM("yyyy-MM",
+                String.format("%s-%s", YEAR_REGEX, MONTH_REGEX)),
         YYYY_MM_DD("yyyy-MM-dd",
-                String.format("%s-%s-%s %s:%s:%s", YEAR_REGEX, MONTH_REGEX, DATE_REGEX, HOUR_REGEX, MINUTE_REGEX, SECOND_REGEX)),
+                String.format("%s-%s-%s", YEAR_REGEX, MONTH_REGEX, DATE_REGEX)),
         HH_mm_ss("HH:mm:ss",
                 String.format("%s:%s:%s", HOUR_REGEX, MINUTE_REGEX, SECOND_REGEX)),
         YYYY_MM_DD_HH_mm("yyyy-MM-dd HH:mm",
                 String.format("%s-%s-%s %s:%s", YEAR_REGEX, MONTH_REGEX, DATE_REGEX, HOUR_REGEX, MINUTE_REGEX)),
         YYYY_MM_DD_HH_mm_ss("yyyy-MM-dd HH:mm:ss",
-                String.format("%s-%s-%s", YEAR_REGEX, MONTH_REGEX, DATE_REGEX)),
+                String.format("%s-%s-%s %s:%s:%s", YEAR_REGEX, MONTH_REGEX, DATE_REGEX, HOUR_REGEX, MINUTE_REGEX, SECOND_REGEX)),
+
         ;
         final String pattern, checkRegex;
     }

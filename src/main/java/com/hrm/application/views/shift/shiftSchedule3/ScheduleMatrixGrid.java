@@ -10,6 +10,7 @@ import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.ToolUtil;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.grid.*;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
@@ -19,6 +20,7 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.data.provider.SortDirection;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,13 +30,13 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class ScheduleMatrixGrid extends Div {
+public class ScheduleMatrixGrid extends Composite<Div> {
 
     // 模式
-    public enum Mode { PERSONAL, MANAGEMENT }
-    private Mode mode = Mode.PERSONAL;
-    public void setMode(Mode mode) { this.mode = (mode == null ? Mode.PERSONAL : mode); }
-    private boolean isManagement() { return mode == Mode.MANAGEMENT; }
+//    public enum Mode { PERSONAL, MANAGEMENT }
+//    private Mode mode = Mode.PERSONAL;
+//    public void setMode(Mode mode) { this.mode = (mode == null ? Mode.PERSONAL : mode); }
+//    private boolean isManagement() { return mode == Mode.MANAGEMENT; }
 
     // 常數
     private static final byte STATUS_LEAVE = 1;         // status==1: 請假
@@ -76,16 +78,30 @@ public class ScheduleMatrixGrid extends Div {
     private final Map<ShiftSchedulesQueryVO, Map<LocalDate, ShiftSchedulesDateTimeQueryVO>> rowDateIndex =
             new IdentityHashMap<>();
 
+    /**
+     * -- SETTER --
+     * 設定 cell 狀態策略：由呼叫端決定 DISABLED / READ_ONLY / INTERACTIVE
+     */
+    // Cell 狀態策略
+    @Setter
+    private CellStateResolver cellStateResolver;
+
+    // Header 反灰策略
+    /** 是否針對延伸週（不在核心 periods 內的日期）反灰 header */
+    private boolean greyHeaderForExtraWeeks = false;
+    /** 是否針對「本人 actionType=1」日期反灰 header */
+    private boolean greyHeaderForLockedByAction = false;
+
     public ScheduleMatrixGrid() {
-        setSizeFull();
+        getContent().setSizeFull();
         initGrid();
-        add(grid);
+        getContent().add(grid);
     }
 
     private void
     initGrid() {
         grid.addClassNames("shiftSchedules-grid");
-//        grid.addThemeVariants(GridVariant.LUMO_NO_ROW_BORDERS);
+        grid.addThemeVariants(GridVariant.LUMO_NO_ROW_BORDERS);
         grid.getStyle().set("--vaadin-grid-cell-padding", "0px");
         grid.setWidthFull();
         grid.setAllRowsVisible(true);
@@ -117,10 +133,10 @@ public class ScheduleMatrixGrid extends Div {
     // ======================= Rebuild =======================
 
     private void rebuildGrid(List<ShiftSchedulesQueryVO> items) {
-        removeAll();
+        getContent().removeAll();
         grid = new Grid<>(ShiftSchedulesQueryVO.class, false);
         initGrid();
-        add(grid);
+        getContent().add(grid);
 
         // reset
         dayColumns.clear(); dayList.clear();
@@ -168,14 +184,14 @@ public class ScheduleMatrixGrid extends Div {
         setHeaderTitle();
 
         // 個人模式：需要反灰的
-        if (!isManagement()) {
-            Set<LocalDate> lockedByActionDates = computeHeaderLockedDatesForCurrentUser(items);
-            for (LocalDate d : days) {
-                if (shouldGreyHeader(d, lockedByActionDates)) {
-                    greyHeader(d);
-                }
-            }
-        }
+//        if (!isManagement()) {
+//            Set<LocalDate> lockedByActionDates = computeHeaderLockedDatesForCurrentUser(items);
+//            for (LocalDate d : days) {
+//                if (shouldGreyHeader(d, lockedByActionDates)) {
+//                    greyHeader(d);
+//                }
+//            }
+//        }
 
         grid.getColumns().forEach(c -> {
             c.setAutoWidth(true);
@@ -215,6 +231,7 @@ public class ScheduleMatrixGrid extends Div {
     // =================== 點擊 / 更新 Cell ===================
 
     private void onCellClick(Div cell) {
+        // disabled=1 → 不處理點擊（個人 / 管理 / 調班都共用）
         if ("1".equals(cell.getElement().getProperty("disabled"))) return;
 
         String emp = cell.getElement().getProperty("empId");
@@ -228,9 +245,6 @@ public class ScheduleMatrixGrid extends Div {
             empId = Integer.valueOf(emp);
             clickedDate = LocalDate.parse(dateStr);
         } catch (Exception ex) { return; }
-
-        // 個人模式：非當下員工不得操作
-        if (!isManagement() && currentUserId != null && !currentUserId.equals(empId)) return;
 
         ShiftSchedulesQueryVO row = findRowByEmployeeId(empId);
         if (row == null) return;
@@ -283,17 +297,17 @@ public class ScheduleMatrixGrid extends Div {
         cell.getElement().setProperty("date", date == null ? "" : date.toString());
 
         Map<LocalDate, ShiftSchedulesDateTimeQueryVO> dateMap = indexRow(row);
+        ShiftSchedulesDateTimeQueryVO sd = (date != null ? dateMap.get(date) : null);
 
-        String shiftTypeKey = (row == null) ? NO_ASSIGN : getShiftTypeForDate(dateMap, date);
+        String shiftTypeKey = (sd == null) ? NO_ASSIGN : sd.getShiftTypes();
         String shiftTypeName = Optional.ofNullable(shiftTypeMap.get(shiftTypeKey))
                 .map(ShiftType::getShiftName)
                 .orElse("未知班別");
         String remark = getRemarkForDate(dateMap, date);
         cell.getElement().setProperty("remark", date == null ? "" : remark);
 
-
-        Byte status = (row == null) ? null : getShiftStatusForDate(dateMap, date);
-        Byte actionType = (row == null) ? null : getActionTypeForDate(dateMap, date);
+        Byte status     = (sd == null) ? null : sd.getStatus();
+        Byte actionType = (sd == null) ? null : sd.getActionType();
 
         // 內容文字
         cell.setText(
@@ -326,42 +340,102 @@ public class ScheduleMatrixGrid extends Div {
         cell.getStyle().set("background-color", bg);
         cell.getStyle().set("color", fg);
 
-        // 管理模式：一律可互動
-        if (isManagement()) {
-            setCellInteractive(cell);
-            return;
+        // 組 CellContext 給 resolver 用
+        boolean extraWeek    = isDisplayOnly(date);
+        boolean isCurrentEmp = (currentUserId != null && Objects.equals(empId, currentUserId));
+        boolean leave        = isLeave(status);
+        boolean hasSchedule  = (sd != null);
+
+        CellContext ctx = new CellContext(
+                date,
+                empId,
+                status,
+                actionType,
+                extraWeek,
+                isCurrentEmp,
+                leave,
+                hasSchedule,
+                sd,
+                row
+        );
+
+        CellVisualState state =
+                (cellStateResolver != null)
+                        ? cellStateResolver.resolve(ctx)
+                        : defaultState(ctx);
+
+        applyCellVisualState(cell, state);
+
+//        // 管理模式：一律可互動
+//        if (isManagement()) {
+//            setCellInteractive(cell);
+//            return;
+//        }
+//
+//        // 個人模式：依規則處理
+//        if (lockedByDisplay(date)) {
+//            setCellLocked(cell);
+//            return;
+//        }
+//        if (lockedByAction(actionType)) {
+//            setCellLocked(cell);
+//            greyHeader(date);
+//            return;
+//        }
+//        if (blockedByOther(empId)) {
+//            setCellReadOnly(cell);
+//            return;
+//        }
+//        setCellInteractive(cell);
+    }
+
+    private CellVisualState defaultState(CellContext ctx) {
+        // 沒有設定 resolver 時，全部當可互動
+        return CellVisualState.INTERACTIVE;
+    }
+
+    private void applyCellVisualState(Div cell, CellVisualState state) {
+        if (state == null) {
+            state = CellVisualState.DISABLED;
         }
 
-        // 個人模式：依規則處理
-        if (lockedByDisplay(date)) {
-            setCellLocked(cell);
-            return;
+        switch (state) {
+            case INTERACTIVE:
+                cell.getStyle().set("opacity", "1");
+                cell.getStyle().set("cursor", "pointer");
+                cell.getElement().setProperty("disabled", "0");
+                cell.getElement().setAttribute("data-state", "interactive");
+                break;
+            case READ_ONLY:
+                cell.getStyle().set("opacity", "1");
+                cell.getStyle().remove("cursor");
+                cell.getElement().setProperty("disabled", "1");
+                cell.getElement().removeAttribute("data-state");
+                break;
+            case DISABLED:
+            default:
+                cell.getStyle().set("opacity", "0.55");
+                cell.getStyle().remove("cursor");
+                cell.getElement().setProperty("disabled", "1");
+                cell.getElement().removeAttribute("data-state");
+                break;
         }
-        if (lockedByAction(actionType)) {
-            setCellLocked(cell);
-            greyHeader(date);
-            return;
-        }
-        if (blockedByOther(empId)) {
-            setCellReadOnly(cell);
-            return;
-        }
-        setCellInteractive(cell);
     }
+
 
     // ============ 規則（集中條件） ============
-    private boolean lockedByDisplay(LocalDate date) {
-        return !isManagement() && isDisplayOnly(date);
-    }
-    private boolean lockedByAction(Byte actionType) {
-        return !isManagement() && actionType != null && actionType == ACTION_LOCKED;
-    }
-    private boolean blockedByOther(Integer empId) {
-        return !isManagement() && currentUserId != null && !Objects.equals(empId, currentUserId);
-    }
-    private boolean shouldGreyHeader(LocalDate date, Set<LocalDate> actionLockedDates) {
-        return !isManagement() && (isDisplayOnly(date) || actionLockedDates.contains(date));
-    }
+//    private boolean lockedByDisplay(LocalDate date) {
+//        return !isManagement() && isDisplayOnly(date);
+//    }
+//    private boolean lockedByAction(Byte actionType) {
+//        return !isManagement() && actionType != null && actionType == ACTION_LOCKED;
+//    }
+//    private boolean blockedByOther(Integer empId) {
+//        return !isManagement() && currentUserId != null && !Objects.equals(empId, currentUserId);
+//    }
+//    private boolean shouldGreyHeader(LocalDate date, Set<LocalDate> actionLockedDates) {
+//        return !isManagement() && (isDisplayOnly(date) || actionLockedDates.contains(date));
+//    }
 
     // 樣式/互動行為統一方法
     private void setCellLocked(Div cell) {
@@ -385,7 +459,7 @@ public class ScheduleMatrixGrid extends Div {
 
     /** 將指定「日期欄」的週數/星期/日期三層表頭做反灰（個人模式用） */
     private void greyHeader(LocalDate date) {
-        if (isManagement() || date == null || dayList.isEmpty()) return;
+        if (date == null || dayList.isEmpty()) return;
         int idx = dayList.indexOf(date);
         if (idx < 0) return;
 
@@ -472,9 +546,9 @@ public class ScheduleMatrixGrid extends Div {
         var dayCell = dayHeader.getCell(col);
         dayCell.setComponent(dayStack);
 
-        if (!isManagement() && isDisplayOnly(date)) {
-            dayCell.setPartName("locked-day");
-        }
+//        if (!isManagement() && isDisplayOnly(date)) {
+//            dayCell.setPartName("locked-day");
+//        }
         dayHeader.getCell(col).setPartName("cell-period" + getPeriodIndexForDate(date, periods));
 
 
@@ -513,7 +587,7 @@ public class ScheduleMatrixGrid extends Div {
 
     // 個人模式下，用目前登入者的 actionType==1 日期來反灰表頭
     private Set<LocalDate> computeHeaderLockedDatesForCurrentUser(List<ShiftSchedulesQueryVO> items) {
-        if (isManagement() || currentUserId == null || items == null) return Collections.emptySet();
+        if (currentUserId == null || items == null) return Collections.emptySet();
         return items.stream()
                 .filter(r -> Objects.equals(currentUserId, r.getEmployeeId()))
                 .flatMap(r -> r.getSchedulesDates().stream())
@@ -743,7 +817,7 @@ public class ScheduleMatrixGrid extends Div {
         private final LocalDate date;
         private final ShiftSchedulesDateTimeQueryVO schedule;
 
-        public CellClickEvent(
+        public  CellClickEvent(
                 ScheduleMatrixGrid source,
                 Div cell,
                 ShiftSchedulesQueryVO row,
@@ -764,5 +838,128 @@ public class ScheduleMatrixGrid extends Div {
 
     public void addCellClickListener(ComponentEventListener<CellClickEvent> listener) {
         addListener(CellClickEvent.class, listener);
+    }
+
+    /**
+     * 簡易版：只在「同一個 header / 日期範圍」下更新 items。
+     * - 不重建 Grid、欄位、表頭
+     * - 只更新 rows + 每日 footer + requestContentUpdate
+     */
+    public void updateItems(List<ShiftSchedulesQueryVO> items) {
+        if (items == null) {
+            items = Collections.emptyList();
+        }
+
+        // 清快取
+        rowDateIndex.clear();
+
+        List<ShiftSchedulesQueryVO> sorted = (new ArrayList<>(items));
+
+        if (grid.getDataProvider() instanceof ListDataProvider) {
+            @SuppressWarnings("unchecked")
+            ListDataProvider<ShiftSchedulesQueryVO> provider =
+                    (ListDataProvider<ShiftSchedulesQueryVO>) grid.getDataProvider();
+            Collection<ShiftSchedulesQueryVO> target = provider.getItems();
+            target.clear();
+            target.addAll(sorted);
+            provider.refreshAll();
+        } else {
+            grid.setItems(sorted);
+        }
+
+        // 重新計算 footer 的早/午/晚班人數
+        if (!dayList.isEmpty() && !dayColumns.isEmpty()) {
+            Map<LocalDate, Map<String, Long>> slotCountsByDate =
+                    computeSlotCountsByDate(sorted, dayList);
+            for (int i = 0; i < dayList.size() && i < dayColumns.size(); i++) {
+                LocalDate d = dayList.get(i);
+                Map<String, Long> slotCounts =
+                        slotCountsByDate.getOrDefault(d, Collections.emptyMap());
+
+                String m = String.valueOf(slotCounts.getOrDefault("morning", 0L));
+                String a = String.valueOf(slotCounts.getOrDefault("afternoon", 0L));
+                String n = String.valueOf(slotCounts.getOrDefault("night", 0L));
+
+                dayColumns.get(i).setFooter(setEmployeeFooterText(m, a, n));
+            }
+        }
+
+        // 通知前端更新 layout
+        getUI().ifPresent(ui ->
+                ui.beforeClientResponse(grid,
+                        ctx -> grid.getElement().callJsFunction("requestContentUpdate")));
+    }
+
+    /**
+     * 給 resolver 判斷 cell 狀態用。
+     */
+    public static class CellContext {
+        public final LocalDate date;
+        public final Integer employeeId;
+        public final Byte status;
+        public final Byte actionType;
+        public final boolean extraWeek;     // 延伸週（不在核心 periods 範圍）
+        public final boolean isCurrentUser; // row 是否為目前登入者
+        public final boolean isLeave;       // 該格是否「請假」
+        public final boolean hasSchedule;   // 是否有排班資料
+        public final ShiftSchedulesDateTimeQueryVO schedule;
+        public final ShiftSchedulesQueryVO row;
+
+        public CellContext(LocalDate date,
+                           Integer employeeId,
+                           Byte status,
+                           Byte actionType,
+                           boolean extraWeek,
+                           boolean isCurrentUser,
+                           boolean isLeave,
+                           boolean hasSchedule,
+                           ShiftSchedulesDateTimeQueryVO schedule,
+                           ShiftSchedulesQueryVO row) {
+            this.date = date;
+            this.employeeId = employeeId;
+            this.status = status;
+            this.actionType = actionType;
+            this.extraWeek = extraWeek;
+            this.isCurrentUser = isCurrentUser;
+            this.isLeave = isLeave;
+            this.hasSchedule = hasSchedule;
+            this.schedule = schedule;
+            this.row = row;
+        }
+    }
+
+    @FunctionalInterface
+    public interface CellStateResolver {
+        CellVisualState resolve(CellContext ctx);
+    }
+
+    // ========= Cell 狀態策略 =========
+
+    public enum CellVisualState {
+        /**
+         * 完全鎖住：不能點、反灰、無 hover 動畫
+         */
+        DISABLED,
+        /**
+         * 唯讀：不能點、但不反灰（例如別人的班）
+         */
+        READ_ONLY,
+        /**
+         * 可操作：可點、有 pointer + hover 動畫
+         */
+        INTERACTIVE
+    }
+
+    // ========= Public API =========
+
+    /**
+     * 設定 header 反灰策略。
+     *
+     * @param greyExtraWeeks      true → 延伸週反灰
+     * @param greyLockedByAction  true → 本人 actionType=1 的日期反灰
+     */
+    public void setHeaderGreyStrategy(boolean greyExtraWeeks, boolean greyLockedByAction) {
+        this.greyHeaderForExtraWeeks = greyExtraWeeks;
+        this.greyHeaderForLockedByAction = greyLockedByAction;
     }
 }

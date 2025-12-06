@@ -1,8 +1,13 @@
 package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
+import com.hrm.application.entity.ShiftSchedules;
+import com.hrm.application.entity.ShiftType;
 import com.hrm.application.model.Option;
+import com.hrm.application.model.ShiftSchedulePeriod;
 import com.hrm.application.model.vo.ShiftAdjustmentRequestVO;
+import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
+import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
 import com.hrm.application.util.BEClientRestUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
@@ -10,8 +15,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ShiftAdjustmentRequestService {
@@ -32,6 +37,57 @@ public class ShiftAdjustmentRequestService {
         };
         ApiResponse<List<ShiftAdjustmentRequestVO>> response = client.doGet(url, null, null, responseType);
         if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    // ---- 查詢班表 ----
+    public List<ShiftSchedules> queryShiftSchedules(String startDate, String endDate, Integer departmentId) {
+        String url = backEndDomain + API.QUERY_SHIFT_SCHEDULES.getPath();
+
+        LinkedHashMap<String, Object> queryParams = new LinkedHashMap<>();
+        queryParams.put("startDate", startDate);
+        queryParams.put("endDate", endDate);
+        queryParams.put("departmentId", departmentId);
+
+        ParameterizedTypeReference<ApiResponse<List<ShiftSchedules>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<ShiftSchedules>> response = client.doGet(url, null, queryParams, responseType);
+        if (response != null && response.getData() != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    //查詢各個排班區間
+    public List<ShiftSchedulePeriod> getShiftSchedulePeriods(String startDate, String endDate) {
+        String url = backEndDomain + API.QUERY_SCHEDULE_PERIODS.getPath();
+
+        ParameterizedTypeReference<ApiResponse<List<ShiftSchedulePeriod>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        LinkedHashMap<String, Object> queryParams = new LinkedHashMap<>();
+        queryParams.put("startDate", startDate);
+        queryParams.put("endDate", endDate);
+
+        ApiResponse<List<ShiftSchedulePeriod>> response = client.doGet(url, null, queryParams, responseType);
+        if (response != null && response.getData() != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    //取得班別及假日配置
+    public List<ShiftType> getShiftAndHolidayConfigList() {
+        String url = backEndDomain + API.GET_SHIFT_HOLIDAY_TYPES.getPath();
+
+        ParameterizedTypeReference<ApiResponse<List<ShiftType>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<ShiftType>> response = client.doGet(url, null, null, responseType);
+        if (response != null && response.getData() != null) {
+//            response.getData().forEach(option ->
+//            log.info("Option - Value: {}, Label: {}", option.getShiftKey(), option.getShiftName())
+//            );
             return response.getData();
         }
         return new ArrayList<>();
@@ -81,8 +137,12 @@ public class ShiftAdjustmentRequestService {
     private enum API {
         SHIFT_ADJUSTMENT_APPLY("/shiftAdjustmentRequest/apply", HttpMethod.POST, MediaType.APPLICATION_JSON),
         GET_PENDING_SHIFT_ADJUSTMENTS("/shiftAdjustmentRequest/getPendingShiftAdjustments", HttpMethod.GET, null),
-        // 檔案
-        DOWNLOAD_SAVE_ATTENDANCE_TEMPLATE("/sample/loadAttendanceRecordSample.xlsx", HttpMethod.GET, null),
+
+        // ---- shiftSchedules ----
+        QUERY_SHIFT_SCHEDULES("/shiftSchedules/queryByMonthAndDepartment", HttpMethod.GET, null),
+        QUERY_SCHEDULE_PERIODS("/shiftSchedules/getShiftSchedulePeriods", HttpMethod.GET, null),
+        GET_SHIFT_HOLIDAY_TYPES("/shiftSchedules/getShiftAndHolidayConfig", HttpMethod.GET, null),
+
 
         GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
         GET_EMPLOYEE_OPTIONS("/employee/getEnumList", HttpMethod.GET, null),
@@ -125,5 +185,85 @@ public class ShiftAdjustmentRequestService {
             this.type = type;
         }
 
+    }
+
+
+    private List<ShiftSchedulesQueryVO> deepCopySchedule(List<ShiftSchedulesQueryVO> src){
+        if (src == null) return List.of();
+        List<ShiftSchedulesQueryVO> cloned = new ArrayList<>();
+        for (ShiftSchedulesQueryVO vo : src) {
+            ShiftSchedulesQueryVO copy = new ShiftSchedulesQueryVO();
+            copy.setEmployeeId(vo.getEmployeeId());
+            copy.setEmployeeNumber(vo.getEmployeeNumber());
+            copy.setNickName(vo.getNickName());
+            copy.setDepartmentId(vo.getDepartmentId());
+            copy.setDepartmentName(vo.getDepartmentName());
+
+            List<ShiftSchedulesDateTimeQueryVO> datesCopy = vo.getSchedulesDates().stream()
+                    .map(sd -> {
+                        ShiftSchedulesDateTimeQueryVO s = new ShiftSchedulesDateTimeQueryVO();
+                        s.setId(sd.getId());
+                        s.setShiftDate(sd.getShiftDate());
+                        s.setShiftTypes(sd.getShiftTypes());
+                        s.setShiftColorCode(sd.getShiftColorCode());
+                        s.setStatus(sd.getStatus());
+                        s.setActionType(sd.getActionType());
+                        return s;
+                    })
+                    .collect(Collectors.toList());
+            copy.setSchedulesDates(datesCopy);
+
+            cloned.add(copy);
+        }
+        return cloned;
+    }
+
+    /**
+     *將時間區間內的shiftSchedule裝填成各別員工的排班物件
+     */
+    public List<ShiftSchedulesQueryVO> convertToShiftSchedulesQueryVO(List<ShiftSchedules> shiftSchedules) {
+        // 按 employeeId 分組
+        Map<Integer, List<ShiftSchedules>> groupedByEmployee = shiftSchedules.stream()
+                .collect(Collectors.groupingBy(ShiftSchedules::getEmployeeId));
+
+        // 轉換成 List<ShiftSchedulesQueryVO>
+        List<ShiftSchedulesQueryVO> vos = new ArrayList<>();
+
+        for (Map.Entry<Integer, List<ShiftSchedules>> entry : groupedByEmployee.entrySet()) {
+            Integer employeeId = entry.getKey();
+            List<ShiftSchedules> employeeSchedules = entry.getValue();
+            if (employeeSchedules.isEmpty()) continue;
+
+            ShiftSchedules first = employeeSchedules.get(0); // 取第一個記錄的部門ID
+
+            // 建立 ShiftSchedulesQueryVO 對像
+            ShiftSchedulesQueryVO vo = new ShiftSchedulesQueryVO();
+            vo.setEmployeeId(employeeId);
+            vo.setNickName(first.getNickName());
+            vo.setDepartmentId(first.getDepartmentId());
+            vo.setDepartmentName(first.getDepartmentName());
+            vo.setId(first.getId());
+            vo.setEmployeeNumber(first.getEmployeeNumber());
+            // 將 ShiftSchedules 轉換為 ShiftSchedulesDateTime 列表
+            List<ShiftSchedulesDateTimeQueryVO> dates = employeeSchedules.stream()
+                    .sorted(Comparator.comparing(ShiftSchedules::getShiftDate)) // 按 shiftDate 排序
+                    .map(schedule -> {
+                        ShiftSchedulesDateTimeQueryVO d = new ShiftSchedulesDateTimeQueryVO();
+                        d.setId(schedule.getId());
+                        d.setShiftTypes(schedule.getShiftTypes());
+                        d.setShiftDate(schedule.getShiftDate());
+                        d.setStatus(schedule.getStatus());
+                        d.setWeekType(schedule.getWeekType());
+                        d.setRemark(schedule.getRemark());
+                        d.setActionType(schedule.getActionType());
+                        d.setShiftColorCode(schedule.getShiftColorCode());
+                        return d;
+                    }).collect(Collectors.toList());
+            vo.setSchedulesDates(dates);
+            vos.add(vo);
+        }
+        // sort by employee id
+        vos.sort(Comparator.comparingInt(ShiftSchedulesQueryVO::getEmployeeId));
+        return vos;
     }
 }
