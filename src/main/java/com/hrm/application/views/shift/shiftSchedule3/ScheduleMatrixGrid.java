@@ -213,7 +213,6 @@ public class ScheduleMatrixGrid extends Composite<Div> {
                     return cell;
                 },
                 (cell, row) -> {
-//                    Map<LocalDate, ShiftSchedulesDateTimeQueryVO> dateMap = indexRow(row);
                     updateCell(cell, row, date);
                 }
         );

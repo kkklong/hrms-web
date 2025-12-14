@@ -4,6 +4,7 @@ import com.hrm.application.entity.ApiResponse;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.model.Option;
+import com.hrm.application.model.ShiftChangePreview;
 import com.hrm.application.model.ShiftSchedulePeriod;
 import com.hrm.application.model.vo.ShiftAdjustmentRequestVO;
 import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
@@ -15,6 +16,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -188,7 +190,7 @@ public class ShiftAdjustmentRequestService {
     }
 
 
-    private List<ShiftSchedulesQueryVO> deepCopySchedule(List<ShiftSchedulesQueryVO> src){
+    public List<ShiftSchedulesQueryVO> deepCopySchedule(List<ShiftSchedulesQueryVO> src){
         if (src == null) return List.of();
         List<ShiftSchedulesQueryVO> cloned = new ArrayList<>();
         for (ShiftSchedulesQueryVO vo : src) {
@@ -266,4 +268,68 @@ public class ShiftAdjustmentRequestService {
         vos.sort(Comparator.comparingInt(ShiftSchedulesQueryVO::getEmployeeId));
         return vos;
     }
+
+    /**
+     * 由快取資料 originalMonthSchedules 內，找出「某員工在某日期」的班別 key。
+     */
+    public String findShiftKeyByEmpAndDate(Integer employeeId, LocalDate date, List<ShiftSchedulesQueryVO> baseShift) {
+        if (employeeId == null || date == null) {
+            return null;
+        }
+        return baseShift.stream()
+                .filter(vo -> Objects.equals(vo.getEmployeeId(), employeeId))
+                .findFirst()
+                .map(ShiftSchedulesQueryVO::getSchedulesDates)
+                .orElseGet(List::of)
+                .stream()
+                .filter(sd -> Objects.equals(sd.getShiftDate(), date))
+                .map(ShiftSchedulesDateTimeQueryVO::getShiftTypes)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
+     * 將changeList中對應date的shiftKey更新至baseList。
+     */
+    public void applyPreviewOnSchedulesInPlace(
+            List<ShiftSchedulesQueryVO> base,
+            List<ShiftChangePreview> changes,
+            Map<String, ShiftType> shiftTypeMap
+    ) {
+        Map<Integer, ShiftSchedulesQueryVO> byEmp = base.stream()
+                .filter(v -> v.getEmployeeId() != null)
+                .collect(Collectors.toMap(ShiftSchedulesQueryVO::getEmployeeId, v -> v, (a, b) -> a));
+
+        for (ShiftChangePreview c : changes) {
+            ShiftSchedulesQueryVO vo = byEmp.get(c.getEmployeeId());
+            if (vo == null) {
+                continue;
+            }
+            for (ShiftSchedulesDateTimeQueryVO sd : vo.getSchedulesDates()) {
+                if (Objects.equals(sd.getShiftDate(), c.getDate())) {
+                    sd.setShiftTypes(c.getToShiftKey());
+                    sd.setShiftColorCode(resolveShiftColorCode(c.getToShiftKey(), shiftTypeMap));
+                    break;
+                }
+            }
+        }
+    }
+
+    public String resolveShiftColorCode(String shiftKey, Map<String, ShiftType> shiftTypeMap) {
+        ShiftType shiftType = shiftTypeMap.get(shiftKey);
+        String color = "#eeeeee";
+        if (shiftType != null) {
+            color = Optional.ofNullable(shiftType.getShiftColorCode()).orElse("#eeeeee");
+//            try {
+//                var m = shiftType.getClass().getMethod("getShiftColorCode");
+//                Object v = m.invoke(shiftType);
+//                if (v != null) {
+//                    color = String.valueOf(v);
+//                }
+//            } catch (Exception ignore) {
+//            }
+        }
+        return color;
+    }
+
 }

@@ -19,6 +19,16 @@ vaadin-button {
 /* ---- readonly邊框 ---- */
 html {
     --vaadin-input-field-readonly-border: 1px solid grey;
+    --vaadin-input-field-border-width: 1px;
+    /* focus 狀態 */
+    /*--vaadin-input-field-focused-border-color: var(--lumo-primary-color);*/
+
+}
+vaadin-input-container {
+    transition: border-color 0.2s ease;
+}
+vaadin-grid:not([all-rows-visible]) {
+    min-height: 12rem;
 }
 
 .background-plan {
@@ -49,8 +59,9 @@ html {
 .grid-content {
     background-color: var(--lumo-base-color);
     border: 1px solid var(--lumo-contrast-30pct);
-    padding: 2px; /* 内边距 */
+    padding: 12px; /* 内边距 */
     border-radius: var(--lumo-border-radius-l);
+    /*margin: 0px 0px 5px 0px; !* 上 右 下 左 *!*/
 }
 
 .menu-item-disable {
@@ -216,16 +227,16 @@ html {
 
 /* =========================================== Others ================================================ */
 
-.right-side-form {
-    justify-items: end;
-}
+.bordered-tabs {
+    position: relative;
+    border: 1px solid var(--lumo-contrast-20pct);
+    border-right: 3px solid var(--lumo-contrast-40pct); /* 右側加深 */
+    border-bottom: 3px solid var(--lumo-contrast-30pct); /* 下側加深 */
 
-.left-side-form {
-    justify-items: start;
-}
+    border-radius: 6px 6px 4px 4px;
+    background-color: var(--lumo-base-color);
 
-.middle-side-form {
-    justify-items: center;
+    padding: 6px 6px 4px 6px;
 }
 
 

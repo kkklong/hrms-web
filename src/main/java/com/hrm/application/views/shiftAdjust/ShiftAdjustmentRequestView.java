@@ -73,8 +73,9 @@ public class ShiftAdjustmentRequestView extends VerticalLayout {
     }
 
     private void createRequest() {
+        ShiftAdjustmentRequestVO vo = new ShiftAdjustmentRequestVO();
         grid.asSingleSelect().clear();
-        ShiftAdjustmentRequestDialog dialog = new ShiftAdjustmentRequestDialog(service);
+        ShiftAdjustmentRequestDialog dialog = new ShiftAdjustmentRequestDialog(vo, service, this::refreshGrid, false);
         dialog.open();
     }
 
@@ -109,5 +110,7 @@ public class ShiftAdjustmentRequestView extends VerticalLayout {
         dataProvider.getItems().clear();
         dataProvider.getItems().addAll(list);
         dataProvider.refreshAll();
+
+
     }
 }

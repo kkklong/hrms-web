@@ -57,8 +57,6 @@ public class DashboardView extends VerticalLayout implements AfterNavigationObse
                 new FormLayout.ResponsiveStep("70em", 2)
         );
         stepLayout.add(clockInfo, userALInfo, personalInfo, calendar);
-//        stepLayout.setColspan(personalInfo, 3);
-//        stepLayout.setColspan(calendar, 3);
 
         add(stepLayout);
 

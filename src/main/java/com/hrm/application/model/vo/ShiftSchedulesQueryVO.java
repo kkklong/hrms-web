@@ -48,4 +48,17 @@ public class ShiftSchedulesQueryVO implements Serializable {
     public void setSchedulesDates(List<ShiftSchedulesDateTimeQueryVO> schedulesDates) {
         this.schedulesDates = schedulesDates;
     }
+
+    @Override
+    public String toString() {
+        return "ShiftSchedulesQueryVO{" +
+                "id=" + id +
+                ", employeeId=" + employeeId +
+                ", nickName='" + nickName + '\'' +
+                ", departmentId=" + departmentId +
+                ", departmentName='" + departmentName + '\'' +
+                ", employeeNumber='" + employeeNumber + '\'' +
+                ", schedulesDates=" + schedulesDates +
+                '}';
+    }
 }
