@@ -1,6 +1,7 @@
 package com.hrm.application.views.shiftAdjust;
 
 import com.hrm.application.component.ToolBar;
+import com.hrm.application.entity.ShiftAdjustmentApply;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.entity.UserInfo;
@@ -8,9 +9,11 @@ import com.hrm.application.model.Option;
 import com.hrm.application.model.ShiftChangePreview;
 import com.hrm.application.model.ShiftSchedulePeriod;
 import com.hrm.application.model.vo.ShiftAdjustmentRequestVO;
+import com.hrm.application.model.vo.ShiftSchedulesDateTimeQueryVO;
 import com.hrm.application.model.vo.ShiftSchedulesQueryVO;
 import com.hrm.application.service.ShiftAdjustmentRequestService;
 import com.hrm.application.util.DateUtil;
+import com.hrm.application.util.NotificationUtil;
 import com.hrm.application.util.SessionUtil;
 import com.hrm.application.util.ToolUtil;
 import com.hrm.application.views.shift.shiftSchedule3.ScheduleMatrixGrid;
@@ -126,6 +129,7 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
 
         initData();
         add(buildToolbar(), getContent(), getApplyForm());
+        getFooter().add(buildFooter());
     }
 
     private void initData() {
@@ -137,22 +141,37 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
         departmentList = service.getDepartmentOptionList();
         shiftTypes = service.getShiftAndHolidayConfigList();
         shiftTypeMap = ToolUtil.transToMap(shiftTypes, ShiftType::getShiftKey);
+    }
 
-        boolean useRequest =
-                viewOnly
-                        && Objects.nonNull(requestVO.getTargetDepartmentId())
-                        && Objects.nonNull(requestVO.getTargetEmployeeId())
-                        && Objects.nonNull(requestVO.getTargetDate());
-        Integer deptId = useRequest ? requestVO.getTargetDepartmentId() : userInfo.getDepartmentId();
-        Integer userId = useRequest ? requestVO.getTargetEmployeeId() : userInfo.getId();
-        LocalDate targetDate = useRequest ? requestVO.getTargetDate() : now;
-
+    public void setDataForCreate() {
+        setView(true);
+        Integer deptId = userInfo.getDepartmentId();
+        LocalDate targetDate = now;
         configureDepartmentSelector(deptId);
         configureMatrixGrid();
         configureTimeTab(targetDate, deptId);
         updateDateSelector(targetDate);
         updateShiftSchedules(deptId);
         updateMatrixGrid(previewShift);
+    }
+
+    public void setDataForCheck(ShiftAdjustmentRequestVO requestVO) {
+        setView(false);
+        Integer deptId = requestVO.getDepartmentId();
+        LocalDate targetDate = now;
+        configureDepartmentSelector(deptId);
+        configureMatrixGrid();
+        configureTimeTab(targetDate, deptId);
+        updateDateSelector(targetDate);
+        updateShiftSchedules(deptId);
+        updateMatrixGrid(previewShift);
+        setApplyFormData(requestVO);
+    }
+
+    public void setView(Boolean isCreate) {
+        addBtn.setVisible(isCreate);
+        submitBtn.setVisible(isCreate);
+        selectForm.setVisible(isCreate);
     }
 
     private void setComponentSize() {
@@ -188,6 +207,106 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
         );
         return applyHt;
     }
+
+    private void setApplyFormData(ShiftAdjustmentRequestVO requestVO) {
+        pendingChanges.clear();
+        if (requestVO == null || requestVO.getShiftMap() == null || requestVO.getShiftMap().isEmpty()) {
+            changeProvider.refreshAll();
+            return;
+        }
+        Map<Integer, ShiftSchedulesDateTimeQueryVO> idToSchedule = new HashMap<>();
+        Map<Integer, Integer> idToEmp = new HashMap<>();
+
+        for (ShiftSchedulesQueryVO vo : baseShift) {
+            Integer empId = vo.getEmployeeId();
+            for (ShiftSchedulesDateTimeQueryVO sd : vo.getSchedulesDates()) {
+                idToSchedule.put(sd.getId(), sd);
+                idToEmp.put(sd.getId(), empId);
+            }
+        }
+
+        Map<Integer, String> originalShiftMap = requestVO.getOriginalShiftMap();
+        boolean hasOriginalMap = originalShiftMap != null && !originalShiftMap.isEmpty();
+
+        // 從request的shiftMap拿toKey; originalMap拿fromKey, 在用id拿sd, 從sd取出shiftType跟color
+        for (Map.Entry<Integer, String> e : requestVO.getShiftMap().entrySet()) {
+            Integer scheduleId = e.getKey();
+            String toKey = e.getValue();
+
+            ShiftSchedulesDateTimeQueryVO sd = idToSchedule.get(scheduleId);
+            Integer empId = idToEmp.get(scheduleId);
+            if (sd == null || empId == null) {
+                continue;
+            }
+
+            LocalDate date = sd.getShiftDate();
+
+            String fromKey;
+            if (hasOriginalMap && originalShiftMap.containsKey(scheduleId)) {
+                fromKey = originalShiftMap.get(scheduleId);
+            } else {
+                fromKey = sd.getShiftTypes();
+            }
+
+            if (fromKey != null) {
+                sd.setShiftTypes(fromKey);
+                sd.setShiftColorCode(service.resolveShiftColorCode(fromKey, shiftTypeMap));
+            }
+
+            pendingChanges.add(new ShiftChangePreview(empId, date, fromKey, toKey));
+        }
+
+        changeProvider.refreshAll();
+    }
+
+    /**
+     * 按鈕與事件。
+     * (1)新增(送出申請)
+     * (2)更新
+     */
+    private Component buildFooter() {
+        submitBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        closeBtn.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+
+        submitBtn.addClickListener(e -> validateAndSave());
+        closeBtn.addClickListener(e -> close());
+
+        var actions = new ToolBar();
+        actions.addRight(submitBtn, closeBtn);
+        return actions;
+    }
+
+    private void validateAndSave() {
+        if (pendingChanges.isEmpty()) {
+            Notification.show("尚未選擇任何調班資料");
+            return;
+        }
+        // 將畫面上的暫存調班轉成 <原班表ID, 目標班別> 的 Map
+        Map<Integer, String> shiftMap = new LinkedHashMap<>();
+        for (ShiftChangePreview c : pendingChanges) {
+            Long originId = service.findOriginScheduleId(c.getEmployeeId(), c.getDate(), baseShift);
+            if (originId != null) {
+                shiftMap.put(originId.intValue(), c.getToShiftKey());
+            }
+        }
+        // 建立一筆申請，塞入 shiftMap 與申請原因
+        ShiftAdjustmentApply req = new ShiftAdjustmentApply();
+        req.setShiftMap(shiftMap);
+        String rsn = Optional.ofNullable(reason.getValue()).orElse("").trim();
+        req.setReason(rsn);
+
+        boolean success = service.applyShiftAdjustment(req);
+        if (success) {
+            NotificationUtil.success("申請成功");
+            if (refreshCallback != null) {
+                refreshCallback.run();
+            }
+            close();
+        } else {
+            NotificationUtil.error("申請失敗");
+        }
+    }
+
 
     // -------- tool --------
     private Component buildToolbar() {
@@ -240,8 +359,7 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
 //                // 檢視模式時不要因為程式切 Tab 再去打後端
 //                return;
 //            }
-            // 切月份一律回到「預覽：調班後」
-            previewEnabled = true;
+            previewEnabled = false;
             updatePreviewBTN(previewBtn);
 
             Tab selected = e.getSelectedTab();
@@ -257,6 +375,10 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
             updateDateSelector(selectedDate);
             updateShiftSchedules(deptId);
             updateMatrixGrid(previewShift);
+            if(requestVO != null) {
+                setApplyFormData(requestVO);
+
+            }
         });
     }
 
@@ -345,7 +467,6 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
                 .distinct()
                 .sorted(Comparator.comparing(Option::getValue))
                 .collect(Collectors.toList());
-
     }
 
     /**
@@ -478,7 +599,7 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
                 changeProvider.refreshAll();
                 refreshPreviewOnMatrixGrid();
             });
-//            delete.setVisible(!viewOnly);   //檢視模式不顯示刪除按鈕
+            delete.setVisible(!viewOnly);   //檢視模式不顯示刪除按鈕
             return delete;
         })).setHeader("操作").setAutoWidth(true).setFlexGrow(1);
         applyForm.add(changeGrid);
@@ -544,8 +665,8 @@ public class ShiftAdjustmentRequestDialog extends Dialog {
         List<ShiftSchedulesQueryVO> base = service.deepCopySchedule(baseShift);
         if (previewEnabled) {
             service.applyPreviewOnSchedulesInPlace(base, pendingChanges, shiftTypeMap);
-            scheduleMatrixGrid.updateItems(base);
         }
+        scheduleMatrixGrid.updateItems(base);
     }
 
 }

@@ -5,43 +5,35 @@ import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Data
 public class ShiftAdjustmentRequestVO implements Serializable {
-
 
     /**
      * 申請單ID(自動生成)
      */
     private Long id;
+
     /**
      * 申請人ID
      */
     private Integer applicantId;
+
     /**
-     * 申請人原班表ID (shift_schedules.id)
+     * 申請人姓名
      */
-    private Integer originScheduleId;
+    private String applicantName;
+
     /**
-     * 目標日期
+     * 申請人部門ID
      */
-    private LocalDate targetDate;
+    private Integer departmentId;
+
     /**
-     * 目標班別
+     * <申請人原班表ID (shift_schedules.id), 目標班別>
      */
-    private String targetShiftTypes;
-    /**
-     * 目標部門ID，NULL 表同部門
-     */
-    private Integer targetDepartmentId;
-    /**
-     * 互換對象的班表ID，如無互換則NULL
-     */
-    private Integer counterpartScheduleId;
-    /**
-     * 目標班表的員工ID
-     */
-    private Integer targetEmployeeId;
+    private Map<Integer, String> shiftMap;
     /**
      * 申請原因
      */
@@ -63,4 +55,14 @@ public class ShiftAdjustmentRequestVO implements Serializable {
      * 記錄每個階段的操作過程
      */
     private String historyReview;
+
+    /**
+     * 是否能被當前登入者審核
+     */
+    private Boolean eligibleForApproval;
+
+    /**
+     * 原始班別明細
+     */
+    private Map<Integer, String> originalShiftMap;
 }

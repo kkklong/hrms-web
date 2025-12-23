@@ -1,6 +1,7 @@
 package com.hrm.application.service;
 
 import com.hrm.application.entity.ApiResponse;
+import com.hrm.application.entity.ShiftAdjustmentApply;
 import com.hrm.application.entity.ShiftSchedules;
 import com.hrm.application.entity.ShiftType;
 import com.hrm.application.model.Option;
@@ -32,6 +33,29 @@ public class ShiftAdjustmentRequestService {
         this.client = client;
     }
 
+    // ---- 申請 ----
+    public boolean applyShiftAdjustment(ShiftAdjustmentApply req) {
+        String url = backEndDomain + API.SHIFT_ADJUSTMENT_APPLY.getPath();
+
+        ParameterizedTypeReference<ApiResponse<Object>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<Object> resp = client.doPostJson(url, null, req, responseType);
+        return resp != null;
+    }
+
+    // ---- 查詢個人申請清單 ----
+    public List<ShiftAdjustmentRequestVO> currentEmployeeShiftAdjustments() {
+        String url = backEndDomain + API.CURRENT_EMPLOYEE_SHIFT_ADJUSTMENTS.getPath();
+
+        ParameterizedTypeReference<ApiResponse<List<ShiftAdjustmentRequestVO>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<ShiftAdjustmentRequestVO>> response = client.doGet(url, null, null, responseType);
+        if (response != null && response.getData() != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
     public List<ShiftAdjustmentRequestVO> getPendingShiftAdjustments() {
         String url = backEndDomain + API.GET_PENDING_SHIFT_ADJUSTMENTS.getPath();
 
@@ -43,6 +67,31 @@ public class ShiftAdjustmentRequestService {
         }
         return new ArrayList<>();
     }
+
+    public List<Option<Byte>> getShiftAdjustmentRequestApprovalStage() {
+        String url = backEndDomain + API.GET_SHIFT_ADJUSTMENT_REQUEST_APPROVAL_STAGE.getPath();
+
+        ParameterizedTypeReference<ApiResponse<List<Option<Byte>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<Byte>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
+    protected List<Option<Byte>> getShiftAdjustmentRequestStatus() {
+        String url = backEndDomain + API.GET_SHIFT_ADJUSTMENT_REQUEST_STATUS.getPath();
+
+        ParameterizedTypeReference<ApiResponse<List<Option<Byte>>>> responseType = new ParameterizedTypeReference<>() {
+        };
+        ApiResponse<List<Option<Byte>>> response = client.doGet(url, null, null, responseType);
+        if (response != null) {
+            return response.getData();
+        }
+        return new ArrayList<>();
+    }
+
 
     // ---- 查詢班表 ----
     public List<ShiftSchedules> queryShiftSchedules(String startDate, String endDate, Integer departmentId) {
@@ -137,8 +186,12 @@ public class ShiftAdjustmentRequestService {
 
 
     private enum API {
+        //調班申請
         SHIFT_ADJUSTMENT_APPLY("/shiftAdjustmentRequest/apply", HttpMethod.POST, MediaType.APPLICATION_JSON),
+        CURRENT_EMPLOYEE_SHIFT_ADJUSTMENTS("/shiftAdjustmentRequest/currentEmployeeShiftAdjustments", HttpMethod.GET, null),
         GET_PENDING_SHIFT_ADJUSTMENTS("/shiftAdjustmentRequest/getPendingShiftAdjustments", HttpMethod.GET, null),
+        SHIFT_ADJUSTMENT_APPROVE("/shiftAdjustmentRequest/approve", HttpMethod.POST, MediaType.APPLICATION_JSON),
+        SHIFT_ADJUSTMENT_REJECT("/shiftAdjustmentRequest/reject", HttpMethod.POST, MediaType.APPLICATION_JSON),
 
         // ---- shiftSchedules ----
         QUERY_SHIFT_SCHEDULES("/shiftSchedules/queryByMonthAndDepartment", HttpMethod.GET, null),
@@ -148,6 +201,10 @@ public class ShiftAdjustmentRequestService {
 
         GET_DEPARTMENT_OPTIONS("/department/getEnumList", HttpMethod.GET, null),
         GET_EMPLOYEE_OPTIONS("/employee/getEnumList", HttpMethod.GET, null),
+        GET_SHIFT_ADJUSTMENT_REQUEST_APPROVAL_STAGE("/enum/getShiftAdjustmentRequestApprovalStage",HttpMethod.GET, null),
+        GET_SHIFT_ADJUSTMENT_REQUEST_STATUS("/enum/getShiftAdjustmentRequestStatus", HttpMethod.GET, null),
+
+
 //        GET_COMPANY_TYPE_OPTIONS("/enum/getCompanyType", HttpMethod.GET, null),
 
 
@@ -330,6 +387,23 @@ public class ShiftAdjustmentRequestService {
 //            }
         }
         return color;
+    }
+
+    /**
+     * 由快取資料 originalMonthSchedules 找出「某員工在某日期」對應的原班表 ID。
+     */
+    public Long findOriginScheduleId(Integer employeeId, LocalDate date, List<ShiftSchedulesQueryVO> baseShift) {
+        Integer id = baseShift.stream()
+                .filter(vo -> Objects.equals(vo.getEmployeeId(), employeeId))
+                .findFirst()
+                .map(ShiftSchedulesQueryVO::getSchedulesDates)
+                .orElseGet(List::of)
+                .stream()
+                .filter(sd -> Objects.equals(sd.getShiftDate(), date))
+                .map(ShiftSchedulesDateTimeQueryVO::getId)
+                .findFirst()
+                .orElse(null);
+        return id == null ? null : id.longValue();
     }
 
 }
