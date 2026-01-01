@@ -155,9 +155,9 @@ public class print01 {
         Map<String, Object> params = new HashMap<>();
         params.put("p", "chk_login");
         params.put("langx", "zh-cn");
-        params.put("username", "Dt7172");
-        params.put("password", "Dtv7172");
-        params.put("ver", "2025-09-10-c1bug_115");
+        params.put("username", "01qoR2");
+        params.put("password", "QAaa1122");
+        params.put("ver", "2025-12-26-noLog_129");
         params.put("auto", "IAIHGD"); //ADFFID
         params.put("app", "N");
         params.put("userAgent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Safari/605.1.15");
@@ -168,7 +168,46 @@ public class print01 {
 //                , url
 //                , params.entrySet().stream().map(entry -> entry.getKey() + "=" + entry.getValue()).collect(Collectors.joining("&"))
 //                , response);
+//        log.info("response: " + response);
 
         log.info("jsonData: " + XMLUtils.xml2json(response));
     }
+
+    @Test
+    public void SportTestForFU() throws IOException {
+        WebClient.Builder builder = WebClient.builder();
+        WebClientUtil client = new WebClientUtil(builder);
+
+        SportService service = new SportService(client);
+        String xmlResponse = service.fuData();
+
+        System.out.println("ResponseData: " + xmlResponse);
+//        System.out.println("jsonData: " + XMLUtils.xml2json(xmlResponse));
+    }
+
+    @Test
+    public void gameMoreForFTtoday() throws IOException {
+        WebClient.Builder builder = WebClient.builder();
+        WebClientUtil client = new WebClientUtil(builder);
+
+        SportService service = new SportService(client);
+        String xmlResponse = service.gameMore();
+
+        System.out.println("ResponseData: " + xmlResponse);
+//        System.out.println("jsonData: " + XMLUtils.xml2json(xmlResponse));
+    }
+
+    @Test
+    public void gameMoreForBKtoday() throws IOException {
+        WebClient.Builder builder = WebClient.builder();
+        WebClientUtil client = new WebClientUtil(builder);
+        SportService service = new SportService(client);
+        String xmlResponse = service.gameMore2();
+
+        System.out.println("ResponseData: " + xmlResponse);
+//        System.out.println("jsonData: " + XMLUtils.xml2json(xmlResponse));
+    }
+
+
+
 }

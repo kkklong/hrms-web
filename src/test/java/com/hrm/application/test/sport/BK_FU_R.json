@@ -1,0 +1,3191 @@
+{
+  "status": "success",
+  "response": {
+    "GAME_0": {
+      "PTYPE": "",
+      "GIDM": "1436522",
+      "GAME_DATE_TIME": "2025-12-28 07:00:00",
+      "GNUM_H": "70502",
+      "MIDFIELD": "N",
+      "PLAYS": {
+        "HALF_OUC": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUCO": "",
+          "HALF_RATIO_OUCU": "",
+          "HALF_IOR_OUCU": "",
+          "HALF_GID": "9908244",
+          "SW_OUC": "N",
+          "HALF_RATIO_OUCO": ""
+        },
+        "HALF_R": {
+          "SW_R": "N",
+          "HALF_STRONG": "H",
+          "HALF_RATIO_R": "",
+          "HALF_GID": "9908244",
+          "HALF_IOR_RH": "",
+          "HALF_IOR_RC": ""
+        },
+        "R": {
+          "SW_R": "Y",
+          "RATIO_R": "3.5",
+          "IOR_RC": "0.91",
+          "IOR_RH": "0.91"
+        },
+        "OUH": {
+          "IOR_OUHU": "0.88",
+          "RATIO_OUHU": "90",
+          "RATIO_OUHO": "90",
+          "SW_OUH": "Y",
+          "IOR_OUHO": "0.9"
+        },
+        "OU": {
+          "RATIO_OUU": "176.5",
+          "IOR_OUH": "0.89",
+          "SW_OU": "Y",
+          "IOR_OUC": "0.89",
+          "RATIO_OUO": "176.5"
+        },
+        "HALF_OUH": {
+          "HALF_STRONG": "H",
+          "HALF_RATIO_OUHO": "",
+          "HALF_IOR_OUHU": "",
+          "HALF_GID": "9908244",
+          "SW_OUH": "N",
+          "HALF_IOR_OUHO": "",
+          "HALF_RATIO_OUHU": ""
+        },
+        "HALF_OU": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUH": "",
+          "HALF_GID": "9908244",
+          "HALF_RATIO_OUU": "",
+          "SW_OU": "N",
+          "HALF_RATIO_OUO": "",
+          "HALF_IOR_OUC": ""
+        },
+        "OUC": {
+          "RATIO_OUCU": "86.5",
+          "IOR_OUCU": "0.87",
+          "RATIO_OUCO": "86.5",
+          "SW_OUC": "Y",
+          "IOR_OUCO": "0.91"
+        }
+      },
+      "MT_ID": "63049025",
+      "GNUM_C": "70501",
+      "FLAG_CLASS": "flag_EU",
+      "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_07:00:00_00000000010_00001436522_00000070501",
+      "MT_GTYPE": "BK",
+      "GID": "9908243",
+      "TEAM_C": "\u840a\u91cc\u9054\u4ff1\u6a02\u90e8",
+      "TEAM_H": "\u57fa\u7f85\u7d0d",
+      "RUNNING": "N",
+      "HALF_SE": "HT",
+      "LID": "100804",
+      "CENTER_TV": "",
+      "MT": "br",
+      "MT_SPID": "2",
+      "EVENTID": "",
+      "MORE": 8,
+      "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+      "DATETIME": "12-28 07:00a",
+      "STRONG": "H",
+      "IS_RB": "N",
+      "SYSTIME": "2025-12-27 17:49:17",
+      "SHOWTYPE": null
+    },
+    "GAME_1": {
+      "PTYPE": "",
+      "GIDM": "1436606",
+      "GAME_DATE_TIME": "2025-12-28 08:00:00",
+      "GNUM_H": "70658",
+      "MIDFIELD": "N",
+      "PLAYS": {
+        "HALF_OUC": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUCO": "",
+          "HALF_RATIO_OUCU": "",
+          "HALF_IOR_OUCU": "",
+          "HALF_GID": "9908832",
+          "SW_OUC": "N",
+          "HALF_RATIO_OUCO": ""
+        },
+        "HALF_R": {
+          "SW_R": "N",
+          "HALF_STRONG": "H",
+          "HALF_RATIO_R": "",
+          "HALF_GID": "9908832",
+          "HALF_IOR_RH": "",
+          "HALF_IOR_RC": ""
+        },
+        "R": {
+          "SW_R": "Y",
+          "RATIO_R": "6.5",
+          "IOR_RC": "0.91",
+          "IOR_RH": "0.91"
+        },
+        "OUH": {
+          "IOR_OUHU": "0.89",
+          "RATIO_OUHU": "87.5",
+          "RATIO_OUHO": "87.5",
+          "SW_OUH": "Y",
+          "IOR_OUHO": "0.89"
+        },
+        "OU": {
+          "RATIO_OUU": "168.5",
+          "IOR_OUH": "0.92",
+          "SW_OU": "Y",
+          "IOR_OUC": "0.86",
+          "RATIO_OUO": "168.5"
+        },
+        "HALF_OUH": {
+          "HALF_STRONG": "H",
+          "HALF_RATIO_OUHO": "",
+          "HALF_IOR_OUHU": "",
+          "HALF_GID": "9908832",
+          "SW_OUH": "N",
+          "HALF_IOR_OUHO": "",
+          "HALF_RATIO_OUHU": ""
+        },
+        "HALF_OU": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUH": "",
+          "HALF_GID": "9908832",
+          "HALF_RATIO_OUU": "",
+          "SW_OU": "N",
+          "HALF_RATIO_OUO": "",
+          "HALF_IOR_OUC": ""
+        },
+        "OUC": {
+          "RATIO_OUCU": "81",
+          "IOR_OUCU": "0.9",
+          "RATIO_OUCO": "81",
+          "SW_OUC": "Y",
+          "IOR_OUCO": "0.88"
+        }
+      },
+      "MT_ID": "63049033",
+      "GNUM_C": "70657",
+      "FLAG_CLASS": "flag_EU",
+      "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_08:00:00_00000000010_00001436606_00000070657",
+      "MT_GTYPE": "BK",
+      "GID": "9908831",
+      "TEAM_C": "\u5927\u52a0\u7d0d\u5229",
+      "TEAM_H": "\u5361\u7d0d\u91cc\u4e9e",
+      "RUNNING": "N",
+      "HALF_SE": "HT",
+      "LID": "100804",
+      "CENTER_TV": "",
+      "MT": "br",
+      "MT_SPID": "2",
+      "EVENTID": "",
+      "MORE": 8,
+      "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+      "DATETIME": "12-28 08:00a",
+      "STRONG": "H",
+      "IS_RB": "N",
+      "SYSTIME": "2025-12-27 17:49:17",
+      "SHOWTYPE": null
+    },
+    "GAME_2": {
+      "PTYPE": "",
+      "GIDM": "1436729",
+      "GAME_DATE_TIME": "2025-12-28 12:00:00",
+      "GNUM_H": "70904",
+      "MIDFIELD": "N",
+      "PLAYS": {
+        "HALF_OUC": {
+          "HALF_STRONG": "C",
+          "HALF_IOR_OUCO": "",
+          "HALF_RATIO_OUCU": "",
+          "HALF_IOR_OUCU": "",
+          "HALF_GID": "9909693",
+          "SW_OUC": "N",
+          "HALF_RATIO_OUCO": ""
+        },
+        "HALF_R": {
+          "SW_R": "N",
+          "HALF_STRONG": "C",
+          "HALF_RATIO_R": "",
+          "HALF_GID": "9909693",
+          "HALF_IOR_RH": "",
+          "HALF_IOR_RC": ""
+        },
+        "R": {
+          "SW_R": "Y",
+          "RATIO_R": "6.5",
+          "IOR_RC": "0.91",
+          "IOR_RH": "0.91"
+        },
+        "OUH": {
+          "IOR_OUHU": "0.89",
+          "RATIO_OUHU": "80.5",
+          "RATIO_OUHO": "80.5",
+          "SW_OUH": "Y",
+          "IOR_OUHO": "0.89"
+        },
+        "OU": {
+          "RATIO_OUU": "167.5",
+          "IOR_OUH": "0.92",
+          "SW_OU": "Y",
+          "IOR_OUC": "0.86",
+          "RATIO_OUO": "167.5"
+        },
+        "HALF_OUH": {
+          "HALF_STRONG": "C",
+          "HALF_RATIO_OUHO": "",
+          "HALF_IOR_OUHU": "",
+          "HALF_GID": "9909693",
+          "SW_OUH": "N",
+          "HALF_IOR_OUHO": "",
+          "HALF_RATIO_OUHU": ""
+        },
+        "HALF_OU": {
+          "HALF_STRONG": "C",
+          "HALF_IOR_OUH": "",
+          "HALF_GID": "9909693",
+          "HALF_RATIO_OUU": "",
+          "SW_OU": "N",
+          "HALF_RATIO_OUO": "",
+          "HALF_IOR_OUC": ""
+        },
+        "OUC": {
+          "RATIO_OUCU": "87",
+          "IOR_OUCU": "0.9",
+          "RATIO_OUCO": "87",
+          "SW_OUC": "Y",
+          "IOR_OUCO": "0.88"
+        }
+      },
+      "MT_ID": "63049037",
+      "GNUM_C": "70903",
+      "FLAG_CLASS": "flag_EU",
+      "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_12:00:00_00000000010_00001436729_00000070903",
+      "MT_GTYPE": "BK",
+      "GID": "9909692",
+      "TEAM_C": "\u5df4\u585e\u7f85\u90a3",
+      "TEAM_H": "\u7562\u723e\u5305",
+      "RUNNING": "N",
+      "HALF_SE": "HT",
+      "LID": "100804",
+      "CENTER_TV": "",
+      "MT": "br",
+      "MT_SPID": "2",
+      "EVENTID": "",
+      "MORE": 8,
+      "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+      "DATETIME": "12-28 12:00p",
+      "STRONG": "C",
+      "IS_RB": "N",
+      "SYSTIME": "2025-12-27 17:49:17",
+      "SHOWTYPE": null
+    },
+    "GAME_3": {
+      "PTYPE": "",
+      "GIDM": "1436732",
+      "GAME_DATE_TIME": "2025-12-28 13:00:00",
+      "GNUM_H": "70910",
+      "MIDFIELD": "N",
+      "PLAYS": {
+        "HALF_OUC": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUCO": "",
+          "HALF_RATIO_OUCU": "",
+          "HALF_IOR_OUCU": "",
+          "HALF_GID": "9909714",
+          "SW_OUC": "N",
+          "HALF_RATIO_OUCO": ""
+        },
+        "HALF_R": {
+          "SW_R": "N",
+          "HALF_STRONG": "H",
+          "HALF_RATIO_R": "",
+          "HALF_GID": "9909714",
+          "HALF_IOR_RH": "",
+          "HALF_IOR_RC": ""
+        },
+        "R": {
+          "SW_R": "Y",
+          "RATIO_R": "14.5",
+          "IOR_RC": "0.91",
+          "IOR_RH": "0.91"
+        },
+        "OUH": {
+          "IOR_OUHU": "0.9",
+          "RATIO_OUHU": "97",
+          "RATIO_OUHO": "97",
+          "SW_OUH": "Y",
+          "IOR_OUHO": "0.88"
+        },
+        "OU": {
+          "RATIO_OUU": "179.5",
+          "IOR_OUH": "0.92",
+          "SW_OU": "Y",
+          "IOR_OUC": "0.86",
+          "RATIO_OUO": "179.5"
+        },
+        "HALF_OUH": {
+          "HALF_STRONG": "H",
+          "HALF_RATIO_OUHO": "",
+          "HALF_IOR_OUHU": "",
+          "HALF_GID": "9909714",
+          "SW_OUH": "N",
+          "HALF_IOR_OUHO": "",
+          "HALF_RATIO_OUHU": ""
+        },
+        "HALF_OU": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUH": "",
+          "HALF_GID": "9909714",
+          "HALF_RATIO_OUU": "",
+          "SW_OU": "N",
+          "HALF_RATIO_OUO": "",
+          "HALF_IOR_OUC": ""
+        },
+        "OUC": {
+          "RATIO_OUCU": "82.5",
+          "IOR_OUCU": "0.9",
+          "RATIO_OUCO": "82.5",
+          "SW_OUC": "Y",
+          "IOR_OUCO": "0.88"
+        }
+      },
+      "MT_ID": "63049039",
+      "GNUM_C": "70909",
+      "FLAG_CLASS": "flag_EU",
+      "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_13:00:00_00000000010_00001436732_00000070909",
+      "MT_GTYPE": "BK",
+      "GID": "9909713",
+      "TEAM_C": "\u5b89\u9053\u723e",
+      "TEAM_H": "\u74e6\u502b\u897f\u4e9e",
+      "RUNNING": "N",
+      "HALF_SE": "HT",
+      "LID": "100804",
+      "CENTER_TV": "",
+      "MT": "br",
+      "MT_SPID": "2",
+      "EVENTID": "",
+      "MORE": 7,
+      "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+      "DATETIME": "12-28 01:00p",
+      "STRONG": "H",
+      "IS_RB": "N",
+      "SYSTIME": "2025-12-27 17:49:17",
+      "SHOWTYPE": null
+    },
+    "GAME_4": {
+      "PTYPE": "",
+      "GIDM": "1436735",
+      "GAME_DATE_TIME": "2025-12-28 14:00:00",
+      "GNUM_H": "70916",
+      "MIDFIELD": "N",
+      "PLAYS": {
+        "HALF_OUC": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUCO": "",
+          "HALF_RATIO_OUCU": "",
+          "HALF_IOR_OUCU": "",
+          "HALF_GID": "9909735",
+          "SW_OUC": "N",
+          "HALF_RATIO_OUCO": ""
+        },
+        "HALF_R": {
+          "SW_R": "N",
+          "HALF_STRONG": "H",
+          "HALF_RATIO_R": "",
+          "HALF_GID": "9909735",
+          "HALF_IOR_RH": "",
+          "HALF_IOR_RC": ""
+        },
+        "R": {
+          "SW_R": "Y",
+          "RATIO_R": "7.5",
+          "IOR_RC": "0.91",
+          "IOR_RH": "0.91"
+        },
+        "OUH": {
+          "IOR_OUHU": "0.88",
+          "RATIO_OUHU": "90",
+          "RATIO_OUHO": "90",
+          "SW_OUH": "Y",
+          "IOR_OUHO": "0.9"
+        },
+        "OU": {
+          "RATIO_OUU": "172.5",
+          "IOR_OUH": "0.89",
+          "SW_OU": "Y",
+          "IOR_OUC": "0.89",
+          "RATIO_OUO": "172.5"
+        },
+        "HALF_OUH": {
+          "HALF_STRONG": "H",
+          "HALF_RATIO_OUHO": "",
+          "HALF_IOR_OUHU": "",
+          "HALF_GID": "9909735",
+          "SW_OUH": "N",
+          "HALF_IOR_OUHO": "",
+          "HALF_RATIO_OUHU": ""
+        },
+        "HALF_OU": {
+          "HALF_STRONG": "H",
+          "HALF_IOR_OUH": "",
+          "HALF_GID": "9909735",
+          "HALF_RATIO_OUU": "",
+          "SW_OU": "N",
+          "HALF_RATIO_OUO": "",
+          "HALF_IOR_OUC": ""
+        },
+        "OUC": {
+          "RATIO_OUCU": "82.5",
+          "IOR_OUCU": "0.87",
+          "RATIO_OUCO": "82.5",
+          "SW_OUC": "Y",
+          "IOR_OUCO": "0.91"
+        }
+      },
+      "MT_ID": "63049035",
+      "GNUM_C": "70915",
+      "FLAG_CLASS": "flag_EU",
+      "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_14:00:00_00000000010_00001436735_00000070915",
+      "MT_GTYPE": "BK",
+      "GID": "9909734",
+      "TEAM_C": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+      "TEAM_H": "\u7687\u5bb6\u99ac\u5fb7\u91cc",
+      "RUNNING": "N",
+      "HALF_SE": "HT",
+      "LID": "100804",
+      "CENTER_TV": "",
+      "MT": "br",
+      "MT_SPID": "2",
+      "EVENTID": "",
+      "MORE": 8,
+      "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+      "DATETIME": "12-28 02:00p",
+      "STRONG": "H",
+      "IS_RB": "N",
+      "SYSTIME": "2025-12-27 17:49:17",
+      "SHOWTYPE": null
+    }
+  },
+  "phpData": {
+    "filter": "FU",
+    "TS": "1766872139742",
+    "CHGSORTTS": "1766872157325",
+    "MYGAME_RTYPE": "r",
+    "NOWSHOWTYPE": "early",
+    "myGamePageCountHash": {
+      "main": 0,
+      "count": 0
+    },
+    "sip": "174.25",
+    "SYSTEM_TIME": "2025-12-27 17:49:17",
+    "CODE": "hasData",
+    "TOTALDATACOUNT": 5,
+    "PAGECOUNT": 1
+  },
+  "original_json": {
+    "response": {
+      "GAME_0": {
+        "PTYPE": "",
+        "GIDM": "1436522",
+        "GAME_DATE_TIME": "2025-12-28 07:00:00",
+        "GNUM_H": "70502",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9908244",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "N",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "",
+            "HALF_GID": "9908244",
+            "HALF_IOR_RH": "",
+            "HALF_IOR_RC": ""
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "3.5",
+            "IOR_RC": "0.91",
+            "IOR_RH": "0.91"
+          },
+          "OUH": {
+            "IOR_OUHU": "0.88",
+            "RATIO_OUHU": "90",
+            "RATIO_OUHO": "90",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0.9"
+          },
+          "OU": {
+            "RATIO_OUU": "176.5",
+            "IOR_OUH": "0.89",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.89",
+            "RATIO_OUO": "176.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9908244",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "",
+            "HALF_GID": "9908244",
+            "HALF_RATIO_OUU": "",
+            "SW_OU": "N",
+            "HALF_RATIO_OUO": "",
+            "HALF_IOR_OUC": ""
+          },
+          "OUC": {
+            "RATIO_OUCU": "86.5",
+            "IOR_OUCU": "0.87",
+            "RATIO_OUCO": "86.5",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0.91"
+          }
+        },
+        "MT_ID": "63049025",
+        "GNUM_C": "70501",
+        "FLAG_CLASS": "flag_EU",
+        "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_07:00:00_00000000010_00001436522_00000070501",
+        "MT_GTYPE": "BK",
+        "GID": "9908243",
+        "TEAM_C": "\u840a\u91cc\u9054\u4ff1\u6a02\u90e8",
+        "TEAM_H": "\u57fa\u7f85\u7d0d",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100804",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "2",
+        "EVENTID": "",
+        "MORE": 8,
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "DATETIME": "12-28 07:00a",
+        "STRONG": "H"
+      },
+      "GAME_1": {
+        "PTYPE": "",
+        "GIDM": "1436606",
+        "GAME_DATE_TIME": "2025-12-28 08:00:00",
+        "GNUM_H": "70658",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9908832",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "N",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "",
+            "HALF_GID": "9908832",
+            "HALF_IOR_RH": "",
+            "HALF_IOR_RC": ""
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "6.5",
+            "IOR_RC": "0.91",
+            "IOR_RH": "0.91"
+          },
+          "OUH": {
+            "IOR_OUHU": "0.89",
+            "RATIO_OUHU": "87.5",
+            "RATIO_OUHO": "87.5",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0.89"
+          },
+          "OU": {
+            "RATIO_OUU": "168.5",
+            "IOR_OUH": "0.92",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.86",
+            "RATIO_OUO": "168.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9908832",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "",
+            "HALF_GID": "9908832",
+            "HALF_RATIO_OUU": "",
+            "SW_OU": "N",
+            "HALF_RATIO_OUO": "",
+            "HALF_IOR_OUC": ""
+          },
+          "OUC": {
+            "RATIO_OUCU": "81",
+            "IOR_OUCU": "0.9",
+            "RATIO_OUCO": "81",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0.88"
+          }
+        },
+        "MT_ID": "63049033",
+        "GNUM_C": "70657",
+        "FLAG_CLASS": "flag_EU",
+        "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_08:00:00_00000000010_00001436606_00000070657",
+        "MT_GTYPE": "BK",
+        "GID": "9908831",
+        "TEAM_C": "\u5927\u52a0\u7d0d\u5229",
+        "TEAM_H": "\u5361\u7d0d\u91cc\u4e9e",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100804",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "2",
+        "EVENTID": "",
+        "MORE": 8,
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "DATETIME": "12-28 08:00a",
+        "STRONG": "H"
+      },
+      "GAME_2": {
+        "PTYPE": "",
+        "GIDM": "1436729",
+        "GAME_DATE_TIME": "2025-12-28 12:00:00",
+        "GNUM_H": "70904",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9909693",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "N",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "",
+            "HALF_GID": "9909693",
+            "HALF_IOR_RH": "",
+            "HALF_IOR_RC": ""
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "6.5",
+            "IOR_RC": "0.91",
+            "IOR_RH": "0.91"
+          },
+          "OUH": {
+            "IOR_OUHU": "0.89",
+            "RATIO_OUHU": "80.5",
+            "RATIO_OUHO": "80.5",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0.89"
+          },
+          "OU": {
+            "RATIO_OUU": "167.5",
+            "IOR_OUH": "0.92",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.86",
+            "RATIO_OUO": "167.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9909693",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "",
+            "HALF_GID": "9909693",
+            "HALF_RATIO_OUU": "",
+            "SW_OU": "N",
+            "HALF_RATIO_OUO": "",
+            "HALF_IOR_OUC": ""
+          },
+          "OUC": {
+            "RATIO_OUCU": "87",
+            "IOR_OUCU": "0.9",
+            "RATIO_OUCO": "87",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0.88"
+          }
+        },
+        "MT_ID": "63049037",
+        "GNUM_C": "70903",
+        "FLAG_CLASS": "flag_EU",
+        "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_12:00:00_00000000010_00001436729_00000070903",
+        "MT_GTYPE": "BK",
+        "GID": "9909692",
+        "TEAM_C": "\u5df4\u585e\u7f85\u90a3",
+        "TEAM_H": "\u7562\u723e\u5305",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100804",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "2",
+        "EVENTID": "",
+        "MORE": 8,
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "DATETIME": "12-28 12:00p",
+        "STRONG": "C"
+      },
+      "GAME_3": {
+        "PTYPE": "",
+        "GIDM": "1436732",
+        "GAME_DATE_TIME": "2025-12-28 13:00:00",
+        "GNUM_H": "70910",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9909714",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "N",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "",
+            "HALF_GID": "9909714",
+            "HALF_IOR_RH": "",
+            "HALF_IOR_RC": ""
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "14.5",
+            "IOR_RC": "0.91",
+            "IOR_RH": "0.91"
+          },
+          "OUH": {
+            "IOR_OUHU": "0.9",
+            "RATIO_OUHU": "97",
+            "RATIO_OUHO": "97",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0.88"
+          },
+          "OU": {
+            "RATIO_OUU": "179.5",
+            "IOR_OUH": "0.92",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.86",
+            "RATIO_OUO": "179.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9909714",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "",
+            "HALF_GID": "9909714",
+            "HALF_RATIO_OUU": "",
+            "SW_OU": "N",
+            "HALF_RATIO_OUO": "",
+            "HALF_IOR_OUC": ""
+          },
+          "OUC": {
+            "RATIO_OUCU": "82.5",
+            "IOR_OUCU": "0.9",
+            "RATIO_OUCO": "82.5",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0.88"
+          }
+        },
+        "MT_ID": "63049039",
+        "GNUM_C": "70909",
+        "FLAG_CLASS": "flag_EU",
+        "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_13:00:00_00000000010_00001436732_00000070909",
+        "MT_GTYPE": "BK",
+        "GID": "9909713",
+        "TEAM_C": "\u5b89\u9053\u723e",
+        "TEAM_H": "\u74e6\u502b\u897f\u4e9e",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100804",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "2",
+        "EVENTID": "",
+        "MORE": 7,
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "DATETIME": "12-28 01:00p",
+        "STRONG": "H"
+      },
+      "GAME_4": {
+        "PTYPE": "",
+        "GIDM": "1436735",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70916",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9909735",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "N",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "",
+            "HALF_GID": "9909735",
+            "HALF_IOR_RH": "",
+            "HALF_IOR_RC": ""
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "7.5",
+            "IOR_RC": "0.91",
+            "IOR_RH": "0.91"
+          },
+          "OUH": {
+            "IOR_OUHU": "0.88",
+            "RATIO_OUHU": "90",
+            "RATIO_OUHO": "90",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0.9"
+          },
+          "OU": {
+            "RATIO_OUU": "172.5",
+            "IOR_OUH": "0.89",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.89",
+            "RATIO_OUO": "172.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9909735",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "",
+            "HALF_GID": "9909735",
+            "HALF_RATIO_OUU": "",
+            "SW_OU": "N",
+            "HALF_RATIO_OUO": "",
+            "HALF_IOR_OUC": ""
+          },
+          "OUC": {
+            "RATIO_OUCU": "82.5",
+            "IOR_OUCU": "0.87",
+            "RATIO_OUCO": "82.5",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0.91"
+          }
+        },
+        "MT_ID": "63049035",
+        "GNUM_C": "70915",
+        "FLAG_CLASS": "flag_EU",
+        "SORT_KEY": "00000001100_Spain ACB League_0_2025-12-28_14:00:00_00000000010_00001436735_00000070915",
+        "MT_GTYPE": "BK",
+        "GID": "9909734",
+        "TEAM_C": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+        "TEAM_H": "\u7687\u5bb6\u99ac\u5fb7\u91cc",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100804",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "2",
+        "EVENTID": "",
+        "MORE": 8,
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "H"
+      },
+      "GAME_5": {
+        "PTYPE": "",
+        "GIDM": "1433500",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70038",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9887097",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "3",
+            "HALF_GID": "9887097",
+            "HALF_IOR_RH": "0.88",
+            "HALF_IOR_RC": "0.96"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "6",
+            "IOR_RC": "0.909",
+            "IOR_RH": "0.951"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "45",
+            "IOR_OUH": "0.931",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "45"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9887097",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.909",
+            "HALF_GID": "9887097",
+            "HALF_RATIO_OUU": "22.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "22.5",
+            "HALF_IOR_OUC": "0.911"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60575023",
+        "GNUM_C": "70037",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_14:00:00_00000000010_00001433500_00000070037",
+        "MT_GTYPE": "AF",
+        "GID": "9887096",
+        "TEAM_C": "\u5766\u5e15\u7063\u6d77\u76dc",
+        "TEAM_H": "\u9081\u963f\u5bc6\u6d77\u8c5a",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "C"
+      },
+      "GAME_20": {
+        "PTYPE": "",
+        "GIDM": "1426534",
+        "GAME_DATE_TIME": "2025-12-31 13:00:00",
+        "GNUM_H": "30002",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838300",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "3",
+            "HALF_GID": "9838300",
+            "HALF_IOR_RH": "0.88",
+            "HALF_IOR_RC": "0.94"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "5",
+            "IOR_RC": "0.911",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "47",
+            "IOR_OUH": "0.871",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "47"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838300",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.871",
+            "HALF_GID": "9838300",
+            "HALF_RATIO_OUU": "23",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "23",
+            "HALF_IOR_OUC": "0.909"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "30001",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-31_13:00:00_00000000010_00001426534_00000030001",
+        "MT_GTYPE": "BK",
+        "GID": "9838299",
+        "TEAM_C": "\u611b\u8377\u83ef",
+        "TEAM_H": "\u8303\u5fb7\u5821",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-31 01:00p",
+        "STRONG": "H"
+      },
+      "GAME_6": {
+        "PTYPE": "",
+        "GIDM": "1433501",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70040",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9887104",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "7",
+            "HALF_GID": "9887104",
+            "HALF_IOR_RH": "0.909",
+            "HALF_IOR_RC": "0.931"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "13.5",
+            "IOR_RC": "0.909",
+            "IOR_RH": "0.951"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "42.5",
+            "IOR_OUH": "0.931",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "42.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9887104",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.911",
+            "HALF_GID": "9887104",
+            "HALF_RATIO_OUU": "21.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "21.5",
+            "HALF_IOR_OUC": "0.909"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60574949",
+        "GNUM_C": "70039",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_14:00:00_00000000010_00001433501_00000070039",
+        "MT_GTYPE": "AF",
+        "GID": "9887103",
+        "TEAM_C": "\u65b0\u82f1\u683c\u862d\u611b\u570b\u8005",
+        "TEAM_H": "\u7d10\u7d04\u5674\u6c23\u6a5f",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 8,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "C"
+      },
+      "GAME_7": {
+        "PTYPE": "",
+        "GIDM": "1433502",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70042",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9887111",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "4",
+            "HALF_GID": "9887111",
+            "HALF_IOR_RH": "0.931",
+            "HALF_IOR_RC": "0.909"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "7",
+            "IOR_RC": "0.88",
+            "IOR_RH": "0.98"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "53.5",
+            "IOR_OUH": "0.911",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.929",
+            "RATIO_OUO": "53.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9887111",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.911",
+            "HALF_GID": "9887111",
+            "HALF_RATIO_OUU": "27",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "27",
+            "HALF_IOR_OUC": "0.909"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60575225",
+        "GNUM_C": "70041",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_14:00:00_00000000010_00001433502_00000070041",
+        "MT_GTYPE": "AF",
+        "GID": "9887110",
+        "TEAM_C": "\u4e9a\u5229\u6851\u90a3\u7ea2\u96c0",
+        "TEAM_H": "\u8f9b\u8f9b\u90a3\u63d0\u5b5f\u52a0\u62c9\u864e",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "H"
+      },
+      "GAME_8": {
+        "PTYPE": "",
+        "GIDM": "1433503",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70044",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9887118",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "4",
+            "HALF_GID": "9887118",
+            "HALF_IOR_RH": "0.931",
+            "HALF_IOR_RC": "0.909"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "7",
+            "IOR_RC": "0.86",
+            "IOR_RH": "1.0"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "42.5",
+            "IOR_OUH": "0.929",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.911",
+            "RATIO_OUO": "42.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9887118",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.909",
+            "HALF_GID": "9887118",
+            "HALF_RATIO_OUU": "21",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "21",
+            "HALF_IOR_OUC": "0.911"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60575145",
+        "GNUM_C": "70043",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_14:00:00_00000000010_00001433503_00000070043",
+        "MT_GTYPE": "AF",
+        "GID": "9887117",
+        "TEAM_C": "\u897f\u96c5\u5716\u6d77\u9df9",
+        "TEAM_H": "\u5361\u7f85\u840a\u7d0d\u9ed1\u8c79",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "C"
+      },
+      "GAME_9": {
+        "PTYPE": "",
+        "GIDM": "1433504",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70046",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9887125",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "3",
+            "HALF_GID": "9887125",
+            "HALF_IOR_RH": "0.909",
+            "HALF_IOR_RC": "0.931"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "5",
+            "IOR_RC": "0.951",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "48",
+            "IOR_OUH": "0.909",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.931",
+            "RATIO_OUO": "48"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9887125",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.911",
+            "HALF_GID": "9887125",
+            "HALF_RATIO_OUU": "24",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "24",
+            "HALF_IOR_OUC": "0.909"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60574873",
+        "GNUM_C": "70045",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_14:00:00_00000000010_00001433504_00000070045",
+        "MT_GTYPE": "AF",
+        "GID": "9887124",
+        "TEAM_C": "\u5091\u514b\u905c\u5a01\u723e\u7f8e\u6d32\u864e",
+        "TEAM_H": "\u5370\u7b2c\u5b89\u90a3\u5c0f\u99ac",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "C"
+      },
+      "GAME_24": {
+        "PTYPE": "",
+        "GIDM": "1435170",
+        "GAME_DATE_TIME": "2025-12-31 20:30:00",
+        "GNUM_H": "30070",
+        "MIDFIELD": "Y",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "0",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "0",
+            "HALF_GID": "9898780",
+            "SW_OUC": "Y",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "5.5",
+            "HALF_GID": "9898780",
+            "HALF_IOR_RH": "0.909",
+            "HALF_IOR_RC": "0.911"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "8.5",
+            "IOR_RC": "0.909",
+            "IOR_RH": "0.911"
+          },
+          "OUH": {
+            "IOR_OUHU": "0",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0"
+          },
+          "OU": {
+            "RATIO_OUU": "42.5",
+            "IOR_OUH": "0.871",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "42.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "0",
+            "HALF_GID": "9898780",
+            "SW_OUH": "Y",
+            "HALF_IOR_OUHO": "0",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.73",
+            "HALF_GID": "9898780",
+            "HALF_RATIO_OUU": "22",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "22",
+            "HALF_IOR_OUC": "1.05"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "0",
+            "RATIO_OUCO": "",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0"
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "30069",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-31_20:30:00_00000000010_00001435170_00000030069",
+        "MT_GTYPE": "BK",
+        "GID": "9898779",
+        "TEAM_C": "\u9081\u963f\u5bc6\u98b6\u98a8",
+        "TEAM_H": "\u4fc4\u4ea5\u4fc4\u5dde\u7acb",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 21,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-31 08:30p",
+        "STRONG": "H"
+      },
+      "GAME_23": {
+        "PTYPE": "",
+        "GIDM": "1426537",
+        "GAME_DATE_TIME": "2025-12-31 16:30:00",
+        "GNUM_H": "30008",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838321",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "7",
+            "HALF_GID": "9838321",
+            "HALF_IOR_RH": "0.881",
+            "HALF_IOR_RC": "0.939"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "13.5",
+            "IOR_RC": "0.939",
+            "IOR_RH": "0.881"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "49",
+            "IOR_OUH": "0.939",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.841",
+            "RATIO_OUO": "49"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838321",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.92",
+            "HALF_GID": "9838321",
+            "HALF_RATIO_OUU": "25.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "25.5",
+            "HALF_IOR_OUC": "0.86"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "30007",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-31_16:30:00_00000000010_00001426537_00000030007",
+        "MT_GTYPE": "BK",
+        "GID": "9838320",
+        "TEAM_C": "\u5167\u5e03\u62c9\u65af\u52a0",
+        "TEAM_H": "\u7336\u4ed6",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-31 04:30p",
+        "STRONG": "H"
+      },
+      "GAME_22": {
+        "PTYPE": "",
+        "GIDM": "1426536",
+        "GAME_DATE_TIME": "2025-12-31 16:00:00",
+        "GNUM_H": "30006",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838314",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "4",
+            "HALF_GID": "9838314",
+            "HALF_IOR_RH": "0.911",
+            "HALF_IOR_RC": "0.909"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "7.5",
+            "IOR_RC": "0.909",
+            "IOR_RH": "0.911"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "48",
+            "IOR_OUH": "0.871",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "48"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838314",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.88",
+            "HALF_GID": "9838314",
+            "HALF_RATIO_OUU": "23.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "23.5",
+            "HALF_IOR_OUC": "0.9"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "30005",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-31_16:00:00_00000000010_00001426536_00000030005",
+        "MT_GTYPE": "BK",
+        "GID": "9838313",
+        "TEAM_C": "\u5bc6\u897f\u6839",
+        "TEAM_H": "\u5fb7\u5dde",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-31 04:00p",
+        "STRONG": "H"
+      },
+      "GAME_21": {
+        "PTYPE": "",
+        "GIDM": "1426535",
+        "GAME_DATE_TIME": "2025-12-31 15:00:00",
+        "GNUM_H": "30004",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838307",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "2.5",
+            "HALF_GID": "9838307",
+            "HALF_IOR_RH": "0.88",
+            "HALF_IOR_RC": "0.94"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "3",
+            "IOR_RC": "0.88",
+            "IOR_RH": "0.94"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "48",
+            "IOR_OUH": "0.939",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.841",
+            "RATIO_OUO": "48"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838307",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.88",
+            "HALF_GID": "9838307",
+            "HALF_RATIO_OUU": "23.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "23.5",
+            "HALF_IOR_OUC": "0.9"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "30003",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-31_15:00:00_00000000010_00001426535_00000030003",
+        "MT_GTYPE": "BK",
+        "GID": "9838306",
+        "TEAM_C": "\u4e9e\u5229\u6851\u90a3\u5dde\u7acb",
+        "TEAM_H": "\u675c\u514b",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-31 03:00p",
+        "STRONG": "H"
+      },
+      "GAME_28": {
+        "PTYPE": "",
+        "GIDM": "1436546",
+        "GAME_DATE_TIME": "2025-12-28 07:30:00",
+        "GNUM_H": "70538",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9908412",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "N",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "",
+            "HALF_GID": "9908412",
+            "HALF_IOR_RH": "",
+            "HALF_IOR_RC": ""
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "2.5",
+            "IOR_RC": "0.81",
+            "IOR_RH": "0.91"
+          },
+          "OUH": {
+            "IOR_OUHU": "0.83",
+            "RATIO_OUHU": "84",
+            "RATIO_OUHO": "84",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0.89"
+          },
+          "OU": {
+            "RATIO_OUU": "165.5",
+            "IOR_OUH": "0.89",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.83",
+            "RATIO_OUO": "165.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9908412",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "",
+            "HALF_GID": "9908412",
+            "HALF_RATIO_OUU": "",
+            "SW_OU": "N",
+            "HALF_RATIO_OUO": "",
+            "HALF_IOR_OUC": ""
+          },
+          "OUC": {
+            "RATIO_OUCU": "81.5",
+            "IOR_OUCU": "0.9",
+            "RATIO_OUCO": "81.5",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0.82"
+          }
+        },
+        "MT_ID": "61792948",
+        "GNUM_C": "70537",
+        "FLAG_CLASS": "flag_EU",
+        "SORT_KEY": "00000001680_Poland Basketball League_0_2025-12-28_07:30:00_00000000010_00001436546_00000070537",
+        "MT_GTYPE": "BK",
+        "GID": "9908411",
+        "TEAM_C": "SK\u83ef\u6c99\u6b77\u57fa\u4e9e",
+        "TEAM_H": "\u963f\u5361",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100928",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "2",
+        "EVENTID": "",
+        "MORE": 7,
+        "LEAGUE": "\u6ce2\u862d\u7c43\u7403\u806f\u8cfd",
+        "DATETIME": "12-28 07:30a",
+        "STRONG": "H"
+      },
+      "GAME_27": {
+        "PTYPE": "",
+        "GIDM": "1435173",
+        "GAME_DATE_TIME": "2026-01-01 21:00:00",
+        "GNUM_H": "40036",
+        "MIDFIELD": "Y",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "0",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "0",
+            "HALF_GID": "9898801",
+            "SW_OUC": "Y",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "3.5",
+            "HALF_GID": "9898801",
+            "HALF_IOR_RH": "0.88",
+            "HALF_IOR_RC": "0.94"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "6",
+            "IOR_RC": "0.909",
+            "IOR_RH": "0.911"
+          },
+          "OUH": {
+            "IOR_OUHU": "0",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0"
+          },
+          "OU": {
+            "RATIO_OUU": "55.5",
+            "IOR_OUH": "0.909",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.871",
+            "RATIO_OUO": "55.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "0",
+            "HALF_GID": "9898801",
+            "SW_OUH": "Y",
+            "HALF_IOR_OUHO": "0",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.9",
+            "HALF_GID": "9898801",
+            "HALF_RATIO_OUU": "27.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "27.5",
+            "HALF_IOR_OUC": "0.88"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "0",
+            "RATIO_OUCO": "",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0"
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "40035",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2026-01-01_21:00:00_00000000010_00001435173_00000040035",
+        "MT_GTYPE": "BK",
+        "GID": "9898800",
+        "TEAM_C": "\u5bc6\u897f\u897f\u6bd4\u5927\u5b78",
+        "TEAM_H": "\u683c\u9b6f\u5409\u4e9e",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 21,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "01-01 09:00p",
+        "STRONG": "H"
+      },
+      "GAME_26": {
+        "PTYPE": "",
+        "GIDM": "1435172",
+        "GAME_DATE_TIME": "2026-01-01 17:00:00",
+        "GNUM_H": "40034",
+        "MIDFIELD": "Y",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "0",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "0",
+            "HALF_GID": "9898794",
+            "SW_OUC": "Y",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "4",
+            "HALF_GID": "9898794",
+            "HALF_IOR_RH": "0.909",
+            "HALF_IOR_RC": "0.911"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "7",
+            "IOR_RC": "0.911",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "0",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0"
+          },
+          "OU": {
+            "RATIO_OUU": "48.5",
+            "IOR_OUH": "0.871",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "48.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "0",
+            "HALF_GID": "9898794",
+            "SW_OUH": "Y",
+            "HALF_IOR_OUHO": "0",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.871",
+            "HALF_GID": "9898794",
+            "HALF_RATIO_OUU": "24",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "24",
+            "HALF_IOR_OUC": "0.909"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "0",
+            "RATIO_OUCO": "",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0"
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "40033",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2026-01-01_17:00:00_00000000010_00001435172_00000040033",
+        "MT_GTYPE": "BK",
+        "GID": "9898793",
+        "TEAM_C": "\u963f\u62c9\u5df4\u99ac",
+        "TEAM_H": "\u5370\u7b2c\u5b89\u7d0d",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 21,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "01-01 05:00p",
+        "STRONG": "H"
+      },
+      "GAME_25": {
+        "PTYPE": "",
+        "GIDM": "1435171",
+        "GAME_DATE_TIME": "2026-01-01 13:00:00",
+        "GNUM_H": "40032",
+        "MIDFIELD": "Y",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "0",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "0",
+            "HALF_GID": "9898787",
+            "SW_OUC": "Y",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "0",
+            "HALF_GID": "9898787",
+            "HALF_IOR_RH": "0.939",
+            "HALF_IOR_RC": "0.881"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "1.5",
+            "IOR_RC": "0.911",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "0",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "Y",
+            "IOR_OUHO": "0"
+          },
+          "OU": {
+            "RATIO_OUU": "53.5",
+            "IOR_OUH": "0.841",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.939",
+            "RATIO_OUO": "53.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "0",
+            "HALF_GID": "9898787",
+            "SW_OUH": "Y",
+            "HALF_IOR_OUHO": "0",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.9",
+            "HALF_GID": "9898787",
+            "HALF_RATIO_OUU": "25.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "25.5",
+            "HALF_IOR_OUC": "0.88"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "0",
+            "RATIO_OUCO": "",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0"
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "40031",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2026-01-01_13:00:00_00000000010_00001435171_00000040031",
+        "MT_GTYPE": "BK",
+        "GID": "9898786",
+        "TEAM_C": "\u4fc4\u52d2\u5ca1",
+        "TEAM_H": "\u5fb7\u5dde\u7406\u5de5",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 21,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "01-01 01:00p",
+        "STRONG": "C"
+      },
+      "GAME_29": {
+        "PTYPE": "",
+        "GIDM": "1436699",
+        "GAME_DATE_TIME": "2025-12-28 10:00:00",
+        "GNUM_H": "70844",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9909483",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "N",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "",
+            "HALF_GID": "9909483",
+            "HALF_IOR_RH": "",
+            "HALF_IOR_RC": ""
+          },
+          "R": {
+            "SW_R": "N",
+            "RATIO_R": "",
+            "IOR_RC": "",
+            "IOR_RH": ""
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "",
+            "IOR_OUH": "",
+            "SW_OU": "N",
+            "IOR_OUC": "",
+            "RATIO_OUO": ""
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9909483",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "",
+            "HALF_GID": "9909483",
+            "HALF_RATIO_OUU": "",
+            "SW_OU": "N",
+            "HALF_RATIO_OUO": "",
+            "HALF_IOR_OUC": ""
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "61792944",
+        "GNUM_C": "70843",
+        "FLAG_CLASS": "flag_EU",
+        "SORT_KEY": "00000001680_Poland Basketball League_0_2025-12-28_10:00:00_00000000010_00001436699_00000070843",
+        "MT_GTYPE": "BK",
+        "GID": "9909482",
+        "TEAM_C": "\u5340\u5967\u65af\u7279\u9b6f\u592b",
+        "TEAM_H": "\u83ef\u65af\u57fa",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100928",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "2",
+        "EVENTID": "",
+        "MORE": 8,
+        "LEAGUE": "\u6ce2\u862d\u7c43\u7403\u806f\u8cfd",
+        "DATETIME": "12-28 10:00a",
+        "STRONG": "H"
+      },
+      "GAME_13": {
+        "PTYPE": "",
+        "GIDM": "1433640",
+        "GAME_DATE_TIME": "2025-12-28 17:25:00",
+        "GNUM_H": "70054",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9888077",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "1.5",
+            "HALF_GID": "9888077",
+            "HALF_IOR_RH": "0.96",
+            "HALF_IOR_RC": "0.88"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "1.5",
+            "IOR_RC": "0.951",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "44.5",
+            "IOR_OUH": "0.901",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.939",
+            "RATIO_OUO": "44.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9888077",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.909",
+            "HALF_GID": "9888077",
+            "HALF_RATIO_OUU": "21",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "21",
+            "HALF_IOR_OUC": "0.911"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60575061",
+        "GNUM_C": "70053",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_17:25:00_00000000010_00001433640_00000070053",
+        "MT_GTYPE": "AF",
+        "GID": "9888076",
+        "TEAM_C": "\u8cbb\u57ce\u8001\u9df9",
+        "TEAM_H": "\u6c34\u725b\u57ce\u6bd4\u723e",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 05:25p",
+        "STRONG": "H"
+      },
+      "GAME_12": {
+        "PTYPE": "",
+        "GIDM": "1433639",
+        "GAME_DATE_TIME": "2025-12-28 17:05:00",
+        "GNUM_H": "70052",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9888070",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "1.5",
+            "HALF_GID": "9888070",
+            "HALF_IOR_RH": "0.88",
+            "HALF_IOR_RC": "0.96"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "2.5",
+            "IOR_RC": "0.951",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "41",
+            "IOR_OUH": "0.909",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.931",
+            "RATIO_OUO": "41"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9888070",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.94",
+            "HALF_GID": "9888070",
+            "HALF_RATIO_OUU": "20.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "20.5",
+            "HALF_IOR_OUC": "0.88"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60575177",
+        "GNUM_C": "70051",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_17:05:00_00000000010_00001433639_00000070051",
+        "MT_GTYPE": "AF",
+        "GID": "9888069",
+        "TEAM_C": "\u7d10\u7d04\u5de8\u4eba",
+        "TEAM_H": "\u62c9\u65af\u7dad\u52a0\u65af\u7a81\u64ca\u8005",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 05:05p",
+        "STRONG": "C"
+      },
+      "GAME_11": {
+        "PTYPE": "",
+        "GIDM": "1433506",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70050",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9887139",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "1.5",
+            "HALF_GID": "9887139",
+            "HALF_IOR_RH": "0.88",
+            "HALF_IOR_RC": "0.96"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "3",
+            "IOR_RC": "0.951",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "34.5",
+            "IOR_OUH": "0.911",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.929",
+            "RATIO_OUO": "34.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9887139",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.94",
+            "HALF_GID": "9887139",
+            "HALF_RATIO_OUU": "17",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "17",
+            "HALF_IOR_OUC": "0.88"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60575017",
+        "GNUM_C": "70049",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_14:00:00_00000000010_00001433506_00000070049",
+        "MT_GTYPE": "AF",
+        "GID": "9887138",
+        "TEAM_C": "\u5339\u8332\u5821\u92fc\u4eba",
+        "TEAM_H": "\u514b\u91cc\u592b\u862d\u5e03\u6717",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "C"
+      },
+      "GAME_10": {
+        "PTYPE": "",
+        "GIDM": "1433505",
+        "GAME_DATE_TIME": "2025-12-28 14:00:00",
+        "GNUM_H": "70048",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9887132",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "1.5",
+            "HALF_GID": "9887132",
+            "HALF_IOR_RH": "0.88",
+            "HALF_IOR_RC": "0.96"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "2",
+            "IOR_RC": "0.901",
+            "IOR_RH": "0.959"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "39",
+            "IOR_OUH": "0.909",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.931",
+            "RATIO_OUO": "39"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9887132",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.909",
+            "HALF_GID": "9887132",
+            "HALF_RATIO_OUU": "19.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "19.5",
+            "HALF_IOR_OUC": "0.911"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "60575015",
+        "GNUM_C": "70047",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_14:00:00_00000000010_00001433505_00000070047",
+        "MT_GTYPE": "AF",
+        "GID": "9887131",
+        "TEAM_C": "\u65b0\u5967\u723e\u826f\u8056\u5f92",
+        "TEAM_H": "\u7530\u7d0d\u897f\u5de8\u795e",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "br",
+        "MT_SPID": "16",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 02:00p",
+        "STRONG": "C"
+      },
+      "GAME_17": {
+        "PTYPE": "",
+        "GIDM": "1426531",
+        "GAME_DATE_TIME": "2025-12-30 15:00:00",
+        "GNUM_H": "20002",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838279",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "4.5",
+            "HALF_GID": "9838279",
+            "HALF_IOR_RH": "0.911",
+            "HALF_IOR_RC": "0.909"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "9",
+            "IOR_RC": "0.909",
+            "IOR_RH": "0.911"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "50.5",
+            "IOR_OUH": "0.909",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.871",
+            "RATIO_OUO": "50.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838279",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.88",
+            "HALF_GID": "9838279",
+            "HALF_RATIO_OUU": "24.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "24.5",
+            "HALF_IOR_OUC": "0.9"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "20001",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-30_15:00:00_00000000010_00001426531_00000020001",
+        "MT_GTYPE": "BK",
+        "GID": "9838278",
+        "TEAM_C": "\u5361\u7f85\u840a\u7d0d\u6d77\u5cb8",
+        "TEAM_H": "\u8def\u6613\u65af\u5b89\u90a3\u7406\u5de5",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-30 03:00p",
+        "STRONG": "H"
+      },
+      "GAME_16": {
+        "PTYPE": "",
+        "GIDM": "1426530",
+        "GAME_DATE_TIME": "2025-12-29 15:00:00",
+        "GNUM_H": "10002",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838272",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "4.5",
+            "HALF_GID": "9838272",
+            "HALF_IOR_RH": "0.881",
+            "HALF_IOR_RC": "0.939"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "8.5",
+            "IOR_RC": "0.909",
+            "IOR_RH": "0.911"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "59.5",
+            "IOR_OUH": "0.871",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "59.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838272",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.88",
+            "HALF_GID": "9838272",
+            "HALF_RATIO_OUU": "29",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "29",
+            "HALF_IOR_OUC": "0.9"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "10001",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-29_15:00:00_00000000010_00001426530_00000010001",
+        "MT_GTYPE": "BK",
+        "GID": "9838271",
+        "TEAM_C": "\u5357\u683c\u9b6f\u5409\u4e9e",
+        "TEAM_H": "\u963f\u5e15\u62c9\u5951\u5dde\u7acb",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-29 03:00p",
+        "STRONG": "C"
+      },
+      "GAME_15": {
+        "PTYPE": "",
+        "GIDM": "1434117",
+        "GAME_DATE_TIME": "2025-12-29 21:15:00",
+        "GNUM_H": "10070",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9891416",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "4.5",
+            "HALF_GID": "9891416",
+            "HALF_IOR_RH": "0.901",
+            "HALF_IOR_RC": "0.939"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "7.5",
+            "IOR_RC": "0.951",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "50.5",
+            "IOR_OUH": "0.901",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.939",
+            "RATIO_OUO": "50.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9891416",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.909",
+            "HALF_GID": "9891416",
+            "HALF_RATIO_OUU": "25.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "25.5",
+            "HALF_IOR_OUC": "0.911"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "10069",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-29_21:15:00_00000000010_00001434117_00000010069",
+        "MT_GTYPE": "BK",
+        "GID": "9891415",
+        "TEAM_C": "\u6d1b\u6749\u78ef\u516c\u7f8a",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u7375\u9df9",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-29 09:15p",
+        "STRONG": "C"
+      },
+      "GAME_14": {
+        "PTYPE": "",
+        "GIDM": "1433764",
+        "GAME_DATE_TIME": "2025-12-28 21:20:00",
+        "GNUM_H": "70056",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9888945",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "H",
+            "HALF_RATIO_R": "2.5",
+            "HALF_GID": "9888945",
+            "HALF_IOR_RH": "0.931",
+            "HALF_IOR_RC": "0.909"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "3",
+            "IOR_RC": "0.95",
+            "IOR_RH": "0.91"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "52",
+            "IOR_OUH": "0.909",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.931",
+            "RATIO_OUO": "52"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "H",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9888945",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "H",
+            "HALF_IOR_OUH": "0.909",
+            "HALF_GID": "9888945",
+            "HALF_RATIO_OUU": "26",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "26",
+            "HALF_IOR_OUC": "0.911"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "70055",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001150_NFL_0_2025-12-28_21:20:00_00000000010_00001433764_00000070055",
+        "MT_GTYPE": "BK",
+        "GID": "9888944",
+        "TEAM_C": "\u829d\u52a0\u54e5\u718a",
+        "TEAM_H": "\u820a\u91d1\u5c7149\u4eba",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100754",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u8077\u696d\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-28 09:20p",
+        "STRONG": "H"
+      },
+      "GAME_19": {
+        "PTYPE": "",
+        "GIDM": "1426533",
+        "GAME_DATE_TIME": "2025-12-30 22:00:00",
+        "GNUM_H": "20006",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838293",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "3.5",
+            "HALF_GID": "9838293",
+            "HALF_IOR_RH": "0.911",
+            "HALF_IOR_RC": "0.909"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "6.5",
+            "IOR_RC": "0.911",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "55",
+            "IOR_OUH": "0.871",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "55"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838293",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.871",
+            "HALF_GID": "9838293",
+            "HALF_RATIO_OUU": "27.5",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "27.5",
+            "HALF_IOR_OUC": "0.909"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "20005",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-30_22:00:00_00000000010_00001426533_00000020005",
+        "MT_GTYPE": "BK",
+        "GID": "9838292",
+        "TEAM_C": "\u5357\u52a0\u5dde\u5927\u5b78",
+        "TEAM_H": "\u5fb7\u5dde\u5929\u4e3b\u6559",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-30 10:00p",
+        "STRONG": "C"
+      },
+      "GAME_18": {
+        "PTYPE": "",
+        "GIDM": "1426532",
+        "GAME_DATE_TIME": "2025-12-30 18:30:00",
+        "GNUM_H": "20004",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "HALF_OUC": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUCO": "",
+            "HALF_RATIO_OUCU": "",
+            "HALF_IOR_OUCU": "",
+            "HALF_GID": "9838286",
+            "SW_OUC": "N",
+            "HALF_RATIO_OUCO": ""
+          },
+          "HALF_R": {
+            "SW_R": "Y",
+            "HALF_STRONG": "C",
+            "HALF_RATIO_R": "2.5",
+            "HALF_GID": "9838286",
+            "HALF_IOR_RH": "0.911",
+            "HALF_IOR_RC": "0.909"
+          },
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "2.5",
+            "IOR_RC": "0.911",
+            "IOR_RH": "0.909"
+          },
+          "OUH": {
+            "IOR_OUHU": "",
+            "RATIO_OUHU": "",
+            "RATIO_OUHO": "",
+            "SW_OUH": "N",
+            "IOR_OUHO": ""
+          },
+          "OU": {
+            "RATIO_OUU": "61.5",
+            "IOR_OUH": "0.871",
+            "SW_OU": "Y",
+            "IOR_OUC": "0.909",
+            "RATIO_OUO": "61.5"
+          },
+          "HALF_OUH": {
+            "HALF_STRONG": "C",
+            "HALF_RATIO_OUHO": "",
+            "HALF_IOR_OUHU": "",
+            "HALF_GID": "9838286",
+            "SW_OUH": "N",
+            "HALF_IOR_OUHO": "",
+            "HALF_RATIO_OUHU": ""
+          },
+          "HALF_OU": {
+            "HALF_STRONG": "C",
+            "HALF_IOR_OUH": "0.9",
+            "HALF_GID": "9838286",
+            "HALF_RATIO_OUU": "30",
+            "SW_OU": "Y",
+            "HALF_RATIO_OUO": "30",
+            "HALF_IOR_OUC": "0.88"
+          },
+          "OUC": {
+            "RATIO_OUCU": "",
+            "IOR_OUCU": "",
+            "RATIO_OUCO": "",
+            "SW_OUC": "N",
+            "IOR_OUCO": ""
+          }
+        },
+        "MT_ID": "",
+        "GNUM_C": "20003",
+        "FLAG_CLASS": "flag_AM",
+        "SORT_KEY": "00000001151_NCAA Football_0_2025-12-30_18:30:00_00000000010_00001426532_00000020003",
+        "MT_GTYPE": "BK",
+        "GID": "9838285",
+        "TEAM_C": "\u7530\u7d0d\u897f",
+        "TEAM_H": "\u4f0a\u5229\u8afe",
+        "RUNNING": "N",
+        "HALF_SE": "HT",
+        "LID": "100800",
+        "CENTER_TV": "",
+        "MT": "",
+        "MT_SPID": "",
+        "EVENTID": "",
+        "MORE": 9,
+        "LEAGUE": "\u7f8e\u570b\u5927\u5b78\u7f8e\u5f0f\u8db3\u7403",
+        "DATETIME": "12-30 06:30p",
+        "STRONG": "C"
+      }
+    },
+    "status": "success"
+  }
+}
