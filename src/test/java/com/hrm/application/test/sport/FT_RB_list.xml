@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverresponse sip='174.8'>
+    <pgcount id="100128" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>8</PD>
+        <RNOU>10</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>10</MAIN>
+        <MOUA>7</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100064" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>0</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="101366" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100235" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>4</PD>
+        <RNOU>6</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>6</MAIN>
+        <MOUA>4</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100111" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="107215" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>5</PD>
+        <RNOU>5</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>5</MAIN>
+        <MOUA>5</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100021" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>4</PD>
+        <RNOU>5</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>5</MAIN>
+        <MOUA>4</MOUA>
+        <CN>4</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="102819" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>2</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>2</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="101200" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="101850" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100065" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100032" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>1</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100116" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100265" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100049" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>1</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100286" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100103" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="109364" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>2</PD>
+        <RNOU>3</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>3</MAIN>
+        <MOUA>2</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100127" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>7</PD>
+        <RNOU>10</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>10</MAIN>
+        <MOUA>6</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="102744" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>2</PD>
+        <RNOU>2</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>2</MAIN>
+        <MOUA>2</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="104377" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100840" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100030" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>0</MOUA>
+        <CN>1</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="101743" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="101323" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="103604" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>0</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>0</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="103389" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>1</CN>
+        <RN>1</RN>
+    </pgcount>
+    <pgcount id="100173" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>0</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>0</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="100802" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>4</PD>
+        <RNOU>7</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>7</MAIN>
+        <MOUA>4</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="108006" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>1</CN>
+        <RN>0</RN>
+    </pgcount>
+    <pgcount id="102529" date="2026-01-17">
+        <SFS>0</SFS>
+        <PD>1</PD>
+        <RNOU>1</RNOU>
+        <FANTASY>0</FANTASY>
+        <MAIN>1</MAIN>
+        <MOUA>1</MOUA>
+        <CN>0</CN>
+        <RN>0</RN>
+    </pgcount>
+    <dataStatus>Y</dataStatus>
+    <system_time>2026-01-17 12:49:30</system_time>
+    <original_json>
+        {"100128!2026-01-17":{"SFS":0,"PD":8,"RNOU":10,"FANTASY":0,"MAIN":10,"MOUA":7,"CN":0,"RN":0},"100064!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":0,"CN":0,"RN":0},"101366!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100235!2026-01-17":{"SFS":0,"PD":4,"RNOU":6,"FANTASY":0,"MAIN":6,"MOUA":4,"CN":0,"RN":0},"100111!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"107215!2026-01-17":{"SFS":0,"PD":5,"RNOU":5,"FANTASY":0,"MAIN":5,"MOUA":5,"CN":0,"RN":0},"100021!2026-01-17":{"SFS":0,"PD":4,"RNOU":5,"FANTASY":0,"MAIN":5,"MOUA":4,"CN":4,"RN":0},"102819!2026-01-17":{"SFS":0,"PD":1,"RNOU":2,"FANTASY":0,"MAIN":2,"MOUA":1,"CN":0,"RN":0},"101200!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"101850!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100065!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100032!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":1,"RN":0},"100116!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100265!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100049!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":1,"RN":0},"100286!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100103!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"109364!2026-01-17":{"SFS":0,"PD":2,"RNOU":3,"FANTASY":0,"MAIN":3,"MOUA":2,"CN":0,"RN":0},"100127!2026-01-17":{"SFS":0,"PD":7,"RNOU":10,"FANTASY":0,"MAIN":10,"MOUA":6,"CN":0,"RN":0},"102744!2026-01-17":{"SFS":0,"PD":2,"RNOU":2,"FANTASY":0,"MAIN":2,"MOUA":2,"CN":0,"RN":0},"104377!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100840!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"100030!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":0,"CN":1,"RN":0},"101743!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"101323!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0},"103604!2026-01-17":{"SFS":0,"PD":0,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":0,"CN":0,"RN":0},"103389!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":1,"RN":1},"100173!2026-01-17":{"SFS":0,"PD":0,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":0,"CN":0,"RN":0},"100802!2026-01-17":{"SFS":0,"PD":4,"RNOU":7,"FANTASY":0,"MAIN":7,"MOUA":4,"CN":0,"RN":0},"108006!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":1,"RN":0},"102529!2026-01-17":{"SFS":0,"PD":1,"RNOU":1,"FANTASY":0,"MAIN":1,"MOUA":1,"CN":0,"RN":0}}
+    </original_json>
+</serverresponse>

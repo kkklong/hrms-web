@@ -209,5 +209,19 @@ public class print01 {
     }
 
 
+    @Test
+    public void test02() {
+        final String[] bk_r_attrNames = {"gid", "datetime", "league", "gnum_h", "gnum_c", "team_h",
+                "team_c", "strong", "ratio",  "ior_RH","ior_RC",
+                "ratio_o", "ratio_u",  "ior_OUC","ior_OUH", "ior_MH", "ior_MC", "ior_MN", "str_odd",
+                "str_even", "ior_EOO", "ior_EOE", "ratio_ouho",
+                "ratio_ouhu", "ior_OUHO", "ior_OUHU", "ratio_ouco", "ratio_oucu", "ior_OUCO", "ior_OUCU",
+                "more", "eventid", "hot", "center_tv", "play", "gidm", "isMaster","SortOrder", "lid"};
+        for (int i = 0; i < bk_r_attrNames.length; i++) {
+            System.out.println(bk_r_attrNames[i]);
+        }
+
+    }
+
 
 }

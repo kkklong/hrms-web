@@ -243,7 +243,7 @@ public class SportService {
 
     private static Map<String, Object> setFtGameMoreParam() {
         Map<String, Object> param = new HashMap<>();
-        param.put("uid", "zd13nrfm39572137l378813b0");
+        param.put("uid", "4gnai9o0drm39572137l440788b0");
         param.put("ver", null);
         param.put("langx", "zh-cn");
         param.put("p", "get_game_more");
@@ -263,7 +263,7 @@ public class SportService {
 
     private static Map<String, Object> setBkGameMoreParam() {
         Map<String, Object> param = new HashMap<>();
-        param.put("uid", "e5w7se99m39572137l379505b0");
+        param.put("uid", "k2cqsikkqm39572137l450186b0");
         param.put("ver", null);
         param.put("langx", "zh-cn");
         param.put("p", "get_game_more");
@@ -277,7 +277,7 @@ public class SportService {
         param.put("from", "game_more");
 //        param.put("filter", "Main");
         param.put("ts", String.valueOf(System.currentTimeMillis()));
-        param.put("gid", "9871801");
+        param.put("gid", "9997626");
         return param;
     }
 

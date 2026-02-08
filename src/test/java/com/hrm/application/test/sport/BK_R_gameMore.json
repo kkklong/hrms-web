@@ -1,9 +1,9 @@
 {
   "response": {
     "VIDEO": {
-      "TV_ID": "89CCB7CCBEBCBBBCB6CCB9BCBDBCB9CCB38BCECCCECCCBCEC4BDB3",
+      "TV_ID": "89CCB9CCBEBCBBBCB6CCBBBCBCBCBEBCB388CACCCECBCBCEC4BDB3",
       "CENTER_TV": "betradar",
-      "MT_ID": "62926487",
+      "MT_ID": "62925619",
       "MT_SID": "2",
       "CENTER_MT": "br",
       "MT_GTYPE": "BK",
@@ -15,18 +15,18 @@
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871810",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942097",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871808_2",
+        "MS": "9942095_2",
         "IS_LIVE": "N",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "910006",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "960010",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
@@ -76,35 +76,35 @@
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "910005",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "960009",
+        "TEAM_ID_H": "117516",
         "GOPEN": "N",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "H"
       },
       "GAME8": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871809",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942096",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871808_1",
+        "MS": "9942095_1",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "810006",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "860010",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
           "R": {
             "SW_R": "Y",
             "RATIO_R": "0.5",
-            "IOR_RC": "0.77",
+            "IOR_RC": "0.79",
             "IOR_RH": "1.09"
           },
           "OUH": {
@@ -115,11 +115,11 @@
             "IOR_OUHO": "0"
           },
           "OU": {
-            "RATIO_OUU": "115.5",
-            "IOR_OUH": "1.11",
+            "RATIO_OUU": "117.5",
+            "IOR_OUH": "1.08",
             "SW_OU": "Y",
-            "RATIO_OUO": "115.5",
-            "IOR_OUC": "0.73"
+            "RATIO_OUO": "117.5",
+            "IOR_OUC": "0.78"
           },
           "WM": {
             "IOR_WMBCOV": "0",
@@ -147,36 +147,36 @@
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "810005",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "860009",
+        "TEAM_ID_H": "117516",
         "GOPEN": "Y",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "C"
       },
       "GAME7": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871808",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942095",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
         "MS": "",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "10006",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "60010",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
           "R": {
             "SW_R": "Y",
             "RATIO_R": "2.5",
-            "IOR_RC": "0.78",
-            "IOR_RH": "1.1"
+            "IOR_RC": "0.83",
+            "IOR_RH": "1.07"
           },
           "OUH": {
             "RATIO_OUHU": "",
@@ -186,11 +186,11 @@
             "IOR_OUHO": "0"
           },
           "OU": {
-            "RATIO_OUU": "226.5",
-            "IOR_OUH": "1.03",
+            "RATIO_OUU": "229.5",
+            "IOR_OUH": "1.04",
             "SW_OU": "Y",
-            "RATIO_OUO": "226.5",
-            "IOR_OUC": "0.83"
+            "RATIO_OUO": "229.5",
+            "IOR_OUC": "0.84"
           },
           "WM": {
             "IOR_WMAC4": "0",
@@ -225,28 +225,28 @@
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "10005",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "60009",
+        "TEAM_ID_H": "117516",
         "GOPEN": "Y",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "C"
       },
       "GAME6": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871807",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942094",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871801_6",
+        "MS": "9942088_6",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "610004",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "660008",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
@@ -274,7 +274,7 @@
             "IOR_WMCCOV": "0",
             "IOR_WMCOT": "0",
             "IOR_WMCHOV": "0",
-            "SW_WM": "N"
+            "SW_WM": "Y"
           },
           "EO": {
             "IOR_EOO": "0",
@@ -289,33 +289,33 @@
             "IOR_OUCO": "0"
           },
           "M": {
-            "SW_M": "Y",
+            "SW_M": "N",
             "IOR_MC": "0",
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "610003",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "660007",
+        "TEAM_ID_H": "117516",
         "GOPEN": "N",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "H"
       },
       "GAME5": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871806",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942093",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871801_5",
+        "MS": "9942088_5",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "510004",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "560008",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
@@ -343,7 +343,7 @@
             "IOR_WMCCOV": "0",
             "IOR_WMCOT": "0",
             "IOR_WMCHOV": "0",
-            "SW_WM": "N"
+            "SW_WM": "Y"
           },
           "EO": {
             "IOR_EOO": "0",
@@ -358,33 +358,33 @@
             "IOR_OUCO": "0"
           },
           "M": {
-            "SW_M": "Y",
+            "SW_M": "N",
             "IOR_MC": "0",
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "510003",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "560007",
+        "TEAM_ID_H": "117516",
         "GOPEN": "N",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "H"
       },
       "GAME4": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871805",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942092",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871801_4",
+        "MS": "9942088_4",
         "IS_LIVE": "N",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "410004",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "460008",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
@@ -392,94 +392,25 @@
             "SW_R": "Y",
             "RATIO_R": "0.5",
             "IOR_RC": "0.88",
-            "IOR_RH": "0.98"
-          },
-          "OUH": {
-            "RATIO_OUHU": "28.5",
-            "IOR_OUHU": "0.89",
-            "SW_OUH": "Y",
-            "RATIO_OUHO": "28.5",
-            "IOR_OUHO": "0.95"
-          },
-          "OU": {
-            "RATIO_OUU": "57.5",
-            "IOR_OUH": "0.97",
-            "SW_OU": "Y",
-            "RATIO_OUO": "57.5",
-            "IOR_OUC": "0.87"
-          },
-          "WM": {
-            "IOR_WMCCOV": "2.2",
-            "IOR_WMCOT": "3.6",
-            "IOR_WMCHOV": "2.7",
-            "SW_WM": "Y"
-          },
-          "EO": {
-            "IOR_EOO": "1.91",
-            "IOR_EOE": "1.91",
-            "SW_EO": "Y"
-          },
-          "OUC": {
-            "RATIO_OUCU": "29",
-            "IOR_OUCU": "0.97",
-            "RATIO_OUCO": "29",
-            "SW_OUC": "Y",
-            "IOR_OUCO": "0.87"
-          },
-          "M": {
-            "SW_M": "Y",
-            "IOR_MC": "1.740",
-            "IOR_MH": "2.020"
-          }
-        },
-        "GNUM_C": "410003",
-        "TEAM_ID_H": "126940",
-        "GOPEN": "Y",
-        "TEAM_ID_C": "117530",
-        "STRONG": "C"
-      },
-      "GAME3": {
-        "RECV": "S",
-        "RETIME": "",
-        "IS_MASTER": "N",
-        "GID": "9871804",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
-        "LEAGUE_ID": "100828",
-        "MS": "9871801_3",
-        "IS_LIVE": "Y",
-        "EM": "0",
-        "GIDM": "1431314",
-        "IS_RB": "N",
-        "GTYPE": "BK",
-        "GNUM_H": "310004",
-        "DATETIME": "2025-12-29 20:00:00",
-        "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
-        "MIDFIELD": "N",
-        "PLAYS": {
-          "R": {
-            "SW_R": "Y",
-            "RATIO_R": "0.5",
-            "IOR_RC": "0.88",
-            "IOR_RH": "0.98"
+            "IOR_RH": "1.0"
           },
           "OUH": {
             "RATIO_OUHU": "29",
-            "IOR_OUHU": "0.91",
+            "IOR_OUHU": "0.86",
             "SW_OUH": "Y",
             "RATIO_OUHO": "29",
-            "IOR_OUHO": "0.93"
+            "IOR_OUHO": "1.0"
           },
           "OU": {
             "RATIO_OUU": "58.5",
-            "IOR_OUH": "0.99",
+            "IOR_OUH": "0.94",
             "SW_OU": "Y",
             "RATIO_OUO": "58.5",
-            "IOR_OUC": "0.85"
+            "IOR_OUC": "0.92"
           },
           "WM": {
             "IOR_WMCCOV": "2.2",
-            "IOR_WMCOT": "3.6",
+            "IOR_WMCOT": "3.5",
             "IOR_WMCHOV": "2.7",
             "SW_WM": "Y"
           },
@@ -490,39 +421,108 @@
           },
           "OUC": {
             "RATIO_OUCU": "29.5",
-            "IOR_OUCU": "0.98",
+            "IOR_OUCU": "0.95",
             "RATIO_OUCO": "29.5",
             "SW_OUC": "Y",
-            "IOR_OUCO": "0.86"
+            "IOR_OUCO": "0.91"
+          },
+          "M": {
+            "SW_M": "Y",
+            "IOR_MC": "1.730",
+            "IOR_MH": "2.070"
+          }
+        },
+        "GNUM_C": "460007",
+        "TEAM_ID_H": "117516",
+        "GOPEN": "Y",
+        "TEAM_ID_C": "123088",
+        "STRONG": "C"
+      },
+      "GAME3": {
+        "RECV": "S",
+        "RETIME": "",
+        "IS_MASTER": "N",
+        "GID": "9942091",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
+        "LEAGUE_ID": "100828",
+        "MS": "9942088_3",
+        "IS_LIVE": "Y",
+        "EM": "0",
+        "GIDM": "1441357",
+        "IS_RB": "N",
+        "GTYPE": "BK",
+        "GNUM_H": "360008",
+        "DATETIME": "2026-01-17 20:30:00",
+        "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "R": {
+            "SW_R": "Y",
+            "RATIO_R": "0.5",
+            "IOR_RC": "0.88",
+            "IOR_RH": "1.0"
+          },
+          "OUH": {
+            "RATIO_OUHU": "29.5",
+            "IOR_OUHU": "0.87",
+            "SW_OUH": "Y",
+            "RATIO_OUHO": "29.5",
+            "IOR_OUHO": "0.99"
+          },
+          "OU": {
+            "RATIO_OUU": "59.5",
+            "IOR_OUH": "0.94",
+            "SW_OU": "Y",
+            "RATIO_OUO": "59.5",
+            "IOR_OUC": "0.92"
+          },
+          "WM": {
+            "IOR_WMCCOV": "2.2",
+            "IOR_WMCOT": "3.5",
+            "IOR_WMCHOV": "2.7",
+            "SW_WM": "Y"
+          },
+          "EO": {
+            "IOR_EOO": "1.91",
+            "IOR_EOE": "1.91",
+            "SW_EO": "Y"
+          },
+          "OUC": {
+            "RATIO_OUCU": "30",
+            "IOR_OUCU": "0.96",
+            "RATIO_OUCO": "30",
+            "SW_OUC": "Y",
+            "IOR_OUCO": "0.9"
           },
           "M": {
             "SW_M": "Y",
             "IOR_MC": "1.740",
-            "IOR_MH": "2.020"
+            "IOR_MH": "2.060"
           }
         },
-        "GNUM_C": "310003",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "360007",
+        "TEAM_ID_H": "117516",
         "GOPEN": "Y",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "C"
       },
       "GAME2": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871803",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942090",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871801_2",
+        "MS": "9942088_2",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "910004",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "960008",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
@@ -550,7 +550,7 @@
             "IOR_WMBCOV": "0",
             "IOR_WMBHOV": "0",
             "IOR_WMBOT": "0",
-            "SW_WM": "N",
+            "SW_WM": "Y",
             "IOR_WMBH1": "0",
             "IOR_WMBC1": "0"
           },
@@ -567,41 +567,41 @@
             "IOR_OUCO": "0"
           },
           "M": {
-            "SW_M": "Y",
+            "SW_M": "N",
             "IOR_MC": "0",
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "910003",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "960007",
+        "TEAM_ID_H": "117516",
         "GOPEN": "N",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "H"
       },
       "GAME10": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871815",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942102",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
         "MS": "",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "10008",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "60012",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
           "R": {
             "SW_R": "Y",
             "RATIO_R": "4.5",
-            "IOR_RC": "1.1",
-            "IOR_RH": "0.78"
+            "IOR_RC": "1.13",
+            "IOR_RH": "0.77"
           },
           "OUH": {
             "RATIO_OUHU": "",
@@ -611,11 +611,11 @@
             "IOR_OUHO": "0"
           },
           "OU": {
-            "RATIO_OUU": "228.5",
-            "IOR_OUH": "0.83",
+            "RATIO_OUU": "231.5",
+            "IOR_OUH": "0.84",
             "SW_OU": "Y",
-            "RATIO_OUO": "228.5",
-            "IOR_OUC": "1.03"
+            "RATIO_OUO": "231.5",
+            "IOR_OUC": "1.04"
           },
           "WM": {
             "IOR_WMAC4": "0",
@@ -650,28 +650,28 @@
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "10007",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "60011",
+        "TEAM_ID_H": "117516",
         "GOPEN": "Y",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "C"
       },
       "GAME11": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871816",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942103",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871815_1",
+        "MS": "9942102_1",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "810008",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "860012",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
@@ -721,28 +721,28 @@
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "810007",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "860011",
+        "TEAM_ID_H": "117516",
         "GOPEN": "N",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "C"
       },
       "GAME12": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871817",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942104",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871815_2",
+        "MS": "9942102_2",
         "IS_LIVE": "N",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "910008",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "960012",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
@@ -792,50 +792,50 @@
             "IOR_MH": "0"
           }
         },
-        "GNUM_C": "910007",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "960011",
+        "TEAM_ID_H": "117516",
         "GOPEN": "N",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "H"
       },
       "GAME1": {
         "RECV": "S",
         "RETIME": "",
         "IS_MASTER": "N",
-        "GID": "9871802",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942089",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "LEAGUE_ID": "100828",
-        "MS": "9871801_1",
+        "MS": "9942088_1",
         "IS_LIVE": "Y",
         "EM": "0",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "810004",
-        "DATETIME": "2025-12-29 20:00:00",
+        "GNUM_H": "860008",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "MIDFIELD": "N",
         "PLAYS": {
           "R": {
             "SW_R": "Y",
             "RATIO_R": "1.5",
-            "IOR_RC": "0.93",
-            "IOR_RH": "0.93"
+            "IOR_RC": "0.92",
+            "IOR_RH": "0.96"
           },
           "OUH": {
-            "RATIO_OUHU": "57.5",
-            "IOR_OUHU": "0.95",
+            "RATIO_OUHU": "58.5",
+            "IOR_OUHU": "0.91",
             "SW_OUH": "Y",
-            "RATIO_OUHO": "57.5",
-            "IOR_OUHO": "0.89"
+            "RATIO_OUHO": "58.5",
+            "IOR_OUHO": "0.95"
           },
           "OU": {
-            "RATIO_OUU": "116.5",
-            "IOR_OUH": "0.99",
+            "RATIO_OUU": "118.5",
+            "IOR_OUH": "0.95",
             "SW_OU": "Y",
-            "RATIO_OUO": "116.5",
-            "IOR_OUC": "0.85"
+            "RATIO_OUO": "118.5",
+            "IOR_OUC": "0.91"
           },
           "WM": {
             "IOR_WMBCOV": "0",
@@ -851,22 +851,22 @@
             "SW_EO": "Y"
           },
           "OUC": {
-            "RATIO_OUCU": "59",
-            "IOR_OUCU": "0.95",
-            "RATIO_OUCO": "59",
+            "RATIO_OUCU": "60",
+            "IOR_OUCU": "0.94",
+            "RATIO_OUCO": "60",
             "SW_OUC": "Y",
-            "IOR_OUCO": "0.89"
+            "IOR_OUCO": "0.92"
           },
           "M": {
             "SW_M": "Y",
-            "IOR_MC": "1.690",
-            "IOR_MH": "2.090"
+            "IOR_MC": "1.680",
+            "IOR_MH": "2.150"
           }
         },
-        "GNUM_C": "810003",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "860007",
+        "TEAM_ID_H": "117516",
         "GOPEN": "Y",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "STRONG": "C"
       },
       "GAME0": {
@@ -875,25 +875,25 @@
         "SE_TYPE": "Quarters",
         "LEAGUE_ID": "100828",
         "IS_LIVE": "Y",
-        "GIDM": "1431314",
+        "GIDM": "1441357",
         "IS_RB": "N",
         "GTYPE": "BK",
-        "GNUM_H": "10004",
+        "GNUM_H": "60008",
         "SE_NOW": "Q1",
         "MIDFIELD": "N",
         "PLAYS": {
           "R": {
             "SW_R": "Y",
             "RATIO_R": "3.5",
-            "IOR_RC": "0.94",
-            "IOR_RH": "0.94"
+            "IOR_RC": "0.99",
+            "IOR_RH": "0.91"
           },
           "OUH": {
-            "RATIO_OUHU": "112.5",
-            "IOR_OUHU": "0.92",
+            "RATIO_OUHU": "113.5",
+            "IOR_OUHU": "0.96",
             "SW_OUH": "Y",
-            "RATIO_OUHO": "112.5",
-            "IOR_OUHO": "0.94"
+            "RATIO_OUHO": "113.5",
+            "IOR_OUHO": "0.92"
           },
           "PD": {
             "IOR_PDH0": "4.5",
@@ -909,26 +909,26 @@
             "IOR_PDH1": "4.5"
           },
           "OU": {
-            "RATIO_OUU": "227.5",
-            "IOR_OUH": "0.93",
+            "RATIO_OUU": "230.5",
+            "IOR_OUH": "0.94",
             "SW_OU": "Y",
-            "RATIO_OUO": "227.5",
-            "IOR_OUC": "0.93"
+            "RATIO_OUO": "230.5",
+            "IOR_OUC": "0.94"
           },
           "WM": {
-            "IOR_WMAC4": "11.0",
-            "IOR_WMAC3": "7.5",
+            "IOR_WMAC4": "10.0",
+            "IOR_WMAC3": "7.0",
             "IOR_WMAC5": "17.0",
-            "IOR_WMACOV": "10.0",
-            "IOR_WMAHOV": "15.0",
+            "IOR_WMACOV": "9.5",
+            "IOR_WMAHOV": "16.0",
             "IOR_WMAH1": "5.5",
             "IOR_WMAH3": "11.0",
             "SW_WM": "Y",
-            "IOR_WMAH2": "7.0",
-            "IOR_WMAH5": "21.0",
-            "IOR_WMAH4": "17.0",
-            "IOR_WMAC2": "6.0",
-            "IOR_WMAC1": "4.7"
+            "IOR_WMAH2": "7.5",
+            "IOR_WMAH5": "26.0",
+            "IOR_WMAH4": "19.0",
+            "IOR_WMAC2": "5.5",
+            "IOR_WMAC1": "5.0"
           },
           "EO": {
             "IOR_EOO": "1.91",
@@ -936,40 +936,40 @@
             "SW_EO": "Y"
           },
           "OUC": {
-            "RATIO_OUCU": "115",
-            "IOR_OUCU": "0.94",
-            "RATIO_OUCO": "115",
+            "RATIO_OUCU": "116.5",
+            "IOR_OUCU": "0.97",
+            "RATIO_OUCO": "116.5",
             "SW_OUC": "Y",
-            "IOR_OUCO": "0.92"
+            "IOR_OUCO": "0.91"
           },
           "M": {
             "SW_M": "Y",
-            "IOR_MC": "1.640",
-            "IOR_MH": "2.300"
+            "IOR_MC": "1.650",
+            "IOR_MH": "2.310"
           }
         },
-        "GNUM_C": "10003",
-        "TEAM_ID_H": "126940",
+        "GNUM_C": "60007",
+        "TEAM_ID_H": "117516",
         "GOPEN": "Y",
-        "TEAM_ID_C": "117530",
+        "TEAM_ID_C": "123088",
         "RETIME": "",
-        "GID": "9871801",
-        "TEAM_C": "\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f",
-        "TEAM_H": "\u590f\u6d1b\u7279\u9ec3\u8702",
+        "GID": "9942088",
+        "TEAM_C": "\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba",
+        "TEAM_H": "\u4e9e\u7279\u862d\u5927\u8001\u9df9",
         "MS": "",
         "EM": "0",
         "SW_3X3": "N",
-        "DATETIME": "2025-12-29 20:00:00",
+        "DATETIME": "2026-01-17 20:30:00",
         "LEAGUE": "NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd",
         "T_COUNT": "600",
         "HALFTIME": "",
         "STRONG": "C"
       }
     },
-    "SYSTIME": "2025-12-29 15:29:13",
+    "SYSTIME": "2026-01-17 19:42:52",
     "DEVICE": "phone",
     "ALL_CLOSE": "N",
-    "SIP": "74.53",
+    "SIP": "74.11",
     "CMD_INRB": -1
   },
   "status": "success",
@@ -977,5 +977,5 @@
     "filter": "Main",
     "type": "getMore"
   },
-  "original_json": "{\"response\":{\"VIDEO\":{\"TV_ID\":\"89CCB7CCBEBCBBBCB6CCB9BCBDBCB9CCB38BCECCCECCCBCEC4BDB3\",\"CENTER_TV\":\"betradar\",\"MT_ID\":\"62926487\",\"MT_SID\":\"2\",\"CENTER_MT\":\"br\",\"MT_GTYPE\":\"BK\",\"MT_LINEUPS\":\"Y\"},\"SHOWTYPE\":\"FT\",\"GAMES\":{\"GAME9\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871810\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871808_2\",\"IS_LIVE\":\"N\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"910006\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"910005\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"H\"},\"GAME8\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871809\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871808_1\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"810006\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"0.5\",\"IOR_RC\":\"0.77\",\"IOR_RH\":\"1.09\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"N\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"115.5\",\"IOR_OUH\":\"1.11\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"115.5\",\"IOR_OUC\":\"0.73\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"N\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"810005\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"C\"},\"GAME7\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871808\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"10006\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"2.5\",\"IOR_RC\":\"0.78\",\"IOR_RH\":\"1.1\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"N\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"226.5\",\"IOR_OUH\":\"1.03\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"226.5\",\"IOR_OUC\":\"0.83\"},\"WM\":{\"IOR_WMAC4\":\"0\",\"IOR_WMAC3\":\"0\",\"IOR_WMAC5\":\"0\",\"IOR_WMACOV\":\"0\",\"IOR_WMAHOV\":\"0\",\"IOR_WMAH1\":\"0\",\"IOR_WMAH3\":\"0\",\"SW_WM\":\"N\",\"IOR_WMAH2\":\"0\",\"IOR_WMAH5\":\"0\",\"IOR_WMAH4\":\"0\",\"IOR_WMAC2\":\"0\",\"IOR_WMAC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"N\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"10005\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"C\"},\"GAME6\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871807\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871801_6\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"610004\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMCCOV\":\"0\",\"IOR_WMCOT\":\"0\",\"IOR_WMCHOV\":\"0\",\"SW_WM\":\"N\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"610003\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"H\"},\"GAME5\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871806\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871801_5\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"510004\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMCCOV\":\"0\",\"IOR_WMCOT\":\"0\",\"IOR_WMCHOV\":\"0\",\"SW_WM\":\"N\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"510003\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"H\"},\"GAME4\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871805\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871801_4\",\"IS_LIVE\":\"N\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"410004\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"0.5\",\"IOR_RC\":\"0.88\",\"IOR_RH\":\"0.98\"},\"OUH\":{\"RATIO_OUHU\":\"28.5\",\"IOR_OUHU\":\"0.89\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"28.5\",\"IOR_OUHO\":\"0.95\"},\"OU\":{\"RATIO_OUU\":\"57.5\",\"IOR_OUH\":\"0.97\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"57.5\",\"IOR_OUC\":\"0.87\"},\"WM\":{\"IOR_WMCCOV\":\"2.2\",\"IOR_WMCOT\":\"3.6\",\"IOR_WMCHOV\":\"2.7\",\"SW_WM\":\"Y\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"29\",\"IOR_OUCU\":\"0.97\",\"RATIO_OUCO\":\"29\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.87\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.740\",\"IOR_MH\":\"2.020\"}},\"GNUM_C\":\"410003\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"C\"},\"GAME3\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871804\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871801_3\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"310004\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"0.5\",\"IOR_RC\":\"0.88\",\"IOR_RH\":\"0.98\"},\"OUH\":{\"RATIO_OUHU\":\"29\",\"IOR_OUHU\":\"0.91\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"29\",\"IOR_OUHO\":\"0.93\"},\"OU\":{\"RATIO_OUU\":\"58.5\",\"IOR_OUH\":\"0.99\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"58.5\",\"IOR_OUC\":\"0.85\"},\"WM\":{\"IOR_WMCCOV\":\"2.2\",\"IOR_WMCOT\":\"3.6\",\"IOR_WMCHOV\":\"2.7\",\"SW_WM\":\"Y\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"29.5\",\"IOR_OUCU\":\"0.98\",\"RATIO_OUCO\":\"29.5\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.86\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.740\",\"IOR_MH\":\"2.020\"}},\"GNUM_C\":\"310003\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"C\"},\"GAME2\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871803\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871801_2\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"910004\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"910003\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"H\"},\"GAME10\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871815\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"10008\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"4.5\",\"IOR_RC\":\"1.1\",\"IOR_RH\":\"0.78\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"N\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"228.5\",\"IOR_OUH\":\"0.83\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"228.5\",\"IOR_OUC\":\"1.03\"},\"WM\":{\"IOR_WMAC4\":\"0\",\"IOR_WMAC3\":\"0\",\"IOR_WMAC5\":\"0\",\"IOR_WMACOV\":\"0\",\"IOR_WMAHOV\":\"0\",\"IOR_WMAH1\":\"0\",\"IOR_WMAH3\":\"0\",\"SW_WM\":\"N\",\"IOR_WMAH2\":\"0\",\"IOR_WMAH5\":\"0\",\"IOR_WMAH4\":\"0\",\"IOR_WMAC2\":\"0\",\"IOR_WMAC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"N\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"10007\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"C\"},\"GAME11\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871816\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871815_1\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"810008\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"810007\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"C\"},\"GAME12\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871817\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871815_2\",\"IS_LIVE\":\"N\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"910008\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"910007\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"H\"},\"GAME1\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9871802\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9871801_1\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"810004\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"1.5\",\"IOR_RC\":\"0.93\",\"IOR_RH\":\"0.93\"},\"OUH\":{\"RATIO_OUHU\":\"57.5\",\"IOR_OUHU\":\"0.95\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"57.5\",\"IOR_OUHO\":\"0.89\"},\"OU\":{\"RATIO_OUU\":\"116.5\",\"IOR_OUH\":\"0.99\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"116.5\",\"IOR_OUC\":\"0.85\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"59\",\"IOR_OUCU\":\"0.95\",\"RATIO_OUCO\":\"59\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.89\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.690\",\"IOR_MH\":\"2.090\"}},\"GNUM_C\":\"810003\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"117530\",\"STRONG\":\"C\"},\"GAME0\":{\"RECV\":\"S\",\"IS_MASTER\":\"Y\",\"SE_TYPE\":\"Quarters\",\"LEAGUE_ID\":\"100828\",\"IS_LIVE\":\"Y\",\"GIDM\":\"1431314\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"10004\",\"SE_NOW\":\"Q1\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"3.5\",\"IOR_RC\":\"0.94\",\"IOR_RH\":\"0.94\"},\"OUH\":{\"RATIO_OUHU\":\"112.5\",\"IOR_OUHU\":\"0.92\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"112.5\",\"IOR_OUHO\":\"0.94\"},\"PD\":{\"IOR_PDH0\":\"4.5\",\"SW_PD\":\"Y\",\"IOR_PDC4\":\"4.5\",\"IOR_PDC3\":\"4.5\",\"IOR_PDC2\":\"4.5\",\"IOR_PDC1\":\"4.5\",\"IOR_PDC0\":\"4.5\",\"IOR_PDH4\":\"4.5\",\"IOR_PDH3\":\"4.5\",\"IOR_PDH2\":\"4.5\",\"IOR_PDH1\":\"4.5\"},\"OU\":{\"RATIO_OUU\":\"227.5\",\"IOR_OUH\":\"0.93\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"227.5\",\"IOR_OUC\":\"0.93\"},\"WM\":{\"IOR_WMAC4\":\"11.0\",\"IOR_WMAC3\":\"7.5\",\"IOR_WMAC5\":\"17.0\",\"IOR_WMACOV\":\"10.0\",\"IOR_WMAHOV\":\"15.0\",\"IOR_WMAH1\":\"5.5\",\"IOR_WMAH3\":\"11.0\",\"SW_WM\":\"Y\",\"IOR_WMAH2\":\"7.0\",\"IOR_WMAH5\":\"21.0\",\"IOR_WMAH4\":\"17.0\",\"IOR_WMAC2\":\"6.0\",\"IOR_WMAC1\":\"4.7\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"115\",\"IOR_OUCU\":\"0.94\",\"RATIO_OUCO\":\"115\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.92\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.640\",\"IOR_MH\":\"2.300\"}},\"GNUM_C\":\"10003\",\"TEAM_ID_H\":\"126940\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"117530\",\"RETIME\":\"\",\"GID\":\"9871801\",\"TEAM_C\":\"\u5bc6\u723e\u6c83\u57fa\u96c4\u9e7f\",\"TEAM_H\":\"\u590f\u6d1b\u7279\u9ec3\u8702\",\"MS\":\"\",\"EM\":\"0\",\"SW_3X3\":\"N\",\"DATETIME\":\"2025-12-29 20:00:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"T_COUNT\":\"600\",\"HALFTIME\":\"\",\"STRONG\":\"C\"}},\"SYSTIME\":\"2025-12-29 15:29:13\",\"DEVICE\":\"phone\",\"ALL_CLOSE\":\"N\",\"SIP\":\"74.53\",\"CMD_INRB\":-1},\"status\":\"success\"}\n"
+  "original_json": "{\"response\":{\"VIDEO\":{\"TV_ID\":\"89CCB9CCBEBCBBBCB6CCBBBCBCBCBEBCB388CACCCECBCBCEC4BDB3\",\"CENTER_TV\":\"betradar\",\"MT_ID\":\"62925619\",\"MT_SID\":\"2\",\"CENTER_MT\":\"br\",\"MT_GTYPE\":\"BK\",\"MT_LINEUPS\":\"Y\"},\"SHOWTYPE\":\"FT\",\"GAMES\":{\"GAME9\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942097\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942095_2\",\"IS_LIVE\":\"N\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"960010\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"960009\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"H\"},\"GAME8\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942096\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942095_1\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"860010\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"0.5\",\"IOR_RC\":\"0.79\",\"IOR_RH\":\"1.09\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"N\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"117.5\",\"IOR_OUH\":\"1.08\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"117.5\",\"IOR_OUC\":\"0.78\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"N\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"860009\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"C\"},\"GAME7\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942095\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"60010\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"2.5\",\"IOR_RC\":\"0.83\",\"IOR_RH\":\"1.07\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"N\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"229.5\",\"IOR_OUH\":\"1.04\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"229.5\",\"IOR_OUC\":\"0.84\"},\"WM\":{\"IOR_WMAC4\":\"0\",\"IOR_WMAC3\":\"0\",\"IOR_WMAC5\":\"0\",\"IOR_WMACOV\":\"0\",\"IOR_WMAHOV\":\"0\",\"IOR_WMAH1\":\"0\",\"IOR_WMAH3\":\"0\",\"SW_WM\":\"N\",\"IOR_WMAH2\":\"0\",\"IOR_WMAH5\":\"0\",\"IOR_WMAH4\":\"0\",\"IOR_WMAC2\":\"0\",\"IOR_WMAC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"N\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"60009\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"C\"},\"GAME6\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942094\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942088_6\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"660008\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMCCOV\":\"0\",\"IOR_WMCOT\":\"0\",\"IOR_WMCHOV\":\"0\",\"SW_WM\":\"Y\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"660007\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"H\"},\"GAME5\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942093\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942088_5\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"560008\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMCCOV\":\"0\",\"IOR_WMCOT\":\"0\",\"IOR_WMCHOV\":\"0\",\"SW_WM\":\"Y\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"560007\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"H\"},\"GAME4\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942092\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942088_4\",\"IS_LIVE\":\"N\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"460008\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"0.5\",\"IOR_RC\":\"0.88\",\"IOR_RH\":\"1.0\"},\"OUH\":{\"RATIO_OUHU\":\"29\",\"IOR_OUHU\":\"0.86\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"29\",\"IOR_OUHO\":\"1.0\"},\"OU\":{\"RATIO_OUU\":\"58.5\",\"IOR_OUH\":\"0.94\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"58.5\",\"IOR_OUC\":\"0.92\"},\"WM\":{\"IOR_WMCCOV\":\"2.2\",\"IOR_WMCOT\":\"3.5\",\"IOR_WMCHOV\":\"2.7\",\"SW_WM\":\"Y\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"29.5\",\"IOR_OUCU\":\"0.95\",\"RATIO_OUCO\":\"29.5\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.91\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.730\",\"IOR_MH\":\"2.070\"}},\"GNUM_C\":\"460007\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"C\"},\"GAME3\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942091\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942088_3\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"360008\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"0.5\",\"IOR_RC\":\"0.88\",\"IOR_RH\":\"1.0\"},\"OUH\":{\"RATIO_OUHU\":\"29.5\",\"IOR_OUHU\":\"0.87\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"29.5\",\"IOR_OUHO\":\"0.99\"},\"OU\":{\"RATIO_OUU\":\"59.5\",\"IOR_OUH\":\"0.94\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"59.5\",\"IOR_OUC\":\"0.92\"},\"WM\":{\"IOR_WMCCOV\":\"2.2\",\"IOR_WMCOT\":\"3.5\",\"IOR_WMCHOV\":\"2.7\",\"SW_WM\":\"Y\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"30\",\"IOR_OUCU\":\"0.96\",\"RATIO_OUCO\":\"30\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.9\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.740\",\"IOR_MH\":\"2.060\"}},\"GNUM_C\":\"360007\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"C\"},\"GAME2\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942090\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942088_2\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"960008\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"Y\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"960007\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"H\"},\"GAME10\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942102\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"60012\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"4.5\",\"IOR_RC\":\"1.13\",\"IOR_RH\":\"0.77\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"N\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"231.5\",\"IOR_OUH\":\"0.84\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"231.5\",\"IOR_OUC\":\"1.04\"},\"WM\":{\"IOR_WMAC4\":\"0\",\"IOR_WMAC3\":\"0\",\"IOR_WMAC5\":\"0\",\"IOR_WMACOV\":\"0\",\"IOR_WMAHOV\":\"0\",\"IOR_WMAH1\":\"0\",\"IOR_WMAH3\":\"0\",\"SW_WM\":\"N\",\"IOR_WMAH2\":\"0\",\"IOR_WMAH5\":\"0\",\"IOR_WMAH4\":\"0\",\"IOR_WMAC2\":\"0\",\"IOR_WMAC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"N\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"60011\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"C\"},\"GAME11\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942103\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942102_1\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"860012\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"860011\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"C\"},\"GAME12\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942104\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942102_2\",\"IS_LIVE\":\"N\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"960012\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"\",\"IOR_RC\":\"0\",\"IOR_RH\":\"0\"},\"OUH\":{\"RATIO_OUHU\":\"\",\"IOR_OUHU\":\"0\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"\",\"IOR_OUHO\":\"0\"},\"OU\":{\"RATIO_OUU\":\"\",\"IOR_OUH\":\"0\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"\",\"IOR_OUC\":\"0\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"0\",\"IOR_EOE\":\"0\",\"SW_EO\":\"N\"},\"OUC\":{\"RATIO_OUCU\":\"\",\"IOR_OUCU\":\"0\",\"RATIO_OUCO\":\"\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0\"},\"M\":{\"SW_M\":\"N\",\"IOR_MC\":\"0\",\"IOR_MH\":\"0\"}},\"GNUM_C\":\"960011\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"N\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"H\"},\"GAME1\":{\"RECV\":\"S\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9942089\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"LEAGUE_ID\":\"100828\",\"MS\":\"9942088_1\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"860008\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"1.5\",\"IOR_RC\":\"0.92\",\"IOR_RH\":\"0.96\"},\"OUH\":{\"RATIO_OUHU\":\"58.5\",\"IOR_OUHU\":\"0.91\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"58.5\",\"IOR_OUHO\":\"0.95\"},\"OU\":{\"RATIO_OUU\":\"118.5\",\"IOR_OUH\":\"0.95\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"118.5\",\"IOR_OUC\":\"0.91\"},\"WM\":{\"IOR_WMBCOV\":\"0\",\"IOR_WMBHOV\":\"0\",\"IOR_WMBOT\":\"0\",\"SW_WM\":\"N\",\"IOR_WMBH1\":\"0\",\"IOR_WMBC1\":\"0\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"60\",\"IOR_OUCU\":\"0.94\",\"RATIO_OUCO\":\"60\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.92\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.680\",\"IOR_MH\":\"2.150\"}},\"GNUM_C\":\"860007\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123088\",\"STRONG\":\"C\"},\"GAME0\":{\"RECV\":\"S\",\"IS_MASTER\":\"Y\",\"SE_TYPE\":\"Quarters\",\"LEAGUE_ID\":\"100828\",\"IS_LIVE\":\"Y\",\"GIDM\":\"1441357\",\"IS_RB\":\"N\",\"GTYPE\":\"BK\",\"GNUM_H\":\"60008\",\"SE_NOW\":\"Q1\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"SW_R\":\"Y\",\"RATIO_R\":\"3.5\",\"IOR_RC\":\"0.99\",\"IOR_RH\":\"0.91\"},\"OUH\":{\"RATIO_OUHU\":\"113.5\",\"IOR_OUHU\":\"0.96\",\"SW_OUH\":\"Y\",\"RATIO_OUHO\":\"113.5\",\"IOR_OUHO\":\"0.92\"},\"PD\":{\"IOR_PDH0\":\"4.5\",\"SW_PD\":\"Y\",\"IOR_PDC4\":\"4.5\",\"IOR_PDC3\":\"4.5\",\"IOR_PDC2\":\"4.5\",\"IOR_PDC1\":\"4.5\",\"IOR_PDC0\":\"4.5\",\"IOR_PDH4\":\"4.5\",\"IOR_PDH3\":\"4.5\",\"IOR_PDH2\":\"4.5\",\"IOR_PDH1\":\"4.5\"},\"OU\":{\"RATIO_OUU\":\"230.5\",\"IOR_OUH\":\"0.94\",\"SW_OU\":\"Y\",\"RATIO_OUO\":\"230.5\",\"IOR_OUC\":\"0.94\"},\"WM\":{\"IOR_WMAC4\":\"10.0\",\"IOR_WMAC3\":\"7.0\",\"IOR_WMAC5\":\"17.0\",\"IOR_WMACOV\":\"9.5\",\"IOR_WMAHOV\":\"16.0\",\"IOR_WMAH1\":\"5.5\",\"IOR_WMAH3\":\"11.0\",\"SW_WM\":\"Y\",\"IOR_WMAH2\":\"7.5\",\"IOR_WMAH5\":\"26.0\",\"IOR_WMAH4\":\"19.0\",\"IOR_WMAC2\":\"5.5\",\"IOR_WMAC1\":\"5.0\"},\"EO\":{\"IOR_EOO\":\"1.91\",\"IOR_EOE\":\"1.91\",\"SW_EO\":\"Y\"},\"OUC\":{\"RATIO_OUCU\":\"116.5\",\"IOR_OUCU\":\"0.97\",\"RATIO_OUCO\":\"116.5\",\"SW_OUC\":\"Y\",\"IOR_OUCO\":\"0.91\"},\"M\":{\"SW_M\":\"Y\",\"IOR_MC\":\"1.650\",\"IOR_MH\":\"2.310\"}},\"GNUM_C\":\"60007\",\"TEAM_ID_H\":\"117516\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123088\",\"RETIME\":\"\",\"GID\":\"9942088\",\"TEAM_C\":\"\u6ce2\u58eb\u9813\u51f1\u723e\u7279\u4eba\",\"TEAM_H\":\"\u4e9e\u7279\u862d\u5927\u8001\u9df9\",\"MS\":\"\",\"EM\":\"0\",\"SW_3X3\":\"N\",\"DATETIME\":\"2026-01-17 20:30:00\",\"LEAGUE\":\"NBA\u7f8e\u570b\u8077\u696d\u7c43\u7403\u806f\u8cfd\",\"T_COUNT\":\"600\",\"HALFTIME\":\"\",\"STRONG\":\"C\"}},\"SYSTIME\":\"2026-01-17 19:42:52\",\"DEVICE\":\"phone\",\"ALL_CLOSE\":\"N\",\"SIP\":\"74.11\",\"CMD_INRB\":-1},\"status\":\"success\"}\n"
 }

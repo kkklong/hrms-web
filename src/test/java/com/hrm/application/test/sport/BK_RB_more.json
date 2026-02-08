@@ -1,0 +1,506 @@
+{
+  "response": {
+    "VIDEO": {
+      "TV_ID": "89BCB9BCBEBCBEBCB9BCB9BCB38FCEC7C8CBCBCEC4BDB3",
+      "CENTER_TV": "img",
+      "MT_ID": "63049111",
+      "MT_SID": "2",
+      "CENTER_MT": "br",
+      "MT_GTYPE": "BK",
+      "MT_LINEUPS": "Y"
+    },
+    "SHOWTYPE": "RB",
+    "GAMES": {
+      "GAME5": {
+        "RECV": "Y",
+        "RETIME": "",
+        "IS_MASTER": "N",
+        "GID": "9987280",
+        "TEAM_C": "\u54e5\u745e\u7d0d\u9054",
+        "TEAM_H": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+        "LEAGUE_ID": "100804",
+        "MS": "",
+        "IS_LIVE": "Y",
+        "EM": "0",
+        "GIDM": "1447810",
+        "IS_RB": "Y",
+        "GTYPE": "BK",
+        "GNUM_H": "60612",
+        "DATETIME": "2026-01-17 13:00:00",
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "R": {
+            "RATIO_RE": "15",
+            "SW_RE": "Y",
+            "IOR_REH": "0.67",
+            "IOR_REC": "1.11"
+          },
+          "OUH": {
+            "RATIO_ROUHU": "",
+            "IOR_ROUHU": "0",
+            "SW_ROUH": "N",
+            "IOR_ROUHO": "0",
+            "RATIO_ROUHO": ""
+          },
+          "OU": {
+            "RATIO_ROUU": "171.5",
+            "IOR_ROUH": "0.67",
+            "SW_ROU": "Y",
+            "RATIO_ROUO": "171.5",
+            "IOR_ROUC": "1.01"
+          },
+          "WM": {
+            "IOR_RWMAC2": "0",
+            "IOR_RWMAC1": "0",
+            "IOR_RWMAH5": "0",
+            "IOR_RWMAH4": "0",
+            "IOR_RWMAC5": "0",
+            "IOR_RWMAC4": "0",
+            "IOR_RWMAC3": "0",
+            "IOR_RWMAH3": "0",
+            "IOR_RWMAH2": "0",
+            "IOR_RWMAH1": "0",
+            "IOR_RWMAHOV": "0",
+            "IOR_RWMACOV": "0",
+            "SW_RWM": "N"
+          },
+          "EO": {
+            "IOR_REOO": "0",
+            "SW_REO": "N",
+            "IOR_REOE": "0"
+          },
+          "OUC": {
+            "RATIO_ROUCO": "",
+            "IOR_ROUCU": "0",
+            "RATIO_ROUCU": "",
+            "IOR_ROUCO": "0",
+            "SW_ROUC": "N"
+          },
+          "M": {
+            "IOR_RMC": "0",
+            "SW_RM": "N",
+            "IOR_RMH": "0"
+          }
+        },
+        "GNUM_C": "60611",
+        "TEAM_ID_H": "123388",
+        "GOPEN": "Y",
+        "TEAM_ID_C": "123562",
+        "STRONG": "H"
+      },
+      "GAME4": {
+        "RECV": "Y",
+        "RETIME": "",
+        "IS_MASTER": "N",
+        "GID": "9987273",
+        "TEAM_C": "\u54e5\u745e\u7d0d\u9054",
+        "TEAM_H": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+        "LEAGUE_ID": "100804",
+        "MS": "",
+        "IS_LIVE": "Y",
+        "EM": "0",
+        "GIDM": "1447810",
+        "IS_RB": "Y",
+        "GTYPE": "BK",
+        "GNUM_H": "60610",
+        "DATETIME": "2026-01-17 13:00:00",
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "R": {
+            "RATIO_RE": "19",
+            "SW_RE": "Y",
+            "IOR_REH": "1.141",
+            "IOR_REC": "0.639"
+          },
+          "OUH": {
+            "RATIO_ROUHU": "",
+            "IOR_ROUHU": "0",
+            "SW_ROUH": "N",
+            "IOR_ROUHO": "0",
+            "RATIO_ROUHO": ""
+          },
+          "OU": {
+            "RATIO_ROUU": "167.5",
+            "IOR_ROUH": "1.04",
+            "SW_ROU": "Y",
+            "RATIO_ROUO": "167.5",
+            "IOR_ROUC": "0.64"
+          },
+          "WM": {
+            "IOR_RWMAC2": "0",
+            "IOR_RWMAC1": "0",
+            "IOR_RWMAH5": "0",
+            "IOR_RWMAH4": "0",
+            "IOR_RWMAC5": "0",
+            "IOR_RWMAC4": "0",
+            "IOR_RWMAC3": "0",
+            "IOR_RWMAH3": "0",
+            "IOR_RWMAH2": "0",
+            "IOR_RWMAH1": "0",
+            "IOR_RWMAHOV": "0",
+            "IOR_RWMACOV": "0",
+            "SW_RWM": "N"
+          },
+          "EO": {
+            "IOR_REOO": "0",
+            "SW_REO": "N",
+            "IOR_REOE": "0"
+          },
+          "OUC": {
+            "RATIO_ROUCO": "",
+            "IOR_ROUCU": "0",
+            "RATIO_ROUCU": "",
+            "IOR_ROUCO": "0",
+            "SW_ROUC": "N"
+          },
+          "M": {
+            "IOR_RMC": "0",
+            "SW_RM": "N",
+            "IOR_RMH": "0"
+          }
+        },
+        "GNUM_C": "60609",
+        "TEAM_ID_H": "123388",
+        "GOPEN": "Y",
+        "TEAM_ID_C": "123562",
+        "STRONG": "H"
+      },
+      "GAME3": {
+        "RECV": "Y",
+        "RETIME": "",
+        "IS_MASTER": "N",
+        "GID": "9987272",
+        "TEAM_C": "\u54e5\u745e\u7d0d\u9054",
+        "TEAM_H": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+        "LEAGUE_ID": "100804",
+        "MS": "9987266_6",
+        "IS_LIVE": "Y",
+        "EM": "0",
+        "GIDM": "1447810",
+        "IS_RB": "Y",
+        "GTYPE": "BK",
+        "GNUM_H": "660608",
+        "DATETIME": "2026-01-17 13:00:00",
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "R": {
+            "RATIO_RE": "",
+            "SW_RE": "N",
+            "IOR_REH": "0",
+            "IOR_REC": "0"
+          },
+          "OUH": {
+            "RATIO_ROUHU": "",
+            "IOR_ROUHU": "0",
+            "SW_ROUH": "N",
+            "IOR_ROUHO": "0",
+            "RATIO_ROUHO": ""
+          },
+          "OU": {
+            "RATIO_ROUU": "",
+            "IOR_ROUH": "0",
+            "SW_ROU": "N",
+            "RATIO_ROUO": "",
+            "IOR_ROUC": "0"
+          },
+          "WM": {
+            "IOR_RWMCCOV": "5.400",
+            "SW_RWM": "N",
+            "IOR_RWMCOT": "5.000",
+            "IOR_RWMCHOV": "1.480"
+          },
+          "EO": {
+            "IOR_REOO": "1.91",
+            "SW_REO": "Y",
+            "IOR_REOE": "1.91"
+          },
+          "OUC": {
+            "RATIO_ROUCO": "",
+            "IOR_ROUCU": "0",
+            "RATIO_ROUCU": "",
+            "IOR_ROUCO": "0",
+            "SW_ROUC": "N"
+          },
+          "M": {
+            "IOR_RMC": "0",
+            "SW_RM": "N",
+            "IOR_RMH": "0"
+          }
+        },
+        "GNUM_C": "660607",
+        "TEAM_ID_H": "123388",
+        "GOPEN": "Y",
+        "TEAM_ID_C": "123562",
+        "STRONG": "H"
+      },
+      "GAME2": {
+        "RECV": "Y",
+        "RETIME": "",
+        "IS_MASTER": "N",
+        "GID": "9987271",
+        "TEAM_C": "\u54e5\u745e\u7d0d\u9054",
+        "TEAM_H": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+        "LEAGUE_ID": "100804",
+        "MS": "9987266_5",
+        "IS_LIVE": "Y",
+        "EM": "0",
+        "GIDM": "1447810",
+        "IS_RB": "Y",
+        "GTYPE": "BK",
+        "GNUM_H": "560608",
+        "DATETIME": "2026-01-17 13:00:00",
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "R": {
+            "RATIO_RE": "",
+            "SW_RE": "N",
+            "IOR_REH": "0",
+            "IOR_REC": "0"
+          },
+          "OUH": {
+            "RATIO_ROUHU": "",
+            "IOR_ROUHU": "0",
+            "SW_ROUH": "N",
+            "IOR_ROUHO": "0",
+            "RATIO_ROUHO": ""
+          },
+          "OU": {
+            "RATIO_ROUU": "",
+            "IOR_ROUH": "0",
+            "SW_ROU": "N",
+            "RATIO_ROUO": "",
+            "IOR_ROUC": "0"
+          },
+          "WM": {
+            "IOR_RWMCCOV": "5.200",
+            "SW_RWM": "N",
+            "IOR_RWMCOT": "5.200",
+            "IOR_RWMCHOV": "1.470"
+          },
+          "EO": {
+            "IOR_REOO": "1.91",
+            "SW_REO": "Y",
+            "IOR_REOE": "1.91"
+          },
+          "OUC": {
+            "RATIO_ROUCO": "",
+            "IOR_ROUCU": "0",
+            "RATIO_ROUCU": "",
+            "IOR_ROUCO": "0",
+            "SW_ROUC": "N"
+          },
+          "M": {
+            "IOR_RMC": "0",
+            "SW_RM": "N",
+            "IOR_RMH": "0"
+          }
+        },
+        "GNUM_C": "560607",
+        "TEAM_ID_H": "123388",
+        "GOPEN": "Y",
+        "TEAM_ID_C": "123562",
+        "STRONG": "H"
+      },
+      "GAME1": {
+        "RECV": "Y",
+        "RETIME": "",
+        "IS_MASTER": "N",
+        "GID": "9987268",
+        "TEAM_C": "\u54e5\u745e\u7d0d\u9054",
+        "TEAM_H": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+        "LEAGUE_ID": "100804",
+        "MS": "9987266_2",
+        "IS_LIVE": "Y",
+        "EM": "0",
+        "GIDM": "1447810",
+        "IS_RB": "Y",
+        "GTYPE": "BK",
+        "GNUM_H": "960608",
+        "DATETIME": "2026-01-17 13:00:00",
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "R": {
+            "RATIO_RE": "",
+            "SW_RE": "N",
+            "IOR_REH": "0",
+            "IOR_REC": "0"
+          },
+          "OUH": {
+            "RATIO_ROUHU": "",
+            "IOR_ROUHU": "0",
+            "SW_ROUH": "N",
+            "IOR_ROUHO": "0",
+            "RATIO_ROUHO": ""
+          },
+          "OU": {
+            "RATIO_ROUU": "",
+            "IOR_ROUH": "0",
+            "SW_ROU": "N",
+            "RATIO_ROUO": "",
+            "IOR_ROUC": "0"
+          },
+          "WM": {
+            "IOR_RWMBC1": "13.500",
+            "IOR_RWMBCOV": "18.000",
+            "SW_RWM": "N",
+            "IOR_RWMBOT": "5.200",
+            "IOR_RWMBH1": "5.600",
+            "IOR_RWMBHOV": "1.420"
+          },
+          "EO": {
+            "IOR_REOO": "1.91",
+            "SW_REO": "Y",
+            "IOR_REOE": "1.91"
+          },
+          "OUC": {
+            "RATIO_ROUCO": "",
+            "IOR_ROUCU": "0",
+            "RATIO_ROUCU": "",
+            "IOR_ROUCO": "0",
+            "SW_ROUC": "N"
+          },
+          "M": {
+            "IOR_RMC": "0",
+            "SW_RM": "N",
+            "IOR_RMH": "0"
+          }
+        },
+        "GNUM_C": "960607",
+        "TEAM_ID_H": "123388",
+        "GOPEN": "Y",
+        "TEAM_ID_C": "123562",
+        "STRONG": "H"
+      },
+      "GAME0": {
+        "RECV": "Y",
+        "IS_MASTER": "Y",
+        "SE_TYPE": "Quarters",
+        "SCORE": {
+          "SC_Q3_H": "0",
+          "SC_Q4_H": "0",
+          "SC_Q1_H": "6",
+          "SC_Q2_H": "0",
+          "SC_OT_H": "0",
+          "SC_Q2_A": "0",
+          "SC_Q3_A": "0",
+          "SC_FT_A": "5",
+          "SC_Q1_A": "5",
+          "SC_H1_A": "5",
+          "SC_H2_A": "0",
+          "SC_Q4_A": "0",
+          "SC_OT_A": "0",
+          "SC_FT_H": "6",
+          "SC_H2_H": "0",
+          "SC_H1_H": "6"
+        },
+        "LEAGUE_ID": "100804",
+        "IS_LIVE": "Y",
+        "GIDM": "1447810",
+        "IS_RB": "Y",
+        "GTYPE": "BK",
+        "GNUM_H": "60608",
+        "SE_NOW": "Q1",
+        "MIDFIELD": "N",
+        "PLAYS": {
+          "R": {
+            "RATIO_RE": "17",
+            "SW_RE": "Y",
+            "IOR_REH": "0.91",
+            "IOR_REC": "0.87"
+          },
+          "OUH": {
+            "RATIO_ROUHU": "93.5",
+            "IOR_ROUHU": "0.86",
+            "SW_ROUH": "Y",
+            "IOR_ROUHO": "0.82",
+            "RATIO_ROUHO": "93.5"
+          },
+          "PD": {
+            "IOR_RPDC4": "4.5",
+            "SW_RPD": "Y",
+            "IOR_RPDC0": "4.5",
+            "IOR_RPDC1": "4.5",
+            "IOR_RPDC2": "4.5",
+            "IOR_RPDC3": "4.5",
+            "IOR_RPDH1": "4.5",
+            "IOR_RPDH2": "4.5",
+            "IOR_RPDH3": "4.5",
+            "IOR_RPDH4": "4.5",
+            "IOR_RPDH0": "4.5"
+          },
+          "OU": {
+            "RATIO_ROUU": "169.5",
+            "IOR_ROUH": "0.86",
+            "SW_ROU": "Y",
+            "RATIO_ROUO": "169.5",
+            "IOR_ROUC": "0.82"
+          },
+          "WM": {
+            "IOR_RWMAC2": "41.000",
+            "IOR_RWMAC1": "21.000",
+            "IOR_RWMAH5": "5.200",
+            "IOR_RWMAH4": "4.950",
+            "IOR_RWMAC5": "0",
+            "IOR_RWMAC4": "0",
+            "IOR_RWMAC3": "0",
+            "IOR_RWMAH3": "5.200",
+            "IOR_RWMAH2": "6.800",
+            "IOR_RWMAH1": "10.000",
+            "IOR_RWMAHOV": "3.550",
+            "IOR_RWMACOV": "0",
+            "SW_RWM": "Y"
+          },
+          "EO": {
+            "IOR_REOO": "1.9",
+            "SW_REO": "Y",
+            "IOR_REOE": "1.92"
+          },
+          "OUC": {
+            "RATIO_ROUCO": "76.5",
+            "IOR_ROUCU": "0.84",
+            "RATIO_ROUCU": "76.5",
+            "IOR_ROUCO": "0.84",
+            "SW_ROUC": "Y"
+          },
+          "M": {
+            "IOR_RMC": "0",
+            "SW_RM": "N",
+            "IOR_RMH": "0"
+          }
+        },
+        "GNUM_C": "60607",
+        "TEAM_ID_H": "123388",
+        "GOPEN": "Y",
+        "TEAM_ID_C": "123562",
+        "RETIME": "",
+        "GID": "9987266",
+        "TEAM_C": "\u54e5\u745e\u7d0d\u9054",
+        "TEAM_H": "\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0",
+        "MS": "",
+        "EM": "0",
+        "SW_3X3": "N",
+        "DATETIME": "2026-01-17 13:00:00",
+        "LEAGUE": "\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd",
+        "T_COUNT": "401.000000",
+        "HALFTIME": "",
+        "STRONG": "H"
+      }
+    },
+    "SYSTIME": "2026-01-17 13:06:17",
+    "DEVICE": "phone",
+    "ALL_CLOSE": "N",
+    "SIP": "74.62",
+    "CMD_INRB": 1
+  },
+  "status": "success",
+  "phpData": {
+    "filter": "Main",
+    "type": "getMore"
+  },
+  "original_json": "{\"response\":{\"VIDEO\":{\"TV_ID\":\"89BCB9BCBEBCBEBCB9BCB9BCB38FCEC7C8CBCBCEC4BDB3\",\"CENTER_TV\":\"img\",\"MT_ID\":\"63049111\",\"MT_SID\":\"2\",\"CENTER_MT\":\"br\",\"MT_GTYPE\":\"BK\",\"MT_LINEUPS\":\"Y\"},\"SHOWTYPE\":\"RB\",\"GAMES\":{\"GAME5\":{\"RECV\":\"Y\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9987280\",\"TEAM_C\":\"\u54e5\u745e\u7d0d\u9054\",\"TEAM_H\":\"\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0\",\"LEAGUE_ID\":\"100804\",\"MS\":\"\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1447810\",\"IS_RB\":\"Y\",\"GTYPE\":\"BK\",\"GNUM_H\":\"60612\",\"DATETIME\":\"2026-01-17 13:00:00\",\"LEAGUE\":\"\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"RATIO_RE\":\"15\",\"SW_RE\":\"Y\",\"IOR_REH\":\"0.67\",\"IOR_REC\":\"1.11\"},\"OUH\":{\"RATIO_ROUHU\":\"\",\"IOR_ROUHU\":\"0\",\"SW_ROUH\":\"N\",\"IOR_ROUHO\":\"0\",\"RATIO_ROUHO\":\"\"},\"OU\":{\"RATIO_ROUU\":\"171.5\",\"IOR_ROUH\":\"0.67\",\"SW_ROU\":\"Y\",\"RATIO_ROUO\":\"171.5\",\"IOR_ROUC\":\"1.01\"},\"WM\":{\"IOR_RWMAC2\":\"0\",\"IOR_RWMAC1\":\"0\",\"IOR_RWMAH5\":\"0\",\"IOR_RWMAH4\":\"0\",\"IOR_RWMAC5\":\"0\",\"IOR_RWMAC4\":\"0\",\"IOR_RWMAC3\":\"0\",\"IOR_RWMAH3\":\"0\",\"IOR_RWMAH2\":\"0\",\"IOR_RWMAH1\":\"0\",\"IOR_RWMAHOV\":\"0\",\"IOR_RWMACOV\":\"0\",\"SW_RWM\":\"N\"},\"EO\":{\"IOR_REOO\":\"0\",\"SW_REO\":\"N\",\"IOR_REOE\":\"0\"},\"OUC\":{\"RATIO_ROUCO\":\"\",\"IOR_ROUCU\":\"0\",\"RATIO_ROUCU\":\"\",\"IOR_ROUCO\":\"0\",\"SW_ROUC\":\"N\"},\"M\":{\"IOR_RMC\":\"0\",\"SW_RM\":\"N\",\"IOR_RMH\":\"0\"}},\"GNUM_C\":\"60611\",\"TEAM_ID_H\":\"123388\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123562\",\"STRONG\":\"H\"},\"GAME4\":{\"RECV\":\"Y\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9987273\",\"TEAM_C\":\"\u54e5\u745e\u7d0d\u9054\",\"TEAM_H\":\"\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0\",\"LEAGUE_ID\":\"100804\",\"MS\":\"\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1447810\",\"IS_RB\":\"Y\",\"GTYPE\":\"BK\",\"GNUM_H\":\"60610\",\"DATETIME\":\"2026-01-17 13:00:00\",\"LEAGUE\":\"\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"RATIO_RE\":\"19\",\"SW_RE\":\"Y\",\"IOR_REH\":\"1.141\",\"IOR_REC\":\"0.639\"},\"OUH\":{\"RATIO_ROUHU\":\"\",\"IOR_ROUHU\":\"0\",\"SW_ROUH\":\"N\",\"IOR_ROUHO\":\"0\",\"RATIO_ROUHO\":\"\"},\"OU\":{\"RATIO_ROUU\":\"167.5\",\"IOR_ROUH\":\"1.04\",\"SW_ROU\":\"Y\",\"RATIO_ROUO\":\"167.5\",\"IOR_ROUC\":\"0.64\"},\"WM\":{\"IOR_RWMAC2\":\"0\",\"IOR_RWMAC1\":\"0\",\"IOR_RWMAH5\":\"0\",\"IOR_RWMAH4\":\"0\",\"IOR_RWMAC5\":\"0\",\"IOR_RWMAC4\":\"0\",\"IOR_RWMAC3\":\"0\",\"IOR_RWMAH3\":\"0\",\"IOR_RWMAH2\":\"0\",\"IOR_RWMAH1\":\"0\",\"IOR_RWMAHOV\":\"0\",\"IOR_RWMACOV\":\"0\",\"SW_RWM\":\"N\"},\"EO\":{\"IOR_REOO\":\"0\",\"SW_REO\":\"N\",\"IOR_REOE\":\"0\"},\"OUC\":{\"RATIO_ROUCO\":\"\",\"IOR_ROUCU\":\"0\",\"RATIO_ROUCU\":\"\",\"IOR_ROUCO\":\"0\",\"SW_ROUC\":\"N\"},\"M\":{\"IOR_RMC\":\"0\",\"SW_RM\":\"N\",\"IOR_RMH\":\"0\"}},\"GNUM_C\":\"60609\",\"TEAM_ID_H\":\"123388\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123562\",\"STRONG\":\"H\"},\"GAME3\":{\"RECV\":\"Y\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9987272\",\"TEAM_C\":\"\u54e5\u745e\u7d0d\u9054\",\"TEAM_H\":\"\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0\",\"LEAGUE_ID\":\"100804\",\"MS\":\"9987266_6\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1447810\",\"IS_RB\":\"Y\",\"GTYPE\":\"BK\",\"GNUM_H\":\"660608\",\"DATETIME\":\"2026-01-17 13:00:00\",\"LEAGUE\":\"\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"RATIO_RE\":\"\",\"SW_RE\":\"N\",\"IOR_REH\":\"0\",\"IOR_REC\":\"0\"},\"OUH\":{\"RATIO_ROUHU\":\"\",\"IOR_ROUHU\":\"0\",\"SW_ROUH\":\"N\",\"IOR_ROUHO\":\"0\",\"RATIO_ROUHO\":\"\"},\"OU\":{\"RATIO_ROUU\":\"\",\"IOR_ROUH\":\"0\",\"SW_ROU\":\"N\",\"RATIO_ROUO\":\"\",\"IOR_ROUC\":\"0\"},\"WM\":{\"IOR_RWMCCOV\":\"5.400\",\"SW_RWM\":\"N\",\"IOR_RWMCOT\":\"5.000\",\"IOR_RWMCHOV\":\"1.480\"},\"EO\":{\"IOR_REOO\":\"1.91\",\"SW_REO\":\"Y\",\"IOR_REOE\":\"1.91\"},\"OUC\":{\"RATIO_ROUCO\":\"\",\"IOR_ROUCU\":\"0\",\"RATIO_ROUCU\":\"\",\"IOR_ROUCO\":\"0\",\"SW_ROUC\":\"N\"},\"M\":{\"IOR_RMC\":\"0\",\"SW_RM\":\"N\",\"IOR_RMH\":\"0\"}},\"GNUM_C\":\"660607\",\"TEAM_ID_H\":\"123388\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123562\",\"STRONG\":\"H\"},\"GAME2\":{\"RECV\":\"Y\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9987271\",\"TEAM_C\":\"\u54e5\u745e\u7d0d\u9054\",\"TEAM_H\":\"\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0\",\"LEAGUE_ID\":\"100804\",\"MS\":\"9987266_5\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1447810\",\"IS_RB\":\"Y\",\"GTYPE\":\"BK\",\"GNUM_H\":\"560608\",\"DATETIME\":\"2026-01-17 13:00:00\",\"LEAGUE\":\"\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"RATIO_RE\":\"\",\"SW_RE\":\"N\",\"IOR_REH\":\"0\",\"IOR_REC\":\"0\"},\"OUH\":{\"RATIO_ROUHU\":\"\",\"IOR_ROUHU\":\"0\",\"SW_ROUH\":\"N\",\"IOR_ROUHO\":\"0\",\"RATIO_ROUHO\":\"\"},\"OU\":{\"RATIO_ROUU\":\"\",\"IOR_ROUH\":\"0\",\"SW_ROU\":\"N\",\"RATIO_ROUO\":\"\",\"IOR_ROUC\":\"0\"},\"WM\":{\"IOR_RWMCCOV\":\"5.200\",\"SW_RWM\":\"N\",\"IOR_RWMCOT\":\"5.200\",\"IOR_RWMCHOV\":\"1.470\"},\"EO\":{\"IOR_REOO\":\"1.91\",\"SW_REO\":\"Y\",\"IOR_REOE\":\"1.91\"},\"OUC\":{\"RATIO_ROUCO\":\"\",\"IOR_ROUCU\":\"0\",\"RATIO_ROUCU\":\"\",\"IOR_ROUCO\":\"0\",\"SW_ROUC\":\"N\"},\"M\":{\"IOR_RMC\":\"0\",\"SW_RM\":\"N\",\"IOR_RMH\":\"0\"}},\"GNUM_C\":\"560607\",\"TEAM_ID_H\":\"123388\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123562\",\"STRONG\":\"H\"},\"GAME1\":{\"RECV\":\"Y\",\"RETIME\":\"\",\"IS_MASTER\":\"N\",\"GID\":\"9987268\",\"TEAM_C\":\"\u54e5\u745e\u7d0d\u9054\",\"TEAM_H\":\"\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0\",\"LEAGUE_ID\":\"100804\",\"MS\":\"9987266_2\",\"IS_LIVE\":\"Y\",\"EM\":\"0\",\"GIDM\":\"1447810\",\"IS_RB\":\"Y\",\"GTYPE\":\"BK\",\"GNUM_H\":\"960608\",\"DATETIME\":\"2026-01-17 13:00:00\",\"LEAGUE\":\"\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"RATIO_RE\":\"\",\"SW_RE\":\"N\",\"IOR_REH\":\"0\",\"IOR_REC\":\"0\"},\"OUH\":{\"RATIO_ROUHU\":\"\",\"IOR_ROUHU\":\"0\",\"SW_ROUH\":\"N\",\"IOR_ROUHO\":\"0\",\"RATIO_ROUHO\":\"\"},\"OU\":{\"RATIO_ROUU\":\"\",\"IOR_ROUH\":\"0\",\"SW_ROU\":\"N\",\"RATIO_ROUO\":\"\",\"IOR_ROUC\":\"0\"},\"WM\":{\"IOR_RWMBC1\":\"13.500\",\"IOR_RWMBCOV\":\"18.000\",\"SW_RWM\":\"N\",\"IOR_RWMBOT\":\"5.200\",\"IOR_RWMBH1\":\"5.600\",\"IOR_RWMBHOV\":\"1.420\"},\"EO\":{\"IOR_REOO\":\"1.91\",\"SW_REO\":\"Y\",\"IOR_REOE\":\"1.91\"},\"OUC\":{\"RATIO_ROUCO\":\"\",\"IOR_ROUCU\":\"0\",\"RATIO_ROUCU\":\"\",\"IOR_ROUCO\":\"0\",\"SW_ROUC\":\"N\"},\"M\":{\"IOR_RMC\":\"0\",\"SW_RM\":\"N\",\"IOR_RMH\":\"0\"}},\"GNUM_C\":\"960607\",\"TEAM_ID_H\":\"123388\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123562\",\"STRONG\":\"H\"},\"GAME0\":{\"RECV\":\"Y\",\"IS_MASTER\":\"Y\",\"SE_TYPE\":\"Quarters\",\"SCORE\":{\"SC_Q3_H\":\"0\",\"SC_Q4_H\":\"0\",\"SC_Q1_H\":\"6\",\"SC_Q2_H\":\"0\",\"SC_OT_H\":\"0\",\"SC_Q2_A\":\"0\",\"SC_Q3_A\":\"0\",\"SC_FT_A\":\"5\",\"SC_Q1_A\":\"5\",\"SC_H1_A\":\"5\",\"SC_H2_A\":\"0\",\"SC_Q4_A\":\"0\",\"SC_OT_A\":\"0\",\"SC_FT_H\":\"6\",\"SC_H2_H\":\"0\",\"SC_H1_H\":\"6\"},\"LEAGUE_ID\":\"100804\",\"IS_LIVE\":\"Y\",\"GIDM\":\"1447810\",\"IS_RB\":\"Y\",\"GTYPE\":\"BK\",\"GNUM_H\":\"60608\",\"SE_NOW\":\"Q1\",\"MIDFIELD\":\"N\",\"PLAYS\":{\"R\":{\"RATIO_RE\":\"17\",\"SW_RE\":\"Y\",\"IOR_REH\":\"0.91\",\"IOR_REC\":\"0.87\"},\"OUH\":{\"RATIO_ROUHU\":\"93.5\",\"IOR_ROUHU\":\"0.86\",\"SW_ROUH\":\"Y\",\"IOR_ROUHO\":\"0.82\",\"RATIO_ROUHO\":\"93.5\"},\"PD\":{\"IOR_RPDC4\":\"4.5\",\"SW_RPD\":\"Y\",\"IOR_RPDC0\":\"4.5\",\"IOR_RPDC1\":\"4.5\",\"IOR_RPDC2\":\"4.5\",\"IOR_RPDC3\":\"4.5\",\"IOR_RPDH1\":\"4.5\",\"IOR_RPDH2\":\"4.5\",\"IOR_RPDH3\":\"4.5\",\"IOR_RPDH4\":\"4.5\",\"IOR_RPDH0\":\"4.5\"},\"OU\":{\"RATIO_ROUU\":\"169.5\",\"IOR_ROUH\":\"0.86\",\"SW_ROU\":\"Y\",\"RATIO_ROUO\":\"169.5\",\"IOR_ROUC\":\"0.82\"},\"WM\":{\"IOR_RWMAC2\":\"41.000\",\"IOR_RWMAC1\":\"21.000\",\"IOR_RWMAH5\":\"5.200\",\"IOR_RWMAH4\":\"4.950\",\"IOR_RWMAC5\":\"0\",\"IOR_RWMAC4\":\"0\",\"IOR_RWMAC3\":\"0\",\"IOR_RWMAH3\":\"5.200\",\"IOR_RWMAH2\":\"6.800\",\"IOR_RWMAH1\":\"10.000\",\"IOR_RWMAHOV\":\"3.550\",\"IOR_RWMACOV\":\"0\",\"SW_RWM\":\"Y\"},\"EO\":{\"IOR_REOO\":\"1.9\",\"SW_REO\":\"Y\",\"IOR_REOE\":\"1.92\"},\"OUC\":{\"RATIO_ROUCO\":\"76.5\",\"IOR_ROUCU\":\"0.84\",\"RATIO_ROUCU\":\"76.5\",\"IOR_ROUCO\":\"0.84\",\"SW_ROUC\":\"Y\"},\"M\":{\"IOR_RMC\":\"0\",\"SW_RM\":\"N\",\"IOR_RMH\":\"0\"}},\"GNUM_C\":\"60607\",\"TEAM_ID_H\":\"123388\",\"GOPEN\":\"Y\",\"TEAM_ID_C\":\"123562\",\"RETIME\":\"\",\"GID\":\"9987266\",\"TEAM_C\":\"\u54e5\u745e\u7d0d\u9054\",\"TEAM_H\":\"\u70cf\u5c3c\u5361\u67e5\u99ac\u62c9\u52a0\",\"MS\":\"\",\"EM\":\"0\",\"SW_3X3\":\"N\",\"DATETIME\":\"2026-01-17 13:00:00\",\"LEAGUE\":\"\u897f\u73ed\u7259\u7c43\u7403\u7532\u7d1a\u806f\u8cfd\",\"T_COUNT\":\"401.000000\",\"HALFTIME\":\"\",\"STRONG\":\"H\"}},\"SYSTIME\":\"2026-01-17 13:06:17\",\"DEVICE\":\"phone\",\"ALL_CLOSE\":\"N\",\"SIP\":\"74.62\",\"CMD_INRB\":1},\"status\":\"success\"}\n"
+}
